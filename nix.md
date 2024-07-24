@@ -1,6 +1,6 @@
 # Nix
 Nix is a tool for people who both need computers to do exactly as intended, repeatably, far into the future.
-+ Reproducible development environments. ([see](##nix_shell_environment))
++ Reproducible development environments. ([see](#nix_shell_environment))
 + Easy installation of software over URLs.
 + Easy transfer of software environments between computers.
 + Declarative specification of Linux machines.
