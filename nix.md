@@ -48,6 +48,7 @@ The command `xml2json` is provided by the package `python3Packages.xmljson`, whi
 `cacert` must be present for SSL authentication to work.
 > [!TIP]
 > Use [search.nixos.org](https://search.nixos.org/packages) to find packages providing the program you need.
+
 The parameter of `-I` refers to a specific Git commit of the Nixpkgs repository.
 \\
 Make the script executable:
