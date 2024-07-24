@@ -3,7 +3,7 @@ Nix is a tool for people who both need computers to do exactly as intended, repe
 + Reproducible development environments. ([see](#nix-shell-environment))
 + Easy installation of software over URLs.
 + Easy transfer of software environments between computers.
-+ Declarative specification of Linux machines.
++ Declarative specification of Linux machines. ([see](#declarative-shell-environments))
 + Reproducible integration testing using virtual machines.
 + Avoidance of version conflicts with already installed software.
 + Installing software from source code.
@@ -111,3 +111,41 @@ nix-shell
 ```
 `nix-shell` by default looks for a file called `shell.nix` in the current directory and builds a shell environment from the Nix expression in this file.\
 Packages defined in the packages attribute will be available in `$PATH`.
+
+## Pinning Nixpkgs
+In various Nix examples, you’ll often see references to `<nixpkgs>`, as follows.
+```nix
+{ pkgs ? import <nixpkgs> {} }:
+
+...
+```
+This is a convenient way to quickly demonstrate a Nix expression and get it working by importing Nix packages.\
+However, the resulting Nix expression is not fully reproducible.\
+Create fully reproducible Nix expressions, we can pin an exact version of Nixpkgs.\
+The simplest way to do this is to fetch the required Nixpkgs version as a tarball specified via the relevant Git commit hash:
+```nix
+{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/06278c77b5d162e62df170fec307e83f1812d94b.tar.gz") {}
+}:
+
+...
+```
+
+> [!TIP]
+> Picking the commit can be done via [status.nixos.org](https://status.nixos.org/), which lists all the releases and the latest commit that has passed all tests.
+
+When choosing a commit, it is recommended to follow either:
++ The latest stable NixOS release by using a specific version.
++ The latest unstable release via nixos-unstable.
+
+## Nix language basics
+The Nix language is designed for conveniently creating and composing derivations – precise descriptions of how contents of existing files are used to derive new files.\
+It is a domain-specific, purely functional, lazily evaluated, dynamically typed programming language.\
+Using the Nix language in practice entails multiple things:
++ Language: syntax and semantics
++ Libraries: `builtins` and `pkgs.lib`
++ Developer tools: testing, debugging, linting, formatting, …
++ Generic build mechanisms: `stdenv.mkDerivation`, trivial builders, …
++ Composition and configuration mechanisms: `override`, `overrideAttrs`, `overlays`, `callPackage`, …
++ Ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, …
++ NixOS module system: `config`, `option`, …
+
