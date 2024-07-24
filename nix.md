@@ -149,3 +149,34 @@ Using the Nix language in practice entails multiple things:
 + Ecosystem-specific packaging mechanisms: `buildGoModule`, `buildPythonApplication`, …
 + NixOS module system: `config`, `option`, …
 
+> [!TIP]
+> See the [Nix manual](https://nix.dev/manual/nix/2.18/language/index.html) for a full language reference.
+
+### Nix expression
+Expression:
+```nix
+1 + 2
+```
+Value:
+```nix
+3
+```
+
+### Interactive evaluation
+Use `nix repl` to evaluate Nix expressions interactively:
+```shell
+$ nix repl
+Welcome to Nix 2.13.3. Type :? for help.
+
+nix-repl> 1 + 2
+3
+```
+> [!NOTE]
+> Some examples show a fully evaluated data structure for clarity.\
+> If your output does not match the example, try prepending :p to the input expression.
+> ```shell
+> { a.b.c = 1; }
+>
+> :p { a.b.c = 1; }
+> ```
+
