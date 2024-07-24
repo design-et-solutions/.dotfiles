@@ -304,4 +304,28 @@ Value:
 Only expressions within the let expression itself can access the newly declared names. We say: the bindings have local scope.
 
 ### Attribute access
-Attributes in a set are accessed with a dot `.` and the attribute name.
+Attributes in a set are accessed with a dot `.` and the attribute name.\
+Expression:
+```nix
+let
+  attrset = { a = { b = { c = 1; }; }; };
+in
+attrset.a.b.c
+```
+Value:
+```
+1
+```
+
+The dot (.) notation can also be used for assigning attributes.
+Expression:
+```nix
+{ a.b.c = 1; }
+```
+Value:
+```
+{ a = { b = { c = 1; }; }; }
+```
+
+### `with ...; ...`
+The `with` expression allows access to attributes without repeatedly referencing their attribute set.
