@@ -100,7 +100,7 @@ pkgs.mkShellNoCC {
 > If you need to override these protected environment variables, use the `shellHook` attribute
 
 > [!TIP]
-> See [mkShell](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell) to manual.
+> See [mkShell](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-mkShell) to manual.\
 > See [Shell functions and utilities](https://nixos.org/manual/nixpkgs/stable/#ssec-stdenv-functions).
 
 Enter the environment by running nix-shell in the same directory as shell.nix.
