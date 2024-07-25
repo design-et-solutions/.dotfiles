@@ -372,6 +372,7 @@ Function declarations in the Nix language can appear in different forms:
   x: x + 1
   ```
   + Multiple arguments via nesting
+    
     ```nix
     x: y: x + y
     ```
@@ -380,10 +381,12 @@ Function declarations in the Nix language can appear in different forms:
   { a, b }: a + b
   ```
   + With default attributes
+    
     ```nix
     { a, b ? 0 }: a + b
     ```
   + With additional attributes allowed
+    
     ```nix
     { a, b, ...}: a + b
     ```
