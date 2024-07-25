@@ -31,14 +31,48 @@ Nix is a tool for people who both need computers to do exactly as intended, repe
   > nix-repl> 1 + 2
   > 3
   > ```
-+ `nix-instantiate --eval` to evaluate the expression in a Nix file.
++ `nix-instantiate` to evaluate the expression in a Nix file.
 
   > ```shell
   > $ echo 1 + 2 > file.nix
   > $ nix-instantiate --eval file.nix
   > 3
   > ```
++ `nix-build` to build nix package
 
+  > ```shell
+  > $ nix-build -A hello
+  > this derivation will be built:
+  >   /nix/store/rbq37s3r76rr77c7d8x8px7z04kw2mk7-hello.drv
+  > building '/nix/store/rbq37s3r76rr77c7d8x8px7z04kw2mk7-hello.drv'...
+  > ...
+  > configuring
+  > ...
+  > configure: creating ./config.status
+  > config.status: creating Makefile
+  > ...
+  > building
+  > ... <many more lines omitted>
+  > ```
++ `nix-prefetch-url`
+
+  > ```shell
+  > $ nix-prefetch-url --unpack https://github.com/atextor/icat/archive/refs/tags/v0.5.tar.gz --type sha256
+  > path is '/nix/store/p8jl1jlqxcsc7ryiazbpm7c1mqb6848b-v0.5.tar.gz'
+  > 0wyy2ksxp95vnh71ybj1bbmqd5ggp13x3mk37pzr99ljs9awy8ka
+  > ```
++ `nix-locate` to quickly locate the package providing a certain file in nixpkgs.
+  
+  > ```shell
+  > $ nix-locate 'bin/hello'
+  > hello.out                                        29,488 x /nix/store/bdjyhh70npndlq3rzmggh4f2dzdsj4xy-hello-2.10/bin/hello
+  > linuxPackages_4_4.dpdk.examples               2,022,224 x /nix/store/jlnk3d38zsk0bp02rp9skpqk4vjfijnn-dpdk-16.07.2-4.4.52-examples/bin/helloworld
+  > linuxPackages.dpdk.examples                   2,022,224 x /nix/store/rzx4k0pb58gd1dr9kzwam3vk9r8bfyv1-dpdk-16.07.2-4.9.13-examples/bin/helloworld
+  > linuxPackages_4_10.dpdk.examples              2,022,224 x /nix/store/wya1b0910qidfc9v3i6r9rnbnc9ykkwq-dpdk-16.07.2-4.10.1-examples/bin/helloworld
+  > linuxPackages_grsec_nixos.dpdk.examples       2,022,224 x /nix/store/2wqv94290pa38aclld7sc548a7hnz35k-dpdk-16.07.2-4.9.13-examples/bin/helloworld
+  > camlistore.out                                7,938,952 x /nix/store/xn5ivjdyslxldhm5cb4x0lfz48zf21rl-camlistore-0.9/bin/hello
+  > ```
+  
 ## Reproducible interpreted scripts
 Create a file called `nixpkgs-releases.sh` with these contents:
 ```shell
