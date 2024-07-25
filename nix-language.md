@@ -402,3 +402,304 @@ Function declarations in the Nix language can appear in different forms:
 
 > [!NOTE]
 > Functions have no names. We say they are anonymous, and call such a function a lambda.
+
+Expression:
+```nix
+x: x + 1
+```
+Value:
+```nix
+<LAMBDA>
+```
+As with any other value, functions can be assigned to a name.\
+Expression:
+```nix
+let
+  f = x: x + 1;
+in f
+```
+Value:
+```nix
+<LAMBDA>
+```
+
+## Calling functions
+Also known as “function application”.\
+Calling a function with an argument means writing the argument after the function.
+Expression:
+```nix
+let
+  f = x: x + 1;
+in f 1
+```
+Value:
+```nix
+2
+```
+One can also pass arguments by name.\
+Expression:
+```nix
+let
+  f = x: x.a;
+  v = { a = 1; };
+in
+f v
+```
+Value:
+```nix
+1
+```
+Since function and argument are separated by white space, sometimes parentheses `( )` are required to achieve the desired result.\
+List elements are also separated by white space, therefore the following are different:
+Expression:
+```nix
+let
+ f = x: x + 1;
+ a = 1;
+in [ (f a) ]
+```
+Value:
+```nix
+[ 2 ]
+```
+
+## Multiple arguments
+Also known as “curried functions”.\
+Multiple arguments can be handled by nesting functions.\
+Such a nested function can be used like a function that takes multiple arguments, but offers additional flexibility.\
+Expression:
+```nix
+let
+  f = x: y: x + y;
+in
+f 1
+```
+Value:
+```nix
+<LAMBDA>
+```
+Applying the function which results from `f 1` to another argument yields the inner body `x + y` (with `x` set to `1` and `y` set to the other argument), which can now be fully evaluated.
+Expression:
+```nix
+let
+  f = x: y: x + y;
+in
+f 1 2
+```
+Value:
+```nix
+3
+```
+
+## Attribute set argument
+Also known as “keyword arguments” or “destructuring” .\
+Nix functions can be declared to require an attribute set with specific structure as argument.\
+This is denoted by listing the expected attribute names separated by commas `,` and enclosed in braces `{ }`.\
+Expression:
+```nix
+let
+  f = {a, b}: a + b;
+in
+f { a = 1; b = 2; }
+```
+Value:
+```nix
+3
+```
+
+## Default values
+Also known as “default arguments”.\
+Destructured arguments can have default values for attributes.\
+This is denoted by separating the attribute name and its default value with a question mark `?`.\
+Attributes in the argument are not required if they have a default value.\
+Expression:
+```nix
+let
+  f = {a ? 0, b ? 0}: a + b;
+in
+f { } # empty attribute set
+```
+Value:
+```nix
+0
+```
+
+## Additional attributes
+Additional attributes are allowed with an ellipsis `...`:
+Expression:
+```nix
+let
+  f = {a, b, ...}: a + b;
+in
+f { a = 1; b = 2; c = 3; }
+```
+Value:
+```nix
+3
+```
+
+## Named attribute set argument
+Also known as “@ pattern”, “@ syntax”, or “‘at’ syntax”.\
+An attribute set argument can be given a name to be accessible as a whole.\
+This is denoted by prepending or appending the name to the attribute set argument, separated by the at sign `@`.\
+Expression:
+```nix
+let
+  f = {a, b, ...}@args: a + b + args.c;
+in
+f { a = 1; b = 2; c = 3; }
+```
+Value:
+```nix
+6
+```
+
+## Function libraries
+In addition to the built-in operators (`+`, `==`, `&&`, etc.), there are two widely used libraries that together can be considered standard for the Nix language.
+
+### `builtins`
+Also known as “primitive operations” or “primops”.\
+These functions are available under the builtins constant.
+
+> [!NOTE]
+> The Nix manual lists all [Built-in Functions](https://nix.dev/manual/nix/2.18/language/builtins.html), and shows how to use them.
+
+Expression:
+```nix
+builtins.toString
+```
+Value:
+```nix
+<PRIMOP>
+```
+
+## import
+Most built-in functions are only accessible through `builtins`.\
+A notable exception is `import`, which is also available at the top level.\
+`import` takes a path to a Nix file, reads it to evaluate the contained Nix expression, and returns the resulting value.\
+If the path points to a directory, the file `default.nix` in that directory is used instead.\
+Terminal:
+```shell
+$ echo "x: x + 1" > file.nix
+```
+Expression:
+```nix
+import ./file.nix 1
+```
+Value:
+```nix
+2
+```
+
+### `pkgs.lib`
+The `nixpkgs` repository contains an attribute set called `lib`, which provides a large number of useful functions.\
+They are implemented in the Nix language, as opposed to builtins, which are part of the language itself.\
+These functions are usually accessed through `pkgs.lib`, as the Nixpkgs attribute set is given the name `pkgs` by convention.
+
+> [!NOTE]
+> The Nixpkgs manual lists all [Nixpkgs library functions](https://nixos.org/manual/nixpkgs/stable/#sec-functions-library).
+
+Expression:
+```nix
+let
+  pkgs = import <nixpkgs> {};
+in
+pkgs.lib.strings.toUpper "lookup paths considered harmful"
+```
+Value:
+```nix
+LOOKUP PATHS CONSIDERED HARMFUL
+```
+In reproductable exemple:
+```nix
+let
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/06278c77b5d162e62df170fec307e83f1812d94b.tar.gz";
+  pkgs = import nixpkgs {};
+in
+pkgs.lib.strings.toUpper "always pin your sources"
+```
+Value:
+```nix
+ALWAYS PIN YOUR SOURCES
+```
+
+## Impurities
+In practice, describing derivations requires observing the outside world.\
+There is only one impurity in the Nix language that is relevant here: reading files from the file system as build inputs.\
+Build inputs are files that derivations refer to in order to describe how to derive new files.\
+When run, a derivation will only have access to explicitly declared build inputs.\
+The only way to specify build inputs in the Nix language is explicitly with:
++ File system paths
++ Dedicated functions
+
+> [!IMPORTANT]
+> Nix and the Nix language refer to files by their content hash.\
+> If file contents are not known in advance, it’s unavoidable to read files during expression evaluation.
+
+> [!NOTE]
+> Nix supports other types of impure expressions, such as lookup paths or the constant `builtins.currentSystem`.
+
+## Paths
+Whenever a file system path is used in string interpolation, the contents of that file are copied to a special location in the file system, the Nix store, as a side effect.\
+The evaluated string then contains the Nix store path assigned to that file.\
+For directories the same thing happens: The entire directory (including nested files and directories) is copied to the Nix store, and the evaluated string becomes the Nix store path of the directory.
+
+## Fetchers
+Files to be used as build inputs do not have to come from the file system.\
+The Nix language provides built-in impure functions to fetch files over the network during evaluation:
++ `builtins.fetchurl`
++ `builtins.fetchTarball`
++ `builtins.fetchGit`
++ `builtins.fetchClosure`
+
+These functions evaluate to a file system path in the Nix store.\
+Expression:
+```nix
+builtins.fetchurl "https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
+```
+Value:
+```nix
+"/nix/store/7dhgs330clj36384akg86140fqkgh8zf-7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
+```
+Some of them add extra convenience, such as automatically unpacking archives.\
+Expression:
+```nix
+builtins.fetchTarball "https://github.com/NixOS/nix/archive/7c3ab5751568a0bc63430b33a5169c5e4784a0ff.tar.gz"
+```
+Value:
+```nix
+"/nix/store/d59llm96vgis5fy231x6m7nrijs0ww36-source"
+```
+
+> [!NOTE]
+> The Nixpkgs manual on [Fetchers](https://nixos.org/manual/nixpkgs/stable/#chap-pkgs-fetchers) lists numerous additional library functions to fetch files over the network.
+
+> [!CAUTION]
+> It is an error if the network request fails.
+
+## Derivations
+Derivations are at the core of both Nix and the Nix language:
++ The Nix language is used to describe derivations.
++ Nix runs derivations to produce build results.
++ Build results can in turn be used as inputs for other derivations.
+
+The Nix language primitive to declare a derivation is the built-in impure function `derivation`.\
+It is usually wrapped by the Nixpkgs build mechanism `stdenv.mkDerivation`, which hides much of the complexity involved in non-trivial build procedures.
+
+> [!IMPORTANT]
+> You will probably never encounter `derivation` in practice.\
+> Whenever you encounter `mkDerivation`, it denotes something that Nix will eventually build.
+
+The evaluation result of `derivation` (and `mkDerivation`) is an attribute set with a certain structure and a special property: It can be used in string interpolation, and in that case evaluates to the Nix store path of its build result.
+Expression:
+```nix
+let
+  pkgs = import <nixpkgs> {};
+in "${pkgs.nix}"
+```
+Value:
+```nix
+"/nix/store/sv2srrjddrp2isghmrla8s6lazbzmikd-nix-2.11.0"
+```
+String interpolation on derivations is used to refer to their build results as file system paths when declaring new derivations.\
+This allows constructing arbitrarily complex compositions of derivations with the Nix language.
