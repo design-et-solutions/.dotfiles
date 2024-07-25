@@ -368,32 +368,33 @@ Function arguments are the third way, apart from attribute sets and `let` expres
 Notably, values are not known in advance: the names are placeholders that are filled when calling a function.\
 Function declarations in the Nix language can appear in different forms:
 + Single argument
-```nix
-x: x + 1
-```
+  ```nix
+  x: x + 1
+  ```
   + Multiple arguments via nesting
-```nix
-x: y: x + y
-```
+    ```nix
+    x: y: x + y
+    ```
 + Attribute set argument
-```nix
-{ a, b }: a + b
-```
+  ```nix
+  { a, b }: a + b
+  ```
   + With default attributes
-```nix
-{ a, b ? 0 }: a + b
-```
+    ```nix
+    { a, b ? 0 }: a + b
+    ```
   + With additional attributes allowed
-```nix
-{ a, b, ...}: a + b
-```
+    ```nix
+    { a, b, ...}: a + b
+    ```
 + Named attribute set argument 
-```nix
-args@{ a, b, ... }: a + b + args.c
-```
-```nix
-{ a, b, ... }@args: a + b + args.c
-```
+  ```nix
+  args@{ a, b, ... }: a + b + args.c
+  ```
+  or
+  ```nix
+  { a, b, ... }@args: a + b + args.c
+  ```
 
 > [!NOTE]
 > Functions have no names. We say they are anonymous, and call such a function a lambda.
