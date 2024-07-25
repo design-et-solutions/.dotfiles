@@ -304,4 +304,96 @@ Value:
 "no no no"
 ```
 ## File system paths
+Absolute paths always start with a slash `/`.\
+Paths are relative when they contain at least one slash `/` but do not start with one.\
+One dot `.` denotes the current directory within the given path.\
+Expression:
+```nix
+/absolute/path
+./relative
+relative/path
+./.
+../.
+```
+Value:
+```nix
+/absolute/path
+/current/directory/relative
+/current/directory/relative/path
+/current/directory
+/current
+```
 
+## Lookup paths
+Also known as “angle bracket syntax”.
+Expression:
+```nix
+<nixpkgs>
+```
+Value:
+```nix
+/nix/var/nix/profiles/per-user/root/channels/nixpkgs
+```
+The value of a lookup path is a file system path that depends on the value of `builtins.nixPath`.\
+In practice, `<nixpkgs>` points to the file system path of some revision of Nixpkgs.
+
+> [!WARNING]
+> While you will encounter many such examples, we recommend to avoid lookup paths in production code, as they are impurities which are not reproducible.
+
+## Indented strings
+Also known as “multi-line strings”.\
+The Nix language offers convenience syntax for character strings which span multiple lines that have common indentation.\
+Indented strings are denoted by double single quotes `'' ''`.\
+Expression:
+```nix
+''
+multi
+line
+ string
+''
+```
+Value:
+```nix
+"multi\nline\n string\n"
+```
+
+## Functions
+A function always takes exactly one argument.\
+Argument and function body are separated by a colon `:`.\
+Wherever you find a colon `:` in Nix language code:
++ On its left is the function argument
++ On its right is the function body.
+
+Function arguments are the third way, apart from attribute sets and `let` expressions, to assign names to values.\
+Notably, values are not known in advance: the names are placeholders that are filled when calling a function.\
+Function declarations in the Nix language can appear in different forms:
++ Single argument
+```nix
+x: x + 1
+```
+  + Multiple arguments via nesting
+```nix
+x: y: x + y
+```
++ Attribute set argument
+```nix
+{ a, b }: a + b
+```
+  + With default attributes
+```nix
+{ a, b ? 0 }: a + b
+```
+  + With additional attributes allowed
+```nix
+{ a, b, ...}: a + b
+```
++ Named attribute set argument 
+```nix
+args@{ a, b, ... }: a + b + args.c
+```
+```nix
+{ a, b, ... }@args: a + b + args.c
+```
+
+> [!NOTE]
+> Functions have no names. We say they are anonymous, and call such a function a lambda.
