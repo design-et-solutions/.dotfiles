@@ -340,4 +340,38 @@ rec {
 
 Previously declared derivations are passed as arguments to other derivations through `callPackage`.
 
+In this case you have to remember to manually specify all arguments required by each package in the respective Nix file that are not in Nixpkgs.
 
+> [!CAUTION]
+> If `./b.nix` requires an argument `a` but there is no `pkgs.a`, the function call will produce an error.
+
+Use `lib.callPackageWith` to create your own `callPackage` based on an attribute set.
+```nix
+let
+  pkgs = import <nixpkgs> { };
+  callPackage = pkgs.lib.callPackageWith (pkgs // packages);
+  packages = {
+    a = callPackage ./a.nix { };
+    b = callPackage ./b.nix { };
+    c = callPackage ./c.nix { };
+    d = callPackage ./d.nix { };
+    e = callPackage ./e.nix { };
+  };
+in
+packages
+```
+First of all note that instead of a recursive attribute set, the names we operate on are now assigned in a `let` binding.\
+It has the same property as recursive sets.\
+This is how we can refer to `packages` when we merge its contents with the pre-existing attribute set `pkgs` using the `//` operator.
+
+Your custom `callPackages` now makes available all the attributes in `pkgs` and `packages` to the called package function (the same names from `packages` taking precedence), and `packages` is being built up recursively with each call.\
+
+This construction is only possible because the Nix language is lazily evaluated.\
+That is, values are only computed when they are actually needed.\
+It allows passing packages around without having fully defined it.
+
+Each package’s dependencies are now implicit at this level (they are still explicit in each of the package files), and `callPackage` resolves them automagically.\
+This relieves you from dealing with them manually, and precludes configuration errors that may only surface late into a lengthy build process.
+
+The implicitly recursive variant can obscure the structure for software developers not familiar with lazy evaluation, making it harder to read for them than it was before.\
+But this benefit really pays off for large constructions, where it is the amount of code that would obscure the structure, and where manual modifications would become cumbersome and error-prone.
