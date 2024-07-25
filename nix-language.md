@@ -703,3 +703,52 @@ Value:
 ```
 String interpolation on derivations is used to refer to their build results as file system paths when declaring new derivations.\
 This allows constructing arbitrarily complex compositions of derivations with the Nix language.
+
+## NixOS configuration
+```nix
+{ config, pkgs, ... }: {
+
+  imports = [ ./hardware-configuration.nix ];
+
+  environment.systemPackages = with pkgs; [ git ];
+
+  # ...
+
+}
+```
+Explanation:
++ This expression is a function that takes an attribute set as an argument.
+  It returns an attribute set.
++ The argument must at least have the attributes `config` and `pkgs`, and may have more attributes.
++ The returned attribute set contains the attributes `imports` and `environment`.
++ `imports` is a list with one element called `hardware-configuration.nix`.
++ `environment` is itself an attribute set with one attribute `systemPackages`, which will evaluate to a list with one element: the `git` attribute from the `pkgs` set.
++ The `config` argument is not (shown to be) used.
+
+## Package
+```nix
+{ lib, stdenv, fetchurl }:
+
+stdenv.mkDerivation rec {
+
+  pname = "hello";
+
+  version = "2.12";
+
+  src = fetchurl {
+    url = "mirror://gnu/${pname}/${pname}-${version}.tar.gz";
+    sha256 = "1ayhp9v4m4rdhjmnl2bq3cibrbqqkgjbl3s7yk2nhlh8vj3ay16g";
+  };
+
+  meta = with lib; {
+    license = licenses.gpl3Plus;
+  };
+
+}
+```
+Explanation:
++ This expression is a function that takes an attribute set which must have exactly the attributes `lib`, `stdenv`, and `fetchurl`.
++ It returns the result of evaluating the function `mkDerivation`, which is an attribute of `stdenv`, applied to a recursive set.
++ The recursive set passed to `mkDerivation` uses its own `pname` and `version` attributes in the argument to the function `fetchurl`.
+  `fetchurl` itself comes from the outer function’s arguments.
++ The `meta` attribute is itself an attribute set, where the license attribute has the value that was assigned to the nested attribute `lib.licenses.gpl3Plus`.
