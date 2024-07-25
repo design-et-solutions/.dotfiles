@@ -392,6 +392,7 @@ Function declarations in the Nix language can appear in different forms:
   args@{ a, b, ... }: a + b + args.c
   ```
   or
+  
   ```nix
   { a, b, ... }@args: a + b + args.c
   ```
