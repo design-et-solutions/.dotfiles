@@ -8,6 +8,9 @@ Using these features directly can be tricky however:
 + The `builtins.path` function (and equivalently `lib.sources.cleanSourceWith`) can address these problems.\
   However, it’s often hard to express the desired path selection using the `filter` function interface.
 
+> [!NOTE]
+> See [file set functions](https://nixos.org/manual/nixpkgs/stable/#sec-functions-library-fileset).
+
 ## File sets
 A file set is a data type representing a collection of local files.\
 File sets can be created, composed, and manipulated with the various functions of the library.
@@ -107,7 +110,7 @@ But the real benefit of the file set library comes from its facilities for compo
 
 ## Difference
 To be able to copy both files `hello.txt` and `world.txt` to the output, add the whole project directory as a source again:
-```nix  build.nix
+```nix
 ...
 -  sourceFiles = ./hello.txt;
 +  sourceFiles = ./.;
@@ -140,10 +143,268 @@ The `difference` function subtracts one file set from another.\
 The result is a new file set that contains all files from the first argument that aren’t in the second argument.
 
 Use it to filter out `./result` by changing the `sourceFiles` definition:
-<div class="code-title">example.py</div>
 ```nix
 ...
 -  sourceFiles = ./.;
 +  sourceFiles = fs.difference ./. ./result;
 ...
 ```
+Building this, the file set library will specify which files are taken from the directory:
+```shell
+$ nix-build
+trace: /home/user/fileset
+trace: - build.nix (regular)
+trace: - default.nix (regular)
+trace: - hello.txt (regular)
+trace: - npins (all files in directory)
+trace: - world.txt (regular)
+this derivation will be built:
+  /nix/store/zr19bv51085zz005yk7pw4s9sglmafvn-fileset.drv
+...
+'hello.txt' -> '/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset/hello.txt'
+'world.txt' -> '/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset/world.txt'
+...
+/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset
+```
+An attempt to repeat the build will re-use the existing store path:
+```shell
+$ nix-build
+trace: /home/user/fileset
+trace: - build.nix (regular)
+trace: - default.nix (regular)
+trace: - hello.txt (regular)
+trace: - npins (all files in directory)
+trace: - world.txt (regular)
+/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset
+```
+
+## Missing files
+Removing the `./result` symlink creates a new problem, though:
+```shell
+$ rm result
+$ nix-build
+error: lib.fileset.difference: Second argument (negative set)
+  (/home/user/fileset/result) is a path that does not exist.
+  To create a file set from a path that may not exist, use `lib.fileset.maybeMissing`.
+```
+Follow the instructions in the error message, and use `maybeMissing` to create a file set from a path that may not exist (in which case the file set will be empty):
+```nix
+-  sourceFiles = fs.difference ./. ./result;
++  sourceFiles = fs.difference ./. (fs.maybeMissing ./result);
+```
+This now works, using the whole directory since `./result` is not present:
+```shell
+$ nix-build
+trace: /home/user/fileset (all files in directory)
+this derivation will be built:
+  /nix/store/zr19bv51085zz005yk7pw4s9sglmafvn-fileset.drv
+...
+/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset
+```
+Another build attempt will produce a different trace, but the same output path:
+```shell
+$ nix-build
+trace: /home/user/fileset
+trace: - build.nix (regular)
+trace: - default.nix (regular)
+trace: - hello.txt (regular)
+trace: - npins (all files in directory)
+trace: - world.txt (regular)
+/nix/store/vhyhk6ij39gjapqavz1j1x3zbiy3qc1a-fileset
+```
+
+## Union (explicitly exclude files)
+There is still a problem: Changing any of the included files causes the derivation to be built again, even though it doesn’t depend on those files.
+
+Append an empty line to `build.nix`:
+```shell
+$ echo >> build.nix
+```
+Again, Nix will start from scratch.\
+One way to fix this is to use `unions`.
+
+Create a file set containing a union of the files to exclude `fs.unions [ ... ]`, and subtract it `difference` from the complete directory `./.`:
+```nix
+...
+ sourceFiles =
+    fs.difference
+      ./.
+      (fs.unions [
+        (fs.maybeMissing ./result)
+        ./default.nix
+        ./build.nix
+        ./npins
+      ]);
+...
+```
+Changing any of the excluded files now doesn’t necessarily cause a new build anymore:
+```shell
+$ echo >> build.nix
+$ nix-build
+trace: /home/user/fileset
+trace: - hello.txt (regular)
+trace: - world.txt (regular)
+/nix/store/ckn40y7hgqphhbhyrq64h9r6rvdh973r-fileset
+```
+
+## Filter
+The `fileFilter` function allows filtering file sets such that each included file satisfies the given criteria.
+
+Use it to select all files with a name ending in .nix:
+```nix
+...
+-        ./default.nix
+-        ./build.nix
++        (fs.fileFilter (file: file.hasExt "nix") ./.)
+...
+```
+This does not change the result, even if we add a new `.nix` file.
+```shell
+$ nix-build
+trace: /home/user/fileset
+trace: - hello.txt (regular)
+trace: - world.txt (regular)
+/nix/store/ckn40y7hgqphhbhyrq64h9r6rvdh973r-fileset
+```
+Notably, the approach of using difference `./.` explicitly selects the files to exclude, which means that new files added to the source directory are included by default.\
+Depending on your project, this might be a better fit than the alternative in the next section.
+
+## Union (explicitly include files)
+To contrast the previous approach, `unions` can also be used to select only the files to include.\
+This means that new files added to the current directory would be ignored by default.
+
+Create some additional files:
+```shell
+$ mkdir src
+$ touch build.sh src/select.{c,h}
+```
+Then create a file set from only the files to be included explicitly:
+```shell
+{ stdenv, lib }:
+let
+  fs = lib.fileset;
+  sourceFiles = fs.unions [
+    ./hello.txt
+    ./world.txt
+    ./build.sh
+    (fs.fileFilter
+      (file: file.hasExt "c" || file.hasExt "h")
+      ./src
+    )
+  ];
+in
+
+fs.trace sourceFiles
+
+stdenv.mkDerivation {
+  name = "fileset";
+  src = fs.toSource {
+    root = ./.;
+    fileset = sourceFiles;
+  };
+  postInstall = ''
+    cp -vr . $out
+  '';
+}
+```
+The postInstall script is simplified to rely on the sources to be pre-filtered appropriately:
+```shell
+$ nix-build
+trace: /home/user/fileset
+trace: - build.sh (regular)
+trace: - hello.txt (regular)
+trace: - src (all files in directory)
+trace: - world.txt (regular)
+this derivation will be built:
+  /nix/store/sjzkn07d6a4qfp60p6dc64pzvmmdafff-fileset.drv
+...
+'.' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset'
+'./build.sh' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/build.sh'
+'./hello.txt' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/hello.txt'
+'./world.txt' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/world.txt'
+'./src' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/src'
+'./src/select.c' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/src/select.c'
+'./src/select.h' -> '/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset/src/select.h'
+...
+/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset
+```
+Only the specified files are used, even when a new one is added:
+```shell
+$ touch src/select.o README.md
+$ nix-build
+trace: - build.sh (regular)
+trace: - hello.txt (regular)
+trace: - src
+trace:   - select.c (regular)
+trace:   - select.h (regular)
+trace: - world.txt (regular)
+/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset
+```
+
+## Matching files tracked by Git
+If a directory is part of a Git repository, passing it to `gitTracked` gives you a file set that only includes files tracked by Git.
+
+Create a local Git repository and add all files except `src/select.o` and `./result` to it:
+```shell
+$ git init
+Initialized empty Git repository in /home/user/fileset/.git/
+$ git add -A
+$ git reset src/select.o result
+```
+Re-use this selection of files with `gitTracked`:
+```nix
+...
+sourceFiles = fs.gitTracked ./.;
+```
+```
+Build it again:
+```shell
+$ nix-build
+warning: Git tree '/home/user/fileset' is dirty
+trace: /home/vg/src/nix.dev/fileset
+trace: - README.md (regular)
+trace: - build.nix (regular)
+trace: - build.sh (regular)
+trace: - default.nix (regular)
+trace: - hello.txt (regular)
+trace: - npins (all files in directory)
+trace: - src
+trace:   - select.c (regular)
+trace:   - select.h (regular)
+trace: - world.txt (regular)
+this derivation will be built:
+  /nix/store/p9aw3fl5xcjbgg9yagykywvskzgrmk5y-fileset.drv
+...
+/nix/store/cw4bza1r27iimzrdbfl4yn5xr36d6k5l-fileset
+```
+This includes too much though, as not all of these files are needed to build the derivation as originally intended.
+
+## Intersection
+This is where `intersection` comes in.\
+It allows creating a file set that consists only of files that are in both of two given file sets.
+
+Select all files that are both tracked by Git and relevant for the build:
+```nix
+  sourceFiles =
+    fs.intersection
+      (fs.gitTracked ./.)
+      (fs.unions [
+        ./hello.txt
+        ./world.txt
+        ./build.sh
+        ./src
+      ]);
+```
+This will produce the same output as in the other approach and therefore re-use a previous build result:
+```shell
+$ nix-build
+warning: Git tree '/home/user/fileset' is dirty
+trace: - build.sh (regular)
+trace: - hello.txt (regular)
+trace: - src
+trace:   - select.c (regular)
+trace:   - select.h (regular)
+trace: - world.txt (regular)
+/nix/store/zl4n1g6is4cmsqf02dci5b2h5zd0ia4r-fileset
+```
+
