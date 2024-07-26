@@ -72,6 +72,7 @@ Nix is a tool for people who both need computers to do exactly as intended, repe
   > linuxPackages_grsec_nixos.dpdk.examples       2,022,224 x /nix/store/2wqv94290pa38aclld7sc548a7hnz35k-dpdk-16.07.2-4.9.13-examples/bin/helloworld
   > camlistore.out                                7,938,952 x /nix/store/xn5ivjdyslxldhm5cb4x0lfz48zf21rl-camlistore-0.9/bin/hello
   > ```
++ `nixos-generate-config` to create a configuration file that contains some useful defaults and configuration suggestions.
   
 ## Reproducible interpreted scripts
 Create a file called `nixpkgs-releases.sh` with these contents:
