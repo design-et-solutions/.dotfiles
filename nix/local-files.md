@@ -140,7 +140,7 @@ The `difference` function subtracts one file set from another.\
 The result is a new file set that contains all files from the first argument that aren’t in the second argument.
 
 Use it to filter out `./result` by changing the `sourceFiles` definition:
-```nix build.nix
+```nix  Code Block title
 ...
 -  sourceFiles = ./.;
 +  sourceFiles = fs.difference ./. ./result;
