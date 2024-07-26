@@ -104,3 +104,45 @@ this derivation will be built:
 /nix/store/sa4g6h13v0zbpfw6pzva860kp5aks44n-fileset
 ```
 But the real benefit of the file set library comes from its facilities for composing file sets in different ways.
+
+## Difference
+To be able to copy both files `hello.txt` and `world.txt` to the output, add the whole project directory as a source again:
+```nix  build.nix
+...
+-  sourceFiles = ./hello.txt;
++  sourceFiles = ./.;
+...
+-    cp -v hello.txt $out
++    cp -v {hello,world}.txt $out
+...
+```
+This will work as expected:
+```shell
+$ nix-build
+trace: /home/user/fileset (all files in directory)
+this derivation will be built:
+  /nix/store/fsihp8872vv9ngbkc7si5jcbigs81727-fileset.drv
+...
+'hello.txt' -> '/nix/store/wmsxfgbylagmf033nkazr3qfc96y7mwk-fileset/hello.txt'
+'world.txt' -> '/nix/store/wmsxfgbylagmf033nkazr3qfc96y7mwk-fileset/world.txt'
+...
+/nix/store/wmsxfgbylagmf033nkazr3qfc96y7mwk-fileset
+```
+However, if you run `nix-build` again, the output path will be different!
+The problem here is that `nix-build` by default creates a `result` symlink in the working directory, which points to the store path just produced:
+```shell
+$ ls -l result
+result -> /nix/store/xknflcvjaa8dj6a6vkg629zmcrgz10rh-fileset
+```
+Since `src` refers to the whole directory, and its contents change when nix-build succeeds, Nix will have to start over every time.
+
+The `difference` function subtracts one file set from another.\
+The result is a new file set that contains all files from the first argument that aren’t in the second argument.
+
+Use it to filter out `./result` by changing the `sourceFiles` definition:
+```nix build.nix
+...
+-  sourceFiles = ./.;
++  sourceFiles = fs.difference ./. ./result;
+...
+```
