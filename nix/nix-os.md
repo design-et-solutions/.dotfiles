@@ -101,3 +101,25 @@ Additionally, you need to specify a password for this user. For the purpose of d
 }
 ```
 ### Creating a QEMU based virtual machine from a NixOS configuration
+A NixOS virtual machine is created with the `nix-build` command:
+```shell
+$ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 -I nixos-config=./configuration.nix
+```
+This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, using the NixOS configuration as specified in the relative path.
++ The positional argument to nix-build is a path to the derivation to be built.\
+  That path can be obtained from a Nix expression that evaluates to a derivation.\
+  The virtual machine build helper is defined in NixOS, which is part of the nixpkgs repository.\
+  Therefore we use the lookup path `<nixpkgs/nixos>`.
++ The `-A` option specifies the attribute to pick from the provided Nix expression `<nixpkgs/nixos>`.\
+  To build the virtual machine, we choose the `vm` attribute as defined in `nixos/default.nix`.
++ The `-I` option prepends entries to the search path.\
+  Here we set `nixpkgs` to refer to a specific version of Nixpkgs and set `nix-config` to the `configuration.nix` file in the current directory.
+
+> [!NOTE]
+> To use the current version of nixpkgs to build the virtual machine:
+> ```shell
+> $ nixos-rebuild build-vm -I nixos-config=./configuration.nix
+> ```
+
+### Running the virtual machine
+
