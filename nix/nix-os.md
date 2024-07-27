@@ -56,3 +56,48 @@ The default NixOS configuration without comments is:
   system.stateVersion = "23.11";
 }
 ```
+To be able to log in, add the following lines to the returned attribute set:
+```nix
+  users.users.alice = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+  };
+```
+We add two lightweight programs as an example:
+```nix
+  environment.systemPackages = with pkgs; [
+    cowsay
+    lolcat
+  ];
+```
+Additionally, you need to specify a password for this user. For the purpose of demonstration only, you specify an insecure, plain text password by adding the `initialPassword` option to the user configuration:
+```nix
+    initialPassword = "test";
+```
+
+> [!WARNING]
+> Do not use plain text passwords outside of this example unless you know what you are doing.\
+> See `initialHashedPassword` or `ssh.authorizedKeys` for more secure alternatives.
+
+### Sample configuration
+```nix
+{ config, pkgs, ... }:
+{
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  users.users.alice = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    initialPassword = "test";
+  };
+
+  environment.systemPackages = with pkgs; [
+    cowsay
+    lolcat
+  ];
+
+  system.stateVersion = "23.11";
+}
+```
+### Creating a QEMU based virtual machine from a NixOS configuration
