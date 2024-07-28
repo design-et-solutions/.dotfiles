@@ -122,4 +122,90 @@ This command builds the attribute `vm` from the `nixos-23.11` release of NixOS, 
 > ```
 
 ### Running the virtual machine
+The previous command created a link with the name result in the working directory.\
+It links to the directory that contains the virtual machine.
 
+Run the virtual machine:
+```shell
+$ QEMU_KERNEL_PARAMS=console=ttyS0 ./result/bin/run-nixos-vm -nographic; reset
+```
+This command will run QEMU in the current terminal due to `-nographic`.\
+`console=ttyS0` will also show the boot process, which ends at the console login screen.\
+Log in as alice with the password test.\
+Check that the programs are indeed available as specified:
+```shell
+$ cowsay hello | lolcat
+```
+Exit the virtual machine by shutting it down:
+```shell
+$ sudo poweroff
+```
+
+> [!NOTE]
+> If you forgot to add the user to wheel or didn’t set a password, stop the virtual machine from a different terminal:
+> ```shell
+> $ sudo pkill qemu
+> ```
+
+Running the virtual machine will create a `nixos.qcow2` file in the current directory.\
+This disk image file contains the dynamic state of the virtual machine.\
+It can interfere with debugging as it keeps the state of previous runs, for example the user password.\
+Delete this file when you change the configuration:
+```shell
+$ rm nixos.qcow2
+```
+
+### Running GNOME on a graphical VM
+To create a virtual machine with a graphical user interface, add the following lines to the configuration:
+```nix
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the GNOME Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+```
+These three lines activate X11, the GDM display manager (to be able to login) and Gnome as desktop manager.
+
+On NixOS, use installation-cd-graphical-gnome.nix to generate the configuration file:
+```shell
+$ nix-shell -I nixpkgs=channel:nixos-23.11 -p "$(cat <<EOF
+  let
+    pkgs = import <nixpkgs> { config = {}; overlays = []; };
+    iso-config = pkgs.path + /nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix;
+    nixos = pkgs.nixos iso-config;
+  in nixos.config.system.build.nixos-generate-config
+EOF
+)"
+```
+```shell
+$ nixos-generate-config --dir ./
+```
+The complete `configuration.nix` file looks like this:
+```shell
+{ config, pkgs, ... }:
+{
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  services.xserver.enable = true;
+
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  users.users.alice = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    initialPassword = "test";
+  };
+
+  system.stateVersion = "23.11";
+}
+```
+To get graphical output, run the virtual machine without special options:
+```shell
+$ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 -I nixos-config=./configuration.nix
+$ ./result/bin/run-nixos-vm
+```
+
+### Running Sway as Wayland compositor on a VM
