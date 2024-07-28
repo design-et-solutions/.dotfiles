@@ -208,4 +208,52 @@ $ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 -I nixos-conf
 $ ./result/bin/run-nixos-vm
 ```
 
+> [!TIP]
+> See [X Window System](https://nixos.org/manual/nixos/stable/#sec-x11).
+
 ### Running Sway as Wayland compositor on a VM
+To change to a Wayland compositor, disable `services.xserver.desktopManager.gnome` and enable `programs.sway`:
+```nix
+-  services.xserver.desktopManager.gnome.enable = true;
++  programs.sway.enable = true;
+```
+Running Wayland compositors in a virtual machine might lead to complications with the display drivers used by QEMU.\
+You need to choose from the available drivers one that is compatible with Sway.
+
+> [!NOTE]
+> See [QEMU User Documentation](https://www.qemu.org/docs/master/system/qemu-manpage.html).
+
+See QEMU User Documentation for options.\
+One possibility is the `virtio-vga` driver:
+```shell
+$ ./result/bin/run-nixos-vm -device virtio-vga
+```
+Arguments to QEMU can also be added to the configuration file:
+```nix
+{ config, pkgs, ... }:
+{
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  services.xserver.enable = true;
+
+  services.xserver.displayManager.gdm.enable = true;
+  programs.sway.enable = true;
+
+  imports = [ <nixpkgs/nixos/modules/virtualisation/qemu-vm.nix> ];
+  virtualisation.qemu.options = [
+    "-device virtio-vga"
+  ];
+
+  users.users.alice = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    initialPassword = "test";
+  };
+
+  system.stateVersion = "23.11";
+}
+```
+
+> [!TIP]
+> See [Wayland](https://nixos.org/manual/nixos/stable/#sec-wayland).
