@@ -405,4 +405,66 @@ Linux server 5.10.37 #1-NixOS SMP Fri May 14 07:50:46 UTC 2021 x86_64 GNU/Linux
 > ```
 
 ### Tests with multiple virtual machines
+Tests can involve multiple virtual machines, for example to test client-server-communication.
 
+The following example setup includes:
++ A virtual machine named `server` running nginx with default configuration.
++ A virtual machine named `client` that has `curl` available to make an HTTP request.
++ A `testScript` orchestrating testing logic between `client` and `server`.
+  
+The complete `client-server-test.nix` file content looks like the following:
+```nix
+let
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.11";
+  pkgs = import nixpkgs { config = {}; overlays = []; };
+in
+
+pkgs.testers.runNixOSTest {
+  name = "client-server-test";
+
+  nodes.server = { pkgs, ... }: {
+    networking = {
+      firewall = {
+        allowedTCPPorts = [ 80 ];
+      };
+    };
+    services.nginx = {
+      enable = true;
+      virtualHosts."server" = {};
+    };
+  };
+
+  nodes.client = { pkgs, ... }: {
+    environment.systemPackages = with pkgs; [
+      curl
+    ];
+  };
+
+  testScript = ''
+    server.wait_for_unit("default.target")
+    client.wait_for_unit("default.target")
+    client.succeed("curl http://server/ | grep -o \"Welcome to nginx!\"")
+  '';
+}
+```
+The test script performs the following steps:
++ Start the server and wait for it to be ready.
++ Start the client and wait for it to be ready.
++ Run `curl` on the client and use `grep` to check the expected return string.\
+  The test passes or fails based on the return value.
+
+Run the test:
+```shell
+$ nix-build client-server-test.nix
+```
+
+### Additional information regarding NixOS tests
++ Running integration tests on CI requires hardware acceleration, which many CIs do not support.
+
+> [!WARNING]
+> To run integration tests in GitHub Actions see (how to disable hardware acceleration)[https://github.com/cachix/install-nix-action#how-do-i-run-nixos-tests].
+
++ NixOS comes with a large set of tests that can serve as educational examples.
++ A good inspiration is Matrix bridging with an IRC.
+
+## Building a bootable ISO image
