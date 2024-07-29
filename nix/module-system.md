@@ -374,10 +374,163 @@ Here, the value of the `config.requestParams` attribute is populated by the modu
 The result of this represents the list of command line arguments to pass to the `./map` script
 
 ### Conditional definitions
+Sometimes, you will want option values to be, well, optional.\
+This can be useful when defining a value for an option is not required, as in the following case.
+
+You will define a new option, `map.zoom`, to control the zoom level of the map.\
+The Google Maps API will infer a zoom level if no corresponding argument is passed, a situation you can represent with the `nullOr <type>`, which represents values of type `<type>` or `null`.\
+This does not automatically mean that when the option isn’t defined, the value of such an option is `null` – we still need to define a default value.
+
+Add the `map` attribute set with the `zoom` option into the top-level `options` declaration, like so:
+```nix
+     requestParams = lib.mkOption {
+       type = lib.types.listOf lib.types.str;
+     };
++
++    map = {
++      zoom = lib.mkOption {
++        type = lib.types.nullOr lib.types.int;
++        default = null;
++      };
++    };
+   };
+```
+To make use of this, use the `mkIf <condition> <definition>` function, which only adds the definition if the condition evaluates to `true`.\
+Make the following additions to the `requestParams` list in the `config` block:
+```nix
+     requestParams = [
+       "size=640x640"
+       "scale=2"
++      (lib.mkIf (config.map.zoom != null)
++        "zoom=${toString config.map.zoom}")
+     ];
+   };
+```
+This will only add a `zoom` parameter to the script invocation if the value of `config.map.zoom` is not `null`.
 
 ### Default values
+Let’s say that in our application we want to have a different default behavior that sets the zoom level to `10`, such that automatic zooming has to be enabled explicitly.\
+This can be done with the `default` argument to `mkOption`.\
+Its value will be used if the value of the option declaring it is not specified otherwise.\
+Add the corresponding line:
+```nix
+     map = {
+       zoom = lib.mkOption {
+         type = lib.types.nullOr lib.types.int;
++        default = 10;
+       };
+     };
+   };
+```
 
 ### Wrapping shell commands
+You have now declared options controlling the map dimensions and zoom level, but have not provided a way to specify where the map should be centered.\
+Add the `center` option now, possibly with your own location as default value:
+```nix
+         type = lib.types.nullOr lib.types.int;
+         default = 10;
+       };
++
++      center = lib.mkOption {
++        type = lib.types.nullOr lib.types.str;
++        default = "switzerland";
++      };
+     };
+   };
+```
+To implement this behavior, you will use `geocode.sh` with contents:
+```shell
+#!/usr/bin/env bash
+set -euo pipefail
+
+rational_regex='-?[[:digit:]]+(\.[[:digit:]]+)?'
+result_regex="$rational_regex,$rational_regex"
+
+keyFile=${XDG_DATA_HOME:-~/.local/share}/google-api/key
+
+if [[ ! -f "$keyFile" ]]; then
+    mkdir -p "$(basename "$keyFile")"
+    echo "No Google API key found in $keyFile" >&2
+    echo "For getting one, see https://developers.google.com/maps/documentation/geocoding/overview#before-you-begin" >&2
+    exit 1
+fi
+
+key=$(cat "$keyFile")
+
+tmp=$(mktemp -d)
+trap 'rm -rf "$tmp"' exit
+
+output=$tmp/output
+
+curlArgs=(
+    https://maps.googleapis.com/maps/api/geocode/json
+    --silent --show-error --get --output "$output" --write-out '%{http_code}'
+    --data-urlencode address="$1"
+)
+
+#echo curl ''${curlArgs[@]@Q} >&2
+
+curlArgs+=(--data-urlencode key="$key")
+
+if status=$(curl "${curlArgs[@]}"); then
+    if [[ "$status" == 200 ]]; then
+        result=$(jq -r '.results[0].geometry.location as $loc | "\($loc | .lat),\($loc | .lng)"' "$output")
+        if ! [[ $result =~ $result_regex ]]; then
+            echo "Got a bad result of: '$result'" >&2
+            exit 1
+        else
+            echo "$result"
+        fi
+    else
+        echo "API returned non-200 HTTP status code $status, output is" >&2
+        cat "$output" >&2
+        exit 1
+    fi
+else
+    echo "curl exited with code $?" >&2
+    exit 1
+fi
+```
+This script turns location names into coordinates.\
+There are multiple ways of making a new package accessible, but as an exercise, you will add it as an option in the module system.\
+First, add a new option to accommodate the package:
+```nix
+   options = {
+     scripts.output = lib.mkOption {
+       type = lib.types.package;
+     };
++
++    scripts.geocode = lib.mkOption {
++      type = lib.types.package;
++    };
+```
+Then define the value for that option where you make the raw script reproducible by wrapping a call to it in `writeShellApplication`:
+```nix
+   config = {
++    scripts.geocode = pkgs.writeShellApplication {
++      name = "geocode";
++      runtimeInputs = with pkgs; [ curl jq ];
++      text = ''exec ${./geocode.sh} "$@"'';
++    };
++
+     scripts.output = pkgs.writeShellApplication {
+       name = "map";
+       runtimeInputs = with pkgs; [ curl feh ];
+```
+Add another `mkIf` call to the list of `requestParams` now where you access the wrapped package through `config.scripts.geocode`, and run the executable /bin/geocode inside:
+```nix
+       "scale=2"
+       (lib.mkIf (config.map.zoom != null)
+         "zoom=${toString config.map.zoom}")
++      (lib.mkIf (config.map.center != null)
++        "center=\"$(${config.scripts.geocode}/bin/geocode ${
++          lib.escapeShellArg config.map.center
++        })\"")
+     ];
+   };
+```
+This time, you’ve used `escapeShellArg` to pass the `config.map.center` value as a command-line argument to `geocode`, string interpolating the result back into the `requestParams` string which sets the `center` value.\
+Wrapping shell command execution in Nix modules is a helpful technique for controlling system changes, as it uses the more ergonomic attributes and values interface rather than dealing with the peculiarities of escaping manually.
 
 ### Splitting modules
 
