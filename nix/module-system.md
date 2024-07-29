@@ -331,6 +331,47 @@ Make the following additions to your `default.nix` file:
 ```
 
 ### Dependencies between options
+A given module generally declares one option that produces a result to be used elsewhere, in this case `scripts.output`.\
+Options can depend on other options, making it possible to build more useful abstractions.\
+Here, we want the `scripts.output` option to use the values of `requestParams` as arguments to the `./map` script.\
+To make option values available to a module, the arguments of the function declaring the module must include the `config` attribute.
+
+Update `default.nix` to add the `config` attribute:
+```nix
+-{ pkgs, lib, ... }: {
++{ pkgs, lib, config, ... }: {
+```
+When a module that sets options is evaluated, the resulting values can be accessed by their corresponding attribute names under `config`.
+
+> [!NOTE]
+> Option values can’t be accessed directly from the same module.\
+> The module system evaluates all modules it receives, and any of them can define a particular option’s value.\
+> What happens when an option is set by multiple modules is determined by that option’s type.
+
+> [!WARNING]
+> The config argument is not the same as the config attribute:
+> + The `config` argument holds the result of the module system’s lazy evaluation, which takes into account all modules passed to `evalModules` and their imports.
+> + The `config` attribute of a module exposes that particular module’s option values to the module system for evaluation.
+
+Now make the following changes to `default.nix`:
+```nix
+   config = {
+     scripts.output = pkgs.writeShellApplication {
+       name = "map";
+       runtimeInputs = with pkgs; [ curl feh ];
+       text = ''
+-        ${./map} size=640x640 scale=2 | feh -
++        ${./map} ${lib.concatStringsSep " "
++          config.requestParams} | feh -
+       '';
+```
+Here, the value of the `config.requestParams` attribute is populated by the module system based on the definitions in the same file.
+
+> [!NOTE]
+> Lazy evaluation in the Nix language allows the module system to make a value available in the `config` argument passed to the module which defines that value.
+
+`lib.concatStringsSep " "` is then used to join each list element from the value of `config.requestParams` into a single string, with the list elements of `requestParams` separated by a space character.\
+The result of this represents the list of command line arguments to pass to the `./map` script
 
 ### Conditional definitions
 
