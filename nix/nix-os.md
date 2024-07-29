@@ -468,3 +468,344 @@ $ nix-build client-server-test.nix
 + A good inspiration is Matrix bridging with an IRC.
 
 ## Building a bootable ISO image
+
+> [!NOTE]
+> If you need to build images for a different platform, see [Cross compiling](https://github.com/nix-community/nixos-generators#user-content-cross-compiling).
+
+You may find that an official installation image lacks some hardware support.
+
+The solution is to create `myimage.nix` to point to the latest kernel using the minimal installation ISO:
+```nix
+{ pkgs, modulesPath, lib, ... }: {
+  imports = [
+    "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
+  ];
+
+  # use the latest Linux kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Needed for https://github.com/NixOS/nixpkgs/issues/58959
+  boot.supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
+}
+```
+Generate an ISO with the above configuration:
+```shell
+$ NIX_PATH=nixpkgs=https://github.com/NixOS/nixpkgs/archive/74e2faf5965a12e8fa5cff799b1b19c6cd26b0e3.tar.gz nix-shell -p nixos-generators --run "nixos-generate --format iso --configuration ./myimage.nix -o result"
+```
+Copy the new image to your USB stick by replacing `sdX` with the name of your device:
+```shell
+dd if=result/iso/*.iso of=/dev/sdX status=progress
+sync
+```
+
+## Continuous integration with [GitHub Actions](https://github.com/features/actions)
+One benefit of Nix is that CI can build and cache developer environments for every project on every branch using binary caches.\
+An important aspect of CI is the feedback loop of, how many minutes does the build take to finish ?\
+There are a several good options, but Cachix (below) and integrating with GitHub’s built-in cache (at the end) are the most straightforward.
+
+### Caching builds using [Cachix](https://www.cachix.org/)
+Using Cachix you’ll never have to waste time building a derivation twice, and you’ll share built derivations with all your developers.\
+After each job, just-built derivations are pushed to your binary cache.\
+Before each job, derivations to be built are first substituted (if they exist) from your binary cache.
+
+#### Creating your first binary cache
+Fill out the form on the [create binary cache](https://app.cachix.org/cache) page.\
+On your freshly created binary cache, follow the Push binaries tab instructions.
+
+#### Setting up secrets
+On your GitHub repository or organization (for use across all repositories):
++ Click on `Settings`.
++ Click on `Secrets`.
++ Add your previously generated secrets (`CACHIX_SIGNING_KEY` and/or `CACHIX_AUTH_TOKEN`).
+
+#### Setting up GitHub Actions
+
+> [!NOTE]
+> See [GitHub Actions workflow syntax](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions).
+
+Create `.github/workflows/test.yml` with:
+```yaml
+name: "Test"
+on:
+  pull_request:
+  push:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v25
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - uses: cachix/cachix-action@v14
+      with:
+        name: mycache
+        # If you chose signing key for write access
+        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+        # If you chose API tokens for write access OR if you have a private cache
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+    - run: nix-build
+    - run: nix-shell --run "echo OK"
+```
+
+### Caching builds using GitHub Actions Cache
+A quick and easy way to speed up CI on any GitHub repository is to use the [Magic Nix Cache](https://github.com/DeterminateSystems/magic-nix-cache-action/).\
+The Magic Nix Cache doesn’t require any configuration, secrets, or credentials.\
+This means the caching benefits automatically work for anyone who forks the repository.\
+One downside to the Magic Nix Cache is it only works inside GitHub Actions.
+
+> [!WARNING]
+> See [limits of GitHub Actions caching](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows).
+
+Create .github/workflows/test.yml with:
+```yaml
+name: "Test"
+on:
+  pull_request:
+  push:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v25
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - uses: DeterminateSystems/magic-nix-cache-action@v2
+    - run: nix-build
+    - run: nix-shell --run "echo OK"
+```
+
+## Building and running Docker images
+Docker is a set of tools and services used to build, manage and deploy containers.
+
+As many cloud platforms offer Docker-based container hosting services, creating Docker containers for a given service is a common task when building reproducible software.
+
+> [!TIP]
+> Docker is available in nixpkgs, which is the preferred way to install it on NixOS.
+
+### Build your first container
+Nixpkgs provides `dockerTools` to create Docker images:
+```nix
+{ pkgs ? import <nixpkgs> { }
+, pkgsLinux ? import <nixpkgs> { system = "x86_64-linux"; }
+}:
+
+pkgs.dockerTools.buildImage {
+  name = "hello-docker";
+  config = {
+    Cmd = [ "${pkgsLinux.hello}/bin/hello" ];
+  };
+}
+```
+
+> [!NOTE]
+> If you’re running **macOS** or any platform other than `x86_64-linux`, you’ll need to either:
++ Set up a remote builder to build on Linux
++ Cross compile to Linux by replacing `pkgsLinux.hello` with `pkgs.pkgsCross.musl64.hello`.
+
+We call the `dockerTools.buildImage` and pass in some parameters:
++ a `name` for our image
++ the `config` including the command `Cmd` that should be run inside the container once the image is started.\
+  Here we reference the GNU hello package from `nixpkgs` and run its executable in the container.
+
+Save this in `hello-docker.nix` and build it:
+```shell
+nix-build hello-docker.nix
+these derivations will be built:
+  /nix/store/qpgdp0qpd8ddi1ld72w02zkmm7n87b92-docker-layer-hello-docker.drv
+  /nix/store/m4xyfyviwbi38sfplq3xx54j6k7mccfb-runtime-deps.drv
+  /nix/store/v0bvy9qxa79izc7s03fhpq5nqs2h4sr5-docker-image-hello-docker.tar.gz.drv
+warning: unknown setting 'experimental-features'
+building '/nix/store/qpgdp0qpd8ddi1ld72w02zkmm7n87b92-docker-layer-hello-docker.drv'...
+No contents to add to layer.
+Packing layer...
+Computing layer checksum...
+Finished building layer 'hello-docker'
+building '/nix/store/m4xyfyviwbi38sfplq3xx54j6k7mccfb-runtime-deps.drv'...
+building '/nix/store/v0bvy9qxa79izc7s03fhpq5nqs2h4sr5-docker-image-hello-docker.tar.gz.drv'...
+Adding layer...
+tar: Removing leading `/' from member names
+Adding meta...
+Cooking the image...
+Finished.
+/nix/store/y74sb4nrhxr975xs7h83izgm8z75x5fc-docker-image-hello-docker.tar.gz
+```
+The image tag (`y74sb4nrhxr975xs7h83izgm8z75x5fc`) refers to the Nix build hash and makes sure that the Docker image corresponds to our Nix build.\
+The store path in the last line of the output references the Docker image.
+
+### Run the container
+To work with the container, load this image into Docker’s image registry from the default `result` symlink created by `nix-build`:
+```shell
+docker load < result
+Loaded image: hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
+```
+You can also use the store path to load the image in order to avoid depending on the presence of `result`:
+```shell
+$ docker load < /nix/store/y74sb4nrhxr975xs7h83izgm8z75x5fc-docker-image-hello-docker.tar.gz
+Loaded image: hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
+```
+Even more conveniently, you can do everything in one command.\
+The advantage of this approach is that nix-build will rebuild the image if there are any changes and pass the new store path to docker load:
+```shell
+$ docker load < $(nix-build hello-docker.nix)
+Loaded image: hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
+```
+Now that you have loaded the image into Docker, you can run it:
+```shell
+docker run -t hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
+Hello, world!
+```
+
+### Working with Docker images
+
+> [!NOTE]
+> See [official Docker documentation](https://docs.docker.com/).
+
+Note that when you build your Docker images with Nix, you will probably not write a Dockerfile as Nix replaces the Dockerfile functionality within the Docker ecosystem.
+
+Nonetheless, understanding the anatomy of a Dockerfile may still be useful to understand how Nix replaces each of its functions.\
+Using the Docker CLI, Docker Compose, Docker Swarm or Docker Hub on the other hand may still be relevant, depending on your use case.
+
+> [!NOTE]
+> See [`dockerTools`](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-dockerTools).
+
+> [!TIP]
+> Take a look at [Arion](https://docs.hercules-ci.com/arion/), a `docker-compose` wrapper with first-class support for Nix.
+
+## Deploying NixOS using Terraform
+
+> [!NOTE]
+> See [basics of Terraform](https://developer.hashicorp.com/terraform/intro)
+
+Provisioned an Amazon Web Services (AWS) instance with Terraform, and will be able to use Nix to deploy incremental changes to NixOS running on the instance.
+
+### Booting NixOS image
+Start by providing the Terraform executable:
+```shell
+$ nix-shell -p terraform
+```
+We are using Terraform Cloud as a state/locking backend:
+```shell
+$ terraform login
+```
+Make sure to create an organization, like `myorganization`, in your Terraform Cloud account.\
+Inside `myorganization`, create a workspace by choosing CLI-driven workflow and pick a name, like `myapp`.\
+Inside your workspace, under `Settings / General`, change Execution Mode to `Local`.\
+Inside a new directory, create a `main.tf` file with the following contents.\
+This will start an AWS instance with the NixOS image using one SSH keypair and an SSH security group:
+```tf
+terraform {
+    backend "remote" {
+        organization = "myorganization"
+
+        workspaces {
+            name = "myapp"
+        }
+    }
+}
+
+provider "aws" {
+    region = "eu-central-1"
+}
+
+module "nixos_image" {
+    source  = "git::https://github.com/tweag/terraform-nixos.git//aws_image_nixos?ref=5f5a0408b299874d6a29d1271e9bffeee4c9ca71"
+    release = "20.09"
+}
+
+resource "aws_security_group" "ssh_and_egress" {
+    ingress {
+        from_port   = 22
+        to_port     = 22
+        protocol    = "tcp"
+        cidr_blocks = [ "0.0.0.0/0" ]
+    }
+
+    egress {
+        from_port       = 0
+        to_port         = 0
+        protocol        = "-1"
+        cidr_blocks     = ["0.0.0.0/0"]
+    }
+}
+
+resource "tls_private_key" "state_ssh_key" {
+    algorithm = "RSA"
+}
+
+resource "local_file" "machine_ssh_key" {
+    sensitive_content = tls_private_key.state_ssh_key.private_key_pem
+    filename          = "${path.module}/id_rsa.pem"
+    file_permission   = "0600"
+}
+
+resource "aws_key_pair" "generated_key" {
+    key_name   = "generated-key-${sha256(tls_private_key.state_ssh_key.public_key_openssh)}"
+    public_key = tls_private_key.state_ssh_key.public_key_openssh
+}
+
+resource "aws_instance" "machine" {
+    ami             = module.nixos_image.ami
+    instance_type   = "t3.micro"
+    security_groups = [ aws_security_group.ssh_and_egress.name ]
+    key_name        = aws_key_pair.generated_key.key_name
+
+    root_block_device {
+        volume_size = 50 # GiB
+    }
+}
+
+output "public_dns" {
+    value = aws_instance.machine.public_dns
+}
+```
+The only NixOS specific snippet is:
+```tf
+module "nixos_image" {
+  source = "git::https://github.com/tweag/terraform-nixos.git/aws_image_nixos?ref=5f5a0408b299874d6a29d1271e9bffeee4c9ca71"
+  release = "20.09"
+}
+```
+
+> [!NOTE]
+> The `aws_image_nixos` module will return a NixOS AMI given a NixOS release number so that the `aws_instance` resource can reference the AMI in `instance_type` argument.
+
+Make sure to configure AWS credentials.\
+Applying the Terraform configuration should get you a running NixOS:
+```shell
+terraform init
+terraform apply
+```
+
+### Deploying NixOS changes
+Once the AWS instance is running a NixOS image via Terraform, we can teach Terraform to always build the latest NixOS configuration and apply those changes to your instance.
+
+Create `configuration.nix` with the following contents:
+```shell
+{ config, lib, pkgs, ... }: {
+  imports = [ <nixpkgs/nixos/modules/virtualisation/amazon-image.nix> ];
+  # Open https://search.nixos.org/options for all options
+}
+```
+Append the following snippet to your `main.tf`:
+```shell
+module "deploy_nixos" {
+    source = "git::https://github.com/tweag/terraform-nixos.git//deploy_nixos?ref=5f5a0408b299874d6a29d1271e9bffeee4c9ca71"
+    nixos_config = "${path.module}/configuration.nix"
+    target_host = aws_instance.machine.public_ip
+    ssh_private_key_file = local_file.machine_ssh_key.filename
+    ssh_agent = false
+}
+```
+Deploy:
+```shell
+$ terraform init
+$ terraform apply
+```
+
+### Caveats
+The `deploy_nixos` module requires NixOS to be installed on the target machine and Nix on the host machine.\
+The `deploy_nixos` module doesn’t work when the client and target architectures are different (unless you use distributed builds).\
+If you need to inject a value into Nix, there is no elegant solution.\
+Each machine is evaluated separately, so note that your memory requirements will grow linearly with the number of machines.
