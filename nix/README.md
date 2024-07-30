@@ -130,6 +130,7 @@ Create fully reproducible Nix expressions, we can pin an exact version of Nixpkg
 ```
 
 ## Tree
+```
 .
 ├── _config.yml
 ├── _drafts
@@ -148,3 +149,4 @@ Create fully reproducible Nix expressions, we can pin an exact version of Nixpkg
 │   └── members.yml
 ├── _site
 └── index.html
+```
