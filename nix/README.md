@@ -131,22 +131,66 @@ Create fully reproducible Nix expressions, we can pin an exact version of Nixpkg
 
 ## Tree
 ```
-.
-├── _config.yml
-├── _drafts
-│   ├── begin-with-the-crazy-ideas. Textile
-│   └── on-simplicity-in-technology. Markdown
-├── _includes
-│   ├── footer.html
-│   └── header.html
-├── _layouts
-│   ├── default.html
-│   └── post.html
-├── _posts
-│   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile
-│   └── 2009-04-26-barcamp-boston-4-roundup.textile
-├── _data
-│   └── members.yml
-├── _site
-└── index.html
+nixos-config/
+├── flake.nix
+├── flake.lock
+├── docs/
+├── hosts/
+│   ├── laptop/
+│   ├── desktop/
+│   │   ├── default.nix
+│   │   └── hardware-configuration.nix
+│   ├── server/
+│   └── vm/
+├── modules/
+|   └── common/
+|       └── users/
+|           ├── root/
+|           ├── me/
+|           └── guest/
+├── nixos/
+|   ├── core/
+|   |   ├── bootloader/
+|   |   |   └── default.nix
+|   |   ├── shell/
+|   |   |   └── fish/
+|   |   |       └── default.nix
+|   |   ├── nix/
+|   |   |   └── options/
+|   |   |       └── default.nix
+|   |   └── kernel/
+|   └── optional/
+|       ├── drivers/
+|       |   └── gpu/
+|       |       ├── gpu/
+|       |       └── nvidia/
+|       └── wifi/
+|           ├── home/
+|           |   └── default.nix
+|           └── work/
+|               └── default.nix
+├── home/
+│   ├── default.nix
+│   ├── core/
+|   |   ├── pkgs/
+│   │   └── fish/
+|   ├── optional/
+|   |   └── desktop/
+|   |       └── hyperland/
+|   └── users/
+|       └── me/
+|           └── pkgs/
+|               └── git/
+├── overlays/
+|   └── ...
+├── secrets/
+└── wallpaper.jpg
 ```
++ `flake.nix`: The entry file that will be recognized and deployed when executing `sudo nixos-rebuild switch`.
++ `flake.lock`: An automatically generated version-lock file that records all input sources, hash values, and version numbers of the entire flake to ensure reproducibility.
++ `hosts/`: Contains subdirectories for each machine, with a `default.nix` for system-specific settings and a `hardware-configuration.nix` for hardware-specific configurations.
++ `modules/`: Contains reusable NixOS modules that can be shared across different hosts.
++ `nixos/`:
++ `home/`: Manages user-specific configurations using home-manager, with subdirectories for programs and services.
++ `overlays/`: Contain custom package definitions or modifications.
++ `secrets/`:
