@@ -533,27 +533,585 @@ This time, you’ve used `escapeShellArg` to pass the `config.map.center` value 
 Wrapping shell command execution in Nix modules is a helpful technique for controlling system changes, as it uses the more ergonomic attributes and values interface rather than dealing with the peculiarities of escaping manually.
 
 ### Splitting modules
+The module schema includes the `imports` attribute, which allows incorporating further modules, for example to split a large configuration into multiple files.\
+In particular, this allows you to separate option declarations from where they are used in your configuration.\
+Create a new module, `marker.nix`, where you can declare options for defining location pins and other markers on the map:
+```nix
+{ lib, config, ... }: {
+
+}
+```
+Reference this new file in `default.nix` using the imports attribute:
+```nix
+ { pkgs, lib, config, ... }: {
+
++  imports = [
++    ./marker.nix
++  ];
++
+```
 
 ### The `submodule` type
+We want to set multiple markers on the map.\
+A marker is a complex type with multiple fields.\
+This is where one of the most useful types included in the module system’s type system comes into play: `submodule`.\
+This type allows you to define nested modules with their own options.\
+Here, you will define a new `map.markers` option whose type is a list of submodules, each with a nested `location` type, allowing you to define a list of markers on the map.\
+Each assignment of markers will be type-checked during evaluation of the top-level `config`.\
+Make the following changes to `marker.nix`:
+```nix
+-{ pkgs, lib, config, ... }: {
++{ pkgs, lib, config, ... }:
++let
++  markerType = lib.types.submodule {
++    options = {
++      location = lib.mkOption {
++        type = lib.types.nullOr lib.types.str;
++        default = null;
++      };
++    };
++  };
++in {
++
++  options = {
++    map.markers = lib.mkOption {
++      type = lib.types.listOf markerType;
++    };
++  };
+```
 
 ### Defining options in other modules
+Because of the way the module system composes option definitions, you can freely assign values to options defined in other modules.\
+In this case, you will use the `map.markers` option to produce and add new elements to the `requestParams` list, making your declared markers appear on the returned map – but from the module declared in `marker.nix`.\
+To implement this behavior, add the following `config` block to `marker.nix`:
+```nix
++  config = {
++
++    map.markers = [
++      { location = "new york"; }
++    ];
++
++    requestParams = let
++      paramForMarker =
++        builtins.map (marker: "$(${config.scripts.geocode}/bin/geocode ${
++          lib.escapeShellArg marker.location})") config.map.markers;
++    in [ "markers=\"${lib.concatStringsSep "|" paramForMarker}\"" ];
++  };
+```
+
+> [!WARNING]
+> To avoid confusion with the `map` option setting and the final `config.map` configuration value, here we use the `map` function explicitly as `builtins.map`.
+
+Here, you again used `escapeShellArg` and string interpolation to generate a Nix string, this time producing a pipe-separated list of geocoded location attributes.\
+The `requestParams` value was also set to the resulting list of strings, which gets appended to the `requestParams` list defined in `default.nix`, thanks to the default merging behavior of the list type.\
+When defining multiple markers, determining an appropriate center or zoom level for the map may be challenging; it’s easier to let the API do this for you.\
+To achieve this, make the following additions to `marker.nix`, above the requestParams declaration:
+```nix
++    map.center = lib.mkIf
++      (lib.length config.map.markers >= 1)
++      null;
++
++    map.zoom = lib.mkIf
++      (lib.length config.map.markers >= 2)
++      null;
++
+     requestParams = let
+       paramForMarker = marker:
+         let
+```
+In this case, the default behavior of the Google Maps API when not passed a center or zoom level is to pick the geometric center of all the given markers, and to set a zoom level appropriate for viewing all markers at once.
 
 ### Nested submodules
+Next, we want to allow multiple named users to define a list of markers each.\
+For that you’ll add a `users` option with type `lib.types.attrsOf <subtype>`, which will allow you to define users as an attribute set, whose values have type `<subtype>`.\
+Here, that subtype will be another submodule which allows declaring a departure marker, suitable for querying the API for the recommended route for a trip.\
+This will again make use of the `markerType` submodule, giving a nested structure of submodules.\
+To propagate marker definitions from `users` to the `map.markers` option, make the following changes in the `let` block:
+```nix
++  userType = lib.types.submodule {
++    options = {
++      departure = lib.mkOption {
++        type = markerType;
++        default = {};
++      };
++    };
++  };
++
+ in {
+```
+This defines a submodule type for a user, with a `departure` option of type `markerType`.
+In the `options` block, above `map.markers`:
+```nix
++    users = lib.mkOption {
++      type = lib.types.attrsOf userType;
++    };
+```
+That allows adding a `users` attribute set to `config` in any submodule that imports `marker.nix`, where each attribute will be of type `userType` as declared in the previous step.\
+In the `config` block, above `map.center`:
+```nix
+   config = {
+
+-    map.markers = [
+-      { location = "new york"; }
+-    ];
++    map.markers = lib.filter
++      (marker: marker.location != null)
++      (lib.concatMap (user: [
++        user.departure
++      ]) (lib.attrValues config.users));
+
+     map.center = lib.mkIf
+       (lib.length config.map.markers >= 1)
+```
+This takes all the `departure` markers from all users in the `config` argument, and adds them to `map.markers` if their `location` attribute is not `null`.\
+The `config.users` attribute set is passed to `attrValues`, which returns a list of values of each of the attributes in the set (here, the set of `config.users` you’ve defined), sorted alphabetically (which is how attribute names are stored in the Nix language).\
+Back in `default.nix`, the resulting `map.markers` option value is still accessed by `requestParams`, which in turn is used to generate arguments to the script that ultimately calls the Google Maps API.
 
 ### The `strMatching` type
+Now that the map can be rendered with multiple markers, it’s time to add some style customizations.\
+To tell the markers apart, add another option to the `markerType` submodule, to allow labeling each marker pin.
+
+> [!TIP]
+> The API documentation states that these labels must be either an uppercase letter or a number.
+
+You can implement this with the `strMatching "<regex>"` type, where `<regex>` is a regular expression that will accept any matching values, in this case an uppercase letter or number.\
+In the `let` block:
+```nix
+         type = lib.types.nullOr lib.types.str;
+         default = null;
+       };
++
++      style.label = lib.mkOption {
++        type = lib.types.nullOr
++          (lib.types.strMatching "[A-Z0-9]");
++        default = null;
++      };
+     };
+   };
+```
+Again, `types.nullOr` allows for `null` values, and the default has been set to `null`.\
+In the `paramForMarker` function:
+```nix
+     requestParams = let
++      paramForMarker = marker:
++        let
++          attributes =
++            lib.optional (marker.style.label != null)
++            "label:${marker.style.label}"
++            ++ [
++              "$(${config.scripts.geocode}/bin/geocode ${
++                lib.escapeShellArg marker.location
++              })"
++            ];
++        in "markers=\"${lib.concatStringsSep "|" attributes}\"";
++      in
++        builtins.map paramForMarker config.map.markers;
+```
+Note how we now create a unique `marker` for each user by concatenating the `label` and `location` attributes together, and assigning them to the `requestParams`.\
+The label for each marker is only propagated to the CLI parameters if `marker.style.label` is set.
 
 ### Functions as submodule arguments
+Right now, if a label is not explicitly set, none will show up.\
+But since every `users` attribute has a name, we could use that as an automatic value instead.\
+This `firstUpperAlnum` function allows you to retrieve the first character of the username, with the correct type for passing to `departure.style.label`:
+```nix
+{ lib, config, ... }:
+ let
++  # Returns the uppercased first letter
++  # or number of a string
++  firstUpperAlnum = str:
++    lib.mapNullable lib.head
++    (builtins.match "[^A-Z0-9]*([A-Z0-9]).*"
++    (lib.toUpper str));
+
+   markerType = lib.types.submodule {
+     options = {
+```
+By transforming the argument to `lib.types.submodule` into a function, you can access arguments within it.\
+One special argument automatically available to submodules is `name`, which when used in `attrsOf`, gives you the name of the attribute the submodule is defined under:
+```nix
+-  userType = lib.types.submodule {
++  userType = lib.types.submodule ({ name, ... }: {
+     options = {
+       departure = lib.mkOption {
+         type = markerType;
+         default = {};
+       };
+     };
+-  };
+```
+In this case, you don’t easily have access to the name from the marker submodules `label` option, where you otherwise could set a `default` value.\
+Instead you can use the `config` section of the `user` submodule to set a default, like so:
+```nix
++
++    config = {
++      departure.style.label = lib.mkDefault
++        (firstUpperAlnum name);
++    };
++  });
+
+ in {
+```
+
+> [!NOTE]
+> Module options have a priority, represented as an integer, which determines the precedence for setting the option to a particular value.\
+> When merging values, the priority with lowest numeric value wins.\
+> The `lib.mkDefault` modifier sets the priority of its argument value to 1000, the lowest precedence.\
+> This ensures that other values set for the same option will prevail.
 
 ### The `either` and `enum` types
+For better visual contrast, it would be helpful to have a way to change the color of a marker.\
+Here you will use two new type-functions for this:
++ `either <this> <that>`, which takes two types as arguments, and allows either of them
++ `enum [ <allowed values> ]`, which takes a list of allowed values, and allows any of them
+
+In the `let` block, add the following `colorType` option, which can hold strings containing either some given color names or an RGB value add the new compound type:
+```nix
+     ...
+     (builtins.match "[^A-Z0-9]*([A-Z0-9]).*"
+     (lib.toUpper str));
+
++  # Either a color name or `0xRRGGBB`
++  colorType = lib.types.either
++    (lib.types.strMatching "0x[0-9A-F]{6}")
++    (lib.types.enum [
++      "black" "brown" "green" "purple" "yellow"
++      "blue" "gray" "orange" "red" "white" ]);
++
+   markerType = lib.types.submodule {
+     options = {
+       location = lib.mkOption {
+```
+This allows either strings that match a 24-bit hexadecimal number or are equal to one of the specified color names.\
+At the bottom of the `let` block, add the `style.color` option and specify a default value:
+```nix
+           (lib.types.strMatching "[A-Z0-9]");
+         default = null;
+       };
++
++      style.color = lib.mkOption {
++        type = colorType;
++        default = "red";
++      };
+     };
+   };
+```
+Now add an entry to the `paramForMarker` list which makes use of the new option:
+```nix
+               (marker.style.label != null)
+               "label:${marker.style.label}"
+             ++ [
++              "color:${marker.style.color}"
+               "$(${config.scripts.geocode}/bin/geocode ${
+                 lib.escapeShellArg marker.location
+               })"
+```
+In case you set many different markers, it would be helpful to have the ability to change their size individually.\
+Add a new `style.size` option to `marker.nix`, allowing you to choose from the set of pre-defined sizes:
+```nix
+         type = colorType;
+         default = "red";
+       };
++
++      style.size = lib.mkOption {
++        type = lib.types.enum
++          [ "tiny" "small" "medium" "large" ];
++        default = "medium";
++      };
+     };
+   };
+```
+Now add a mapping for the size parameter in `paramForMarker`, which selects an appropriate string to pass to the API:
+```nix
+     requestParams = let
+       paramForMarker = marker:
+         let
++          size = {
++            tiny = "tiny";
++            small = "small";
++            medium = "mid";
++            large = null;
++          }.${marker.style.size};
++
+```
+Finally, add another `lib.optional` call to the `attributes` string, making use of the selected size:
+```nix
+           attributes =
+             lib.optional
+               (marker.style.label != null)
+               "label:${marker.style.label}"
++            ++ lib.optional
++              (size != null)
++              "size:${size}"
+             ++ [
+               "color:${marker.style.color}"
+               "$(${config.scripts.geocode}/bin/geocode ${
+```
 
 ### The `pathType` submodule
+So far, you’ve created an option for declaring a departure marker, as well as several options for configuring the marker’s visual representation.\
+Now we want to compute and display a route from the user’s location to some destination.\
+The new option defined in the next section will allow you to set an arrival marker, which together with a departure allows you to draw paths on the map using the new module defined below.\
+To start, create a new `path.nix` file with the following contents:
+```nix
+{ lib, config, ... }:
+let
+  pathType = lib.types.submodule {
+    options = {
+      locations = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+      };
+    };
+  };
+in
+{
+  options = {
+    map.paths = lib.mkOption {
+      type = lib.types.listOf pathType;
+    };
+  };
+  config = {
+    requestParams =
+      let
+        attrForLocation = loc:
+          "$(${config.scripts.geocode}/bin/geocode ${lib.escapeShellArg loc})";
+        paramForPath = path:
+          let
+            attributes =
+              builtins.map attrForLocation path.locations;
+          in
+          ''path="${lib.concatStringsSep "|" attributes}"'';
+      in
+      builtins.map paramForPath config.map.paths;
+  };
+}
+```
+The `path.nix` module declares an option for defining a list of paths on our `map`, where each path is a list of strings for geographic locations.\
+In the `config` attribute we augment the API call by setting the `requestParams` option value with the coordinates transformed appropriately, which will be concatenated with request parameters set elsewhere.\
+Now import this new `path.nix` module from your `marker.nix` module:
+```nix
+ in {
+
++  imports = [
++    ./path.nix
++  ];
++
+   options = {
+
+     users = lib.mkOption {
+```
+Copy the `departure` option declaration to a new `arrival` option in `marker.nix`, to complete the initial path implementation:
+```nix
+         type = markerType;
+         default = {};
+       };
++
++      arrival = lib.mkOption {
++        type = markerType;
++        default = {};
++      };
+     };
+```
+Next, add an `arrival.style.label` attribute to the `config` block, mirroring the `departure.style.label`:
+```nix
+     config = {
+       departure.style.label = lib.mkDefault
+         (firstUpperAlnum name);
++      arrival.style.label = lib.mkDefault
++        (firstUpperAlnum name);
+     };
+   });
+```
+Finally, update the return list in the function passed to `concatMap` in `map.markers` to also include the `arrival` marker for each user:
+```nix
+     map.markers = lib.filter
+       (marker: marker.location != null)
+       (lib.concatMap (user: [
+-        user.departure
++        user.departure user.arrival
+       ]) (lib.attrValues config.users));
+
+     map.center = lib.mkIf
+```
+Now you have the basis to define paths on the map, connecting pairs of departure and arrival points.\
+In the path module, define a path connecting every user’s departure and arrival locations:
+```nix
+   config = {
++
++    map.paths = builtins.map (user: {
++      locations = [
++        user.departure.location
++        user.arrival.location
++      ];
++    }) (lib.filter (user:
++      user.departure.location != null
++      && user.arrival.location != null
++    ) (lib.attrValues config.users));
++
+     requestParams = let
+       attrForLocation = loc:
+         "$(geocode ${lib.escapeShellArg loc})";
+```
+The new `map.paths` attribute contains a list of all valid paths defined for all users.\
+A path is valid only if the `departure` and `arrival` attributes are set for that user.
 
 ### The `between` constraint on integer values
+Your users have spoken, and they demand the ability to customize the styles of their paths with a `weight` option.\
+As before, you’ll now declare a new submodule for the path style.\
+While you could also directly declare the `style.weight` option, in this case you should use the submodule to be able reuse the path style type later.\
+Add the `pathStyleType` submodule option to the let block in `path.nix`:
+```nix
+ { lib, config, ... }:
+ let
++
++  pathStyleType = lib.types.submodule {
++    options = {
++      weight = lib.mkOption {
++        type = lib.types.ints.between 1 20;
++        default = 5;
++      };
++    };
++  };
++
+   pathType = lib.types.submodule {
+```
+
+> [!NOTE]
+> The `ints.between <lower> <upper>` type allows integers in the given (inclusive) range.
+
+The path weight will default to 5, but can be set to any integer value in the 1 to 20 range, with higher weights producing thicker paths on the map.\
+Now add a `style` option to the `options` set further down the file:
+```nix
+     options = {
+       locations = lib.mkOption {
+         type = lib.types.listOf lib.types.str;
+       };
++
++      style = lib.mkOption {
++        type = pathStyleType;
++        default = {};
++      };
+     };
+
+   };
+```
+Finally, update the `attributes` list in `paramForPath`:
+```nix
+       paramForPath = path:
+         let
+           attributes =
+-            builtins.map attrForLocation path.locations;
++            [
++              "weight:${toString path.style.weight}"
++            ]
++            ++ builtins.map attrForLocation path.locations;
+         in "path=\"${lib.concatStringsSep "|" attributes}\"";
+```
 
 ### The `pathStyle` submodule
+Users still can’t actually customize the path style yet.\
+Introduce a new `pathStyle` option for each user.\
+The module system allows you to declare values for an option multiple times, and if the types permit doing so, takes care of merging each declaration’s values together.\
+This makes it possible to have a definition for the `users` option in the `marker.nix` module, as well as a `users` definition in `path.nix`:
+```nix
+ in {
+   options = {
++
++    users = lib.mkOption {
++      type = lib.types.attrsOf (lib.types.submodule {
++        options.pathStyle = lib.mkOption {
++          type = pathStyleType;
++          default = {};
++        };
++      });
++    };
++
+     map.paths = lib.mkOption {
+       type = lib.types.listOf pathType;
+     }
+```
+Then add a line using the `user.pathStyle` option in `map.paths` where each user’s paths are processed:
+```nix
+         user.departure.location
+         user.arrival.location
+       ];
++      style = user.pathStyle;
+     }) (lib.filter (user:
+       user.departure.location != null
+       && user.arrival.location != null
+```
 
 ### Path styling: color
+As with markers, paths should have customizable colors.\
+You can accomplish this using types you’ve already encountered by now.\
+Add a new `colorType` block to `path.nix`, specifying the allowed color names and RGB/RGBA hexadecimal values:
+```nix
+ { lib, config, ... }:
+ let
+
++  # Either a color name, `0xRRGGBB` or `0xRRGGBBAA`
++  colorType = lib.types.either
++    (lib.types.strMatching "0x[0-9A-F]{6}[0-9A-F]{2}?")
++    (lib.types.enum [
++      "black" "brown" "green" "purple" "yellow"
++      "blue" "gray" "orange" "red" "white"
++    ]);
++
+   pathStyleType = lib.types.submodule {
+```
+Under the `weight` option, add a new `color` option to use the new `colorType` value:
+```nix
+         type = lib.types.ints.between 1 20;
+         default = 5;
+       };
++
++      color = lib.mkOption {
++        type = colorType;
++        default = "blue";
++      };
+     };
+   }
+```
+Finally, add a line using the `color` option to the `attributes` list:
+```nix
+           attributes =
+             [
+               "weight:${toString path.style.weight}"
++              "color:${path.style.color}"
+             ]
+             ++ map attrForLocation path.locations;
+         in "path=${
+```
 
 ### Further styling
+Now that you’ve got this far, to further improve the aesthetics of the rendered map, add another style option allowing paths to be drawn as geodesics, the shortest “as the crow flies” distance between two points on Earth.\
+Since this feature can be turned on or off, you can do this using the `bool` type, which can be `true` or `false`.\
+Make the following changes to `path.nix` now:
+```nix
+         type = colorType;
+         default = "blue";
+       };
++
++      geodesic = lib.mkOption {
++        type = lib.types.bool;
++        default = false;
++      };
+     };
+   };
+```
+Make sure to also add a line to use that value in `attributes` list, so the option value is included in the API call:
+```nix
+             [
+               "weight:${toString path.style.weight}"
+               "color:${path.style.color}"
++              "geodesic:${lib.boolToString path.style.geodesic}"
+             ]
+             ++ map attrForLocation path.locations;
+         in "path=${
+```
 
 ### Wrapping up
+In this tutorial, you’ve learned how to write custom Nix modules to bring external services under declarative control, with the help of several new utility functions from the Nixpkgs `lib`.\
+You defined several modules in multiple files, each with separate submodules making use of the module system’s type checking.\
+These modules exposed features of the external API in a declarative way.\
+You can now conquer the world with Nix.
