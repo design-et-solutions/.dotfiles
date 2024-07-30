@@ -126,6 +126,25 @@ Create fully reproducible Nix expressions, we can pin an exact version of Nixpkg
 ```nix
 { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/06278c77b5d162e62df170fec307e83f1812d94b.tar.gz") {}
 }:
-
 ...
 ```
+
+## Tree
+.
+├── _config.yml
+├── _drafts
+│   ├── begin-with-the-crazy-ideas. Textile
+│   └── on-simplicity-in-technology. Markdown
+├── _includes
+│   ├── footer.html
+│   └── header.html
+├── _layouts
+│   ├── default.html
+│   └── post.html
+├── _posts
+│   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile
+│   └── 2009-04-26-barcamp-boston-4-roundup.textile
+├── _data
+│   └── members.yml
+├── _site
+└── index.html
