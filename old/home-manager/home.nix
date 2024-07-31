@@ -45,12 +45,26 @@
   };
 
   # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  programs.neovim.enable = true; 
+  # home.packages = with pkgs; [ ...   ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
+
+  programs.hyprland = {
+    enable = true;
+    nvidiaPatches = true;  # If you're using NVIDIA GPU
+    xwayland.enable = true;
+  };
+
+  environment.sessionVariables = {
+    "LIBVA_DRIVER_NAME" = "nvidia";  # If you're using NVIDIA GPU
+    "XDG_SESSION_TYPE" = "wayland";
+    "GBM_BACKEND" = "nvidia-drm";  # If you're using NVIDIA GPU
+    "__GLX_VENDOR_LIBRARY_NAME" = "nvidia";  # If you're using NVIDIA GPU
+    "WLR_NO_HARDWARE_CURSORS" = "1";
+  };  
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

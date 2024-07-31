@@ -64,6 +64,41 @@
     };
 
     # FIXME: Add the rest of your current configuration
+    
+    # Enable Hyprland
+    services.xserver = {
+        enable = true;
+        layout = "us";
+        xkbOptions = "eurosign:e";
+        windowManager.hyprland.enable = true;
+        displayManager.lightdm.enable = true;  # You can use another display manager if you prefer
+    };
+
+    # Enable sound
+    sound.enable = true;
+    hardware.pulseaudio.enable = true;
+
+    # Enable NetworkManager
+    networking = {
+        networkmanager.enable = true;
+        useDHCP = false;  # Disable global DHCP
+
+        interfaces = {
+            wlo1 = {
+                useDHCP = false;  # Disable DHCP for Wi-Fi interface
+            };
+        };
+
+        # Configure Wi-Fi
+        wireless = {
+            enable = true;
+            networks = {
+                "Sweet_Home_2G" = {
+                    psk = "oh!sweethome";
+                };
+            };
+        };
+    };
 
     # TODO: Set your hostname
     networking.hostName = "nixos";
