@@ -10,26 +10,33 @@
   };
 
   outputs = {
-      self,
-      nixpkgs,
-      home-manager,
-      ...
+    self,
+    nixpkgs,
+    home-manager,
+    ...
   } @ inputs: let
-      inherit (self) outputs;
+    inherit (self) outputs;
+    systems = [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+    ];
+    forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
     nixosConfigurations = {
       laptop-hood = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/laptop/hood
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.me = import ./modules/common/users/me;
-            home-manager.extraSpecialArgs = { inherit inputs outputs; };
-          }
         ];
+      };
+    };
+
+    homeConfigurations = {
+      "me@laptop-hood" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./modules/common/users/me];
       };
     };
   };

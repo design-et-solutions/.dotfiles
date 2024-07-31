@@ -1,12 +1,13 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 {
   imports = [
+    ../../../modules/home/core 
     "../../../home/users/me/pkgs/git"
   ];
 
-  initialPassword = "So!weak#0";
-  isNormalUser = true;
-  openssh.authorizedKeys.keys = [];
-  extraGroups = ["wheel", "networkmanager"];
+  home = {
+    username = "me";
+    homeDirectory = "/home/me";
+  };
 
 }
