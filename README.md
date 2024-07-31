@@ -3,8 +3,27 @@ Inside each document you might found two indications:
 + `FIXME` (required)
 + `TODO` (usually tips or optional stuff you might want)
 
+## Tree
+```
+config/
+├── flake.nix
+├── flake.lock
+├── docs/
+|   ├── hyperland/
+|   |   ├── README.md
+|   |   └── ...
+|   └── nix/
+|       ├── README.md
+|       └── ...
+├── home-manager/
+|   └── home.nix
+└── nixos/
+    ├── configuration.nix
+    └── hardware-configuration.nix
+```
+
 ## Setup `config`
-1. Make sure you're running Nix 2.4+, and opt into the experimental `flakes` and `nix-command` features:
++ Make sure you're running Nix 2.4+, and opt into the experimental `flakes` and `nix-command` features:
   ```sh
   # Should be 2.4+
   nix --version
@@ -24,7 +43,10 @@ Inside each document you might found two indications:
       ```sh
       sudo nix-collect-garbage -d
       ```
++ Take a look at `flake.nix`, making sure to fill out anything marked with `FIXME` or `TODO`.
++ Copy your `/etc/nixos/hardware-configuration.nix` to `./nixos/hardware-configuration.nix`.
 
+---
 
 
 2. If you want to use NixOS: add stuff you currently have on `/etc/nixos/` to `nixos` (usually `configuration.nix` and `hardware-configuration.nix`, when you're starting out).

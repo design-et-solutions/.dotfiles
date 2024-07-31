@@ -1,2 +1,0 @@
-# Depend on host machine
-./nixos/hardware-configuration.nix

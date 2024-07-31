@@ -1,6 +1,6 @@
 {
-    description = "Your new nix config";
-
+    description = "Nix config";
+    
     inputs = {
         # Nixpkgs
         nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
