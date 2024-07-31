@@ -73,6 +73,7 @@ Nix is a tool for people who both need computers to do exactly as intended, repe
   > camlistore.out                                7,938,952 x /nix/store/xn5ivjdyslxldhm5cb4x0lfz48zf21rl-camlistore-0.9/bin/hello
   > ```
 + `nixos-generate-config` to create a configuration file that contains some useful defaults and configuration suggestions.
++ `nix`
   
 ## Reproducible interpreted scripts
 Create a file called `nixpkgs-releases.sh` with these contents:
@@ -130,6 +131,40 @@ Create fully reproducible Nix expressions, we can pin an exact version of Nixpkg
 ```
 
 ## Tree
+```
+nixos-config/
+├── flake.nix
+├── flake.lock
+├── home-manager/
+|   └── home.nix
+└── nixos/
+    ├── configuration.nix
+    └── hardware-configuration.nix
+```
+
+```
+nixos-config/
+├── flake.nix
+├── flake.lock
+├── home-manager/
+|   └── home.nix
+├── nixos/
+|   ├── configuration.nix
+|   └── hardware-configuration.nix
+├── modules/
+|   ├── home-manager/
+|   |   └── default.nix
+|   └── nixos/
+|       └── default.nix
+├── pkgs/
+|   └── default.nix
+└── overlays
+    └── default.nix
+```
+
+
+
+
 ```
 nixos-config/
 ├── flake.nix
