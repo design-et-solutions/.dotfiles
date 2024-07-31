@@ -1,12 +1,13 @@
 {
-  description = "Nix config";
-    
+  description = "Nix config with Flake and Sops";
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Nixpkgs
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+
+    # Home manager
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -16,27 +17,23 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    systems = [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-    ];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
+    # NixOS configuration entrypoint
+    # Available through 'nixos-rebuild --flake .#machine-name'
     nixosConfigurations = {
       laptop-hood = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./modules/nixos/configuration.nix
-        ];
+        modules = [./nixos/configuration.nix];
       };
     };
 
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager --flake .#username@machine-name'
     homeConfigurations = {
       "me@laptop-hood" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./modules/common/users/me];
+        modules = [./home];
       };
     };
   };
