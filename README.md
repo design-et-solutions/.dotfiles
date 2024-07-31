@@ -23,6 +23,12 @@ config/
 ```
 
 ## Setup `config`
+1. Get repo into your current repo
+2. Replace contents of `./nixos/hardware-configuration.nix` by contents of `/etc/nixos/hardware-configuration.nix`.
+
+---
+
++ get 
 + If it's your machine, enable SSH inside `/etc/nixos/configuration.nix` and generate a key:
   ```sh
   ssh-keygen
@@ -49,6 +55,9 @@ config/
       ```sh
       sudo nix-collect-garbage -d
       ```
++ Get the template:
+  ```sh
+  ```
 + Take a look at `flake.nix`, making sure to fill out anything marked with `FIXME` or `TODO`.
 + Copy your `/etc/nixos/hardware-configuration.nix` to `./nixos/hardware-configuration.nix`.
 
