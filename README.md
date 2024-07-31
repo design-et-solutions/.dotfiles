@@ -23,6 +23,12 @@ config/
 ```
 
 ## Setup `config`
++ If it's your machine, enable SSH inside `/etc/nixos/configuration.nix` and generate a key:
+      ```sh
+      ssh-keygen
+      ```
+    + Add the `.pub` key to github and clone repo
++ If it's not ...
 + Make sure you're running Nix 2.4+, and opt into the experimental `flakes` and `nix-command` features:
   ```sh
   # Should be 2.4+
