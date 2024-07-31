@@ -20,6 +20,10 @@
         ./hardware-configuration.nix
     ];
 
+    # Add bootloader configuration for UEFI systems
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+
     nixpkgs = {
         # You can add overlays here
         overlays = [
@@ -71,7 +75,7 @@
             # TODO: You can set an initial password for your user.
             # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
             # Be sure to change it (using passwd) after rebooting!
-            initialPassword = "correcthorsebatterystaple";
+            initialPassword = "So!weak#0";
             isNormalUser = true;
             openssh.authorizedKeys.keys = [
                 # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
