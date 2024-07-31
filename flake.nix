@@ -18,11 +18,11 @@
       inherit (self) outputs;
   in {
     nixosConfigurations = {
-      desktop-home = nixpkgs.lib.nixosSystem {
+      laptop-hood = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs outputs; };
         modules = [
-          ./hosts/desktop/home
+          ./hosts/laptop/hood
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
