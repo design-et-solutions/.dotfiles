@@ -2,6 +2,7 @@
 {
   imports = [
     ../../../modules/nixos/core 
+    ./hardware-configuration.nix
   ];
 
   networking.hostName = "template";
