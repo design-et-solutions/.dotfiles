@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    "../../../../home/users/me/pkgs/git"
+    "../../../home/users/me/pkgs/git"
   ];
 
   initialPassword = "So!weak#0";
