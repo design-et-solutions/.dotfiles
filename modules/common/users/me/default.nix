@@ -10,4 +10,13 @@
     homeDirectory = "/home/me";
   };
 
+  users.users = {
+    me = {
+      initialPassword = "Oups";
+      isNormalUser = true;
+      openssh.authorizedKeys.keys = [];
+      extraGroups = ["wheel"];
+    };
+  };
+
 }

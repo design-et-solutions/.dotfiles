@@ -2,7 +2,6 @@
 {
   imports = [
     ../../../modules/nixos/core 
-    ./hardware-configuration.nix 
     ../../../modules/nixos/optional/wifi/home 
     ../../../modules/home/optional/desktop/hyprland
   ];

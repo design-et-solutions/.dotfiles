@@ -4,7 +4,8 @@
     ./bootloader
     ./zswap
     ./shell/fish
-    ./audio/pulseaudio
+    ./audio/pulseaudio 
+    ./hardware-configuration.nix 
   ];
 
   nix = let
