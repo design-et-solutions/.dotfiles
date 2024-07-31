@@ -27,7 +27,7 @@
       laptop-hood = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/laptop/hood
+          ./modules/nixos/configuration.nix
         ];
       };
     };

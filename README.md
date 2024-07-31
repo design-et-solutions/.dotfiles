@@ -35,9 +35,10 @@ Tests for the configurations are located in the `tests/` directory.
   home-manager switch --flake .#username@hostname
   ```
 ## Dependecy
-+ Install git, if you haven't already.
++ Enable Git.
 + Enable SSH.
 + Create a repository for your `config` or clone this repo.
++ Add stuff you currently have on `/etc/nixos/` to `/modules/nixos/`.
 + Make Nix config to use the bellow options:
   ```sh
   export NIX_CONFIG="experimental-features = nix-command flakes"
