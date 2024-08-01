@@ -16,16 +16,9 @@
     };
   };
 
-  # Enable NetworkManager for easier WiFi management
-  networking.networkmanager = {
-    enable = true;
-    wifi.powersave = true;
-  };
-
   # Install useful networking tools
   environment.systemPackages = with pkgs; [
     iw
     wirelesstools
-    networkmanagerapplet
   ];
 }

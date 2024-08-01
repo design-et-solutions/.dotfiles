@@ -25,6 +25,7 @@
 
    home.packages = with pkgs; [ 
     htop
+    networkmanager   
   ];
 
   # Nicely reload system units when changing configs
