@@ -27,9 +27,9 @@
           ./hosts/laptop/hood
           home-manager.nixosModules.home-manager
           {
-            home-manager.users.me = { pkgs, ... }: {
-              home-manager.users.me = import ./modules/home/me;
-            };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.me = import ./modules/home/me;
           }
         ];
       };
