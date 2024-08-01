@@ -3,6 +3,6 @@
 }: {
     imports = [
     ../.
-    ../../../optional/desktop/hyperland
+    ../../optional/desktop/hyperland
   ];
 }
