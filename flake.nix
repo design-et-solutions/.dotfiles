@@ -29,7 +29,10 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.me = import ./modules/home/me;
+            home-manager.users.me = [
+              ./modules/home/me
+              ./modules/optional/desktop/wayland
+            ];
           }
         ];
       };
