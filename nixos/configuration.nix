@@ -37,6 +37,12 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    timeout = 3;
+  };
+
   networking.hostName = "laptop-hood";
 
   users.users = {
