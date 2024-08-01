@@ -8,7 +8,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 
-    ../../../modules/nixos/optional/wifi/home
+    ../../../modules/nixos/optional/wifi/home 
   ];
 
   networking.hostName = "laptop-hood";

@@ -1,0 +1,8 @@
+{
+  ...
+}: {
+    imports = [
+    ../.
+    ../../../optional/desktop/hyperland
+  ];
+}
