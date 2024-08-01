@@ -1,8 +1,0 @@
-{
-  ...
-}: {
-    imports = [
-    ../.
-    ../../../optional/desktop/hyprland
-  ];
-}

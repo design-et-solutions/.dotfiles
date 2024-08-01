@@ -4,14 +4,18 @@
 }:
 {
   imports = [
-    ../../../modules/nixos/core 
+    # Import general core 
+    ../../../nixos/core 
+    ../../../nixos/core/shell/fish 
     
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 
-    ../../../modules/nixos/optional/wifi/home 
-    ../../../modules/nixos/optional/window-manager/wayland 
-    ../../../modules/nixos/optional/window-manager/hyprland 
+    # Import optional
+    ../../../nixos/optional/wifi/home 
+    ../../../nixos/optional/wayland 
+    ../../../nixos/optional/window-manager/hyprland 
+    ../../../nixos/optional/pkgs/firefox
   ];
 
   networking.hostName = "laptop-hood";
@@ -22,5 +26,11 @@
       PermitRootLogin = "no";
       PasswordAuthentication = true;
     };
+  };
+
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    MOZ_ENABLE_WAYLAND = "1";
   };
 }
