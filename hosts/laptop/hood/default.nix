@@ -1,4 +1,5 @@
 { 
+  pkgs,
   ... 
 }:
 {
@@ -20,4 +21,15 @@
       PasswordAuthentication = true;
     };
   };
+
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.wayland.enable = true;
+  programs.hyprland.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    wayland
+    xwayland
+    hyprland
+  ];
 }
