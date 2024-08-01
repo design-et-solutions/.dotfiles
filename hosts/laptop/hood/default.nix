@@ -1,7 +1,7 @@
 { 
-  config, 
+  # config, 
   # lib, 
-  pkgs,
+  # pkgs,
   ... 
 }:
 {
@@ -24,8 +24,4 @@
       PasswordAuthentication = true;
     };
   };
-
-  home.packages = with pkgs; [
-    htop
-  ];
 }

@@ -23,7 +23,10 @@
   programs.home-manager.enable = true;
   programs.git.enable = true;
 
-   home.packages = with pkgs; [ nmcli ];
+   home.packages = with pkgs; [ 
+    htop
+    nmcli 
+  ];
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
