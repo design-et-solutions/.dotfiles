@@ -29,7 +29,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.me = import ./modules/home/me/desktop;
+            home-manager.users.me = import ./modules/home/common/me/desktop;
           }
         ];
       };
