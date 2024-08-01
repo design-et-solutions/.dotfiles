@@ -10,6 +10,8 @@
     ./hardware-configuration.nix
 
     ../../../modules/nixos/optional/wifi/home 
+    ../../../modules/nixos/optional/window-manager/wayland 
+    ../../../modules/nixos/optional/window-manager/hyprland 
   ];
 
   networking.hostName = "laptop-hood";
@@ -21,15 +23,4 @@
       PasswordAuthentication = true;
     };
   };
-
-  services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.wayland.enable = true;
-  programs.hyprland.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    wayland
-    xwayland
-    hyprland
-  ];
 }

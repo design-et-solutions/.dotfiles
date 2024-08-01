@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./bootloader
+    ./shell/fish
   ];
 
   nixpkgs = {
