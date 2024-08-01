@@ -1,7 +1,5 @@
 # README
-
 ## Initialization
-
 ### Prelude
 + Create a repository for your `config` or clone this repo.
-+ Add stuff you currently have on `/etc/nixos/` to `/modules/nixos/`.
++ Add `/etc/nixos/hardware-configuration.nix` to `/modules/nixos/`.

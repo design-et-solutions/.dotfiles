@@ -6,8 +6,7 @@
   ...
 }: {
   imports = [
-    # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
+    ./bootloader
   ];
 
   nixpkgs = {
@@ -43,22 +42,12 @@
     timeout = 3;
   };
 
-  networking.hostName = "laptop-hood";
-
   users.users = {
     me = {
       initialPassword = "Oups";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [];
       extraGroups = ["wheel"];
-    };
-  };
-
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
     };
   };
 
