@@ -8,13 +8,10 @@
     userControlled.enable = true;
     networks = {
       "Sweet_Home_2G" = {
-        pskRaw = "89143132fd5b6c1f3cba26e9583bb4c271a52b1ae3d88c244287ff7ee0fd1990";
+        psk = "oh!sweethome";
       };
       "Sweet_Home_5G" = {
-        pskRaw = "6424fc5adc5fdf73903e5fbb4b70f6876e573bd48b3ce93fc25232aa6c4cadd2";
-      };
-      "Bbox-192379F6" = {
-        pskRaw = "8ee55c8383f81b63bf11c6bcef46cf9e19363714bf7f03ea5ac205fd0b46c26f";
+        psk = "oh!sweethome";
       };
     };
   };

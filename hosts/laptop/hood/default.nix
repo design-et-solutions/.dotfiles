@@ -9,7 +9,7 @@
     ./hardware-configuration.nix
 
     ../../../modules/nixos/optional/wifi/home 
-    # ../../../modules/home/optional/desktop/hyprland
+    ../../../modules/home/optional/desktop/hyprland
   ];
 
   networking.hostName = "laptop-hood";
