@@ -22,19 +22,16 @@
     # Available through 'nixos-rebuild --flake .#machine-name'
     nixosConfigurations = {
       laptop-hood = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/laptop/hood];
+        specialArgs = { inherit inputs outputs; };
+        modules = [
+          ./hosts/laptop/hood
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.users.me = { pkgs, ... }: {
+              home-manager.users.me = import ./modules/home/me;
+            };
+          }
+        ];
       };
     };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#username@machine-name'
-    homeConfigurations = {
-      "me@laptop-hood" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./modules/home];
-      };
-    };
-  };
 }
