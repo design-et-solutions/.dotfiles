@@ -11,12 +11,16 @@
     ../../optional/pkgs/git
   ];
 
-  home = {
-    username = "me";
-    # homeDirectory = "/home/me";
+  users.users.me = {
     group = "me";
     isNormalUser = true;
     home = "/home/me";
+    # shell = pkgs.fish;
+  };
+
+  home = {
+    username = "me";
+    # homeDirectory = "/home/me";
   };
 
   home.packages = with pkgs; [ 
