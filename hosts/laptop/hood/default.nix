@@ -13,7 +13,7 @@
 
     # Import optional
     ../../../nixos/optional/wifi/home 
-    ../../../nixos/optional/wayland 
+    # ../../../nixos/optional/wayland 
     ../../../nixos/optional/window-manager/hyprland 
     ../../../nixos/optional/pkgs/firefox
     ../../../nixos/optional/pkgs/tmux
