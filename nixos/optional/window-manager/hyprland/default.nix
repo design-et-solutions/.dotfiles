@@ -1,6 +1,10 @@
 { pkgs, ... }:
 {
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    nvidiaPatches = true;
+  };
 
   # wayland.windowManager.hyprland = {
   #   enable = true;
