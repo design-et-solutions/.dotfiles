@@ -22,7 +22,7 @@
     # Available through 'nixos-rebuild --flake .#machine-name'
     nixosConfigurations = {
       laptop-hood = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs outputs pkgs; };
+        specialArgs = { inherit inputs outputs; };
         modules = [
           ./hosts/laptop/hood
           home-manager.nixosModules.home-manager
