@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
-  programs.fish = {
+  programs.fish.enable = true;
+
+  programs.fish.fisher = {
     enable = true;
-    fisher.enable = true;
   };
 }
