@@ -35,8 +35,6 @@
             users.users.me = import ./nixos/users/me;
             # Home Manager configuration for user 'me'
             home-manager.users.me = import ./home/users/me;
-
-            users.users.root = import ./nixos/users/root;
           }
         ];
       };
