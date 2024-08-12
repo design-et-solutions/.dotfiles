@@ -21,7 +21,7 @@
   };
 
   home.packages = with pkgs; [ 
-      can-utils
+    can-utils
   ];
 
   # home.sessionVariables = {
