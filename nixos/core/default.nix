@@ -39,6 +39,7 @@
   environment.systemPackages = with pkgs; [
     htop
     networkmanager   
+    git
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
