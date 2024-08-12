@@ -16,12 +16,6 @@
     homeDirectory = "/home/me";
   };
 
-  users.users.me = {
-    group = "me";
-    isNormalUser = true;
-    home = "/home/me";
-  };
-
   home.packages = with pkgs; [ 
     can-utils
   ];
