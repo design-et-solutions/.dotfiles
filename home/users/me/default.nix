@@ -11,6 +11,9 @@
     ../../optional/pkgs/git
   ];
 
+  isNormalUser = true;
+  group = "me";
+
   home = {
     username = "me";
     # homeDirectory = "/home/me";

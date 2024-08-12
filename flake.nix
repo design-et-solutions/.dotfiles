@@ -29,11 +29,8 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.users.groups.me = {};
             home-manager.users.me = import ./home/users/me;
-            home-manager.users.users.me = {
-              isNormalUser = true;
-              group = "me";
-            };
           }
         ];
       };
