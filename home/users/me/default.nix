@@ -12,7 +12,6 @@
   ];
 
   isNormalUser = true;
-  group = "me";
 
   home = {
     username = "me";
