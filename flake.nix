@@ -35,7 +35,7 @@
               isNormalUser = true;
               home = "/home/me";
               shell = pkgs.fish;
-            }
+            };
             home-manager.users.me = import ./home/users/me;
           }
         ];
