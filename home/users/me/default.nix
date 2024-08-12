@@ -13,7 +13,7 @@
 
   home = {
     username = "me";
-    homeDirectory = "/home/me";
+    # homeDirectory = "/home/me";
   };
 
   home.packages = with pkgs; [ 
