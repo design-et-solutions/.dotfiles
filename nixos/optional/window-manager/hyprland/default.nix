@@ -3,7 +3,7 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    nvidiaPatches = true;
+    systemd.enable = true;
   };
 
   # wayland.windowManager.hyprland = {
