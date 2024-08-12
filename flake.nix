@@ -29,7 +29,11 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            
+            # User and group configuration for user 'me'
             users.groups.me = {};
+            users.users.me = import ./nixos/users/me;
+            # Home Manager configuration for user 'me'
             home-manager.users.me = import ./home/users/me;
           }
         ];
