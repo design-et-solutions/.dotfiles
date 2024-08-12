@@ -30,12 +30,12 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             users.groups.me = {};
-            users.users.me = {
-              group = "me";
-              isNormalUser = true;
-              home = "/home/me";
-              # shell = pkgs.fish;
-            };
+            # users.users.me = {
+            #   group = "me";
+            #   isNormalUser = true;
+            #   home = "/home/me";
+            #   # shell = pkgs.fish;
+            # };
             home-manager.users.me = import ./home/users/me;
           }
         ];

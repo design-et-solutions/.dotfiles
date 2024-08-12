@@ -14,6 +14,9 @@
   home = {
     username = "me";
     # homeDirectory = "/home/me";
+    group = "me";
+    isNormalUser = true;
+    home = "/home/me";
   };
 
   home.packages = with pkgs; [ 
