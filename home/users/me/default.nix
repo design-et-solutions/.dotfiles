@@ -9,7 +9,6 @@
 
     # Import optional
     ../../optional/pkgs/git
-    ../../optional/pkgs/neovim
   ];
 
   home = {

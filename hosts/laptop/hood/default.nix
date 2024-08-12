@@ -16,6 +16,8 @@
     ../../../nixos/optional/wayland 
     ../../../nixos/optional/window-manager/hyprland 
     ../../../nixos/optional/pkgs/firefox
+    ../../../nixos/optional/pkgs/tmux
+    ../../../nixos/optional/pkgs/neovim
   ];
 
   networking.hostName = "laptop-hood";

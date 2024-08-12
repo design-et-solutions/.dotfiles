@@ -88,7 +88,7 @@ config/
   ```sh
   sudo nixos-rebuild switch --flake .#hostname
   ```
-+ Apply home-manager configuration
-  ```sh
-  home-manager switch --flake .#username@hostname
-  ```
+
+# How to decide if it's home-manager or NixOS
++ it's home-manager, if you want to add it to the USER
++ it's NixOS, if you want to add it to the Machine
