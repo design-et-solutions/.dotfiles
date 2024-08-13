@@ -4,6 +4,6 @@
 
   xdg.configFile = {
     "nvim/init.lua".source = ../../../custom/nvim/init.lua;
-    "nvim/lua".source = ../../../custom/hypr/lua;
+    "nvim/lua".source = ../../../custom/nvim/lua;
   };
 }
