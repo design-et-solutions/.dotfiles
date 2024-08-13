@@ -9,6 +9,9 @@
 
     # Import optional
     ../../optional/pkgs/git
+    ../../optional/pkgs/nvim
+    ../../optional/pkgs/tmux
+    ../../optional/pkgs/firefox
     ../../optional/window-manager/hyprland
   ];
 
