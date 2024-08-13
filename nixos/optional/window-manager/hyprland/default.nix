@@ -5,8 +5,6 @@
     xwayland.enable = true;
   };
 
-  xdg.configFile."hypr/hyprland.conf".text = builtins.readFile ../../../../hyprland/hyprland.conf;
-
   programs.thunar.enable = true;
 
   environment.systemPackages = with pkgs; [

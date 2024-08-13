@@ -9,6 +9,7 @@
 
     # Import optional
     ../../optional/pkgs/git
+    ../../optional/window-manager/hyprland
   ];
 
   home = {
