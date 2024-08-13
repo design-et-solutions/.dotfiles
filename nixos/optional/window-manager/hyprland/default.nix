@@ -8,9 +8,9 @@
   programs.thunar.enable = true;
 
   environment.systemPackages = with pkgs; [
-    swww
-    rofi
-    waybar
-    dunst
+    hyprpaper # fast wallpaper utility
+    rofi # window switcher, Application launcher and dmenu replacement
+    dunst # lightweight notification daemon
+    wezterm # terminal manager
   ];
 }

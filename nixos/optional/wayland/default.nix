@@ -11,5 +11,6 @@
   environment.systemPackages = with pkgs; [
     swaylock # screen locker
     swayidle # screen idle management
+    waybar # screen bar
   ];
 }

@@ -23,7 +23,5 @@
 
   home.packages = with pkgs; [ 
     can-utils # can cli tools
-    wezterm # terminal manager
-    kitty
   ];
 }
