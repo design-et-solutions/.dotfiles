@@ -5,7 +5,7 @@ stdenv.mkDerivation rec {
 
   src = fetchzip {
     url = "https://github.com/0xType/0xProto/releases/download/2.100/0xProto_2_100.zip";
-    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    sha256 = "sha256-hUQGCsktnun9924+k6ECQuQ1Ddl/qGmtuLWERh/vDpc=";
   };
 
   installPhase = ''
