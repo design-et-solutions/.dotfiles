@@ -4,10 +4,8 @@
     enable = true;
     xwayland.enable = true;
   };
-  
-  wayland.windowManager.hyprland = {
-    extraConfig = builtins.readFile ../../../../hyprland/hyprland.conf;
-  };
+
+  environment.etc."hypr/hyprland.conf".text = builtins.readFile ../../../../hyprland/hyprland.conf;
 
   programs.thunar.enable = true;
 
