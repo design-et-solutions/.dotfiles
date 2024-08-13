@@ -41,6 +41,7 @@
     networkmanager # network cli tools  
     git 
     libnotify # notification manager
+    gcc # collection of compilers
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
