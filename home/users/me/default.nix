@@ -23,5 +23,6 @@
   home.packages = with pkgs; [ 
     can-utils
     wezterm
+    libnotify
   ];
 }
