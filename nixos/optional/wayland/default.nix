@@ -9,4 +9,9 @@
         wayland = true;
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    swaylock # screen locker
+    swayidle # screen idle management
+  ];
 }

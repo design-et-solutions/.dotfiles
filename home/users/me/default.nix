@@ -21,8 +21,7 @@
   };
 
   home.packages = with pkgs; [ 
-    can-utils
-    wezterm
-    libnotify
+    can-utils # can cli tools
+    wezterm # terminal manager
   ];
 }
