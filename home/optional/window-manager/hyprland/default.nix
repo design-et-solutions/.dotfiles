@@ -5,7 +5,12 @@
     "hypr/windowrule.conf".source = ../../../custom/hypr/windowrule.conf;
     "hypr/keybinds.conf".source = ../../../custom/hypr/keybinds.conf;
     "hypr/scripts/wallpapers-randomizer.sh".source = ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
-    "hypr/scripts/wallpapers-randomizer.sh".executable = true;
+    "hypr/scripts/wallpapers-randomizer.sh" = {
+      source = ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
+      executable = true;
+      user = "me";
+      mode = "0755";
+    };
 
     "kitty/kitty.conf".source = ../../../custom/kitty/kitty.conf;
 
