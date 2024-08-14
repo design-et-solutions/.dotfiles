@@ -4,10 +4,7 @@
     "hypr/hyprland.conf".source = ../../../custom/hypr/hyprland.conf;
     "hypr/windowrule.conf".source = ../../../custom/hypr/windowrule.conf;
     "hypr/keybinds.conf".source = ../../../custom/hypr/keybinds.conf;
-    "hypr/scripts/wallpapers-randomizer.sh" = {
-      source = ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
-      executable = true;
-    };
+    "hypr/scripts".executable = ../../../custom/hypr/scripts;
 
     "kitty/kitty.conf".source = ../../../custom/kitty/kitty.conf;
 
