@@ -1,6 +1,7 @@
 #!/bin/sh
 
 WALLPAPER_DIR="$HOME/.wallpapers"
+echo "wallpapers path: $WALLPAPER_DIR"
 
 # Unload old wallpapers
 for wallpaper in $(hyprctl hyprpaper listloaded); do
