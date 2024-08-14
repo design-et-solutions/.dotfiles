@@ -11,6 +11,6 @@
     hyprpaper # fast wallpaper utility
     rofi # window switcher, Application launcher and dmenu replacement
     dunst # lightweight notification daemon
-    wezterm # terminal manager
+    kitty # terminal manager
   ];
 }
