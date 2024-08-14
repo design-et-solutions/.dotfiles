@@ -4,10 +4,6 @@
     "hypr/hyprland.conf".source = ../../../custom/hypr/hyprland.conf;
     "hypr/windowrule.conf".source = ../../../custom/hypr/windowrule.conf;
     "hypr/keybinds.conf".source = ../../../custom/hypr/keybinds.conf;
-    "hypr/scripts/wallpapers-randomizer.sh" = {
-      source = ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
-      executable = true;
-    };
 
     "kitty/kitty.conf".source = ../../../custom/kitty/kitty.conf;
 
@@ -15,12 +11,9 @@
   };
 
   home.file = {
-    ".wallpapers".source = ../../../custom/wallpapers;
-  };
-
-  home.activation = {
-    fixScriptPermissions = ''
-      $DRY_RUN_CMD chmod +x $HOME/.config/hypr/scripts/wallpapers-randomizer.sh
-    '';
+    ".wallpapers".source = ../../../custom/wallpapersp;
+    ".scripts/wallpapers-randomizer.sh" = {
+      source = ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
+    };
   };
 }
