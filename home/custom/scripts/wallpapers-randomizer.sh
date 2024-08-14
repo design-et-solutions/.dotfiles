@@ -10,7 +10,7 @@ if [ ! -d "$WALLPAPER_DIR" ]; then
 fi
 
 # Count the number of files in the wallpaper directory
-file_count=$(find "$WALLPAPER_DIR" -type f | wc -l)
+file_count=$(find "$WALLPAPER_DIR"/ -type f | wc -l)
 echo "Number of files in wallpaper directory: $file_count"
 
 # Check if hyprpaper is running
