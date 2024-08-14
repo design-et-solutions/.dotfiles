@@ -9,7 +9,9 @@
     "kitty/kitty.conf".source = ../../../custom/kitty/kitty.conf;
 
     "hypr/hyprpaper.conf".source = ../../../custom/hyprpaper/hyprpaper.conf;
+  };
 
+  xdg.homeDirectory = {
     ".wallpapers".source = ../../../custom/wallpapers;
   };
 }
