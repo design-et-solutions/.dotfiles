@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ nixpkgs, ... }:
 {
   group = "me";
   isNormalUser = true;
   home = "/home/me";
-  shell = pkgs.fish;
+  shell = nixpkgs.fish;
 }
