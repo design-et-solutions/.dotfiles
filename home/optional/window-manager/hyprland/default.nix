@@ -5,7 +5,7 @@
     "hypr/windowrule.conf".source = ../../../custom/hypr/windowrule.conf;
     "hypr/keybinds.conf".source = ../../../custom/hypr/keybinds.conf;
     "hypr/scripts/wallpapers-randomizer.sh" = {
-      text = builtins.readFile ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
+      source = ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
       executable = true;
     };
 
@@ -16,5 +16,11 @@
 
   home.file = {
     ".wallpapers".source = ../../../custom/wallpapers;
+  };
+
+  home.activation = {
+    fixScriptPermissions = ''
+      $DRY_RUN_CMD chmod +x $HOME/.config/hypr/scripts/wallpapers-randomizer.sh
+    '';
   };
 }
