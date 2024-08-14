@@ -7,7 +7,9 @@
     "hypr/scripts/wallpapers-randomizer.sh" = {
       source = ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
       executable = true;
-      user = "me";
+      onChange = ''
+        chmod 755 $HOME/.config/hypr/scripts/wallpapers-randomizer.sh
+      '';
     };
 
     "kitty/kitty.conf".source = ../../../custom/kitty/kitty.conf;
