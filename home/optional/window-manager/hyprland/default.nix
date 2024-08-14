@@ -8,7 +8,6 @@
       source = ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
       executable = true;
       user = "me";
-      mode = "0755";
     };
 
     "kitty/kitty.conf".source = ../../../custom/kitty/kitty.conf;
