@@ -24,7 +24,7 @@ fi
 echo "Setting new wallpapers..."
 for display in $(hyprctl monitors | grep "Monitor" | cut -d " " -f 2); do
     echo "Setting wallpaper for display: $display"
-    wallpaper="$(find "$WALLPAPER_DIR" -type f | shuf -n 1)"
+    wallpaper="$(find "$WALLPAPER_DIR"/ -type f | shuf -n 1)"
     echo "Selected wallpaper: $wallpaper"
     if [ -f "$wallpaper" ]; then
         echo "Preloading wallpaper..."
