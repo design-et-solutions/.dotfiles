@@ -14,6 +14,7 @@
     ".wallpapers".source = ../../../custom/wallpapers;
     ".scripts/wallpapers-randomizer.sh" = {
       source = ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
+      executable = true;
     };
   };
 }
