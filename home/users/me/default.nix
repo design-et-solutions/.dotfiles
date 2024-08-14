@@ -24,4 +24,6 @@
   home.packages = with pkgs; [ 
     can-utils # can cli tools
   ];
+
+  shell = pkgs.fish;
 }
