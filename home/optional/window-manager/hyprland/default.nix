@@ -11,7 +11,7 @@
     "hypr/hyprpaper.conf".source = ../../../custom/hyprpaper/hyprpaper.conf;
   };
 
-  xdg.file = {
+  home.file = {
     ".wallpapers".source = ../../../custom/wallpapers;
   };
 }
