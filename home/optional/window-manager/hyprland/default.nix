@@ -5,11 +5,8 @@
     "hypr/windowrule.conf".source = ../../../custom/hypr/windowrule.conf;
     "hypr/keybinds.conf".source = ../../../custom/hypr/keybinds.conf;
     "hypr/scripts/wallpapers-randomizer.sh" = {
-      source = ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
+      text = builtins.readFile ../../../custom/hypr/scripts/wallpapers-randomizer.sh;
       executable = true;
-      onChange = ''
-        chmod 755 $HOME/.config/hypr/scripts/wallpapers-randomizer.sh
-      '';
     };
 
     "kitty/kitty.conf".source = ../../../custom/kitty/kitty.conf;
