@@ -8,6 +8,8 @@
     "kitty/kitty.conf".source = ../../../custom/kitty/kitty.conf;
 
     "hypr/hyprpaper.conf".source = ../../../custom/hyprpaper/hyprpaper.conf;
+
+    "rofi/config.conf".source = ../../../custom/rofi/config.conf;
   };
 
   home.file = {
