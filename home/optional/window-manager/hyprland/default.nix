@@ -15,7 +15,7 @@
   home.file = {
     ".wallpapers".source = ../../../custom/wallpapers;
     ".scripts/wallpapers-randomizer.sh" = {
-      source = ../../scripts/wallpapers-randomizer.sh;
+      source = ../../../custom/scripts/wallpapers-randomizer.sh;
       executable = true;
     };
   }; 
