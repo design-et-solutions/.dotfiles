@@ -18,5 +18,7 @@
       source = ../../../custom/scripts/wallpapers-randomizer.sh;
       executable = true;
     };
-  };
+
+    ".tmux.conf".source = ../../../custom/tmux/tmux.conf;
+  }; 
 }
