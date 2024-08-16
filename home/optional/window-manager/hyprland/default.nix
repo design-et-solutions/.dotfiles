@@ -9,7 +9,7 @@
 
     "hypr/hyprpaper.conf".source = ../../../custom/hyprpaper/hyprpaper.conf;
 
-    "rofi/config.conf".source = ../../../custom/rofi/config.rasi;
+    "rofi/config.rasi".source = ../../../custom/rofi/config.rasi;
   };
 
   home.file = {
