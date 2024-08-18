@@ -29,7 +29,7 @@
       nix-path = config.nix.nixPath;
     };
     # Opinionated: disable channels
-    channel.enable = false;
+    channel.enable = true;
 
     # Opinionated: make flake registry and nix path match flake inputs
     registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
@@ -39,7 +39,7 @@
   environment.systemPackages = with pkgs; [
     htop # interactive process viewer
     networkmanager # network cli tools  
-    git 
+    git # git
     libnotify # notification manager
     gcc # collection of compilers
   ];
