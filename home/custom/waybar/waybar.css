@@ -1,0 +1,11 @@
+#waybar {
+  background-color: #282c34;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 10px;
+}
+
+#waybar .module {
+  padding: 0 10px;
+}
+

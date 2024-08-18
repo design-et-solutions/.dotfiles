@@ -5,6 +5,7 @@
 
     # Import optional
     ../../optional/pkgs/git
+    ../../optional/pkgs/lazygit
     ../../optional/pkgs/nvim
     ../../optional/pkgs/tmux
     ../../optional/pkgs/firefox
@@ -19,6 +20,7 @@
 
   home.packages = with pkgs; [ 
     can-utils # can cli tools
+    lazygit
   ];
 
   programs.git = {

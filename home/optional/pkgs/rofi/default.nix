@@ -1,9 +1,5 @@
 { pkgs, ... }:
 {
-  xdg.configFile = {
-    "rofi/theme.rasi".source = ../../../custom/rofi/theme.rasi;
-  };
-
   programs.rofi = {
     enable = true;
     cycle = true;
@@ -19,5 +15,10 @@
       hide-scrollbar = true;
       show-icons = true;
     };
+    font = "0xProto 14";
+  };
+
+  xdg.configFile = {
+    "rofi/theme.rasi".source = ../../../custom/rofi/theme.rasi;
   };
 }

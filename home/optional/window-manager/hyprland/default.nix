@@ -2,6 +2,8 @@
   imports = [
     ../../pkgs/kitty 
     ../../pkgs/rofi 
+    ../../pkgs/yazi 
+    ../../pkgs/waybar 
   ];
 
   xdg.configFile = {
@@ -19,4 +21,8 @@
       executable = true;
     };
   };
+
+  home.packages = with pkgs; [ 
+    hyprpaper
+  ];
 }
