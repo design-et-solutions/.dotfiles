@@ -1,5 +1,5 @@
 {
-  description = "Nix config with Flake and Sops";
+  description = "Nix config with Flake";
 
   inputs = {
     # Nixpkgs
@@ -22,6 +22,7 @@
     # Available through 'nixos-rebuild --flake .#machine-name'
     nixosConfigurations = {
       laptop-hood = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         specialArgs = { inherit inputs outputs; };
         modules = [
           ./hosts/laptop/hood

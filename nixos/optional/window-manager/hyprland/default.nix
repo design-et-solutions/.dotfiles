@@ -5,12 +5,12 @@
     xwayland.enable = true;
   };
 
-  programs.thunar.enable = true;
+  programs.thunar.enable = true; # file manager
 
   environment.systemPackages = with pkgs; [
     hyprpaper # fast wallpaper utility
     rofi # window switcher, Application launcher and dmenu replacement
-    dunst # lightweight notification daemon
     kitty # terminal manager
+    dunst # lightweight notification daemon
   ];
 }

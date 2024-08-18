@@ -1,12 +1,13 @@
-
-
 * {
   /* Default background color */
   background-color: #282738;
   text-color:       #E5B9C6;
-  font: "JetBrainsMono Bold 10";
+  font: "0xProto Regular 10";
 }
 
+configuration {
+  dpi: 96;
+}
 
 window {
   padding: 1em;
@@ -42,7 +43,7 @@ textbox {
     blink:                       true;
     markup:                      true;
     size:                        400em;
-    font: "JetBrainsMono Bold 15";
+    font: "0xProto Regular 15";
 
 }
 error-message {
@@ -101,7 +102,7 @@ element {
 element-text {
     background-color: #282738;
     text-color:       #FFFFFF;
-    font: "JetBrains Mono Medium";
+    font: "0xProto Regular";
 }
 
 element normal.normal {
@@ -149,19 +150,19 @@ element-text.selected.normal {
     background-color: #E5B9C6;
     border-color: #E5B9C6;
     text-color:       #282738;
-    font: "JetBrains Mono Medium";
+    font: "0xProto Regular";
 }
 element-text.selected.urgent {
     background-color: #E5B9C6;
     border-color: #E5B9C6;
     text-color:       #282738;
-    font: "JetBrains Mono Medium";
+    font: "0xProto Regular";
 }
 element-text.selected.active {
     background-color: #E5B9C6;
     border-color: #E5B9C6;
     text-color:       #282738;
-    font: "JetBrains Mono Medium";
+    font: "0xProto Regular";
 }
 scrollbar {
     width:        4px ;

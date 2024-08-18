@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ pkgs, ... }: {
   imports = [
     # Import general core 
     ../../core
@@ -24,4 +20,10 @@
   home.packages = with pkgs; [ 
     can-utils # can cli tools
   ];
+
+  programs.git = {
+    enable = true;
+    userName = "username";
+    userEmail = "email@domain.com";
+  };
 }
