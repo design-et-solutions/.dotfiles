@@ -4,7 +4,7 @@
     text-color: #8ca0aa;
     spacing: 0;
     width: 512px;
-    font: "0xproto 12";
+    font: "0xproto 14";
 }
 
 inputbar {
