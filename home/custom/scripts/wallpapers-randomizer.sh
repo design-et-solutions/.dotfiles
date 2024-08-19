@@ -20,12 +20,21 @@ if ! pgrep -x "hyprpaper" > /dev/null; then
     sleep 2  # Give hyprpaper time to start
 fi
 
+# Unload any wallpapers that aren't currently in use
+echo "Cleaning up unused wallpapers..."
+for loaded_wallpaper in $(hyprctl hyprpaper listloaded); do
+    if ! hyprctl hyprpaper wallpapers | grep -q "$loaded_wallpaper"; then
+        echo "Unloading unused wallpaper: $loaded_wallpaper"
+        hyprctl hyprpaper unload "$loaded_wallpaper"
+    fi
+done
+
 # Set new wallpapers for each display
 echo "Setting new wallpapers..."
 for display in $(hyprctl monitors | grep "Monitor" | cut -d " " -f 2); do
     echo "Setting wallpaper for display: $display"
     wallpaper="$(find "$WALLPAPER_DIR"/ -type f | shuf -n 1)"
-    echo "Selected wallpaper: $wallpaper"
+    echo "Selected wallpaper: $wallpaper on $display"
     if [ -f "$wallpaper" ]; then
         echo "Preloading wallpaper..."
         hyprctl hyprpaper preload "$wallpaper"
@@ -33,15 +42,6 @@ for display in $(hyprctl monitors | grep "Monitor" | cut -d " " -f 2); do
         hyprctl hyprpaper wallpaper "$display,$wallpaper"
     else
         echo "Error: Selected wallpaper file does not exist: $wallpaper"
-    fi
-done
-
-# Unload any wallpapers that aren't currently in use
-echo "Cleaning up unused wallpapers..."
-for loaded_wallpaper in $(hyprctl hyprpaper listloaded); do
-    if ! hyprctl hyprpaper wallpapers | grep -q "$loaded_wallpaper"; then
-        echo "Unloading unused wallpaper: $loaded_wallpaper"
-        hyprctl hyprpaper unload "$loaded_wallpaper"
     fi
 done
 
