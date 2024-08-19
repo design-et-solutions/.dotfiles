@@ -6,7 +6,7 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "0xProto";
+      name = "FiraCode";
       size = 12.0;
     };
     settings = {

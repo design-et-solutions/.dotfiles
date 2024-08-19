@@ -17,14 +17,13 @@
         modules-right = [
           # "tray"
           # "pulseaudio" 
-          # "network" 
-          # "cpu"
-          # "memory"
-          # "temperature" 
+          "network" 
+          "cpu"
+          "memory"
+          "temperature" 
           # "backlight" 
-          # "battery"
-          # "battery#bat2"
-          # "clock"
+          "battery"
+          "clock"
         ];
         
         "sway/workspaces" = {
@@ -90,9 +89,6 @@
           # format-good = ""; # An empty format will hide the module
           # format-full = "";
           format-icons = ["" "" "" "" ""];
-        };
-        "battery#bat2" = {
-          bat = "BAT2";
         };
         "network" = {
           # interface = "wlp2s0";

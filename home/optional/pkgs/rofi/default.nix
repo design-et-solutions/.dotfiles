@@ -15,10 +15,10 @@
       hide-scrollbar = true;
       show-icons = true;
     };
-    font = "0xProto 14";
+    font = "FiraCode 14";
   };
 
   xdg.configFile = {
-    "rofi/theme.rasi".source = ../../../custom/rofi/theme.rasi;
+    "rofi/theme.rasi".source = ./theme.rasi;
   };
 }
