@@ -10,7 +10,7 @@
     ../../optional/pkgs/tmux
     ../../optional/pkgs/firefox
     ../../optional/window-manager/hyprland
-    ../../optional/fonts/zerox-proto
+    ../../optional/fonts
   ];
 
   home = {
