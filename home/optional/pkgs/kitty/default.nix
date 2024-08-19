@@ -1,8 +1,4 @@
 { ... }: {
-  xdg.configFile = {
-    "rofi/theme.rasi".source = ../../../custom/rofi/theme.rasi;
-  };
-
   programs.kitty = {
     enable = true;
     font = {
