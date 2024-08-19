@@ -1,7 +1,7 @@
 { ... }: {
   programs.waybar = {
     enable = true;
-    style = ../../../custom/waybar/waybar.css;
+    style = ./waybar.css;
     settings = {
       mainBar = {
         layer = "top";
@@ -21,7 +21,7 @@
           "cpu"
           "memory"
           "temperature" 
-          # "backlight" 
+          "backlight" 
           "battery"
           "clock"
         ];
