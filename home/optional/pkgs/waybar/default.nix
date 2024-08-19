@@ -1,7 +1,7 @@
 { ... }: {
   programs.waybar = {
     enable = true;
-    style = "~/.config/waybar/waybar.css";
+    style = "~/.config/waybar/style.css";
     settings = {
       mainBar = {
         layer = "top";
@@ -15,6 +15,6 @@
   };
 
   xdg.configFile = {
-    "waybar/waybar.css".source = ../../../custom/waybar/waybar.css;
+    "waybar/style.css".source = ../../../custom/waybar/style.css;
   };
 }

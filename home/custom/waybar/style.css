@@ -1,0 +1,18 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "0xProto", sans-serif;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: #282c34;
+    color: #ffffff;
+    padding: 10px;
+}
+
+#waybar .module {
+    padding: 0 10px;
+}
+
