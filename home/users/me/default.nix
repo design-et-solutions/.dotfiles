@@ -11,6 +11,7 @@
     ../../optional/pkgs/firefox
     ../../optional/window-manager/hyprland
     ../../optional/fonts
+    ../../optional/rust
   ];
 
   home = {
