@@ -1,4 +1,7 @@
-vim.opt.completeopt = {'menu', 'menuone', 'no select'}                                                                                                                              
+-- Set completeopt for better completion experience
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+-- Treesitter configuration
 require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true,
@@ -35,26 +38,30 @@ require("gruvbox").setup({
 vim.o.background = "light"
 vim.cmd("colorscheme gruvbox")
 
--- disable netrw at the very start of your init.lua (strongly advised)
+-- Disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- set termguicolors to enable highlight groups
+-- Enable 24-bit color
 vim.opt.termguicolors = true
 
+-- Setup nvim-tree
 require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
+    sort = { 
+        sorter = "case_sensitive" 
+    },
+    view = { 
+        width = 30 
+    },
+    renderer = { 
+        group_empty = true 
+    },
+    filters = { 
+        dotfiles = false 
+    },
 })
 
--- Key mapping to toggle NvimTree
-vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-
+-- Key mappings for nvim-tree
+vim.api.nvim_set_keymap('n', '<A-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-f>', ':NvimTreeFindFile<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-t>', ':NvimTreeFocus<CR>', { noremap = true, silent = true })

@@ -7,6 +7,8 @@
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;
+    extraConfig = builtins.readFile ./config.vim;
+    extraLuaConfig = builtins.readFile ./config.lua;
     plugins = with pkgs.vimPlugins; [
       vim-nix
       vim-lastplace
@@ -34,7 +36,5 @@
         type = "lua";
       }
     ];
-    extraConfig = builtins.readFile ./config.vim;
-    extraLuaConfig = builtins.readFile ./config.lua;
   };
 }
