@@ -19,7 +19,7 @@
       {
         plugin = tmuxPlugins.gruvbox;
         extraConfig = ''
-          set -g @gruvbox 'light'
+          set -g @tmux-gruvbox 'light'
         '';
       }
     ];
