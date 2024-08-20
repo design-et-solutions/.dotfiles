@@ -1,6 +1,9 @@
 -- Set completeopt for better completion experience
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
+-- Copy/Past Clipboard
+vim.opt.clipboard = 'unnamedplus'
+
 -- Treesitter configuration
 require'nvim-treesitter.configs'.setup {
     highlight = {
@@ -63,5 +66,10 @@ require("nvim-tree").setup({
 
 -- Key mappings for nvim-tree
 vim.api.nvim_set_keymap('n', '<A-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-f>', ':NvimTreeFindFile<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-f>', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-t>', ':NvimTreeFocus<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-r>', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
+
+-- Key mappings for nvim
+vim.api.nvim_set_keymap('n', '<A-q>', ':bd<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
