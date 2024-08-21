@@ -1,7 +1,7 @@
 { ... }: {
   programs.waybar = {
     enable = true;
-    style = ./waybar.css;
+    style = ./style.css;
     settings = {
       mainBar = {
         layer = "top";

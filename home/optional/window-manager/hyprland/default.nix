@@ -2,7 +2,6 @@
   imports = [
     ../../pkgs/kitty 
     ../../pkgs/rofi 
-    ../../pkgs/yazi 
     ../../pkgs/waybar 
   ];
 

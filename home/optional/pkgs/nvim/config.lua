@@ -83,31 +83,31 @@ vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', {
     desc = "save focused file" 
 })
 
-vim.api.map("n", "<C-h>", "<C-w>h", { 
+vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", { 
     desc = "switch window left" 
 })
-vim.api.map("n", "<C-l>", "<C-w>l", { 
+vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { 
     desc = "switch window right" 
 })
-vim.api.map("n", "<C-j>", "<C-w>j", { 
+vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { 
     desc = "switch window down" 
 })
-vim.api.map("n", "<C-k>", "<C-w>k", { 
+vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { 
     desc = "switch window up" 
 })
 
-vim.api.map("n", "<A>fm", function()
+vim.api.nvim_set_keymap("n", "<A>fm", function()
   require("conform").format { lsp_fallback = true }
 end, { 
     desc = "general Format file" 
 })
 
 -- Comment
-vim.api.map("n", "<A-/>", "gcc", { 
+vim.api.nvim_set_keymap("n", "<A-/>", "gcc", { 
     desc = "Toggle Comment", 
     remap = true 
 })
-vim.api.map("v", "<A-/>", "gc", { 
+vim.api.nvim_set_keymap("v", "<A-/>", "gc", { 
     desc = "Toggle comment", 
     remap = true 
 })
