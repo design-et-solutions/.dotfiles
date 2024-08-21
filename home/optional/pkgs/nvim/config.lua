@@ -96,7 +96,7 @@ vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", {
     desc = "switch window up" 
 })
 
-vim.api.nvim_set_keymap("n", "<A>fm", function()
+vim.api.nvim_set_keymap("n", "<A-m>", function()
   require("conform").format { lsp_fallback = true }
 end, { 
     desc = "general Format file" 

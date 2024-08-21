@@ -19,6 +19,7 @@
       nvim-tree-lua
       nvim-web-devicons
       conform-nvim
+      comment-nvim
       {
         plugin = nvim-treesitter.withPlugins (
           plugins: with plugins; [
