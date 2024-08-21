@@ -54,7 +54,7 @@ require("nvim-tree").setup({
         sorter = "case_sensitive" 
     },
     view = { 
-        width = 30 
+        width = 20 
     },
     renderer = { 
         group_empty = true 
@@ -65,11 +65,49 @@ require("nvim-tree").setup({
 })
 
 -- Key mappings for nvim-tree
-vim.api.nvim_set_keymap('n', '<A-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-f>', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-t>', ':NvimTreeFocus<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-r>', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-n>', ':NvimTreeToggle<CR>', { 
+    desc = "toggle tree" 
+})
+vim.api.nvim_set_keymap('n', '<A-t>', ':NvimTreeFocus<CR>', { 
+    desc = "focus tree" 
+})
+vim.api.nvim_set_keymap('n', '<A-r>', ':NvimTreeRefresh<CR>', { 
+    desc = "refresh tree" 
+})
 
 -- Key mappings for nvim
-vim.api.nvim_set_keymap('n', '<A-q>', ':bd<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-q>', ':bd<CR>', { 
+    desc = "close focused file" 
+})
+vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { 
+    desc = "save focused file" 
+})
+
+vim.api.map("n", "<C-h>", "<C-w>h", { 
+    desc = "switch window left" 
+})
+vim.api.map("n", "<C-l>", "<C-w>l", { 
+    desc = "switch window right" 
+})
+vim.api.map("n", "<C-j>", "<C-w>j", { 
+    desc = "switch window down" 
+})
+vim.api.map("n", "<C-k>", "<C-w>k", { 
+    desc = "switch window up" 
+})
+
+vim.api.map("n", "<A>fm", function()
+  require("conform").format { lsp_fallback = true }
+end, { 
+    desc = "general Format file" 
+})
+
+-- Comment
+vim.api.map("n", "<A-/>", "gcc", { 
+    desc = "Toggle Comment", 
+    remap = true 
+})
+vim.api.map("v", "<A-/>", "gc", { 
+    desc = "Toggle comment", 
+    remap = true 
+})

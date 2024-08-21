@@ -18,6 +18,7 @@
       gruvbox-nvim
       nvim-tree-lua
       nvim-web-devicons
+      conform
       {
         plugin = nvim-treesitter.withPlugins (
           plugins: with plugins; [
