@@ -3,13 +3,13 @@
 <h1 align="center">
   <div>
     <a href="https://github.com/YvesCousteau/config/issues">
-        <img src="https://img.shields.io/github/issues/YvesCousteau/config?color=cc241d&labelColor=303446&style=for-the-badge">
+        <img src="https://img.shields.io/github/issues/YvesCousteau/config?color=cc241d&labelColor=ebdbb2&style=for-the-badge">
     </a>
     <a href="https://github.com/YvesCousteau/config/stargazers">
-        <img src="https://img.shields.io/github/stars/YvesCousteau/config?color=98971a&labelColor=303446&style=for-the-badge">
+        <img src="https://img.shields.io/github/stars/YvesCousteau/config?color=98971a&labelColor=ebdbb2&style=for-the-badge">
     </a>
     <a href="https://github.com/YvesCousteau/config/">
-        <img src="https://img.shields.io/github/repo-size/YvesCousteau/config?color=d79921c&labelColor=303446&style=for-the-badge">
+        <img src="https://img.shields.io/github/repo-size/YvesCousteau/config?color=d79921&labelColor=ebdbb2&style=for-the-badge">
     </a>
     <br>
   </div>
