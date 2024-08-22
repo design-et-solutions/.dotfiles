@@ -5,10 +5,6 @@
     ../../pkgs/waybar 
   ];
 
-  programs.hyprland = {
-    enable = true;
-  };
-
   xdg.configFile = {
     "hypr/hyprland.conf".source = ./hyprland.conf;
     "hypr/windowrule.conf".source = ./windowrule.conf;

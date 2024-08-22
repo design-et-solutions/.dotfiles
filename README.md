@@ -21,6 +21,7 @@
  ╭─ Distro          -> NixOS
  ├─ Editor          -> NeoVim
  ├─ Browser         -> Firefox
+ ├─ Mail            -> 
  ├─ Shell           -> Fish
  │  ╰─ Prompt       -> Starship
  ├─ WM              -> Hyprland
@@ -37,7 +38,15 @@
  │  ╰─ TUI          -> Lazygit
  ├─ Terminal        -> Kitty
  │  ╰─ Multiplexer  -> Tmux
- ╰─ Font            -> FridaCode
+ ╰─ Font            -> FiraCode
+```
+
+### App
+
+```
+ ╭─ Steam
+ ├─ Whatsapp
+ ╰─ Discord
 ```
 
 ### Color Theme 
@@ -48,7 +57,7 @@
 
 ---
 <details>
-<summary><h2>Extras</h2></summary>
+<summary><h2>Shortcuts</h2></summary>
 
 ### Table of Contents
 - [Hyprland Shortcuts](#hyprland-shortcuts)
@@ -57,8 +66,6 @@
 - [Audio Shortcuts](#audio-shortcuts)
 - [Bluetooth Shortcuts](#bluetooth-shortcuts)
 - [Kitty Shortcuts](#kitty-shortcuts)
-
----
 
 ### Hyprland Shortcuts
 
