@@ -90,12 +90,12 @@
 #### General Shortcuts
 | Shortcut                | Action                               |
 |-------------------------|--------------------------------------|
-| `Super + l`             | lock screen                          |
+| `Super + Shift + l`     | lock screen                          |
 | `Super + t`             | open terminal                        |
 | `Super + e`             | open file manager                    |
 | `Super + d`             | open menu                            |
 | `Super + q`             | kill active panel                    |
-| `Super + Shift + q`     | exit                                 |
+| `Super + Shift + q`     | logout                               |
 | `Super + f`             | fulll screen panel                   |
 
 #### Mouvement Shortcuts

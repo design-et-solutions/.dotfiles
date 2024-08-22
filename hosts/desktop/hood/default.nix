@@ -17,6 +17,7 @@
     ../../../nixos/optional/wifi/home 
     ../../../nixos/optional/wayland 
     ../../../nixos/optional/window-manager/hyprland 
+    ../../../nixos/optional/pkgs/steam
   ];
 
   networking.hostName = "desktop-hood";
