@@ -15,7 +15,7 @@
           "clock#time"
           "hyprland/workspaces"
           "hyprland/window"
-          "tray"
+          # "tray"
         ];
         modules-center = [
         ];
