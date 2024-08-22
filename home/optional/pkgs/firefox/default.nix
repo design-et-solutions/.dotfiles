@@ -33,6 +33,9 @@
         };
       };
       Preferences = { 
+        "font.name.monospace.x-western" = "FiraCode Nerd Font";
+        "font.name.sans-serif.x-western" = "FiraCode Nerd Font";
+        "font.name.serif.x-western" = "FiraCode Nerd Font";
         "browser.bookmarks.managed.enabled" = { Value = true; Status = "locked"; };
         "browser.contentblocking.category" = { Value = "strict"; Status = "locked"; };
         "browser.topsites.contile.enabled" = { Value = false; Status = "locked"; };

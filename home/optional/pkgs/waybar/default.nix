@@ -6,40 +6,80 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 32;
+        height = 40;
         spacing = 0; # Gaps between modules (0px) Adjusted in the css
-        margin-top = 0;
+        margin-top = 10;
+        margin-bottom = 4;
         margin-left = 10;
         margin-right = 10;
         modules-left = [
           "hyprland/workspaces"
+          "hyprland/window"
+          "tray"
+        ];
+        modules-center = [
+          "clock#time"
+        ];
+        modules-right = [
           "cpu"
           "memory"
           "temperature"
           "disk"
+          "network" 
+          "pulseaudio"
+          "battery"
+          "backlight" 
+          "clock#date"
         ];
         "hyprland/workspaces" = {
-          format = "";
+          format = "{icon}:";
+          all-outputs = true;
+          sort-by-number = true;
+          active-only = true;
           format-icons = {
-            active = "";
-            default = "";
+            "1" = "01/10";
+            "2" = "02/10";
+            "3" = "03/10";
+            "4" = "04/10";
+            "5" = "05/10";
+            "6" = "06/10";
+            "7" = "07/10";
+            "8" = "08/10";
+            "9" = "09/10";
+            "10" = "10/10";
           };
           disable-scroll = true;
         };
+        "hyprland/window" = {
+          format = "{}";
+          separate-outputs = true;
+          max-length = 35;
+        };
         "cpu" = {
-          format = "{usage}%  ";
-          interval = 2;
-        };
+		  interval = 5;
+		  tooltip = false;
+		  format = "  {usage}%";
+		  format-alt = "  {load}";
+		  states = {
+			warning = 70;
+			critical = 90;
+		  };
+	    };
         "memory" = {
-          format = "{}% ";
-          interval = 2;
-        };
+		  interval = 5;
+		  format = "  {used:0.1f}G/{total:0.1f}G";
+		  states = {
+			warning = 70;
+		    critical = 90;
+		  };
+		  tooltip = false;
+	    };
         "temperature" = {
           # thermal-zone = 2;
           # hwmon-path" = /sys/class/hwmon/hwmon2/temp1_input";
           critical-threshold = 80;
-          format-critical = "{temperatureC}°C {icon}";
-          format = "{temperatureC}°C {icon}";
+          format-critical = "{icon} {temperatureC}°C";
+          format = "{icon} {temperatureC}°C";
           format-icons = [
             ""
             ""
@@ -48,31 +88,15 @@
           interval = 2;
         };
         "disk" = {
-          format = "{percentage_used}%   ({free})";
+          format = "  {percentage_used}% ({free})";
           interval = 2;
         };
-        modules-center = [
-          "hyprland/window"
-        ];
-        "hyprland/window" = {
-          format = "{}";
-          separate-outputs = true;
-          max-length = 35;
-        };
-        modules-right = [
-          "network" 
-          "pulseaudio"
-          "tray"
-          "backlight" 
-          "battery"
-          "clock"
-        ];
         "network" = {
           # interface = "wlp2s0"; #(Optional) To force the use of this interface
-          format = "{bandwidthTotalBytes}↕";
-          format-disconnected = "disconnected {icon}";
-          format-wifi = "{essid} ({signalStrength}%) {icon}";
-          format-ethernet = "{ifname}: {ipaddr}/{cidr} {icon}";
+          format = "↕ {bandwidthTotalBytes}";
+          format-disconnected = "{icon} disconnected";
+          format-wifi = "{icon}  {essid} ({signalStrength}%)";
+          format-ethernet = "{icon} {ifname}: {ipaddr}/{cidr}";
           format-icons = {
             ethernet = "";
             disconnected = "⚠";
@@ -82,12 +106,12 @@
         };
         "pulseaudio" = {
           # scroll-step = 1;
-          format = "{volume}% {icon}";
-          format-bluetooth = "{volume}% {icon}";
-          format-bluetooth-muted = "";
-          format-muted = "";
-          format-source = "{volume}% ";
-          format-source-muted = "";
+          format = "{icon} {volume}%";
+          format-bluetooth = "{icon} {volume}%";
+          format-bluetooth-muted = "{icon}";
+          format-muted = "{icon}";
+          format-source = "{icon} {volume}%";
+          format-source-muted = "{icon}";
           format-icons = {
             headphones = "";
             handsfree = "";
@@ -95,12 +119,18 @@
             phone = "";
             portable = "";
             car = "";
+            source = "";
+            source-muted = "";
+            muted = "";
+            bluetooth = "";
+            bluetooth-muted = "";
             default = ["" "" ""];
           };
         };
         "backlight" = {
           # device = "acpi_video1";
-          format = "{percent}% {icon}";
+          format = "{icon} {percent}%";
+          format-alt = "no backlight";
           format-icons = [
             ""
             ""
@@ -120,29 +150,32 @@
             warning = 30;
             critical = 15;
           };
-          format = "{capacity}% {icon}";
-          format-charging = " {capacity}%";
-          format-plugged = " {capacity}%";
-          # format-good = ""; # An empty format will hide the module
-          # format-full = "";
+          format = "{capacity}% {icon} ({time})";
+		  format-time = "{H}:{M:02}";
+		  format-charging = " {capacity}% ({time})";
+		  format-charging-full = " {capacity}%";
+		  format-full = "{icon} {capacity}%";
+		  format-alt = "{icon} {power}W";
           format-icons = ["" "" "" "" ""];
+		  tooltip = false;
           interval = 2;
         };
         "tray" = {
           icon-size = 21;
           spacing = 10;
         };
-        "clock" = {
+        "clock#time" = {
           timezone = "Europe/Paris";
-          format = " {:%d <small>%a</small> %H:%M}";
-          format-alt = " {:%A %B %d %Y (%V) | %r}";
-          calendar-weeks-pos = "right";
-          today-format = "<span color='#f38ba8'><b><u>{}</u></b></span>";
-          format-calendar = "<span color='#f2cdcd'><b>{}</b></span>";
-          format-calendar-weeks = "<span color='#94e2d5'><b>W{:%U}</b></span>";
-          format-calendar-weekdays = "<span color='#f9e2af'><b>{}</b></span>";
-          interval = 60;
-        };
+		  interval = 10;
+		  format = "{:%H:%M}";
+		  tooltip = false;
+	    };
+	    "clock#date" = {
+          timezone = "Europe/Paris";
+		  interval = 20;
+		  format = "󰃶 {:%e %b %Y}";
+		  tooltip = false;
+    	};
       };
     };
   };
