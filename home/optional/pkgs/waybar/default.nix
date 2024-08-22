@@ -61,8 +61,8 @@
         };
         modules-right = [
           "network" 
-          "pulseaudio",
-          "tray",
+          "pulseaudio"
+          "tray"
           "backlight" 
           "battery"
           "clock"
@@ -137,7 +137,6 @@
           format = " {:%d <small>%a</small> %H:%M}";
           format-alt = " {:%A %B %d %Y (%V) | %r}";
           calendar-weeks-pos = "right";
-          today-format = "<span color='#f38ba8'><b><u>{}</u></b></span>";
           today-format = "<span color='#f38ba8'><b><u>{}</u></b></span>";
           format-calendar = "<span color='#f2cdcd'><b>{}</b></span>";
           format-calendar-weeks = "<span color='#94e2d5'><b>W{:%U}</b></span>";
