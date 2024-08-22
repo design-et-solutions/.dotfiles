@@ -14,7 +14,7 @@
     border: none;
     font-family: 'FiraCode Nerd Font', monospace;
     font-size: 14px;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 /* =============================== */
@@ -29,7 +29,6 @@
 /* Workspaces */
 #workspaces {
     padding-left: 10px;
-    font-weight: bold;
 }
 
 /* =============================== */
@@ -45,6 +44,7 @@
 #disk,
 #temperature {
     color: @blue;
+    font-weight: normal;
 }
 
 /* =============================== */
@@ -84,6 +84,7 @@
 #battery,
 #backlight {
     color: @purple;
+    font-weight: normal;
 }
 
 /* =============================== */
@@ -95,9 +96,6 @@
 
 /* =============================== */
 /* Clock */
-#clock {
-    font-weight: bold;
-}
 #clock.date {
     padding-right: 18px;
 }
