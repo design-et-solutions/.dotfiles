@@ -64,7 +64,9 @@ require("nvim-tree").setup({
     },
 })
 
--- Key mappings for nvim-tree
+-- Key mappings 
+
+-- Tree
 vim.keymap.set('n', '<A-n>', ':NvimTreeToggle<CR>', { 
     desc = "toggle tree" 
 })
@@ -75,14 +77,7 @@ vim.keymap.set('n', '<A-r>', ':NvimTreeRefresh<CR>', {
     desc = "refresh tree" 
 })
 
--- Key mappings for nvim
-vim.keymap.set('n', '<A-q>', ':bd<CR>', { 
-    desc = "close focused file" 
-})
-vim.keymap.set('n', '<C-s>', ':w<CR>', { 
-    desc = "save focused file" 
-})
-
+-- Mouvement
 vim.keymap.set("n", "<C-h>", "<C-w>h", { 
     desc = "switch window left" 
 })
@@ -96,6 +91,7 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", {
     desc = "switch window up" 
 })
 
+-- Format File
 vim.keymap.set("n", "<A-m>", function()
   require("conform").format { lsp_fallback = true }
 end, { 
@@ -112,7 +108,13 @@ vim.keymap.set("v", "<A-c>", "gc", {
     remap = true 
 })
 
--- Buffer navigation with Tab and Shift+Tab
+-- Buff
+vim.keymap.set('n', '<A-q>', ':bd<CR>', { 
+    desc = "close focused file" 
+})
+vim.keymap.set('n', '<C-s>', ':w<CR>', { 
+    desc = "save focused file" 
+})
 vim.keymap.set('n', '<Tab>', ':bnext<CR>', { 
     desc = "move to the next buffer" 
 })
