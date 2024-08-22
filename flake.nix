@@ -21,8 +21,25 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#machine-name'
     nixosConfigurations = {
+      desktop-hood = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs outputs; };
+        modules = [
+          ./hosts/desktop/hood
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+            
+            # User and group configuration for user 'me'
+            users.groups.me = {};
+            users.users.me = import ./nixos/users/me;
+            # Home Manager configuration for user 'me'
+            home-manager.users.me = import ./home/users/me;
+          }
+        ];
+      };
       laptop-hood = nixpkgs.lib.nixosSystem {
-        # system = "x86_64-linux";
         specialArgs = { inherit inputs outputs; };
         modules = [
           ./hosts/laptop/hood
