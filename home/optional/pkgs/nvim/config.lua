@@ -122,3 +122,12 @@ vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', {
 vim.keymap.set('n', '<A-b>', ':buffers<CR>', { 
     desc = "list buffers" 
 })
+
+-- Split Window
+vim.keymap.set('n', '<A-h>', ':split<CR>', { 
+    desc = "split window horizontally" 
+})
+vim.keymap.set('n', '<A-v>', ':vsplit<CR>', { 
+    desc = "split window vertically" 
+})
+
