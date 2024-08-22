@@ -12,10 +12,9 @@
 /* Universal Styling */
 * {
     border: none;
-    font-family: 'FridaCode Nerd Font', monospace;
+    font-family: 'FiraCode Nerd Font', monospace;
     font-size: 14px;
-    padding-right: 2px;
-    padding-left: 2px;
+    font-weight: normal;
 }
 
 /* =============================== */
@@ -30,10 +29,13 @@
 /* Workspaces */
 #workspaces {
     padding-left: 10px;
+    font-weight: bold;
 }
 
+/* =============================== */
+/* Window */
 #window {
-    margin-left: -10px;
+    margin-left: -5px;
 }
 
 /* =============================== */
@@ -42,31 +44,60 @@
 #memory,
 #disk,
 #temperature {
-    margin-right: 20px;
     color: @blue;
 }
 
 /* =============================== */
+/* CPU */
+#cpu {
+    margin-right: 25px;
+}
+
+/* =============================== */
+/* CPU */
+#cpu {
+    margin-right: 25px;
+}
+
+/* =============================== */
+/* Memory */
+#memory {
+    margin-right: 25px;
+}
+
+/* =============================== */
+/* Disk */
+#disk {
+    margin-right: 25px;
+}
+
+/* =============================== */
+/* Temperature */
+#temperature {
+    margin-right: 25px;
+}
+
+/* =============================== */
 /* Others */
 #network,
 #pulseaudio,
 #battery,
 #backlight {
-    margin-right: 15px;
     color: @purple;
 }
 
 /* =============================== */
-/* Clock */
-#clock.date {
+/* Network */
+#network {
+    margin-right: 15px;
 }
+
 
 /* =============================== */
-/* Others */
-#network,
-#pulseaudio,
-#battery,
-#backlight {
-    margin-right: 5px;
+/* Clock */
+#clock {
+    font-weight: bold;
 }
-
+#clock.date {
+    padding-right: 18px;
+}

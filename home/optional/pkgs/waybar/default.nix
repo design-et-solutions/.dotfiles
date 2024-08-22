@@ -7,7 +7,6 @@
         layer = "top";
         position = "top";
         height = 40;
-        spacing = 0; # Gaps between modules (0px) Adjusted in the css
         margin-top = 10;
         margin-bottom = 4;
         margin-left = 10;
