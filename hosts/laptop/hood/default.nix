@@ -12,6 +12,8 @@
     ./hardware-configuration.nix
 
     # Import optional
+    ../../../nixos/optional/drivers/audio
+    ../../../nixos/optional/drivers/bluetooth
     ../../../nixos/optional/wifi/home 
     ../../../nixos/optional/wayland 
     ../../../nixos/optional/window-manager/hyprland 

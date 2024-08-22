@@ -13,6 +13,7 @@
 
     # Import optional
     ../../../nixos/optional/drivers/gpu/nvidia
+    ../../../nixos/optional/drivers/audio
     ../../../nixos/optional/wifi/home 
     ../../../nixos/optional/wayland 
     ../../../nixos/optional/window-manager/hyprland 
