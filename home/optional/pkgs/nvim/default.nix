@@ -20,6 +20,7 @@
       nvim-web-devicons
       conform-nvim
       comment-nvim
+      markdown-preview-nvim
       {
         plugin = nvim-treesitter.withPlugins (
           plugins: with plugins; [
