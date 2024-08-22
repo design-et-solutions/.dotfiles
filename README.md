@@ -24,25 +24,26 @@
 ⠀⠀          🌸 SETUP 🌸
  -----------------------------------
 
- ╭─ Distro  -> NixOS
- ├─ Editor  -> VSCode / NeoVim
- ├─ Browser -> Firefox
- ├─ Shell   -> ZSH
- ╰─ Resource Monitor -> Btop
+ ╭─ Distro          -> NixOS
+ ├─ Editor          -> NeoVim
+ ├─ Browser         -> Firefox
+ ├─ Shell           -> Fish
+ │  ╰─ Prompt       -> Starship
+ ├─ WM              -> Hyprland
+ │  ├─ Bar          -> Waybar
+ │  ├─ App Menu     -> Rofi
+ │  ├─ Notification -> 
+ │  ├─ File Manager -> 
+ │  ╰─ Wallpaper    -> Hyprpaper
+ ├─ Theme           -> Gruvbox Light
+ ├─ Audio           -> 
+ ├─ Project Manager -> Git 
+ │  ╰─ TUI          -> Lazygit
+ ├─ Terminal        -> Kitty
+ │  ╰─ Multiplexer  -> Tmux
+ ╰─ Font            -> FridaCode
 
- ╭─ Model -> ASUS TUF Gaming A15
- ├─ CPU   -> Ryzen 7 4800H @ 4.3GHz
- ├─ GPU   -> NVIDIA GeForce RTX 3050
- ╰─ Resolution -> 1920x1080
-
- ╭─ WM       -> Hyprland
- ├─ Terminal -> Kitty
- ├─ Theme    -> Tokyonight-Dark-BL-LB
- ├─ Icons    -> Tokyonight-Moon
- ├─ Font     -> CaskaydiaCove Nerd Font
- ╰─ Hotel    -> Trivago
-
-                        
+                              
 ```
 
 <h1></h1>

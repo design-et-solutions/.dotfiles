@@ -7,10 +7,20 @@
       la = "ls -a";
       lg = "lazygit"; 
     };
+    interactiveShellInit = ''
+      starship init fish | source
+    '';
   };
+
+  programs.starship = {
+    enable = true;
+    enableFishIntegretion = true;
+  };
+
 
   environment.systemPackages = with pkgs; [
     fish
+    starship
   ];
 
   environment.shells = with pkgs; [ fish ];

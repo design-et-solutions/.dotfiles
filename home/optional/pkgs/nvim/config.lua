@@ -65,34 +65,34 @@ require("nvim-tree").setup({
 })
 
 -- Key mappings for nvim-tree
-vim.api.nvim_set_keymap('n', '<A-n>', ':NvimTreeToggle<CR>', { 
+vim.keymap.set('n', '<A-n>', ':NvimTreeToggle<CR>', { 
     desc = "toggle tree" 
 })
-vim.api.nvim_set_keymap('n', '<A-t>', ':NvimTreeFocus<CR>', { 
+vim.keymap.set('n', '<A-t>', ':NvimTreeFocus<CR>', { 
     desc = "focus tree" 
 })
-vim.api.nvim_set_keymap('n', '<A-r>', ':NvimTreeRefresh<CR>', { 
+vim.keymap.set('n', '<A-r>', ':NvimTreeRefresh<CR>', { 
     desc = "refresh tree" 
 })
 
 -- Key mappings for nvim
-vim.api.nvim_set_keymap('n', '<A-q>', ':bd<CR>', { 
+vim.keymap.set('n', '<A-q>', ':bd<CR>', { 
     desc = "close focused file" 
 })
-vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { 
+vim.keymap.set('n', '<C-s>', ':w<CR>', { 
     desc = "save focused file" 
 })
 
-vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", { 
+vim.keymap.set("n", "<C-h>", "<C-w>h", { 
     desc = "switch window left" 
 })
-vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { 
+vim.keymap.set("n", "<C-l>", "<C-w>l", { 
     desc = "switch window right" 
 })
-vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { 
+vim.keymap.set("n", "<C-j>", "<C-w>j", { 
     desc = "switch window down" 
 })
-vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { 
+vim.keymap.set("n", "<C-k>", "<C-w>k", { 
     desc = "switch window up" 
 })
 
@@ -103,11 +103,22 @@ end, {
 })
 
 -- Comment
-vim.api.nvim_set_keymap("n", "<A-/>", "gcc", { 
+vim.keymap.set("n", "<A-c>", "gcc", { 
     desc = "Toggle Comment", 
     remap = true 
 })
-vim.api.nvim_set_keymap("v", "<A-/>", "gc", { 
+vim.keymap.set("v", "<A-c>", "gc", { 
     desc = "Toggle comment", 
     remap = true 
+})
+
+-- Buffer navigation with Tab and Shift+Tab
+vim.keymap.set('n', '<Tab>', ':bnext<CR>', { 
+    desc = "move to the next buffer" 
+})
+vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', { 
+    desc = "move to the previous buffer" 
+})
+vim.keymap.set('n', '<A-b>', ':buffers<CR>', { 
+    desc = "list buffers" 
 })
