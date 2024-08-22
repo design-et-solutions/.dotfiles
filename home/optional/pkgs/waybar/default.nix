@@ -12,12 +12,12 @@
         margin-left = 10;
         margin-right = 10;
         modules-left = [
+          "clock#time"
           "hyprland/workspaces"
           "hyprland/window"
           "tray"
         ];
         modules-center = [
-          "clock#time"
         ];
         modules-right = [
           "cpu"
@@ -25,9 +25,9 @@
           "temperature"
           "disk"
           "network" 
-          "pulseaudio"
-          "battery"
-          "backlight" 
+          # "pulseaudio"
+          # "battery"
+          # "backlight" 
           "clock#date"
         ];
         "hyprland/workspaces" = {
