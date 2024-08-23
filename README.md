@@ -56,3 +56,33 @@
 - [Shortcuts Guide](docs/shortcuts/README.md)
 - [Usage Guide](docs/usage/README.md)
 
+## For blind man
+If you only need it occasionally on a specific user so:
+> `./home/optional/`
+
+If you need it always on a specific user so:
+> `./home/users/${user}`
+
+If you only need it always on all users so:
+> `./home/core/`
+
+If you only need it occasionally on a specific host so:
+> `./nixos/optional/`
+
+If you need it always on a specific host so:
+> `./hosts/${host}`
+
+If you only need it always on all hosts so:
+> `./nixos/core/`
+
+> [!TIP]
+> to update `home-manager` rebuild your `kernel` and `logout` 
+
+> [!TIP]
+> to update `nixios` rebuild your `kernel` and smile 
+
+> [!TIP]
+> to update `hyprl` rebuild your `kernel` and run `hyprlctl reload` 
+
+> [!TIP]
+> to update `waybar` rebuild your `kernel` and smile 

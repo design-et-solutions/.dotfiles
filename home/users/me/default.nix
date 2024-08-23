@@ -23,7 +23,6 @@
     can-utils # can cli tools
     vial      # keyboard soft
     stremio   # stream app
-    woeusb    # tool to make boot key
   ];
 
   programs.git = {

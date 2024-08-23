@@ -43,6 +43,7 @@
     libnotify      # notification manager
     gcc            # collection of compilers
     usbutils       # usb cli tools
+    woeusb         # tool to make boot key
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
