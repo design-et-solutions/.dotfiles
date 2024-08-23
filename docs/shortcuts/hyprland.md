@@ -10,7 +10,9 @@
 | `Super + s`             | open spotify                         |
 | `Super + Shift + p`     | toggle spotify pause play            |
 | `Super + Shift + n`     | spotify next                         |
-| `Super + Shift + m`     | toggle previous                      |
+| `Super + Shift + m`     | spotify previous                     |
+| `Super + Shift + ,`     | pulseaudio volume -5                 |
+| `Super + Shift + .`     | pulseaudio volume +5                 |
 
 ## Window management
 | Shortcut                | Action                               |
