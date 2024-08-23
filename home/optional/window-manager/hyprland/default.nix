@@ -8,7 +8,7 @@
   xdg.configFile = {
     "hypr/hyprland.conf".source = ./hyprland.conf;
     "hypr/windowrule.conf".source = ./windowrule.conf;
-    "hypr/keybinds.conf".source = ./keybinds.conf;
+    "hypr/keybindings.conf".source = ./keybindings.conf;
     "hypr/hyprpaper.conf".source = ./hyprpaper.conf;
   };
 
