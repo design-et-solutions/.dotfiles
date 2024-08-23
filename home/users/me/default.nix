@@ -11,6 +11,7 @@
     ../../optional/pkgs/tmux
     ../../optional/pkgs/rust
     ../../optional/pkgs/firefox
+    ../../optional/pkgs/unity
   ];
 
   home = {
@@ -21,11 +22,12 @@
   home.packages = with pkgs; [ 
     can-utils # can cli tools
     vial      # keyboard soft
+    stremio   # stream app
   ];
 
   programs.git = {
     enable = true;
-    userName = "username";
+    userName = "me";
     userEmail = "email@domain.com";
   };
 }

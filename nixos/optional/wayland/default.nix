@@ -7,6 +7,13 @@
         wayland = true;
     };
   };
+  services.libinput = {
+    enable = true;
+    mouse = {
+      accelProfile = "flat";
+      accelSpeed = "0";
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     swaylock # screen locker
