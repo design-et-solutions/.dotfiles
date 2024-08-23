@@ -10,53 +10,43 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs: 
+    let inherit (self) outputs;
+    # NixOS configuration entrypoint
+    # Define a function to create a NixOS configuration
+      mkNixosConfiguration = { hostModule, system ? "x86_64-linux" }: 
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            hostModule
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+              };
+              
+              # User and group configuration for user 'me'
+              users.groups.me = {};
+              users.users.me = import ./nixos/users/me;
+              # Home Manager configuration for user 'me'
+              home-manager.users.me = import ./home/users/me;
+            }
+          ];
+        };
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#machine-name'
     nixosConfigurations = {
-      desktop-hood = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs outputs; };
-        modules = [
-          ./hosts/desktop/hood
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            
-            # User and group configuration for user 'me'
-            users.groups.me = {};
-            users.users.me = import ./nixos/users/me;
-            # Home Manager configuration for user 'me'
-            home-manager.users.me = import ./home/users/me;
-          }
-        ];
+      desktop-hood = mkNixosConfiguration {
+        hostModule = ./hosts/desktop/hood;
       };
-      laptop-hood = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs outputs; };
-        modules = [
-          ./hosts/laptop/hood
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            
-            # User and group configuration for user 'me'
-            users.groups.me = {};
-            users.users.me = import ./nixos/users/me;
-            # Home Manager configuration for user 'me'
-            home-manager.users.me = import ./home/users/me;
-          }
-        ];
+      laptop-hood = mkNixosConfiguration {
+        hostModule = ./hosts/laptop/hood;
       };
     };
   };
 }
+

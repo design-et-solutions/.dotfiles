@@ -19,7 +19,10 @@
     ../../../nixos/optional/window-manager/hyprland 
     ../../../nixos/optional/pkgs/steam
     ../../../nixos/optional/pkgs/spotify
+    ../../../nixos/optional/pkgs/python
   ];
+
+  system = "x86_64-linux";
 
   networking.hostName = "desktop-hood";
 
