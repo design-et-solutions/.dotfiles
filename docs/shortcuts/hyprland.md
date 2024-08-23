@@ -1,13 +1,16 @@
 # Hyprland Shortcuts
 
-## General
+## Misc
 | Shortcut                | Action                               |
 |-------------------------|--------------------------------------|
 | `Super + Shift + z`     | lock screen                          |
 | `Super + t`             | open terminal                        |
-| `Super + e`             | open file manager                    |
-| `Super + d`             | open app menu                        |
-| `Super + p`             | pin window (Picture-in-Picture)      |
+| `Super + m`             | open app menu                        |
+| `Super + i`             | open browser                         |
+| `Super + s`             | open spotify                         |
+| `Super + Shift + p`     | toggle spotify pause play            |
+| `Super + Shift + n`     | spotify next                         |
+| `Super + Shift + m`     | toggle previous                      |
 
 ## Window management
 | Shortcut                | Action                               |
@@ -15,6 +18,8 @@
 | `Super + q`             | kill active window                   |
 | `Super + Shift + q`     | logout                               |
 | `Super + f`             | fulll screen window                  |
+| `Super + p`             | pin window                           |
+| `Super + w`             | toggle floating window               |
 
 ## Mouvement
 | Shortcut                | Action                               |
