@@ -37,11 +37,12 @@
   };
 
   environment.systemPackages = with pkgs; [
-    htop # interactive process viewer
+    htop           # interactive process viewer
     networkmanager # network cli tools  
-    git # git
-    libnotify # notification manager
-    gcc # collection of compilers
+    git            # git
+    libnotify      # notification manager
+    gcc            # collection of compilers
+    usbutils       # usb cli tools
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -33,4 +33,12 @@
       PasswordAuthentication = true;
     };
   };
+
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;
+
+  environment.systemPackages = with pkgs; [
+    solaar # Linux manager for many Logitech keyboards, mice, and other devices 
+  ];
+
 }
