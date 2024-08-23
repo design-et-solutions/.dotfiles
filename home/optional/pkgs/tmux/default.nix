@@ -26,6 +26,9 @@
     prefix = "C-f";
     keyMode = "vi";
     baseIndex = 1;
-    extraConfig = builtins.readFile ./config.conf;
+    extraConfig = ''
+      ${builtins.readFile ./config.conf}
+      ${builtins.readFile ./keybindings.conf}
+    '';
   };
 }

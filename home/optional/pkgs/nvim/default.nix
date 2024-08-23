@@ -8,7 +8,10 @@
     vimdiffAlias = true;
     withNodeJs = true;
     extraConfig = builtins.readFile ./config.vim;
-    extraLuaConfig = builtins.readFile ./config.lua;
+    extraLuaConfig = ''
+      ${builtins.readFile ./config.lua}
+      ${builtins.readFile ./keybindings.lua}
+    '';
     plugins = with pkgs.vimPlugins; [
       vim-nix
       vim-lastplace

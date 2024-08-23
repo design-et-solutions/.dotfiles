@@ -63,6 +63,3 @@ require("nvim-tree").setup({
         dotfiles = false 
     },
 })
-
--- Key mappings 
-require('keybindings')
