@@ -20,12 +20,13 @@
         modules-center = [
         ];
         modules-right = [
+          "custom/spotify"
+          "network" 
+          "pulseaudio"
           "cpu"
           "memory"
           "temperature"
           "disk"
-          "network" 
-          # "pulseaudio"
           # "battery"
           # "backlight" 
           "clock#date"
@@ -104,27 +105,21 @@
           interval = 2;
         };
         "pulseaudio" = {
-          # scroll-step = 1;
-          format = "{icon} {volume}%";
-          format-bluetooth = "{icon} {volume}%";
-          format-bluetooth-muted = "{icon}";
-          format-muted = "{icon}";
-          format-source = "{icon} {volume}%";
-          format-source-muted = "{icon}";
+          format = "{icon}  {volume}%";
+          format-bluetooth = "{icon}  {volume}%";
+          format-muted = "";
           format-icons = {
             headphones = "";
             handsfree = "";
             headset = "";
             phone = "";
+            phone-muted = "";
             portable = "";
             car = "";
-            source = "";
-            source-muted = "";
-            muted = "";
-            bluetooth = "";
-            bluetooth-muted = "";
-            default = ["" "" ""];
+            default = ["" ""];
           };
+          scroll-step = 1;
+          on-click = "pavucontrol";
         };
         "backlight" = {
           # device = "acpi_video1";
@@ -175,6 +170,13 @@
 		  format = "󰃶 {:%e %b %Y}";
 		  tooltip = false;
     	};
+        "custom/spotify" = {
+          format = "oyla{}";
+          return-type = "json";
+          interval = 1;
+          # exec = "${pkgs.playerctl}/bin/playerctl -p spotify metadata --format '{\"text\": \"{{artist}} - {{title}}\", \"tooltip\": \"{{album}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}'";
+          # on-click = "${pkgs.playerctl}/bin/playerctl -p spotify play-pause";
+        };
       };
     };
   };

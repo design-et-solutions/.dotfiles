@@ -18,6 +18,7 @@
     ../../../nixos/optional/wayland 
     ../../../nixos/optional/window-manager/hyprland 
     ../../../nixos/optional/pkgs/steam
+    ../../../nixos/optional/pkgs/spotify
   ];
 
   networking.hostName = "desktop-hood";
