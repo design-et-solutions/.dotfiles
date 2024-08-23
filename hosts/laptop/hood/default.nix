@@ -21,8 +21,6 @@
     ../../../nixos/optional/pkgs/python
   ];
 
-  system = "x86_64-linux";
-
   networking.hostName = "laptop-hood";
 
   services.openssh = {

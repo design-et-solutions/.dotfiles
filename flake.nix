@@ -41,9 +41,11 @@
     # Available through 'nixos-rebuild --flake .#machine-name'
     nixosConfigurations = {
       desktop-hood = mkNixosConfiguration {
+        system = "x86_64-linux";
         hostModule = ./hosts/desktop/hood;
       };
       laptop-hood = mkNixosConfiguration {
+        system = "x86_64-linux";
         hostModule = ./hosts/laptop/hood;
       };
     };

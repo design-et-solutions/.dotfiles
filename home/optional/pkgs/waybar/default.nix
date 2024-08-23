@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.waybar = {
     enable = true;
     style = ./style.css;
@@ -171,11 +171,13 @@
 		  tooltip = false;
     	};
         "custom/spotify" = {
-          format = "oyla{}";
+          format = " {}";
           return-type = "json";
           interval = 1;
-          # exec = "${pkgs.playerctl}/bin/playerctl -p spotify metadata --format '{\"text\": \"{{artist}} - {{title}}\", \"tooltip\": \"{{album}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}'";
-          # on-click = "${pkgs.playerctl}/bin/playerctl -p spotify play-pause";
+          exec = "${pkgs.writeShellScript "spotify-waybar" ''
+            ${pkgs.playerctl}/bin/playerctl -p spotify metadata --format '{"text": "{{artist}} - {{title}}", "tooltip": "{{title}} by {{artist}} on {{album}}", "alt": "{{status}}", "class": "{{status}}"}'
+          ''}";
+          exec-if = "${pkgs.playerctl}/bin/playerctl -p spotify status";
         };
       };
     };

@@ -89,3 +89,12 @@
     border: 4px solid @fg;
     margin-right: 10px;
 }
+
+/* =============================== */
+/* Spotify */
+#custom-spotify.playing {
+    color: @green;
+}
+#custom-spotify.paused {
+    color: @red;
+}

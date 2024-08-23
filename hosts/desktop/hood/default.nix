@@ -22,8 +22,6 @@
     ../../../nixos/optional/pkgs/python
   ];
 
-  system = "x86_64-linux";
-
   networking.hostName = "desktop-hood";
 
   services.dbus.enable = true;

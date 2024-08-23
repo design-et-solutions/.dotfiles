@@ -13,12 +13,11 @@
   };
 
   home.file = {
-    ".wallpapers".source = ../../../wallpapers;
-    ".scripts".source = ../../../scripts;
     ".scripts/wallpapers-randomizer.sh" = {
       source = ../../../scripts/wallpapers-randomizer.sh;
       executable = true;
     };
+    ".wallpapers".source = ../../../wallpapers;
   };
 
   home.packages = with pkgs; [ 

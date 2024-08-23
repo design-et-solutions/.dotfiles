@@ -20,6 +20,7 @@
 
   home.packages = with pkgs; [ 
     can-utils # can cli tools
+    vial      # keyboard soft
   ];
 
   programs.git = {
