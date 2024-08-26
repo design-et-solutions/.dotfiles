@@ -36,6 +36,8 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
+  programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS
+
   environment.systemPackages = with pkgs; [
     htop           # interactive process viewer
     networkmanager # network cli tools  
