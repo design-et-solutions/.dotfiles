@@ -11,7 +11,6 @@
     ../../optional/pkgs/tmux
     ../../optional/pkgs/rust
     ../../optional/pkgs/firefox
-    ../../optional/pkgs/chromium
     ../../optional/pkgs/unity
   ];
 
