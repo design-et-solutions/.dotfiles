@@ -159,13 +159,13 @@
           spacing = 10;
         };
         "clock#time" = {
-          timezone = "Europe/Paris";
+          # timezone = "Europe/Paris";
 		  interval = 10;
 		  format = "{:%H:%M}";
 		  tooltip = false;
 	    };
 	    "clock#date" = {
-          timezone = "Europe/Paris";
+          # timezone = "Europe/Paris";
 		  interval = 20;
 		  format = "󰃶 {:%e %b %Y}";
 		  tooltip = false;

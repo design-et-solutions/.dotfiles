@@ -21,6 +21,8 @@
     ../../../nixos/optional/pkgs/python
   ];
 
+  time.timeZone = "Europe/Paris";
+
   networking.hostName = "laptop-hood";
 
   services.openssh = {
