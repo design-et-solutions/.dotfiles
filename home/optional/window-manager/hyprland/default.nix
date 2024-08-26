@@ -3,7 +3,6 @@
     ../../pkgs/kitty 
     ../../pkgs/rofi 
     ../../pkgs/waybar 
-    ../../pkgs/thunar 
   ];
 
   xdg.configFile = {
