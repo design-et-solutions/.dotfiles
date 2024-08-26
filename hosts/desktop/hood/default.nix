@@ -24,7 +24,15 @@
   
   time.timeZone = "Europe/Paris";
 
-  networking.hostName = "desktop-hood";
+
+  networking= {
+    hostName = "desktop-hood";
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 80 443 8080 5000 ];
+      allowedUDPPorts = [ 53 ];
+    };
+  };
 
   services.dbus.enable = true;
 
@@ -40,7 +48,8 @@
   hardware.logitech.wireless.enableGraphical = true;
 
   environment.systemPackages = with pkgs; [
-    solaar # Linux manager for many Logitech keyboards, mice, and other devices 
+    solaar    # Linux manager for many Logitech keyboards, mice, and other devices 
+    steam-run # Steam env like
   ];
 
 }
