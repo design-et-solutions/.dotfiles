@@ -1,5 +1,6 @@
 { 
   pkgs,
+  lib,
   ... 
 }:
 {
@@ -23,7 +24,10 @@
 
   time.timeZone = "Europe/Paris";
 
-  networking.hostName = "laptop-hood";
+  networking= {
+    hostName = "laptop-hood";
+    firewall.allowedTCPPorts = lib.mkAfter [ 3000 5000 ];
+  };
 
   services.openssh = {
     enable = true;

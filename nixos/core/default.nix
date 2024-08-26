@@ -36,6 +36,15 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
+  networking= {
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 80 443 8080 ];
+      allowedUDPPorts = [ 53 ];
+    };
+  };
+
+
   programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS
 
   environment.systemPackages = with pkgs; [

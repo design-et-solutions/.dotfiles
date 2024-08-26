@@ -1,5 +1,6 @@
 { 
   pkgs,
+  lib,
   ... 
 }:
 {
@@ -27,11 +28,7 @@
 
   networking= {
     hostName = "desktop-hood";
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [ 80 443 8080 5000 ];
-      allowedUDPPorts = [ 53 ];
-    };
+    firewall.allowedTCPPorts = lib.mkAfter [ 3000 5000 ];
   };
 
   services.dbus.enable = true;
