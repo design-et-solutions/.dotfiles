@@ -13,4 +13,13 @@
     "hypr/keybindings.conf".source = ./keybindings.conf;
     "hypr/hyprpaper.conf".source = ./hyprpaper.conf;
   };
+
+
+  home.file = {
+    ".scripts/wallpapers-randomizer.sh" = {
+      source = builtins.toString ../../../scripts/wallpapers-randomizer.sh;
+      executable = true;
+    };
+    ".wallpapers".source = ../../../wallpapers;
+  };
 }
