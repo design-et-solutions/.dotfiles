@@ -8,7 +8,6 @@
   imports = [
     ./bootloader
     ./shell/fish
-    ./fonts
   ];
 
   nixpkgs = {
