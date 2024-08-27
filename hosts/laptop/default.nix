@@ -6,7 +6,6 @@
     # Import optional
     ../../nixos/optional/drivers/gpu/nvidia
     ../../nixos/optional/drivers/audio
-    ../../nixos/optional/desktop 
   ];
 
   services.openssh = {

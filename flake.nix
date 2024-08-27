@@ -18,6 +18,7 @@
       hostModule, 
       system, 
       extraModules ? [],
+      isGui ? false,
       users
     }: nixpkgs.lib.nixosSystem {
           inherit system;
@@ -31,6 +32,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "backup";
+                extraSpecialArgs = { inherit isGui; };
                 users = builtins.listToAttrs (map (user: {
                   name = user;
                   value = import (./home/users/${user});
@@ -53,19 +55,22 @@
       desktop-hood = mkNixosConfiguration {
         system = "x86_64-linux";
         hostModule = ./hosts/desktop/hood;
-        extraModules = [ ./nixos/gui ];
+        extraModules = [ ./nixos/optional/gui ];
+        isGui = true;
         users = [ "me" ];
       };
       laptop-hood = mkNixosConfiguration {
         system = "x86_64-linux";
         hostModule = ./hosts/laptop/hood;
-        extraModules = [ ./nixos/gui ];
+        extraModules = [ ./nixos/optional/gui ];
+        isGui = true;
         users = [ "me" ];
       };
       desktop-work = mkNixosConfiguration {
         system = "x86_64-linux";
         hostModule = ./hosts/desktop/work;
-        extraModules = [ ./nixos/gui ];
+        extraModules = [ ./nixos/optional/gui ];
+        isGui = true;
         users = [ "guest" ];
       };
     };

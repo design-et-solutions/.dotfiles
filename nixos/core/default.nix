@@ -9,7 +9,6 @@
     ./bootloader
     ./shell/fish
     ./fonts
-    ./pkgs/nvim
   ];
 
   nixpkgs = {
@@ -48,7 +47,6 @@
   };
 
 
-  programs.git.enable = true;
   programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS
 
   services.dbus.enable = true;   # inter-process communication (IPC), allows apps to comm with one another
@@ -61,6 +59,8 @@
     usbutils       # usb cli tools
     woeusb-ng      # tool to make boot key
     ntfs3g         # ntfs
+    git
+    lazygit
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

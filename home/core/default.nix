@@ -1,4 +1,7 @@
-{ config, ... }: {
+{ config, isGui, ... }: {
+  config = lib.mkIf (!isGui) {
+    import ../optional/gui;
+  }
   nixpkgs = {
     config = {
       # Disable if you don't want unfree packages
