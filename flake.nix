@@ -33,10 +33,19 @@
                 useUserPackages = true;
                 backupFileExtension = "backup";
                 extraSpecialArgs = { inherit isGui; };
-                users = builtins.listToAttrs (map (user: {
-                  name = user;
-                  value = import (./home/users/${user}.nix);
-                }) users);
+                # users = builtins.listToAttrs (map (user: {
+                #   name = user;
+                #   value = import [
+                #      ./home/core
+                #      ./home/users/${user}.nix
+                #   ];
+                # }) users);
+                users = nixpkgs.lib.genAttrs users (user: {
+                  imports = [
+                    ./home/core
+                    ./home/users/${user}.nix
+                  ];
+                });
               };
             }
             {
