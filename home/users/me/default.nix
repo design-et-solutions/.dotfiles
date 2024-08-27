@@ -4,10 +4,8 @@
     ../../core
 
     # Import optional
-    ../../optional/window-manager/hyprland
     ../../optional/pkgs/git
     ../../optional/pkgs/rust
-    ../../optional/pkgs/firefox
     ../../optional/pkgs/unity
   ];
 
@@ -23,7 +21,6 @@
   ];
 
   programs.git = {
-    enable = true;
     userName = "me";
     userEmail = "email@domain.com";
   };

@@ -9,7 +9,7 @@
 
     # Import optional
     ../../../nixos/optional/drivers/gpu/nvidia
-    ../../../nixos/optional/wifi/home 
+    ../../../nixos/optional/network/wifi/home 
     ../../../nixos/optional/pkgs/steam
     ../../../nixos/optional/pkgs/spotify
     ../../../nixos/optional/pkgs/python

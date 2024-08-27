@@ -4,8 +4,8 @@
   ...
 }: {
   imports = [
-    ./fonts
-    ./pkgs/nvim
+    # ./fonts
+    # ./pkgs/nvim
   ];
 
   nixpkgs = {
@@ -18,7 +18,6 @@
   };
 
   programs.home-manager.enable = true;
-  programs.git.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
