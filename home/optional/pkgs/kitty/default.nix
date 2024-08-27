@@ -1,4 +1,8 @@
 { ... }: {
+  imports = [
+    ../tmux 
+  ];
+
   programs.kitty = {
     enable = true;
     font = {

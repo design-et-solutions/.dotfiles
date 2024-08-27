@@ -6,9 +6,6 @@
     # Import optional
     ../../optional/window-manager/hyprland
     ../../optional/pkgs/git
-    ../../optional/pkgs/lazygit
-    ../../optional/pkgs/nvim
-    ../../optional/pkgs/tmux
     ../../optional/pkgs/rust
     ../../optional/pkgs/firefox
     ../../optional/pkgs/unity
