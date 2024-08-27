@@ -27,8 +27,8 @@
           "memory"
           "temperature"
           "disk"
-          # "battery"
-          # "backlight" 
+          "battery"
+          "backlight" 
           "clock#date"
         ];
         "hyprland/workspaces" = {

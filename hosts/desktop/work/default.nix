@@ -36,4 +36,9 @@
     steam-run # Steam env like
   ];
 
+  services.xserver.displayManager.autoLogin = {
+    enable = true;
+    user = "guest";
+  };
+
 }
