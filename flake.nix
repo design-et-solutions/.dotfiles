@@ -33,6 +33,12 @@
               users.users.me = import ./nixos/users/me;
               # Home Manager configuration for user 'me'
               home-manager.users.me = import ./home/users/me;
+
+              # User and group configuration for user 'guest'
+              users.groups.guest = {};
+              users.users.guest = import ./nixos/users/guest;
+              # Home Manager configuration for user 'guest'
+              home-manager.users.guest = import ./home/users/guest;
             }
           ];
         };
@@ -47,6 +53,10 @@
       laptop-hood = mkNixosConfiguration {
         system = "x86_64-linux";
         hostModule = ./hosts/laptop/hood;
+      };
+      desktop-work = mkNixosConfiguration {
+        system = "x86_64-linux";
+        hostModule = ./hosts/desktop/work;
       };
     };
   };

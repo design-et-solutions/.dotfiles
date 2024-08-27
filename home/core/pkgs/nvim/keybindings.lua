@@ -32,5 +32,5 @@ vim.keymap.set('n', '<A-b>', ':buffers<CR>', { desc = "list buffers" })
 
 -- =============================== 
 -- split window
-vim.keymap.set('n', '<A-h>', ':split<CR>', { desc = "split window horizontally" })
-vim.keymap.set('n', '<A-v>', ':vsplit<CR>', { desc = "split window vertically" })
+vim.keymap.set('n', '<A-/_>', ':split<CR>', { desc = "split window horizontally" })
+vim.keymap.set('n', '<A-/->', ':vsplit<CR>', { desc = "split window vertically" })

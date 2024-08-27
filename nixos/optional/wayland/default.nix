@@ -2,9 +2,11 @@
 {
   services.xserver = {
     enable = true;
-    displayManager.gdm = {
+    displayManager = {
+      gdm = {
         enable = true;
         wayland = true;
+      };
     };
   };
 

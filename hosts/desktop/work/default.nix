@@ -1,8 +1,4 @@
-{ 
-  pkgs,
-  lib,
-  ... 
-}:
+{ pkgs, lib, ... }:
 {
   imports = [
     # Import general core 
@@ -12,20 +8,20 @@
     ./hardware-configuration.nix
 
     # Import optional
+    ../../../nixos/optional/drivers/gpu/nvidia
     ../../../nixos/optional/drivers/audio
-    ../../../nixos/optional/drivers/bluetooth
-    ../../../nixos/optional/wifi/home 
     ../../../nixos/optional/wayland 
     ../../../nixos/optional/window-manager/hyprland 
-    ../../../nixos/optional/pkgs/spotify
     ../../../nixos/optional/pkgs/python
+    ../../../nixos/optional/pkgs/steam
   ];
-
+  
   time.timeZone = "Europe/Paris";
 
+
   networking= {
-    hostName = "laptop-hood";
-    firewall.allowedTCPPorts = lib.mkAfter [ 3000 5000 ];
+    hostName = "desktop-work";
+    firewall.allowedTCPPorts = lib.mkAfter [ 5000 ];
   };
 
   services.openssh = {
@@ -35,4 +31,9 @@
       PasswordAuthentication = true;
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    steam-run # Steam env like
+  ];
+
 }

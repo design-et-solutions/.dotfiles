@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./bootloader
+    ./shell/fish
   ];
 
   nixpkgs = {
@@ -46,6 +47,8 @@
 
 
   programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS
+
+  services.dbus.enable = true;   # inter-process communication (IPC), allows apps to comm with one another
 
   environment.systemPackages = with pkgs; [
     htop           # interactive process viewer
