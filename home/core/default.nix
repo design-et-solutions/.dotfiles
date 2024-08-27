@@ -1,12 +1,13 @@
 { lib, isGui, ... }: {
-  imports = [
-    ./fonts
-    ./pkgs/nvim
-    ./pkgs/git
-  ];
-  imports = lib.optionals isGui [
-    ../optional/gui
-  ];
+  imports = 
+    (lib.optionals isGui [
+      ../optional/gui
+    ]) ++
+    [
+      ./fonts
+      ./pkgs/nvim
+      ./pkgs/git
+    ];
 
   nixpkgs = {
     config = {
