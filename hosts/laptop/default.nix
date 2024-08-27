@@ -1,8 +1,5 @@
 { pkgs, lib, ... }:{
   imports = [
-    # Import general core 
-    ../../nixos/core 
-
     # Import optional
     ../../nixos/optional/drivers/gpu/nvidia
     ../../nixos/optional/drivers/audio

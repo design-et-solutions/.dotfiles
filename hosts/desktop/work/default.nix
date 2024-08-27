@@ -1,5 +1,4 @@
-{ pkgs, lib, ... }:
-{
+{ pkgs, lib, ... }:{
   imports = [
     # Import general core 
     ../default.nix

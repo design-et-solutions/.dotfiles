@@ -1,9 +1,8 @@
 { pkgs, ... }: {
   imports = [
     # Import optional
-    ../../optional/pkgs/git
-    ../../optional/pkgs/rust
-    ../../optional/pkgs/unity
+    ../optional/pkgs/rust
+    ../optional/pkgs/unity
   ];
 
   home = {

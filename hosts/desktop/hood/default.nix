@@ -1,5 +1,4 @@
 { pkgs, lib, ... }:{
-{
   imports = [
     # Import general desktop 
     ../default.nix
@@ -9,7 +8,7 @@
 
     # Import optional
     ../../../nixos/optional/drivers/gpu/nvidia
-    ../../../nixos/optional/network/wifi/home 
+    ../../../nixos/optional/network/wifi/home
     ../../../nixos/optional/pkgs/steam
     ../../../nixos/optional/pkgs/spotify
     ../../../nixos/optional/pkgs/python

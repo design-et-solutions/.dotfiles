@@ -35,7 +35,7 @@
                 extraSpecialArgs = { inherit isGui; };
                 users = builtins.listToAttrs (map (user: {
                   name = user;
-                  value = import (./home/users/${user});
+                  value = import (./home/users/${user}.nix);
                 }) users);
               };
             }
@@ -43,7 +43,7 @@
               users.groups = nixpkgs.lib.genAttrs users (user: {});
               users.users = builtins.listToAttrs (map (user: {
                 name = user;
-                value = import (./nixos/users/${user});
+                value = import (./nixos/users/${user}.nix);
               }) users);
             }
           ] ++ extraModules;
