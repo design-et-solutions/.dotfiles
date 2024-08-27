@@ -1,8 +1,5 @@
 { pkgs, ... }: {
   imports = [
-    # Import general core 
-    ../../core
-
     # Import optional
     ../../optional/pkgs/git
     ../../optional/pkgs/rust

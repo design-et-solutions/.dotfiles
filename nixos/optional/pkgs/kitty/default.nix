@@ -3,7 +3,7 @@
     ../tmux 
   ];
 
-  home.sessionVariables = {
+  environment.sessionVariables = {
     TERMINAL = "kitty";
   };
 

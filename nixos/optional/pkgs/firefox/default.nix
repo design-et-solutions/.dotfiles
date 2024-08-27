@@ -1,17 +1,11 @@
 { ... }: {
-
-  home.sessionVariables = {
+  environment.sessionVariables = {
     BROWSER = "firefox";
   };
 
   programs.firefox = {
     enable = true;
     languagePacks = [ "fr" "en-US" ];
-    profiles.default = {
-      id = 0;
-      name = "Default";
-      isDefault = true;
-    };
     policies = {
       # BlockAboutConfig = true;
       DefaultDownloadDirectory = "~/Downloads";

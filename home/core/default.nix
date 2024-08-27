@@ -1,13 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  imports = [
-    # ./fonts
-    # ./pkgs/nvim
-  ];
-
+{ config, ... }: {
   nixpkgs = {
     config = {
       # Disable if you don't want unfree packages

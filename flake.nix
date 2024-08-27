@@ -14,11 +14,16 @@
     let inherit (self) outputs;
     # NixOS configuration entrypoint
     # Define a function to create a NixOS configuration
-      mkNixosConfiguration = { hostModule, system ? "x86_64-linux" }: 
-        nixpkgs.lib.nixosSystem {
+    mkNixosConfiguration = { 
+      hostModule, 
+      system, 
+      extraModules ? [],
+      users
+    }: nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs outputs; };
           modules = [
+            ./nixos/core
             hostModule
             home-manager.nixosModules.home-manager
             {
@@ -26,21 +31,20 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "backup";
+                users = builtins.listToAttrs (map (user: {
+                  name = user;
+                  value = import (./home/users/${user});
+                }) users);
               };
-              
-              # User and group configuration for user 'me'
-              users.groups.me = {};
-              users.users.me = import ./nixos/users/me;
-              # Home Manager configuration for user 'me'
-              home-manager.users.me = import ./home/users/me;
-
-              # User and group configuration for user 'guest'
-              users.groups.guest = {};
-              users.users.guest = import ./nixos/users/guest;
-              # Home Manager configuration for user 'guest'
-              home-manager.users.guest = import ./home/users/guest;
             }
-          ];
+            {
+              users.groups = nixpkgs.lib.genAttrs users (user: {});
+              users.users = builtins.listToAttrs (map (user: {
+                name = user;
+                value = import (./nixos/users/${user});
+              }) users);
+            }
+          ] ++ extraModules;
         };
   in {
     # NixOS configuration entrypoint
@@ -49,14 +53,20 @@
       desktop-hood = mkNixosConfiguration {
         system = "x86_64-linux";
         hostModule = ./hosts/desktop/hood;
+        extraModules = [ ./nixos/gui ];
+        users = [ "me" ];
       };
       laptop-hood = mkNixosConfiguration {
         system = "x86_64-linux";
         hostModule = ./hosts/laptop/hood;
+        extraModules = [ ./nixos/gui ];
+        users = [ "me" ];
       };
       desktop-work = mkNixosConfiguration {
         system = "x86_64-linux";
         hostModule = ./hosts/desktop/work;
+        extraModules = [ ./nixos/gui ];
+        users = [ "guest" ];
       };
     };
   };
