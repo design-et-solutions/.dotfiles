@@ -29,12 +29,28 @@
   };
 
   # custom
-  systemd.services.unity = {
-    description = "Service Unity";
+  systemd.services.unity-front = {
+    description = "Service Unity Front";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    environment = {
+      WAYLAND_DISPLAY = "wayland-1";
+      XDG_RUNTIME_DIR = "/run/user/1000";
+    };
+    serviceConfig = {
+      ExecStart = "${pkgs.steam-run}/bin/steam-run /home/guest/build.x86_64";
+      Restart = "always";
+      RestartSec = "10s";
+    };
+  };
+  systemd.services.unity-back = {
+    description = "Service Unity Back";
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.steam-run}/bin/steam-run /home/guest/build.x86_64";
+      ExecStart = "${pkgs.python}/bin/python /home/guest/server.py";
+      Restart = "always";
+      RestartSec = "10s";
     };
   };
 }
