@@ -1,14 +1,16 @@
 { pkgs, lib, ... }:{
   imports = [
     # Import general core 
-    ./../..
+    ./../../..
     
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 
     # Import optional
-    ../../../nixos/optional/drivers/gpu/intel
+    ../../../../../nixos/optional/drivers/gpu/intel
   ];
+
+  time.timeZone = "Europe/Paris";
   
   networking= {
     hostName = "desktop-work-4651-master";
