@@ -96,11 +96,11 @@ require("toggleterm").setup{
     },
     highlights = {
         FloatBorder = {
-          guifg = colors.fg0,
-          guibg = colors.bg0,
+          guifg = vim.api.nvim_get_hl_by_name("Normal", true).background,
+          guibg = vim.api.nvim_get_hl_by_name("Normal", true).background,
         },
         NormalFloat = {
-          guibg = colors.bg0,
+          guibg = vim.api.nvim_get_hl_by_name("Normal", true).background,
         },
     },
 }
