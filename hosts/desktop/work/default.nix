@@ -48,7 +48,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.python}/bin/python /home/guest/server.py";
+      ExecStart = "${pkgs.python3}/bin/python /home/guest/server.py";
       Restart = "always";
       RestartSec = "10s";
     };
