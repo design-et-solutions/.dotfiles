@@ -51,6 +51,14 @@
 
   services.dbus.enable = true;   # inter-process communication (IPC), allows apps to comm with one another
 
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     htop           # interactive process viewer
     networkmanager # network cli tools  
@@ -61,6 +69,7 @@
     ntfs3g         # ntfs
     git
     lazygit
+    neofetch
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

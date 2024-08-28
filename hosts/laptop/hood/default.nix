@@ -1,12 +1,10 @@
 { pkgs, lib, ... }:{
   imports = [
-    # Import general 
-    ./.. 
-    
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 
     # Import optional
+    ../../../nixos/optional/drivers/gpu/intel
     ../../../nixos/optional/drivers/bluetooth
     ../../../nixos/optional/pkgs/spotify
     ../../../nixos/optional/pkgs/python
