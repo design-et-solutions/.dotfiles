@@ -50,18 +50,10 @@ vim.opt.termguicolors = true
 
 -- Setup nvim-tree
 require("nvim-tree").setup({
-    sort = { 
-        sorter = "case_sensitive" 
-    },
-    view = { 
-        width = 20 
-    },
-    renderer = { 
-        group_empty = true 
-    },
-    filters = { 
-        dotfiles = false 
-    },
+    sort = { sorter = "case_sensitive" },
+    view = { width = 25 },
+    renderer = { group_empty = true },
+    filters = { dotfiles = false },
 })
 
 require("bufferline").setup{
@@ -73,7 +65,7 @@ require("bufferline").setup{
         left_mouse_command = "buffer %d",
         middle_mouse_command = nil,
         indicator = {
-            icon = '▎',
+            -- icon = '▎',
             style = 'icon',
         },
         buffer_close_icon = '',

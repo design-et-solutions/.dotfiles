@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 -- =============================== 
 -- focus
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true, desc = "switch window left" })
@@ -19,12 +20,12 @@ end, { noremap = true, silent = true, desc = "general Format file" })
 
 -- =============================== 
 -- comment
-vim.keymap.set("n", "<leader>c", "gcc", { noremap = true, silent = true, desc = "Toggle Comment" })
-vim.keymap.set("v", "<leader>c", "gc", { noremap = true, silent = true, desc = "Toggle comment" })
+vim.keymap.set("n", "<leader>c", "gcc", { remap = true, silent = true, desc = "Toggle Comment" })
+vim.keymap.set("v", "<leader>c", "gc", { remap = true, silent = true, desc = "Toggle comment" })
 
 -- =============================== 
 -- buffer
-vim.keymap.set('n', '<C-q>', ':bd<CR>', { noremap = true, silent = true, desc = "close buffer" })
+vim.keymap.set('n', '<C-x>', ':bp | bd #<CR>', { noremap = true, silent = true, desc = "close buffer" })
 vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true, desc = "save buffer" })
 vim.keymap.set('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true, desc = "move to the next buffer" })
 vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true, desc = "move to the previous buffer" })
