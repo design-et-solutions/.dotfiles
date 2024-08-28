@@ -33,13 +33,6 @@
                 useUserPackages = true;
                 backupFileExtension = "backup";
                 extraSpecialArgs = { inherit isGui; };
-                # users = builtins.listToAttrs (map (user: {
-                #   name = user;
-                #   value = import [
-                #      ./home/core
-                #      ./home/users/${user}.nix
-                #   ];
-                # }) users);
                 users = nixpkgs.lib.genAttrs users (user: {
                   imports = [
                     ./home/core
@@ -80,7 +73,7 @@
         hostModule = ./hosts/desktop/work;
         extraModules = [ ./nixos/optional/gui ];
         isGui = true;
-        users = [ "guest" ];
+        users = [ "me" "guest" ];
       };
     };
   };

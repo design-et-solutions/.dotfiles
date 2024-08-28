@@ -7,14 +7,12 @@
     ./hardware-configuration.nix
 
     # Import optional
+    ../../../nixos/optional/drivers/gpu/intel
     ../../../nixos/optional/pkgs/python
     ../../../nixos/optional/pkgs/steam
-
-    # Import custom
   ];
   
   time.timeZone = "Europe/Paris";
-
 
   networking= {
     hostName = "desktop-work";
@@ -27,7 +25,16 @@
 
   services.displayManager.autoLogin = {
     enable = true;
-    user = "guest";
+    user = "me";
   };
 
+  # custom
+  systemd.services.unity = {
+    description = "Service Unity";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.steam-run}/bin/steam-run /home/guest/build.x86_64";
+    };
+  };
 }
