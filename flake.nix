@@ -50,32 +50,12 @@
             }
           ] ++ extraModules;
         };
+
+        nixosConfigurations = import ./hosts { inherit mkNixosConfiguration; };
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#machine-name'
-    nixosConfigurations = {
-      desktop-hood = mkNixosConfiguration {
-        system = "x86_64-linux";
-        hostModule = ./hosts/desktop/hood;
-        extraModules = [ ./nixos/optional/gui ];
-        isGui = true;
-        users = [ "me" ];
-      };
-      laptop-hood = mkNixosConfiguration {
-        system = "x86_64-linux";
-        hostModule = ./hosts/laptop/hood;
-        extraModules = [ ./nixos/optional/gui ];
-        isGui = true;
-        users = [ "me" ];
-      };
-      desktop-work = mkNixosConfiguration {
-        system = "x86_64-linux";
-        hostModule = ./hosts/desktop/work;
-        extraModules = [ ./nixos/optional/gui ];
-        isGui = true;
-        users = [ "me" "guest" ];
-      };
-    };
+    inherit nixosConfigurations;
   };
 }
 
