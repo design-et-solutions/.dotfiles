@@ -32,7 +32,8 @@
   systemd.services.unity-front = {
     description = "Service Unity Front";
     wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    after = [ "network.target" "graphical-session.target" ];
+    requires = [ "graphical-session.target" ];
     environment = {
       WAYLAND_DISPLAY = "wayland-1";
       XDG_RUNTIME_DIR = "/run/user/1000";
@@ -40,7 +41,7 @@
     serviceConfig = {
       ExecStart = "${pkgs.steam-run}/bin/steam-run /home/guest/build.x86_64";
       Restart = "always";
-      RestartSec = "10s";
+      RestartSec = "30s";
     };
   };
   # systemd.services.unity-back = {
