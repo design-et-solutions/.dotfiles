@@ -25,7 +25,7 @@
 
   services.displayManager.autoLogin = {
     enable = true;
-    user = "me";
+    user = "guest";
   };
 
   # custom
@@ -43,20 +43,20 @@
       RestartSec = "10s";
     };
   };
-  systemd.services.unity-back = {
-    description = "Service Unity Back";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.python3.withPackages (ps: [ 
-        ps.flask
-        ps.flask-socketio
-        ps.eventlet
-        ps.colorama
-        ps.pynput
-      ])}/bin/python /home/guest/server.py";
-      Restart = "always";
-      RestartSec = "10s";
-    };
-  };
+  # systemd.services.unity-back = {
+  #   description = "Service Unity Back";
+  #   wantedBy = [ "multi-user.target" ];
+  #   after = [ "network.target" ];
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.python3.withPackages (ps: [ 
+  #       ps.flask
+  #       ps.flask-socketio
+  #       ps.eventlet
+  #       ps.colorama
+  #       ps.pynput
+  #     ])}/bin/python /home/guest/server.py";
+  #     Restart = "always";
+  #     RestartSec = "10s";
+  #   };
+  # };
 }
