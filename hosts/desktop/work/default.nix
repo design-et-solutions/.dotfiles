@@ -35,7 +35,7 @@
     after = [ "network.target" ];
     environment = {
       WAYLAND_DISPLAY = "wayland-1";
-      XDG_RUNTIME_DIR = "/run/user/1000";
+      XDG_RUNTIME_DIR = "/run/user/1001";
     };
     serviceConfig = {
       ExecStartPre = "${pkgs.coreutils}/bin/sleep 30";
