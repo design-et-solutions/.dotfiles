@@ -9,7 +9,7 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true, desc = "
 -- =============================== 
 -- tree
 vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>', { noremap = true, silent = true, desc = "toggle tree" })
-vim.keymap.set('n', '<leader>t', ':NvimTreeFocus<CR>', { noremap = true, silent = true, desc = "focus tree" })
+vim.keymap.set('n', '<leader>f', ':NvimTreeFocus<CR>', { noremap = true, silent = true, desc = "focus tree" })
 vim.keymap.set('n', '<leader>r', ':NvimTreeRefresh<CR>', { noremap = true, silent = true, desc = "refresh tree" })
 
 -- =============================== 
@@ -35,3 +35,8 @@ vim.keymap.set('n', '<leader>b', ':buffers<CR>', { noremap = true, silent = true
 -- split window
 vim.keymap.set('n', '<leader>sh', ':split<CR>', { noremap = true, silent = true, desc = "split window horizontally" })
 vim.keymap.set('n', '<leader>sv', ':vsplit<CR>', { noremap = true, silent = true, desc = "split window vertically" })
+
+-- =============================== 
+-- telescope
+vim.api.nvim_set_keymap("n", "<leader>t", ":ToggleTerm direction=float<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("t", "<leader>t", "<C-\\><C-n>:ToggleTerm<CR>", {noremap = true, silent = true})

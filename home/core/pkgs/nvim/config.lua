@@ -88,3 +88,19 @@ require("bufferline").setup{
     }
 }
 
+require("toggleterm").setup{
+    open_mapping = [[<c-\>]],
+    direction = "float",
+    float_opts = {
+        winblend = 0,
+    },
+    highlights = {
+        FloatBorder = {
+          guifg = colors.fg0,
+          guibg = colors.bg0,
+        },
+        NormalFloat = {
+          guibg = colors.bg0,
+        },
+    },
+}

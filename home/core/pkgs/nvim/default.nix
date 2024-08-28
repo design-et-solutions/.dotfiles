@@ -17,6 +17,7 @@
       ${builtins.readFile ./keybindings.lua}
     '';
     plugins = with pkgs.vimPlugins; [
+      nvim-lspconfig
       vim-nix
       vim-lastplace
       rust-vim
@@ -29,6 +30,8 @@
       comment-nvim
       markdown-preview-nvim
       bufferline-nvim
+      telescope-nvim
+      toggleterm-nvim
       {
         plugin = nvim-treesitter.withPlugins (
           plugins: with plugins; [
