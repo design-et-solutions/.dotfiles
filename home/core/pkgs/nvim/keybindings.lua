@@ -1,36 +1,36 @@
 -- =============================== 
 -- focus
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
+vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true, desc = "switch window left" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true, desc = "switch window right" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true, desc = "switch window down" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true, desc = "switch window up" })
 
 -- =============================== 
 -- tree
-vim.keymap.set('n', '<A-n>', ':NvimTreeToggle<CR>', { desc = "toggle tree" })
-vim.keymap.set('n', '<A-t>', ':NvimTreeFocus<CR>', { desc = "focus tree" })
-vim.keymap.set('n', '<A-r>', ':NvimTreeRefresh<CR>', { desc = "refresh tree" })
+vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>', { noremap = true, silent = true, desc = "toggle tree" })
+vim.keymap.set('n', '<leader>t', ':NvimTreeFocus<CR>', { noremap = true, silent = true, desc = "focus tree" })
+vim.keymap.set('n', '<leader>r', ':NvimTreeRefresh<CR>', { noremap = true, silent = true, desc = "refresh tree" })
 
 -- =============================== 
 -- format File
-vim.keymap.set("n", "<A-m>", function()
+vim.keymap.set("n", "<leader>m", function()
   require("conform").format { lsp_fallback = true }
-end, { desc = "general Format file" })
+end, { noremap = true, silent = true, desc = "general Format file" })
 
 -- =============================== 
 -- comment
-vim.keymap.set("n", "<A-c>", "gcc", { desc = "Toggle Comment", remap = true })
-vim.keymap.set("v", "<A-c>", "gc", { desc = "Toggle comment", remap = true })
+vim.keymap.set("n", "<leader>c", "gcc", { noremap = true, silent = true, desc = "Toggle Comment" })
+vim.keymap.set("v", "<leader>c", "gc", { noremap = true, silent = true, desc = "Toggle comment" })
 
 -- =============================== 
 -- buffer
-vim.keymap.set('n', '<A-q>', ':bd<CR>', { desc = "close buffer" })
-vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = "save buffer" })
-vim.keymap.set('n', '<Tab>', ':bnext<CR>', { desc = "move to the next buffer" })
-vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', { desc = "move to the previous buffer" })
-vim.keymap.set('n', '<A-b>', ':buffers<CR>', { desc = "list buffers" })
+vim.keymap.set('n', '<C-q>', ':bd<CR>', { noremap = true, silent = true, desc = "close buffer" })
+vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true, desc = "save buffer" })
+vim.keymap.set('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true, desc = "move to the next buffer" })
+vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true, desc = "move to the previous buffer" })
+vim.keymap.set('n', '<leader>b', ':buffers<CR>', { noremap = true, silent = true, desc = "list buffers" })
 
 -- =============================== 
 -- split window
-vim.keymap.set('n', '<A-/_>', ':split<CR>', { desc = "split window horizontally" })
-vim.keymap.set('n', '<A-/->', ':vsplit<CR>', { desc = "split window vertically" })
+vim.keymap.set('n', '<leader>sh', ':split<CR>', { noremap = true, silent = true, desc = "split window horizontally" })
+vim.keymap.set('n', '<leader>sv', ':vsplit<CR>', { noremap = true, silent = true, desc = "split window vertically" })

@@ -28,6 +28,7 @@
       conform-nvim
       comment-nvim
       markdown-preview-nvim
+      bufferline-nvim
       {
         plugin = nvim-treesitter.withPlugins (
           plugins: with plugins; [

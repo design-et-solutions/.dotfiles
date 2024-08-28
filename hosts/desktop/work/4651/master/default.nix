@@ -1,8 +1,5 @@
 { pkgs, lib, ... }:{
   imports = [
-    # Import general core 
-    ./../../..
-    
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 
