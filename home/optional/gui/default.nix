@@ -20,6 +20,10 @@
       source = builtins.toString ../../scripts/wallpapers-randomizer.sh;
       executable = true;
     };
+    ".scripts/powermenu.sh" = {
+      source = builtins.toString ../../scripts/powermenu.sh;
+      executable = true;
+    };
     ".wallpapers".source = ../../wallpapers;
   };
 }
