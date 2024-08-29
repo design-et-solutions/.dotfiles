@@ -5,7 +5,9 @@
 
     # Import optional
     ../../../nixos/optional/drivers/gpu/intel
+    ../../../nixos/optional/drivers/audio
     ../../../nixos/optional/drivers/bluetooth
+    ../../../nixos/optional/network/wifi/home
     ../../../nixos/optional/pkgs/spotify
     ../../../nixos/optional/pkgs/python
   ];
