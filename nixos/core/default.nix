@@ -45,8 +45,6 @@
 
   programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS
 
-  services.dbus.enable = true;   # inter-process communication (IPC), allows apps to comm with one another
-
   # tools and libs
   environment.systemPackages = with pkgs; [
     libnotify      # notification manager
