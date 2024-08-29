@@ -18,5 +18,5 @@
     font = "FiraCode Nerd Font 14";
   };
 
-  home.file.".local/share/rofi/themes/guvbox.rasi".source = ./guvbox.rasi;
+  home.file.".local/share/rofi/themes/gruvbox.rasi".source = ./gruvbox.rasi;
 }
