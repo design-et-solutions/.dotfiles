@@ -8,6 +8,12 @@
   imports = [
     ./bootloader
     ./shell/fish
+    ./pkgs/git
+    ./pkgs/monitoring
+    ./pkgs/network
+    ./pkgs/rust
+    ./pkgs/ssh
+    ./pkgs/usb
   ];
 
   nixpkgs = {
@@ -37,39 +43,15 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
-  networking= {
-    networkmanager.enable = true;
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [ 80 443 8080 ];
-      allowedUDPPorts = [ 53 ];
-    };
-  };
-
-
   programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS
 
   services.dbus.enable = true;   # inter-process communication (IPC), allows apps to comm with one another
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = true;
-    };
-  };
-
+  # tools and libs
   environment.systemPackages = with pkgs; [
-    htop           # interactive process viewer
-    networkmanager # network cli tools  
     libnotify      # notification manager
     gcc            # collection of compilers
-    usbutils       # usb cli tools
-    woeusb-ng      # tool to make boot key
-    ntfs3g         # ntfs
-    git
-    lazygit
-    neofetch
+    unzip
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

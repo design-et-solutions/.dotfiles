@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   imports = [
     # Import optional
-    ../optional/pkgs/rust
     ../optional/pkgs/unity
   ];
 
