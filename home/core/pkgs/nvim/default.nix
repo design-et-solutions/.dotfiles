@@ -32,6 +32,7 @@
       bufferline-nvim
       telescope-nvim
       toggleterm-nvim
+      nvim-colorizer-lua
       {
         plugin = nvim-treesitter.withPlugins (
           plugins: with plugins; [

@@ -104,3 +104,8 @@ require("toggleterm").setup{
         },
     },
 }
+
+require("colorizer").setup{
+    filetypes = { "*" },
+    buftypes = {},
+}

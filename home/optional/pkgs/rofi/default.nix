@@ -15,7 +15,8 @@
       hide-scrollbar = true;
       show-icons = true;
     };
-    font = "FiraCode 14";
+    font = "FiraCode Nerd Font 14";
   };
 
+  home.file.".local/share/rofi/themes/guvbox.rasi".source = ./guvbox.rasi;
 }
