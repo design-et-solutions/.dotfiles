@@ -10,5 +10,6 @@
 
   environment.systemPackages = with pkgs; [
     networkmanager # network cli tools  
+    protobuf       # protobuf
   ];
 }
