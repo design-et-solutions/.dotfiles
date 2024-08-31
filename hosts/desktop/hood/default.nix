@@ -10,6 +10,9 @@
     ../../../nixos/optional/pkgs/steam
     ../../../nixos/optional/pkgs/spotify
     ../../../nixos/optional/pkgs/python
+
+    # Import projects
+    ../../../projects/fatherhood
   ];
   
   time.timeZone = "Europe/Paris";
