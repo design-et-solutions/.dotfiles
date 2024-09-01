@@ -14,6 +14,7 @@ in {
       stdenv.cc.cc.lib
       glibc.dev
       gcc
+      openssl
     ];
     sessionVariables = {
       PKG_CONFIG_PATH = "${ffmpeg.dev}/lib/pkgconfig:${pkgs.lib.makeLibraryPath [ffmpeg]}:$PKG_CONFIG_PATH";
