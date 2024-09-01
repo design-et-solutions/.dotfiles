@@ -52,6 +52,7 @@
     libnotify      # notification manager
     gcc            # collection of compilers
     unzip
+    tree
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
