@@ -14,7 +14,7 @@ in {
       stdenv.cc.cc.lib
       glibc.dev
       gcc
-      openssl
+      openssl.dev
     ];
     sessionVariables = {
       PKG_CONFIG_PATH = "${ffmpeg.dev}/lib/pkgconfig:${pkgs.lib.makeLibraryPath [ffmpeg]}:$PKG_CONFIG_PATH";
@@ -24,6 +24,9 @@ in {
       C_INCLUDE_PATH = "${pkgs.clang}/resource-root/include:${pkgs.glibc.dev}/include:${pkgs.gcc}/lib/gcc/${pkgs.stdenv.hostPlatform.config}/${pkgs.gcc.version}/include:${pkgs.stdenv.cc.cc.lib}/include:$C_INCLUDE_PATH";
       CPLUS_INCLUDE_PATH = "${pkgs.clang}/resource-root/include:${pkgs.glibc.dev}/include:${pkgs.gcc}/lib/gcc/${pkgs.stdenv.hostPlatform.config}/${pkgs.gcc.version}/include:${pkgs.stdenv.cc.cc.lib}/include/c++:$CPLUS_INCLUDE_PATH";
       BINDGEN_EXTRA_CLANG_ARGS = "-I${pkgs.clang}/resource-root/include -I${pkgs.glibc.dev}/include -I${pkgs.gcc}/lib/gcc/${pkgs.stdenv.hostPlatform.config}/${pkgs.gcc.version}/include";
+      OPENSSL_DIR = "${pkgs.openssl.dev}";
+      OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
+      OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
     };
     etc = {
       "fatherhood/.env".source = ./.env;
