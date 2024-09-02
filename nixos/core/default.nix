@@ -51,6 +51,7 @@
   environment.systemPackages = with pkgs; [
     libnotify   # notification manager
     gcc         # collection of compilers
+    glib
     pkg-config
     clang
     unzip

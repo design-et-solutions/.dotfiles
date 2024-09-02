@@ -9,8 +9,17 @@
       openssl.dev
 
       # tools -> sonify
-      alsaLib
+      gst_all_1.gstreamer
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-good
+      gst_all_1.gst-plugins-bad
+      gst_all_1.gst-plugins-ugly
+      gst_all_1.gst-libav
+      gst_all_1.gst-vaapi
     ];
+    sessionVariables = {
+      PKG_CONFIG_PATH="${pkgs.glib.dev}/lib/pkgconfig:${pkgs.gst_all_1.gstreamer.dev}/lib/pkgconfig:${pkgs.gst_all_1.gst-plugins-base.dev}/lib/pkgconfig:$PKG_CONFIG_PATH";
+    };
     etc = {
       "fatherhood/.env".source = ./.env;
       "fatherhood/cantrolly".source = ./cantrolly;
@@ -18,7 +27,7 @@
       "fatherhood/registry".source = ./registry;
       "fatherhood/visionary".source = ./visionary;
     };
-  };
+  }; 
 
   systemd.services = {
     fatherhood-gateway = {
