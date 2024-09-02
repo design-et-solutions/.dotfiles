@@ -2,9 +2,6 @@
   imports = [
     # Import optional
     ../optional/pkgs/unity
-
-    # Import projects
-    ../../projects/fatherhood
   ];
 
   home = {

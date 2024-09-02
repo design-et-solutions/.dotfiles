@@ -45,11 +45,7 @@
               users.groups = nixpkgs.lib.genAttrs users (user: {});
               users.users = builtins.listToAttrs (map (user: {
                 name = user;
-                value = import (./nixos/users/${user}/users.nix);
-              }) users);
-              systemd = builtins.listToAttrs (map (user: {
-                name = user;
-                value = import (./nixos/users/${user}/systemd.nix);
+                value = import (./nixos/users/${user}.nix);
               }) users);
             }
           ] ++ extraModules;

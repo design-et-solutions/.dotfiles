@@ -11,8 +11,8 @@
     ../../../nixos/optional/pkgs/spotify
     ../../../nixos/optional/pkgs/python
 
-    # # Import projects
-    # ../../../projects/fatherhood
+    # Import projects
+    ../../../projects/fatherhood
   ];
 
   time.timeZone = "Europe/Paris";
