@@ -1,93 +1,19 @@
-{ pkgs, ... }:
-let
-  ffmpeg = pkgs.ffmpeg-full.override {
-    withUnfree = true;  # Include non-free codecs if needed
-  };
-in {
-  # dependency
-  environment = {
-    systemPackages = with pkgs; [
-      ffmpeg-full
-      pkg-config
-      clang
-      llvmPackages.libclang
-      stdenv.cc.cc.lib
-      glibc.dev
-      gcc
+{ pkgs, ... }:{
+  home = {
+    packages = with pkgs; [
+      # gateway
+      ffmpeg
+      # cli
       openssl.dev
+      # tools -> sonify
+      alsaLib
     ];
-    sessionVariables = {
-      PKG_CONFIG_PATH = "${ffmpeg.dev}/lib/pkgconfig:${pkgs.lib.makeLibraryPath [ffmpeg]}:$PKG_CONFIG_PATH";
-      FFMPEG_PKG_CONFIG_PATH = "${ffmpeg.dev}/lib/pkgconfig";
-      LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
-      LD_LIBRARY_PATH = "${ffmpeg.lib}/lib:${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH";
-      C_INCLUDE_PATH = "${pkgs.clang}/resource-root/include:${pkgs.glibc.dev}/include:${pkgs.gcc}/lib/gcc/${pkgs.stdenv.hostPlatform.config}/${pkgs.gcc.version}/include:${pkgs.stdenv.cc.cc.lib}/include:$C_INCLUDE_PATH";
-      CPLUS_INCLUDE_PATH = "${pkgs.clang}/resource-root/include:${pkgs.glibc.dev}/include:${pkgs.gcc}/lib/gcc/${pkgs.stdenv.hostPlatform.config}/${pkgs.gcc.version}/include:${pkgs.stdenv.cc.cc.lib}/include/c++:$CPLUS_INCLUDE_PATH";
-      BINDGEN_EXTRA_CLANG_ARGS = "-I${pkgs.clang}/resource-root/include -I${pkgs.glibc.dev}/include -I${pkgs.gcc}/lib/gcc/${pkgs.stdenv.hostPlatform.config}/${pkgs.gcc.version}/include";
-      OPENSSL_DIR = "${pkgs.openssl.dev}";
-      OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
-      OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
-    };
-    etc = {
-      "fatherhood/.env".source = ./.env;
-      "fatherhood/cantrolly".source = ./cantrolly;
-      "fatherhood/gateway".source = ./gateway;
-      "fatherhood/registry".source = ./registry;
-      "fatherhood/visionary".source = ./visionary;
-    };
-  };
-
-  systemd.services = {
-    fatherhood-gateway = {
-      description = "Service Fatherhood Gateway";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" "fatherhood-registry.service" ];
-      requires = [ "fatherhood-registry.service" ];
-      serviceConfig = {
-        ExecStart = "/etc/fatherhood/gateway";
-        Restart = "always";
-        RestartSec = "30s";
-        EnvironmentFile= "/etc/fatherhood/.env";
-      };
-    };
-    fatherhood-registry = {
-      description = "Service Fatherhood Registry";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
-      serviceConfig = {
-        ExecStart = "/etc/fatherhood/registry";
-        Restart = "always";
-        RestartSec = "30s";
-        EnvironmentFile= "/etc/fatherhood/.env";
-      };
-    };
-    fatherhood-cantrolly = {
-      description = "Service Fatherhood Cantrolly";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" "fatherhood-registry.service" ];
-      requires = [ "fatherhood-registry.service" ];
-      serviceConfig = {
-        ExecStart = "/etc/fatherhood/cantrolly";
-        Restart = "always";
-        RestartSec = "30s";
-        EnvironmentFile= "/etc/fatherhood/.env";
-      };
-    };
-    fatherhood-visionary = {
-      description = "Service Fatherhood Visionary";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" "fatherhood-registry.service" ];
-      requires = [ "fatherhood-registry.service" ];
-      environment = {
-        WAYLAND_DISPLAY = "wayland-1";
-        XDG_RUNTIME_DIR = "/run/user/1001";
-      };
-      serviceConfig = {
-        ExecStart = "/etc/fatherhood/visionary";
-        Restart = "always";
-        RestartSec = "30s";
-        EnvironmentFile= "/etc/fatherhood/.env";
-      };
+    file = {
+      ".local/share/fatherhood/.env".source = ./.env;
+      ".local/share/fatherhood/cantrolly".source = ./cantrolly;
+      ".local/share/fatherhood/gateway".source = ./gateway;
+      ".local/share/fatherhood/registry".source = ./registry;
+      ".local/share/fatherhood/visionary".source = ./visionary;
     };
   };
 }

@@ -49,8 +49,10 @@
 
   # tools and libs
   environment.systemPackages = with pkgs; [
-    libnotify      # notification manager
-    gcc            # collection of compilers
+    libnotify   # notification manager
+    gcc         # collection of compilers
+    pkg-config
+    clang
     unzip
     tree
   ];
