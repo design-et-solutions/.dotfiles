@@ -47,6 +47,7 @@ in {
         ExecStart = "/etc/fatherhood/gateway";
         Restart = "always";
         RestartSec = "30s";
+        EnvironmentFile= "/etc/fatherhood/.env";
       };
     };
     fatherhood-registry = {
@@ -57,6 +58,7 @@ in {
         ExecStart = "/etc/fatherhood/registry";
         Restart = "always";
         RestartSec = "30s";
+        EnvironmentFile= "/etc/fatherhood/.env";
       };
     };
     fatherhood-cantrolly = {
@@ -68,6 +70,7 @@ in {
         ExecStart = "/etc/fatherhood/cantrolly";
         Restart = "always";
         RestartSec = "30s";
+        EnvironmentFile= "/etc/fatherhood/.env";
       };
     };
     fatherhood-visionary = {
@@ -75,10 +78,15 @@ in {
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" "fatherhood-registry.service" ];
       requires = [ "fatherhood-registry.service" ];
+      environment = {
+        WAYLAND_DISPLAY = "wayland-1";
+        XDG_RUNTIME_DIR = "/run/user/1001";
+      };
       serviceConfig = {
         ExecStart = "/etc/fatherhood/visionary";
         Restart = "always";
         RestartSec = "30s";
+        EnvironmentFile= "/etc/fatherhood/.env";
       };
     };
   };
