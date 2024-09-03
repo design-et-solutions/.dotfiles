@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   imports = [
     # Import optional
-    ../optional/pkgs/unity
   ];
 
   home = {
@@ -11,8 +10,6 @@
 
   home.packages = with pkgs; [ 
     can-utils # can cli tools
-    vial      # keyboard soft
-    stremio   # stream app
   ];
 
   programs.git = {

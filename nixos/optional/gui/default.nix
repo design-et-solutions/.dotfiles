@@ -25,6 +25,11 @@
 
   environment.systemPackages = with pkgs; [
     hyprpaper
+    unityhub
+    pavucontrol
+    handbrake
+    vial      # keyboard soft
+    stremio   # stream app
   ];
 
   hardware = {
