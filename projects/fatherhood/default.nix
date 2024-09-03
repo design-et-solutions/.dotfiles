@@ -34,18 +34,6 @@
         EnvironmentFile= "/etc/fatherhood/.env";
       };
     };
-    fatherhood-cantrolly = {
-      description = "Service Fatherhood Cantrolly";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" "fatherhood-registry.service" ];
-      requires = [ "fatherhood-registry.service" ];
-      serviceConfig = {
-        ExecStart = "/etc/fatherhood/cantrolly";
-        Restart = "always";
-        RestartSec = "30s";
-        EnvironmentFile= "/etc/fatherhood/.env";
-      };
-    };
     fatherhood-visionary = {
       description = "Service Fatherhood Visionary";
       wantedBy = [ "multi-user.target" ];
