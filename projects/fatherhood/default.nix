@@ -3,7 +3,6 @@
   environment = {
     etc = {
       "fatherhood/.env".source = ./.env;
-      "fatherhood/cantrolly".source = ./cantrolly;
       "fatherhood/gateway".source = ./gateway;
       "fatherhood/registry".source = ./registry;
       "fatherhood/visionary".source = ./visionary;

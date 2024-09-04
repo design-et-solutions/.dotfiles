@@ -8,6 +8,7 @@
     ../../../nixos/optional/drivers/audio
     ../../../nixos/optional/drivers/bluetooth
     ../../../nixos/optional/network/wifi/home
+    ../../../nixos/optional/network/can
     ../../../nixos/optional/pkgs/spotify
     ../../../nixos/optional/pkgs/python
 
@@ -25,4 +26,6 @@
   environment.systemPackages = with pkgs; [
     steam-run # Steam env like
   ];
+
+  boot.kernelModules = [ "peak_usb" "can" "can_raw" ];
 }
