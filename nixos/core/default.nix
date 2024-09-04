@@ -53,6 +53,7 @@
     gcc         # collection of compilers
     unzip
     tree
+    websocat
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -7,6 +7,7 @@
       eventlet
       colorama
       pynput
+      websockets
     ]))
   ];
 }
