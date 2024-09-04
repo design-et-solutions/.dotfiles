@@ -1,7 +1,5 @@
 { pkgs, lib, config, ... }:
-
 with lib;
-
 let
   cfg = config.networking.can;
 in {
@@ -13,11 +11,6 @@ in {
             type = types.int;
             default = 500000;
             description = "The bitrate for the CAN interface.";
-          };
-          txqueuelen = mkOption {
-            type = types.int;
-            default = 1000;
-            description = "The transmission queue length for the CAN interface.";
           };
         };
       });
@@ -38,7 +31,8 @@ in {
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
-        ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.iproute2}/bin/ip link set ${name} type can bitrate ${toString interface.bitrate} txqueuelen ${toString interface.txqueuelen} && ${pkgs.iproute2}/bin/ip link set ${name} up'";
+        ExecStartPre = "${pkgs.iproute2}/bin/ip link set ${name} type can bitrate ${toString interface.bitrate}";
+        ExecStart = "${pkgs.iproute2}/bin/ip link set ${name} up";
         ExecStop = "${pkgs.iproute2}/bin/ip link set ${name} down";
       };
     }) cfg.interfaces;

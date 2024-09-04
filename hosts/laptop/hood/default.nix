@@ -16,17 +16,6 @@
     ../../../projects/fatherhood
   ];
 
-  networking.can.interfaces = {
-    can0 = {
-      bitrate = 500000;
-      txqueuelen = 1000;
-    };
-    can1 = {
-      bitrate = 500000;
-      txqueuelen = 1000;
-    };
-  };
-
   time.timeZone = "Europe/Paris";
 
   networking= {
@@ -41,4 +30,14 @@
 
   # Peak USB
   boot.kernelModules = [ "peak_usb" ];
+
+  networking.can.interfaces = {
+    can0 = {
+      bitrate = 500000;
+    };
+    can1 = {
+      bitrate = 500000;
+    };
+  };
+
 }
