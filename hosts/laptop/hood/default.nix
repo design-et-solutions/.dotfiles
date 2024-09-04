@@ -11,10 +11,21 @@
     ../../../nixos/optional/network/can
     ../../../nixos/optional/pkgs/spotify
     ../../../nixos/optional/pkgs/python
-
+    ../../../nixos/optional/network/can
     # Import projects
     ../../../projects/fatherhood
   ];
+
+  networking.can.interfaces = {
+    can0 = {
+      bitrate = 500000;
+      txqueuelen = 1000;
+    };
+    can1 = {
+      bitrate = 500000;
+      txqueuelen = 1000;
+    };
+  };
 
   time.timeZone = "Europe/Paris";
 
@@ -24,8 +35,10 @@
   };
 
   environment.systemPackages = with pkgs; [
+    solaar    # Linux manager for many Logitech keyboards, mice, and other devices 
     steam-run # Steam env like
   ];
 
-  boot.kernelModules = [ "peak_usb" "can" "can_raw" ];
+  # Peak USB
+  boot.kernelModules = [ "peak_usb" ];
 }
