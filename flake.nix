@@ -17,7 +17,6 @@
     mkNixosConfiguration = { 
       hostModule, 
       system, 
-      extraModules ? [],
       isGui ? false,
       users
     }: nixpkgs.lib.nixosSystem {
@@ -48,7 +47,7 @@
                 value = import (./nixos/users/${user}.nix);
               }) users);
             }
-          ] ++ extraModules;
+          ] ++ (if isGui then [ ./nixos/optional/gui ] else []);
         };
 
         nixosConfigurations = import ./hosts { inherit mkNixosConfiguration; };
