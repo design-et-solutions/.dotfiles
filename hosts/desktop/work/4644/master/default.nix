@@ -19,17 +19,27 @@
     user = "guest";
   };
 
-  # systemd.services. = {
-  #   description = "Service Unity Front";
+  environment.systemPackages = with pkgs; [
+    nodejs_22
+  ];
+
+  # systemd.services.cantrolly = {
+  #   description = "Service CAN manager";
   #   wantedBy = [ "multi-user.target" ];
   #   after = [ "network.target" ];
-  #   environment = {
-  #     WAYLAND_DISPLAY = "wayland-1";
-  #     XDG_RUNTIME_DIR = "/run/user/1001";
-  #   };
   #   serviceConfig = {
-  #     ExecStartPre = "${pkgs.coreutils}/bin/sleep 30";
-  #     ExecStart = "${pkgs.steam-run}/bin/steam-run /home/guest/build.x86_64";
+  #     ExecStart = "/home/guest/cantrolly";
+  #     Restart = "always";
+  #     RestartSec = "30s";
+  #   };
+  # };
+
+  # systemd.services.web-front = {
+  #   description = "Service Web Front";
+  #   wantedBy = [ "multi-user.target" ];
+  #   after = [ "network.target" ];
+  #   serviceConfig = {
+  #     ExecStart = "npm run /home/guest/build.x86_64";
   #     Restart = "always";
   #     RestartSec = "30s";
   #   };

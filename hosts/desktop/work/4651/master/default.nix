@@ -7,7 +7,7 @@
     ../../../../../nixos/optional/drivers/gpu/intel
 
     # Import projects
-    ../../../projects/fatherhood
+    ../../../../../projects/fatherhood
   ];
 
   time.timeZone = "Europe/Paris";
