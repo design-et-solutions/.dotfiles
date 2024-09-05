@@ -5,6 +5,10 @@
 
     # Import optional
     ../../../../../nixos/optional/drivers/gpu/intel
+    ../../../nixos/optional/network/can
+
+    # Import projects
+    ../../../../../projects/fatherhood
   ];
 
   time.timeZone = "Europe/Paris";
@@ -22,6 +26,15 @@
   environment.systemPackages = with pkgs; [
     nodejs_22
   ];
+
+  # Peak USB
+  boot.kernelModules = [ "peak_usb" ];
+
+  networking.can.interfaces = {
+    can0 = {
+      bitrate = 500000;
+    };
+  };
 
   # systemd.services.cantrolly = {
   #   description = "Service CAN manager";

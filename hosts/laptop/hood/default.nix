@@ -12,6 +12,7 @@
     ../../../nixos/optional/pkgs/spotify
     ../../../nixos/optional/pkgs/python
     ../../../nixos/optional/network/can
+
     # Import projects
     ../../../projects/fatherhood
   ];
@@ -39,5 +40,4 @@
       bitrate = 500000;
     };
   };
-
 }
