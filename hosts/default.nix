@@ -1,10 +1,10 @@
 { mkNixosConfiguration }:
 {
   desktop-hood = mkNixosConfiguration {
+    system = "x86_64-linux";
+    host = ./desktop/hood;
+    users = [ "me" ];
     setup = {
-      system = "x86_64-linux";
-      host = ./desktop/hood;
-      users = [ "me" ];
       gui = {
         enable = true;
         nvidia = true;
@@ -34,16 +34,20 @@
     };
   };
   laptop-hood = mkNixosConfiguration {
+    system = "x86_64-linux";
+    host = ./laptop/hood;
+    users = [ "me" ];
     setup = {
-      system = "x86_64-linux";
-      host = ./laptop/hood;
-      users = [ "me" ];
       gui = {
         enable = true;
         nvidia = true;
+        unity = false;
+        steam = false;
         steam-run = true;
         solaar = true;
+        streamio = false;
         pavucontrol = true;
+        vial = false;
         handbrake = true;
       };
       audio = {

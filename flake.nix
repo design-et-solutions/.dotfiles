@@ -15,13 +15,16 @@
     # NixOS configuration entrypoint
     # Define a function to create a NixOS configuration
     mkNixosConfiguration = { 
+      system,
+      host,
+      users,
       setup,
     }: nixpkgs.lib.nixosSystem {
-          inherit (setup) system;
+          inherit system;
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./nixos/core
-            setup.host
+            host
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -29,7 +32,7 @@
                 useUserPackages = true;
                 backupFileExtension = "backup";
                 extraSpecialArgs = { inherit setup; };
-                users = nixpkgs.lib.genAttrs setup.users (user: {
+                users = nixpkgs.lib.genAttrs users (user: {
                   imports = [
                     ./home/core
                     ./home/users/${user}.nix
@@ -38,11 +41,11 @@
               };
             }
             {
-              users.groups = nixpkgs.lib.genAttrs setup.users (user: {});
+              users.groups = nixpkgs.lib.genAttrs users (user: {});
               users.users = builtins.listToAttrs (map (user: {
                 name = user;
                 value = import (./nixos/users/${user}.nix);
-              }) setup.users);
+              }) users);
             }
           ] 
           # GUI

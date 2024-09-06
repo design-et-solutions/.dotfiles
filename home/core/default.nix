@@ -1,6 +1,6 @@
-{ lib, isGui, ... }: {
+{ lib, setup, ... }: {
   imports = 
-    (lib.optionals isGui [
+    (lib.optionals setup.gui.enable [
       ../optional/gui
     ]) ++
     [
