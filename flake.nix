@@ -15,24 +15,21 @@
     # NixOS configuration entrypoint
     # Define a function to create a NixOS configuration
     mkNixosConfiguration = { 
-      hostModule, 
-      system, 
-      isGui ? false,
-      users
+      setup,
     }: nixpkgs.lib.nixosSystem {
-          inherit system;
+          inherit (setup) system;
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./nixos/core
-            hostModule
+            setup.host
             home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "backup";
-                extraSpecialArgs = { inherit isGui; };
-                users = nixpkgs.lib.genAttrs users (user: {
+                extraSpecialArgs = { inherit setup; };
+                users = nixpkgs.lib.genAttrs setup.users (user: {
                   imports = [
                     ./home/core
                     ./home/users/${user}.nix
@@ -41,13 +38,31 @@
               };
             }
             {
-              users.groups = nixpkgs.lib.genAttrs users (user: {});
+              users.groups = nixpkgs.lib.genAttrs setup.users (user: {});
               users.users = builtins.listToAttrs (map (user: {
                 name = user;
                 value = import (./nixos/users/${user}.nix);
-              }) users);
+              }) setup.users);
             }
-          ] ++ (if isGui then [ ./nixos/optional/gui ] else []);
+          ] 
+          # GUI
+          ++ (if setup.gui.enable then [ ./nixos/optional/gui ] else [])
+          ++ (if setup.gui.nvidia then [ ./nixos/optional/drivers/gpu/nvidia ] else [])
+          ++ (if setup.gui.steam then [ ./nixos/optional/pkgs/steam ] else [])
+          ++ (if setup.gui.steam-run then [ ./nixos/optional/pkgs/steam ] else [])
+          ++ (if setup.gui.solaar then [ ./nixos/optional/pkgs/solaar ] else [])
+          ++ (if setup.gui.unity then [ ./nixos/optional/pkgs/unity ] else [])
+          ++ (if setup.gui.pavucontrol then [ ./nixos/optional/pkgs/vial ] else [])
+          ++ (if setup.gui.streamio then [ ./nixos/optional/pkgs/stremio ] else [])
+          ++ (if setup.gui.handbrake then [ ./nixos/optional/pkgs/handbrake ] else [])
+          # AUDIO
+          ++ (if setup.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
+          ++ (if setup.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
+          # NETWORK
+          ++ (if setup.network.wifi.home then [ ./nixos/optional/network/wifi/home.nix ] else [])
+          ++ (if setup.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
+          ++ (if setup.network.can.enable then [ ./nixos/optional/network/can ] else [])
+          ++ (if setup.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else []);
         };
 
         nixosConfigurations = import ./hosts { inherit mkNixosConfiguration; };

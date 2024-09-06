@@ -1,15 +1,72 @@
 { mkNixosConfiguration }:
 {
   desktop-hood = mkNixosConfiguration {
-    system = "x86_64-linux";
-    hostModule = ./desktop/hood;
-    isGui = true;
-    users = [ "me" ];
+    setup = {
+      system = "x86_64-linux";
+      host = ./desktop/hood;
+      users = [ "me" ];
+      gui = {
+        enable = true;
+        nvidia = true;
+        unity = true;
+        steam = true;
+        steam-run = true;
+        solaar = true;
+        pavucontrol = true;
+        streamio = true;
+        vial = true;
+        handbrake = true;
+      };
+      audio = {
+        enable = true;
+        spotify = true;
+      };
+      network = {
+        wifi = {
+          home =  true;
+        };
+        bluetooth = false;
+        can = {
+          enable = false;
+          peak = false;
+        };
+      };
+    };
   };
   laptop-hood = mkNixosConfiguration {
-    system = "x86_64-linux";
-    hostModule = ./laptop/hood;
-    isGui = true;
-    users = [ "me" ];
+    setup = {
+      system = "x86_64-linux";
+      host = ./laptop/hood;
+      users = [ "me" ];
+      gui = {
+        enable = true;
+        nvidia = true;
+        steam-run = true;
+        solaar = true;
+        pavucontrol = true;
+        handbrake = true;
+      };
+      audio = {
+        enable = true;
+        spotify = true;
+      };
+      python = true;
+      network = {
+        wifi = {
+          home =  true;
+        };
+        bluetooth = true;
+        can = {
+          enable = true;
+          peak = true;
+        };
+      };
+    };
   };
+  # work-4644 = mkNixosConfiguration {
+  #   system = "x86_64-linux";
+  #   hostModule = ./laptop/hood;
+  #   isGui = true;
+  #   users = [ "me" ];
+  # };
 }
