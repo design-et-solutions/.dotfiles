@@ -19,6 +19,7 @@
       host,
       users,
       setup,
+      extraModules
     }: nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs outputs; };
@@ -48,6 +49,7 @@
               }) users);
             }
           ] 
+          ++ extraModules
           # GUI
           ++ (if setup.gui.enable then [ ./nixos/optional/gui ] else [])
           ++ (if setup.gui.nvidia then [ ./nixos/optional/drivers/gpu/nvidia ] else [])
@@ -58,6 +60,7 @@
           ++ (if setup.gui.pavucontrol then [ ./nixos/optional/pkgs/vial ] else [])
           ++ (if setup.gui.streamio then [ ./nixos/optional/pkgs/stremio ] else [])
           ++ (if setup.gui.handbrake then [ ./nixos/optional/pkgs/handbrake ] else [])
+          ++ (if setup.gui.vlc then [ ./nixos/optional/pkgs/vlc ] else [])
           # AUDIO
           ++ (if setup.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
           ++ (if setup.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])

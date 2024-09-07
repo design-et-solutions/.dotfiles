@@ -1,4 +1,4 @@
-{ mkNixosConfiguration }:
+{ mkNixosConfiguration, ... }:
 {
   desktop-hood = mkNixosConfiguration {
     system = "x86_64-linux";
@@ -16,6 +16,7 @@
         streamio = true;
         vial = true;
         handbrake = true;
+        vlc = true;
       };
       audio = {
         enable = true;
@@ -32,6 +33,10 @@
         };
       };
     };
+    extraModules = [
+      "/home/me/Fatherhood/nix/os.nix"
+      "/home/me/work/4644-ZDZ110/soft-high-level/nix/os.nix"
+    ];
   };
   laptop-hood = mkNixosConfiguration {
     system = "x86_64-linux";
@@ -49,6 +54,7 @@
         pavucontrol = true;
         vial = false;
         handbrake = true;
+        vlc = true;
       };
       audio = {
         enable = true;
@@ -66,11 +72,8 @@
         };
       };
     };
+    extraModules = [
+      "/home/me/Fatherhood/nix/os.nix"
+    ];
   };
-  # work-4644 = mkNixosConfiguration {
-  #   system = "x86_64-linux";
-  #   hostModule = ./laptop/hood;
-  #   isGui = true;
-  #   users = [ "me" ];
-  # };
 }
