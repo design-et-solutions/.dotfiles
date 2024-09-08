@@ -10,6 +10,7 @@
   systemd.services = {
     cantrolly = {
       description = "Service Cantrolly";
+      wantedBy = [ "multi-user.target" ];
       after = [ "network.target" "fatherhood-gateway.service" ];
       requires = [ "fatherhood-gateway.service" ];
       serviceConfig = {
