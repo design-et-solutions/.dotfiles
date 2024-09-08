@@ -63,7 +63,8 @@
         PULSE_SERVER = "/run/user/1000/pulse/native";
       };
       serviceConfig = {
-        User = "me";
+        User = "1000";
+        Group = "audio";
         ExecStart = "/etc/fatherhood/sonify";
         Restart = "always";
         RestartSec = "30s";
