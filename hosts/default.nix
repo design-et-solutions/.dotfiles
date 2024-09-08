@@ -1,4 +1,4 @@
-{ mkNixosConfiguration, ... }:
+{ mkNixosConfiguration, lib, ... }:
 {
   desktop-hood = mkNixosConfiguration {
     system = "x86_64-linux";
@@ -33,13 +33,19 @@
       };
     };
     extraModules = [
-      ../projects/fatherhood
+      ({ config, ... }: {
+        imports = [ ../projects/fatherhood ];
+        services.fatherhood = {
+          enable = true;
+          user = "1000";
+        };
+      })
     ];
   };
   desktop-4644 = mkNixosConfiguration {
     system = "x86_64-linux";
     host = ./desktop_4644;
-    users = [ "me" "guest" ];
+    users = [ "guest" ];
     setup = {
       gui = {
         enable = true;
@@ -69,7 +75,13 @@
       };
     };
     extraModules = [
-      ../projects/fatherhood
+      ({ config, ... }: {
+        imports = [ ../projects/fatherhood ];
+        services.fatherhood = {
+          enable = true;
+          user = "1001";
+        };
+      })
       ../projects/cantrolly
       ../projects/sniffy
       "/home/me/4644-ZDZ110/soft-high-level/nix/os.nix"
@@ -109,7 +121,13 @@
       };
     };
     extraModules = [
-      ../projects/fatherhood
+      ({ config, ... }: {
+        imports = [ ../projects/fatherhood ];
+        services.fatherhood = {
+          enable = true;
+          user = "1000";
+        };
+      })
     ];
   };
 }

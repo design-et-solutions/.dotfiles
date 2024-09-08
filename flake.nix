@@ -70,7 +70,10 @@
           ++ (if setup.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else []);
         };
 
-        nixosConfigurations = import ./hosts { inherit mkNixosConfiguration; };
+        nixosConfigurations = import ./hosts {
+          inherit mkNixosConfiguration;
+          inherit (nixpkgs) lib;
+        };
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#machine-name'
