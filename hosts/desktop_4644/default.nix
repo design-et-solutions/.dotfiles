@@ -32,4 +32,6 @@
       };
     };
   };
+
+  boot.kernelModules = [ "snd-usb-audio" ];
 }
