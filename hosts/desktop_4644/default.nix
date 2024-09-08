@@ -33,5 +33,7 @@
     };
   };
 
-  boot.kernelModules = [ "snd-usb-audio" ];
+  hardware.enableAllFirmware = true;
+
+  boot.kernelModules = [ "usbcore" "usb_storage" "snd-usb-audio" ];
 }
