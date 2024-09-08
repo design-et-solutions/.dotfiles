@@ -2,7 +2,7 @@
 {
   desktop-hood = mkNixosConfiguration {
     system = "x86_64-linux";
-    host = ./desktop/hood;
+    host = ./desktop_hood;
     users = [ "me" ];
     setup = {
       gui = {
@@ -37,9 +37,9 @@
       "../projects/fatherhood"
     ];
   };
-  zdz110 = mkNixosConfiguration {
+  desktop-4644 = mkNixosConfiguration {
     system = "x86_64-linux";
-    host = ./../../work/4644-ZDZ110/soft-high-level/nix/host.nix;
+    host = ./desktop_4644;
     users = [ "guest" ];
     setup = {
       gui = {
@@ -76,7 +76,7 @@
   };
   laptop-hood = mkNixosConfiguration {
     system = "x86_64-linux";
-    host = ./laptop/hood;
+    host = ./laptop_hood;
     users = [ "me" ];
     setup = {
       gui = {
