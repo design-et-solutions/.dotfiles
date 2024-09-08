@@ -2,5 +2,5 @@
   group = "me";
   isNormalUser = true;
   home = "/home/me";
-  extraGroups = [ "wheel" "audio" "guest" ];
+  extraGroups = [ "wheel" "audio" "guest" "video" "systemd-journal" ];
 }
