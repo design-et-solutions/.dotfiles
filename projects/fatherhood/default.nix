@@ -60,6 +60,7 @@
       requires = [ "fatherhood-registry.service" ];
       environment = {
         XDG_RUNTIME_DIR = "/run/user/1001";
+        PULSE_SERVER = "/run/user/1001/pulse/native";
       };
       serviceConfig = {
         ExecStart = "/etc/fatherhood/sonify";
