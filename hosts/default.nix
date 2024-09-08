@@ -12,7 +12,6 @@
         steam = true;
         steam-run = true;
         solaar = true;
-        pavucontrol = true;
         streamio = true;
         vial = true;
         handbrake = true;
@@ -49,7 +48,6 @@
         steam = false;
         steam-run = false;
         solaar = false;
-        pavucontrol = false;
         streamio = false;
         vial = false;
         handbrake = false;
@@ -90,7 +88,6 @@
         steam-run = true;
         solaar = true;
         streamio = false;
-        pavucontrol = true;
         vial = false;
         handbrake = true;
         vlc = true;

@@ -57,7 +57,6 @@
           ++ (if setup.gui.steam-run then [ ./nixos/optional/pkgs/steam ] else [])
           ++ (if setup.gui.solaar then [ ./nixos/optional/pkgs/solaar ] else [])
           ++ (if setup.gui.unity then [ ./nixos/optional/pkgs/unity ] else [])
-          ++ (if setup.gui.pavucontrol then [ ./nixos/optional/pkgs/vial ] else [])
           ++ (if setup.gui.streamio then [ ./nixos/optional/pkgs/stremio ] else [])
           ++ (if setup.gui.handbrake then [ ./nixos/optional/pkgs/handbrake ] else [])
           ++ (if setup.gui.vlc then [ ./nixos/optional/pkgs/vlc ] else [])
