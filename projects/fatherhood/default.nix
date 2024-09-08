@@ -41,6 +41,11 @@
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" "fatherhood-registry.service" ];
       requires = [ "fatherhood-registry.service" ];
+      environment = {
+        DISPLAY = ":0";
+        WAYLAND_DISPLAY = "wayland-1";
+        XDG_RUNTIME_DIR = "/run/user/1001";
+      };
       serviceConfig = {
         ExecStart = "/etc/fatherhood/visionary";
         Restart = "always";
@@ -53,6 +58,9 @@
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" "fatherhood-registry.service" ];
       requires = [ "fatherhood-registry.service" ];
+      environment = {
+        XDG_RUNTIME_DIR = "/run/user/1000";
+      };
       serviceConfig = {
         ExecStart = "/etc/fatherhood/sonify";
         Restart = "always";
