@@ -3,7 +3,7 @@
   environment = {
     etc = {
       "cantrolly/.env".source = ./.env;
-      "cantrolly/cantrolly".source = ../../../cantrolly;
+      "cantrolly/bin".source = ../../../cantrolly;
     };
   }; 
 

@@ -74,7 +74,7 @@
       ../projects/fatherhood
       ../projects/cantrolly
       ../projects/sniffy
-      "/home/me/4644-ZDZ110/soft-high-level/nix/os.nix"
+      # "/home/me/4644-ZDZ110/soft-high-level/nix/os.nix"
     ];
   };
   laptop-hood = mkNixosConfiguration {
