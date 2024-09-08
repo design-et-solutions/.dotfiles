@@ -34,7 +34,7 @@
       };
     };
     extraModules = [
-      "../projects/fatherhood"
+      ../projects/fatherhood
     ];
   };
   desktop-4644 = mkNixosConfiguration {
@@ -71,7 +71,10 @@
       };
     };
     extraModules = [
-      "../projects/fatherhood"
+      ../projects/fatherhood
+      ../projects/cantrolly
+      ../projects/sniffy
+      ../../4644-ZDZ110/soft-high-level/nix/os.nix
     ];
   };
   laptop-hood = mkNixosConfiguration {
@@ -109,10 +112,7 @@
       };
     };
     extraModules = [
-      "../projects/fatherhood"
-      "../projects/cantrolly"
-      "../projects/sniffy"
-      "../../4644-ZDZ110/soft-high-level/nix/os.nix"
+      ../projects/fatherhood
     ];
   };
 }
