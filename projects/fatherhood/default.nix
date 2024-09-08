@@ -59,7 +59,7 @@
       after = [ "network.target" "fatherhood-registry.service" ];
       requires = [ "fatherhood-registry.service" ];
       environment = {
-        XDG_RUNTIME_DIR = "/run/user/1000";
+        XDG_RUNTIME_DIR = "/run/user/1001";
       };
       serviceConfig = {
         ExecStart = "/etc/fatherhood/sonify";
