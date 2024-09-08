@@ -112,7 +112,7 @@
       "../projects/fatherhood"
       "../projects/cantrolly"
       "../projects/sniffy"
-      # "/home/me//soft-high-level/nix/os.nix"
+      "../../4644-ZDZ110/soft-high-level/nix/os.nix"
     ];
   };
 }
