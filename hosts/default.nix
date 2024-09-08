@@ -39,7 +39,7 @@
   desktop-4644 = mkNixosConfiguration {
     system = "x86_64-linux";
     host = ./desktop_4644;
-    users = [ "guest" ];
+    users = [ "me" "guest" ];
     setup = {
       gui = {
         enable = true;
