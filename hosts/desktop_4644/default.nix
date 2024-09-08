@@ -19,4 +19,17 @@
       bitrate = 500000;
     };
   };
+
+  services = { 
+    xserver = {
+      displayManager = {
+        gdm = {
+          autoLogin = {
+            enable = true;
+            user = "guest";
+          };
+        };
+      };
+    };
+  };
 }
