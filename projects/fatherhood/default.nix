@@ -41,11 +41,6 @@
       wantedBy = [ "graphical-session.target" ];
       after = [ "graphical-session.target" "fatherhood-registry.service" ];
       requires = [ "fatherhood-registry.service" ];
-      environment = {
-        DISPLAY = ":0";
-        WAYLAND_DISPLAY = "wayland-1";
-        XDG_RUNTIME_DIR = "/run/user/1000";
-      };
       serviceConfig = {
         ExecStart = "/etc/fatherhood/visionary";
         Restart = "always";
