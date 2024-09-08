@@ -38,8 +38,8 @@
     };
     fatherhood-visionary = {
       description = "Service Fatherhood Visionary";
-      wantedBy = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" "fatherhood-registry.service" ];
+      wantedBy = [ "network-session.target" ];
+      after = [ "network-session.target" "fatherhood-registry.service" ];
       requires = [ "fatherhood-registry.service" ];
       serviceConfig = {
         ExecStart = "/etc/fatherhood/visionary";
