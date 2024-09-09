@@ -3,7 +3,7 @@
 
 mkNixosConfiguration {
   system = "x86_64-linux";
-  host = ./desktop_hood;
+  host = ./.;
   users = [ "guest" ];
   setup = {
     gui = {
@@ -36,7 +36,7 @@ mkNixosConfiguration {
   };
   extraModules = [
     ({ config, ... }: {
-      imports = [ ../projects/fatherhood ];
+      imports = [ ../../projects/fatherhood ];
       services.fatherhood = {
         enable = false;
       };
