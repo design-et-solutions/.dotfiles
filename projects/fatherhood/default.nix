@@ -14,19 +14,17 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
-    environment = {
-      etc = {
-        "fatherhood/.env".source = ./.env;
-        "fatherhood/gateway".source = ./gateway;
-        "fatherhood/registry".source = ./registry;
-        "fatherhood/visionary".source = ./visionary;
-        "fatherhood/sonify".source = ./sonify;
-        "fatherhood/cli".source = ./cli;
-      };
-      systemPackages = [ pkgs.lolcat ];
-    }; 
+  environment = { etc = {
+      "fatherhood/.env".source = ./.env;
+      "fatherhood/gateway".source = ./gateway;
+      "fatherhood/registry".source = ./registry;
+      "fatherhood/visionary".source = ./visionary;
+      "fatherhood/sonify".source = ./sonify;
+      "fatherhood/cli".source = ./cli;
+    };
+  }; 
 
+  config = mkIf cfg.enable {
     systemd.services = {
       fatherhood-gateway = {
         description = "Service Fatherhood Gateway";
