@@ -1,13 +1,12 @@
 { pkgs, lib, ... }:{
   # Boot configuration
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-  boot.loader.generic-extlinux-compatible.enable = lib.mkForce true;
-
   boot = {
     loader = {
+      systemd-boot.enable = lib.mkForce false;
+      generic-extlinux-compatible.enable = lib.mkForce true;
       grub.enable = false;
-      generic-extlinux-compatible.enable = true;
-      systemd-boot.enable = false;  # Explicitly disable systemd-boot
+      # generic-extlinux-compatible.enable = true;
+      # systemd-boot.enable = false;  # Explicitly disable systemd-boot
     };
     kernelPackages = pkgs.linuxPackages_rpi4;
     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
