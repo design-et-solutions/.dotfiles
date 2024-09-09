@@ -1,8 +1,7 @@
-{ pkgs, lib, ... }:{
+{ pkgs, lib, nixos-hardware, ... }:{
   imports =
     [
-      # <nixos-hardware/raspberry-pi/4>
-      ./hardware-configuration.nix
+      nixos-hardware.nixosModules.raspberry-pi-4
     ];
   hardware = {
     raspberry-pi."4".apply-overlays-dtmerge.enable = true;
