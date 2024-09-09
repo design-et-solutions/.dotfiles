@@ -1,8 +1,9 @@
 { pkgs, lib, nixos-hardware, ... }:{
   imports =
     [
-      nixos-hardware.nixosModules.raspberry-pi-4
+      # nixos-hardware.nixosModules.raspberry-pi-4
     ];
+
   hardware = {
     raspberry-pi."4".apply-overlays-dtmerge.enable = true;
     deviceTree = {
