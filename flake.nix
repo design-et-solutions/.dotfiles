@@ -71,6 +71,8 @@
           ++ (if setup.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
           ++ (if setup.network.can.enable then [ ./nixos/optional/network/can ] else [])
           ++ (if setup.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else []);
+          # MISC
+          ++ (if setup.misc.podman then [ ./nixos/optional/pkgs/podman ] else []);
         };
 
         nixosConfigurations = import ./hosts {

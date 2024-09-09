@@ -31,6 +31,9 @@ mkNixosConfiguration {
         peak = true;
       };
     };
+    misc = {
+      podman = true;
+    };
   };
   extraModules = [
     ({ config, ... }: {

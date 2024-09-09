@@ -33,6 +33,9 @@ mkNixosConfiguration {
         peak = true;
       };
     };
+    misc = {
+      podman = false;
+    };
   };
   extraModules = [
     nixos-hardware.nixosModules.raspberry-pi-4

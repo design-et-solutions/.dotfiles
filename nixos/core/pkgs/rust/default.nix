@@ -5,4 +5,8 @@
     rust-analyzer
     rustfmt
   ];
+
+  environment.shellInit = ''
+    export PATH=$PATH:$HOME/.cargo/bin
+  '';
 }
