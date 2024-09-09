@@ -1,5 +1,8 @@
 { pkgs, lib, ... }:{
   # Boot configuration
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.loader.generic-extlinux-compatible.enable = lib.mkForce true;
+
   boot = {
     loader = {
       grub.enable = false;
