@@ -54,14 +54,11 @@
       bitrate = 250000;
     };
   };
-
   services = { 
     displayManager = {
-      gdm = {
-        autoLogin = {
-          enable = true;
-          user = "guest";
-        };
+      autoLogin = {
+        enable = true;
+        user = "guest";
       };
     };
   };
