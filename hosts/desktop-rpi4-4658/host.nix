@@ -35,7 +35,9 @@ mkNixosConfiguration {
     };
   };
   extraModules = [
-    nixos-hardware.nixosModules.raspberry-pi-4
+    ({ nixos-hardware, ... }: {
+      imports = [ nixos-hardware.nixosModules.raspberry-pi-4 ];
+    })
     ({ config, ... }: {
       imports = [ ../../projects/fatherhood ];
       services.fatherhood = {
