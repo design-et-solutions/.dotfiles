@@ -33,7 +33,7 @@
     raspberry-pi."4".apply-overlays-dtmerge.enable = true;
     deviceTree = {
       enable = true;
-      filter = "*rpi-4-*.dtb";
+      filter = lib.mkForce "*rpi-4-*.dtb";
     };
   };
   console.enable = false;
