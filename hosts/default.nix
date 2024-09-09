@@ -1,5 +1,5 @@
 # hosts/default.nix
-{ mkNixosConfiguration, lib, ... }:
+{ mkNixosConfiguration, nixos-hardware, lib, ... }:
 
 let
   # Get all subdirectories in the current directory
