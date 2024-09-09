@@ -1,20 +1,36 @@
 { pkgs, lib, ... }:{
+  # Boot configuration
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
-    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
+      systemd-boot.enable = false;  # Explicitly disable systemd-boot
     };
+    kernelPackages = pkgs.linuxPackages_rpi4;
+    initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
+    # Increase if you experience kernel panics
+    kernelParams = ["cma=128M"];
   };
 
+  # File system configuration
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
-      options = [ "noatime" ];
+    };
+    "/boot" = {
+      device = "/dev/disk/by-label/FIRMWARE";
+      fsType = "vfat";
     };
   };
+
+  # Swap configuration (optional, but recommended)
+  swapDevices = [ { device = "/swapfile"; size = 1024; } ];
+
+  # Basic system packages
+  environment.systemPackages = with pkgs; [
+    raspberrypi-eeprom
+  ];
 
   hardware = {
     raspberry-pi."4".apply-overlays-dtmerge.enable = true;
@@ -45,13 +61,11 @@
   };
 
   services = { 
-    xserver = {
-      displayManager = {
-        gdm = {
-          autoLogin = {
-            enable = true;
-            user = "guest";
-          };
+    displayManager = {
+      gdm = {
+        autoLogin = {
+          enable = true;
+          user = "guest";
         };
       };
     };
