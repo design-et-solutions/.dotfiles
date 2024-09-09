@@ -27,11 +27,6 @@
   # Swap configuration (optional, but recommended)
   swapDevices = [ { device = "/swapfile"; size = 1024; } ];
 
-  # Basic system packages
-  environment.systemPackages = with pkgs; [
-    raspberrypi-eeprom
-  ];
-
   hardware = {
     raspberry-pi."4".apply-overlays-dtmerge.enable = true;
     deviceTree = {
