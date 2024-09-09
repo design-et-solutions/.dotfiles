@@ -4,32 +4,33 @@
 mkNixosConfiguration {
   system = "x86_64-linux";
   host = ./desktop_hood;
-  users = [ "me" ];
+  users = [ "guest" ];
   setup = {
     gui = {
       enable = true;
-      nvidia = true;
-      unity = true;
-      steam = true;
-      steam-run = true;
-      solaar = true;
-      streamio = true;
-      vial = true;
-      handbrake = true;
-      vlc = true;
+      nvidia = false;
+      unity = false;
+      steam = false;
+      steam-run = false;
+      solaar = false;
+      streamio = false;
+      vial = false;
+      handbrake = false;
+      vlc = false;
     };
     audio = {
-      enable = true;
-      spotify = true;
+      enable = false;
+      spotify = false;
     };
     network = {
       wifi = {
-        home =  true;
+        home =  false;
+        emergency =  true;
       };
       bluetooth = false;
       can = {
-        enable = false;
-        peak = false;
+        enable = true;
+        peak = true;
       };
     };
   };
@@ -37,9 +38,9 @@ mkNixosConfiguration {
     ({ config, ... }: {
       imports = [ ../projects/fatherhood ];
       services.fatherhood = {
-        enable = true;
-        user = "1000";
+        enable = false;
       };
     })
+    "../../../4658-UGreen/soft-high-level/nix/os.nix"
   ];
 }

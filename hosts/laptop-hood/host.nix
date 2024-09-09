@@ -1,9 +1,8 @@
 # hosts/desktop-hood.nix
 { mkNixosConfiguration, ... }:
-
 mkNixosConfiguration {
   system = "x86_64-linux";
-  host = ./laptop-hood;
+  host = ./.;
   users = [ "me" ];
   setup = {
     gui = {
@@ -35,7 +34,7 @@ mkNixosConfiguration {
   };
   extraModules = [
     ({ config, ... }: {
-      imports = [ ../projects/fatherhood ];
+      imports = [ ../../projects/fatherhood ];
       services.fatherhood = {
         enable = true;
         user = "1000";

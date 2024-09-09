@@ -8,7 +8,7 @@
 
 
   networking= {
-    hostName = "ZDZ110";
+    hostName = "desktop-4644";
   };
 
   networking.can.interfaces = {

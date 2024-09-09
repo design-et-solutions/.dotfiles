@@ -65,6 +65,7 @@
           ++ (if setup.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
           # NETWORK
           ++ (if setup.network.wifi.home then [ ./nixos/optional/network/wifi/home.nix ] else [])
+          ++ (if setup.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
           ++ (if setup.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
           ++ (if setup.network.can.enable then [ ./nixos/optional/network/can ] else [])
           ++ (if setup.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else []);
