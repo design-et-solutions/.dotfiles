@@ -1,10 +1,10 @@
 # hosts/desktop-hood.nix
-{ mkNixosConfiguration, config, ... }:
+{ mkNixosConfiguration, nixos-hardware, ... }:
 
 mkNixosConfiguration {
   system = "x86_64-linux";
   host = ./.;
-  users = [ "me" ];
+  users = [ "root" "me" ];
   setup = {
     gui = {
       enable = true;
@@ -25,11 +25,12 @@ mkNixosConfiguration {
     network = {
       wifi = {
         home =  true;
+        emergency =  false;
       };
       bluetooth = false;
       can = {
-        enable = false;
-        peak = false;
+        enable = true;
+        peak = true;
       };
     };
   };

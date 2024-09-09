@@ -10,5 +10,14 @@
   networking= {
     hostName = "desktop-hood";
   };
+
+  networking.can.interfaces = {
+    can0 = {
+      bitrate = 500000;
+    };
+    can1 = {
+      bitrate = 250000;
+    };
+  };
 }
 
