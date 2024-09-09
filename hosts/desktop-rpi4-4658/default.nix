@@ -1,8 +1,20 @@
 { pkgs, lib, ... }:{
-  imports =
-    [
-      # nixos-hardware.nixosModules.raspberry-pi-4
-    ];
+  boot = {
+    kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
+    };
+  };
+
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      fsType = "ext4";
+      options = [ "noatime" ];
+    };
+  };
 
   hardware = {
     raspberry-pi."4".apply-overlays-dtmerge.enable = true;
@@ -18,6 +30,7 @@
   ];
 
   hardware.raspberry-pi."4".fkms-3d.enable = true;
+  hardware.enableRedistributableFirmware = true;
   
   time.timeZone = "Europe/Paris";
 
