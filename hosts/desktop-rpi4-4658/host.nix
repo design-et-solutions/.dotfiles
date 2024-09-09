@@ -42,6 +42,6 @@ mkNixosConfiguration {
         enable = false;
       };
     })
-    "../../../4658-UGreen/soft-high-level/nix/os.nix"
+    ../../../4658-UGreen/soft-high-level/nix/os.nix
   ];
 }
