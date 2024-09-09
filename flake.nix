@@ -74,8 +74,7 @@
         };
 
         nixosConfigurations = import ./hosts {
-          inherit mkNixosConfiguration;
-          inherit nixos-hardware;
+          inherit mkNixosConfiguration nixos-hardware;
           inherit (nixpkgs) lib;
         };
   in {

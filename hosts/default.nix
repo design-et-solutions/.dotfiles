@@ -10,6 +10,8 @@ let
     import (./. + "/${name}/host.nix") { inherit mkNixosConfiguration; }
   ) hostDirs;
 in
+  hostConfigurations
+
 #   desktop-4644 = mkNixosConfiguration {
 #     system = "x86_64-linux";
 #     host = ./desktop_4644;
