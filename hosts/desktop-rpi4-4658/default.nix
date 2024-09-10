@@ -62,6 +62,7 @@
       bitrate = 250000;
     };
   };
+
   services = { 
     displayManager = {
       autoLogin = {
