@@ -7,12 +7,15 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, ... } @ inputs: 
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix, ... } @ inputs: 
     let inherit (self) outputs;
     # NixOS configuration entrypoint
     # Define a function to create a NixOS configuration
