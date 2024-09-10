@@ -3,7 +3,7 @@
 mkNixosConfiguration {
   system = "x86_64-linux";
   host = ./.;
-  users = [ "root" "me" ];
+  users = [ "me" ];
   setup = {
     gui = {
       enable = true;
