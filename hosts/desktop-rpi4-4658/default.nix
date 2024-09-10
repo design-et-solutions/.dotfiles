@@ -30,8 +30,8 @@
   };
 
   # Swap configuration (optional, but recommended)
-  # swapDevices = [ { device = "/swapfile"; size = 1024; } ];
-  swapDevices = [ { device = "/swapfile"; size = 2048; } ];
+  swapDevices = [ { device = "/swapfile"; size = 1024; } ];
+  # swapDevices = [ { device = "/swapfile"; size = 2048; } ];
 
   hardware = {
     raspberry-pi."4".apply-overlays-dtmerge.enable = true;
@@ -72,5 +72,4 @@
   };
 
   # users.users.root.hash = "nixos";
-  users.users.root.initialHashedPassword = "";
 }

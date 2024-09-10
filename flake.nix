@@ -49,6 +49,10 @@
                 name = user;
                 value = import (./nixos/users/${user}.nix);
               }) users);
+
+              # root
+              users.users.root.password = "root";
+              users.users.root.isSystemUser = true;
             }
           ] 
           ++ extraModules
