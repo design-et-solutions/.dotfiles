@@ -12,8 +12,8 @@
     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
     # Increase if you experience kernel panics
     kernelParams = [
-      # "cma=128M"
-      "cma=256M"
+      "cma=128M"
+      # "cma=256M"
     ];
   };
 
@@ -48,7 +48,7 @@
 
   hardware.raspberry-pi."4".fkms-3d.enable = lib.mkForce false;
   # hardware.raspberry-pi."4".audio.enable = true;
-  hardware.raspberry-pi."4".dwc2.enable = true;
+  # hardware.raspberry-pi."4".dwc2.enable = true;
   hardware.enableRedistributableFirmware = true;
   
   time.timeZone = "Europe/Paris";
@@ -71,5 +71,6 @@
     };
   };
 
-  users.users.root.password = "nixos";
+  # users.users.root.hash = "nixos";
+  users.users.root.initialHashedPassword = "";
 }
