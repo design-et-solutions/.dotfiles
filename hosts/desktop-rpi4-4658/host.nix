@@ -4,7 +4,7 @@
 mkNixosConfiguration {
   system = "aarch64-linux";
   host = ./.;
-  users = [ "guest" ];
+  users = [ "root" "guest" ];
   setup = {
     gui = {
       enable = true;

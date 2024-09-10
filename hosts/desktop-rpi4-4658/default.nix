@@ -70,6 +70,4 @@
       };
     };
   };
-
-  # users.users.root.hash = "nixos";
 }

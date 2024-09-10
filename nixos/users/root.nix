@@ -1,0 +1,4 @@
+{ ... }:{
+  isSystemUser = true;
+  password = "nixos";
+}
