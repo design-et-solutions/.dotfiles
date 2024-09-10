@@ -15,6 +15,9 @@
     can0 = {
       bitrate = 500000;
     };
+    can1 = {
+      bitrate = 500000;
+    };
   };
 
   services = { 
