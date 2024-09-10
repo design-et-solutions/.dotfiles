@@ -34,17 +34,11 @@ mkNixosConfiguration {
       };
     };
     misc = {
-      podman = false;
+      docker = false;
     };
   };
   extraModules = [
     nixos-hardware.nixosModules.raspberry-pi-4
-    ({ config, ... }: {
-      imports = [ ../../projects/fatherhood ];
-      services.fatherhood = {
-        enable = false;
-      };
-    })
     "/home/nixos/4658-UGreen/soft-high-level/nix/os.nix"
   ];
 }
