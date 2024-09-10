@@ -47,7 +47,7 @@
   ];
 
   hardware.raspberry-pi."4".fkms-3d.enable = lib.mkForce false;
-  hardware.raspberry-pi."4".audio.enable = true;
+  # hardware.raspberry-pi."4".audio.enable = true;
   hardware.raspberry-pi."4".dwc2.enable = true;
   hardware.enableRedistributableFirmware = true;
   
@@ -71,5 +71,5 @@
     };
   };
 
-  users.users.root.hashedPassword = "nixos";
+  users.users.root.password = "nixos";
 }
