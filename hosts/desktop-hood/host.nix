@@ -34,7 +34,7 @@ mkNixosConfiguration {
       };
     };
     misc = {
-      podman = true;
+      docker = true;
     };
   };
   extraModules = [

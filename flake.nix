@@ -70,9 +70,9 @@
           ++ (if setup.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
           ++ (if setup.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
           ++ (if setup.network.can.enable then [ ./nixos/optional/network/can ] else [])
-          ++ (if setup.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else []);
+          ++ (if setup.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else [])
           # MISC
-          ++ (if setup.misc.podman then [ ./nixos/optional/pkgs/podman ] else []);
+          ++ (if setup.misc.docker then [ ./nixos/optional/pkgs/docker ] else []);
         };
 
         nixosConfigurations = import ./hosts {
