@@ -8,6 +8,13 @@ mkNixosConfiguration {
   setup = {
     gui = {
       enable = true;
+      extra.hyprland = {
+        classic = ''
+        cursor {
+          no_hardware_cursors
+        }
+        '';
+      };
     };
     network = {
       wifi = {
