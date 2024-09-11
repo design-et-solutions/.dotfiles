@@ -23,6 +23,6 @@ mkNixosConfiguration {
     };
   };
   extraModules = [
-    "/home/guest/4651-ZLegend/soft-high-level/nix/os.nix"
+    "/home/me/4651-ZLegend/soft-high-level/nix/os.nix"
   ];
 }

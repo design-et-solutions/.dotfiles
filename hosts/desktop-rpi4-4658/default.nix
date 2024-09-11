@@ -39,6 +39,8 @@
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
+    glibc
+    glibc.dev
   ];
 
   hardware = {
