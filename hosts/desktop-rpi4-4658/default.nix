@@ -16,6 +16,7 @@
       "cma=256M" 
       "dtoverlay=vc4-fkms-v3d"
     ];
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   # File system configuration
