@@ -7,6 +7,7 @@ mkNixosConfiguration {
   setup = {
     gui = {
       enable = true;
+      full = true;
       nvidia = true;
       unity = false;
       steam = false;
