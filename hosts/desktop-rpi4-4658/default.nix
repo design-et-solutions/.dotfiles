@@ -12,7 +12,8 @@
     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
     # Increase if you experience kernel panics
     kernelParams = [
-      "cma=128M" 
+      # "cma=128M" 
+      "cma=256M" 
       "dtoverlay=vc4-fkms-v3d"
     ];
   };
@@ -30,34 +31,22 @@
   };
 
   # Swap configuration (optional, but recommended)
-  swapDevices = [ { device = "/swapfile"; size = 1024; } ];
-  # swapDevices = [ { device = "/swapfile"; size = 2048; } ];
+  # swapDevices = [ { device = "/swapfile"; size = 1024; } ];
+  swapDevices = [ { device = "/swapfile"; size = 2048; } ];
 
   console.enable = false;
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
+    pkgsStatic.glibc
   ];
 
   hardware = {
     raspberry-pi."4" = {
       fkms-3d.enable = true;
-      # gpu.memoryAllocated = 256;  # Increase GPU memory (in MB)
-      # apply-overlays-dtmerge.enable = true;
-      # deviceTree = {
-      #   enable = true;
-      #   filter = lib.mkForce "*rpi-4-*.dtb";
-      # };
-    };
-    opengl = {
-      enable = true;
-      # driSupport = true;
     };
     enableRedistributableFirmware = true;
   };
-  # hardware.raspberry-pi."4".fkms-3d.enable = lib.mkForce false;
-  # hardware.raspberry-pi."4".audio.enable = true;
-  # hardware.raspberry-pi."4".dwc2.enable = true;
   
   time.timeZone = "Europe/Paris";
 
