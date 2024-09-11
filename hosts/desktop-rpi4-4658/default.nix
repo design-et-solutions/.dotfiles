@@ -40,16 +40,14 @@
   ];
 
   hardware = {
-    raspberry-pi = {
-      "4" = {
-        fkms-3d.enable = true;
-        gpu.memoryAllocated = 256;  # Increase GPU memory (in MB)
-        # apply-overlays-dtmerge.enable = true;
-        # deviceTree = {
-        #   enable = true;
-        #   filter = lib.mkForce "*rpi-4-*.dtb";
-        # };
-      };
+    raspberry-pi."4" = {
+      fkms-3d.enable = true;
+      gpu.memoryAllocated = 256;  # Increase GPU memory (in MB)
+      # apply-overlays-dtmerge.enable = true;
+      # deviceTree = {
+      #   enable = true;
+      #   filter = lib.mkForce "*rpi-4-*.dtb";
+      # };
     };
     opengl = {
       enable = true;
@@ -60,9 +58,6 @@
   # hardware.raspberry-pi."4".fkms-3d.enable = lib.mkForce false;
   # hardware.raspberry-pi."4".audio.enable = true;
   # hardware.raspberry-pi."4".dwc2.enable = true;
-  hardware.
-    raspberry-pi."4".
-  };
   
   time.timeZone = "Europe/Paris";
 
