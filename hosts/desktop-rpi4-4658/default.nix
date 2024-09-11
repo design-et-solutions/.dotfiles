@@ -42,7 +42,7 @@
   hardware = {
     raspberry-pi."4" = {
       fkms-3d.enable = true;
-      gpu.memoryAllocated = 256;  # Increase GPU memory (in MB)
+      # gpu.memoryAllocated = 256;  # Increase GPU memory (in MB)
       # apply-overlays-dtmerge.enable = true;
       # deviceTree = {
       #   enable = true;
