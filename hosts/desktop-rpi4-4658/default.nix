@@ -39,7 +39,7 @@
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
-    glibc
+    # glibc
     # glibc.dev
   ];
 
