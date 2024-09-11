@@ -1,35 +1,40 @@
+
 # hosts/desktop-hood.nix
-{ mkNixosConfiguration, ... }:
+{ mkNixosConfiguration, nixos-hardware, ... }:
+
 mkNixosConfiguration {
   system = "x86_64-linux";
   host = ./.;
-  users = [ "me" ];
+  users = [ "guest" ];
   setup = {
     gui = {
       enable = true;
       nvidia = true;
       unity = false;
       steam = false;
-      steam-run = true;
-      solaar = true;
+      steam-run = false;
+      solaar = false;
       streamio = false;
-      handbrake = true;
-      vlc = true;
+      vial = false;
+      handbrake = false;
+      vlc = false;
     };
     audio = {
       enable = true;
-      spotify = true;
+      spotify = false;
     };
     network = {
       wifi = {
-        home =  true;
+        home =  false;
       };
-      bluetooth = true;
+      bluetooth = false;
       can = {
         enable = true;
         peak = true;
       };
     };
   };
-}
-
+  extraModules = [
+    "/home/me/4644-ZDZ110/soft-high-level/nix/os.nix"
+  ];
+};

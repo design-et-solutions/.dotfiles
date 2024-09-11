@@ -37,13 +37,4 @@ mkNixosConfiguration {
       docker = true;
     };
   };
-  extraModules = [
-    ({ config, ... }: {
-      imports = [ ../../projects/fatherhood ];
-      services.fatherhood = {
-        enable = true;
-        user = "1000";
-      };
-    })
-  ];
 }

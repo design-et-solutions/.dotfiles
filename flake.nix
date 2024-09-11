@@ -17,6 +17,7 @@
 
   outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix, ... } @ inputs: 
     let inherit (self) outputs;
+    defaultSetup = import ./hosts/default-setup.nix;
     # NixOS configuration entrypoint
     # Define a function to create a NixOS configuration
     mkNixosConfiguration = { 
@@ -24,8 +25,12 @@
       host,
       users,
       setup,
-      extraModules
-    }: nixpkgs.lib.nixosSystem {
+      extraModules ? []
+    }: 
+    let
+      mergedSetup = nixpkgs.lib.recursiveUpdate defaultSetup setup;
+    in
+    nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs outputs; };
           modules = [
@@ -56,26 +61,25 @@
           ] 
           ++ extraModules
           # GUI
-          ++ (if setup.gui.enable then [ ./nixos/optional/gui ] else [])
-          ++ (if setup.gui.nvidia then [ ./nixos/optional/drivers/gpu/nvidia ] else [])
-          ++ (if setup.gui.steam then [ ./nixos/optional/pkgs/steam ] else [])
-          ++ (if setup.gui.steam-run then [ ./nixos/optional/pkgs/steam ] else [])
-          ++ (if setup.gui.solaar then [ ./nixos/optional/pkgs/solaar ] else [])
-          ++ (if setup.gui.unity then [ ./nixos/optional/pkgs/unity ] else [])
-          ++ (if setup.gui.streamio then [ ./nixos/optional/pkgs/stremio ] else [])
-          ++ (if setup.gui.handbrake then [ ./nixos/optional/pkgs/handbrake ] else [])
-          ++ (if setup.gui.vlc then [ ./nixos/optional/pkgs/vlc ] else [])
+          ++ (if mergedSetup.gui.enable then [ ./nixos/optional/gui ] else [])
+          ++ (if mergedSetup.gui.nvidia then [ ./nixos/optional/drivers/gpu/nvidia ] else [])
+          ++ (if mergedSetup.gui.steam then [ ./nixos/optional/pkgs/steam ] else [])
+          ++ (if mergedSetup.gui.steam-run then [ ./nixos/optional/pkgs/steam ] else [])
+          ++ (if mergedSetup.gui.solaar then [ ./nixos/optional/pkgs/solaar ] else [])
+          ++ (if mergedSetup.gui.unity then [ ./nixos/optional/pkgs/unity ] else [])
+          ++ (if mergedSetup.gui.streamio then [ ./nixos/optional/pkgs/stremio ] else [])
+          ++ (if mergedSetup.gui.handbrake then [ ./nixos/optional/pkgs/handbrake ] else [])
+          ++ (if mergedSetup.gui.vlc then [ ./nixos/optional/pkgs/vlc ] else [])
           # AUDIO
-          ++ (if setup.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
-          ++ (if setup.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
+          ++ (if mergedSetup.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
+          ++ (if mergedSetup.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
           # NETWORK
-          ++ (if setup.network.wifi.home then [ ./nixos/optional/network/wifi/home.nix ] else [])
-          ++ (if setup.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
-          ++ (if setup.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
-          ++ (if setup.network.can.enable then [ ./nixos/optional/network/can ] else [])
-          ++ (if setup.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else [])
+          ++ (if mergedSetup.network.wifi.home then [ ./nixos/optional/network/wifi/home.nix ] else [])
+          ++ (if mergedSetup.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
+          ++ (if mergedSetup.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
+          ++ (if mergedSetup.network.can.enable then [ ./nixos/optional/network/can ] else [])
+          ++ (if mergedSetup.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else []);
           # MISC
-          ++ (if setup.misc.docker then [ ./nixos/optional/pkgs/docker ] else []);
         };
 
         nixosConfigurations = import ./hosts {
