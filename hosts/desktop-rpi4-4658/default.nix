@@ -25,8 +25,8 @@
       fsType = "ext4";
     };
     "/boot" = {
-      # device = "/dev/disk/by-label/FIRMWARE";
-      device = "/dev/disk/by-label/NIXOS_BOOT";
+      device = "/dev/disk/by-label/FIRMWARE";
+      # device = "/dev/disk/by-label/NIXOS_BOOT";
       fsType = "vfat";
     };
   };
