@@ -1,6 +1,6 @@
-{ lib, setup, ... }: {
+{ lib, mergedSetup, ... }: {
   imports = 
-    (lib.optionals setup.gui.enable [
+    (lib.optionals mergedSetup.gui.enable [
       ../optional/gui
     ]) ++
     [

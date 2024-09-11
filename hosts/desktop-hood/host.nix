@@ -25,16 +25,11 @@ mkNixosConfiguration {
     network = {
       wifi = {
         home =  true;
-        emergency =  false;
       };
-      bluetooth = false;
       can = {
         enable = true;
         peak = true;
       };
-    };
-    misc = {
-      docker = true;
     };
   };
 }

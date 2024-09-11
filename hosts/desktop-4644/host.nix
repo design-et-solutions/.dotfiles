@@ -10,24 +10,14 @@ mkNixosConfiguration {
     gui = {
       enable = true;
       nvidia = true;
-      unity = false;
-      steam = false;
-      steam-run = false;
-      solaar = false;
-      streamio = false;
-      vial = false;
-      handbrake = false;
-      vlc = false;
     };
     audio = {
       enable = true;
-      spotify = false;
     };
     network = {
       wifi = {
         home =  false;
       };
-      bluetooth = false;
       can = {
         enable = true;
         peak = true;

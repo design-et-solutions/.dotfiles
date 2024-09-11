@@ -2,6 +2,7 @@
 {
   gui = {
     enable = false;
+    full = false;
     nvidia = false;
     unity = false;
     steam = false;

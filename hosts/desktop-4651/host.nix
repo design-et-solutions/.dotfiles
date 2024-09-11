@@ -9,32 +9,17 @@ mkNixosConfiguration {
     gui = {
       enable = true;
       nvidia = true;
-      unity = false;
-      steam = false;
       steam-run = true;
-      solaar = false;
-      streamio = false;
-      vial = false;
       handbrake = true;
-      vlc = false;
-    };
-    audio = {
-      enable = false;
-      spotify = false;
     };
     network = {
       wifi = {
-        home =  false;
-        emergency =  false;
+        emergency =  true;
       };
-      bluetooth = false;
       can = {
         enable = true;
         peak = true;
       };
-    };
-    misc = {
-      docker = false;
     };
   };
   extraModules = [
