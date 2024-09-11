@@ -3,6 +3,12 @@
   gui = {
     enable = false;
     full = false;
+    extra = {
+      hyprland = {
+        classic = "";
+        windowrulev2 ="";
+      };
+    };
     nvidia = false;
     unity = false;
     steam = false;

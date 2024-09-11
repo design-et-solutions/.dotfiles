@@ -14,8 +14,12 @@ let
     src = ./hyprland.conf;
     waybar_command = waybarCommand;
     hyprpaper_command = hyprpaperCommand;
-    cursor_inactive_timeout = if mergedSetup.gui.full or false then "5" else "0";
     animations_enable = if mergedSetup.gui.full or false then "true" else "false";
+    custom = mergedSetup.gui.extra.hyprland.classic;
+  };
+  windowruleConf = pkgs.substituteAll {
+    src = ./windowrule.conf;
+    custom = mergedSetup.gui.extra.hyprland.windowrulev2;
   };
 in
 {

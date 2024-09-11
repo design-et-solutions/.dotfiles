@@ -8,6 +8,11 @@ mkNixosConfiguration {
   setup = {
     gui = {
       enable = true;
+      extra.hyprland = {
+        windowrulev2 = ''
+          windowrulev2 = monitor 1,title:^(X1325)$,
+        '';
+      };
       nvidia = true;
       steam-run = true;
       handbrake = true;
