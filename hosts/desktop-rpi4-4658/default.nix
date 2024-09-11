@@ -40,7 +40,7 @@
     libraspberrypi
     raspberrypi-eeprom
     glibc
-    glibc.dev
+    # glibc.dev
   ];
 
   hardware = {
