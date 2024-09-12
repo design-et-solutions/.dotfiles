@@ -1,14 +1,18 @@
-
 # hosts/desktop-hood.nix
 { mkNixosConfiguration, nixos-hardware, ... }:
 
 mkNixosConfiguration {
   system = "x86_64-linux";
   host = ./.;
-  users = [ "guest" ];
+  users = [ "me" "guest" ];
   setup = {
     gui = {
       enable = true;
+      extra.hyprland = ''
+        cursor {
+          inactive_timeout = 3
+        }
+      '';
       nvidia = true;
     };
     audio = {
@@ -16,7 +20,7 @@ mkNixosConfiguration {
     };
     network = {
       wifi = {
-        home =  false;
+        emergency =  true;
       };
       can = {
         enable = true;
@@ -27,4 +31,4 @@ mkNixosConfiguration {
   extraModules = [
     "/home/me/4644-ZDZ110/soft-high-level/nix/os.nix"
   ];
-};
+}
