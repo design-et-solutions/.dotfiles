@@ -23,28 +23,14 @@
     ./hardware-configuration.nix
   ];
 
-  # File system configuration
-  # fileSystems = {
-  #   "/" = {
-  #     device = "/dev/disk/by-label/NIXOS_SD";
-  #     fsType = "ext4";
-  #   };
-  #   "/boot" = {
-  #     device = "/dev/disk/by-label/FIRMWARE";
-  #     # device = "/dev/disk/by-label/NIXOS_BOOT";
-  #     fsType = "vfat";
-  #   };
-  # };
-
   # Swap configuration (optional, but recommended)
-  # swapDevices = [ { device = "/swapfile"; size = 1024; } ];
   swapDevices = [ { device = "/swapfile"; size = 2048; } ];
 
   console.enable = false;
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
-    # glibc
+    glibc
     # glibc.dev
   ];
 
