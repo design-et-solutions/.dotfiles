@@ -30,8 +30,15 @@
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
-    glibc
-    # glibc.dev
+    (pkgs.buildFHSUserEnv {
+      name = "fhs";
+      targetPkgs = pkgs: with pkgs; [
+        glibc
+        zlib
+        stdenv.cc.cc
+      ];
+      runScript = "bash";
+    })
   ];
 
   hardware = {

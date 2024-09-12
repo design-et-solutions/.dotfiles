@@ -15,6 +15,7 @@ mkNixosConfiguration {
         }
         '';
       };
+      steam-run = false;
     };
     network = {
       wifi = {
