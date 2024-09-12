@@ -28,6 +28,6 @@ mkNixosConfiguration {
   };
   extraModules = [
     nixos-hardware.nixosModules.raspberry-pi-4
-    "/home/me/4658-UGreen/soft-high-level/nix/os.nix"
+    "/home/me/4658-UGREEN/soft-high-level/nix/os.nix"
   ];
 }
