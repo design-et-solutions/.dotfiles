@@ -1,15 +1,21 @@
 { pkgs, lib, ... }:{
+  imports = [
+    # Import your generated (nixos-generate-config) hardware configuration
+    ./hardware-configuration.nix
+  ];
+
   # Boot configuration
   boot = {
     loader = {
-      systemd-boot.enable = lib.mkForce false;
-      generic-extlinux-compatible.enable = lib.mkForce true;
+      generic-extlinux-compatible.enable = true;
       grub.enable = false;
+      # systemd-boot.enable = lib.mkForce false;
       # generic-extlinux-compatible.enable = true;
       # systemd-boot.enable = false;  # Explicitly disable systemd-boot
     };
     kernelPackages = pkgs.linuxPackages_rpi4;
     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
+
     # Increase if you experience kernel panics
     kernelParams = [
       # "cma=128M" 
@@ -19,17 +25,17 @@
   };
 
   # File system configuration
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
-      fsType = "ext4";
-    };
-    "/boot" = {
-      device = "/dev/disk/by-label/FIRMWARE";
-      # device = "/dev/disk/by-label/NIXOS_BOOT";
-      fsType = "vfat";
-    };
-  };
+  # fileSystems = {
+  #   "/" = {
+  #     device = "/dev/disk/by-label/NIXOS_SD";
+  #     fsType = "ext4";
+  #   };
+  #   "/boot" = {
+  #     device = "/dev/disk/by-label/FIRMWARE";
+  #     # device = "/dev/disk/by-label/NIXOS_BOOT";
+  #     fsType = "vfat";
+  #   };
+  # };
 
   # Swap configuration (optional, but recommended)
   # swapDevices = [ { device = "/swapfile"; size = 1024; } ];
