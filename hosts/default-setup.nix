@@ -4,10 +4,7 @@
     enable = false;
     full = false;
     extra = {
-      hyprland = {
-        classic = "";
-        windowrulev2 ="";
-      };
+      hyprland = "";
     };
     nvidia = false;
     unity = false;
