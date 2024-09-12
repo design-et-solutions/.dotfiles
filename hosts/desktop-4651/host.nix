@@ -9,13 +9,8 @@ mkNixosConfiguration {
     gui = {
       enable = true;
       extra.hyprland = ''
-        env = LIBVA_DRIVER_NAME,nvidia
-        env = XDG_SESSION_TYPE,wayland
-        env = GBM_BACKEND,nvidia-drm
-        env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-
         cursor {
-          no_hardware_cursors = true
+          inactive_timeout = 3
         }
 
         windowrulev2 = monitor 1,title:^(X1325)$,
