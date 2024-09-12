@@ -12,6 +12,11 @@ mkNixosConfiguration {
         windowrulev2 = ''
           windowrulev2 = monitor 1,title:^(X1325)$,
         '';
+        classic = ''
+          cursor {
+            no_hardware_cursors = true
+          }
+        '';
       };
       nvidia = true;
       steam-run = true;
