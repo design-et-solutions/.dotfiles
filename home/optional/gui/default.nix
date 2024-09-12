@@ -15,8 +15,7 @@ let
     waybar_command = waybarCommand;
     hyprpaper_command = hyprpaperCommand;
     animations_enable = if mergedSetup.gui.full or false then "true" else "false";
-    custom_classic = mergedSetup.gui.extra.hyprland.classic;
-    custom_windowrule = mergedSetup.gui.extra.hyprland.windowrulev2;
+    custom = mergedSetup.gui.extra.hyprland;
   };
 in
 {

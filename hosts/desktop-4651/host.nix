@@ -8,16 +8,18 @@ mkNixosConfiguration {
   setup = {
     gui = {
       enable = true;
-      extra.hyprland = {
-        windowrulev2 = ''
-          windowrulev2 = monitor 1,title:^(X1325)$,
-        '';
-        classic = ''
-          cursor {
-            no_hardware_cursors = true
-          }
-        '';
-      };
+      extra.hyprland = ''
+        env = LIBVA_DRIVER_NAME,nvidia
+        env = XDG_SESSION_TYPE,wayland
+        env = GBM_BACKEND,nvidia-drm
+        env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+
+        cursor {
+          no_hardware_cursors = true
+        }
+
+        windowrulev2 = monitor 1,title:^(X1325)$,
+      '';
       nvidia = true;
       steam-run = true;
       handbrake = true;
