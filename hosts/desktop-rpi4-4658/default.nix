@@ -1,17 +1,11 @@
 { pkgs, lib, ... }:{
-  imports = [
-    # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
-  ];
-
   # Boot configuration
   boot = {
     loader = {
       generic-extlinux-compatible.enable = true;
       grub.enable = false;
-      # systemd-boot.enable = lib.mkForce false;
-      # generic-extlinux-compatible.enable = true;
-      # systemd-boot.enable = false;  # Explicitly disable systemd-boot
+      systemd-boot.enable = lib.mkForce false;
+      efi.canTouchEfiVariables = false;
     };
     kernelPackages = pkgs.linuxPackages_rpi4;
     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
@@ -23,6 +17,11 @@
       "dtoverlay=vc4-fkms-v3d"
     ];
   };
+
+  imports = [
+    # Import your generated (nixos-generate-config) hardware configuration
+    ./hardware-configuration.nix
+  ];
 
   # File system configuration
   # fileSystems = {
