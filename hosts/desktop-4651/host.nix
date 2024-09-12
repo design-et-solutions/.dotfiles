@@ -13,7 +13,7 @@ mkNixosConfiguration {
           inactive_timeout = 3
         }
 
-        windowrulev2 = monitor 1,title:^(X1325)$,
+        windowrulev2 = monitor 0,title:^(X1325)$,
       '';
       nvidia = true;
       steam-run = true;
