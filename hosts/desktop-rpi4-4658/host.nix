@@ -8,13 +8,11 @@ mkNixosConfiguration {
   setup = {
     gui = {
       enable = true;
-      extra.hyprland = {
-        classic = ''
+      extra.hyprland = ''
         cursor {
           no_hardware_cursors
         }
-        '';
-      };
+      '';
       steam-run = false;
     };
     network = {
