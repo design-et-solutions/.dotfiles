@@ -9,8 +9,12 @@ mkNixosConfiguration {
     gui = {
       enable = true;
       extra.hyprland = ''
+        input {
+          follow_mouse = 0
+        }
+
         cursor {
-          no_hardware_cursors
+          inactive_timeout = 3
         }
       '';
       steam-run = false;
