@@ -1,7 +1,7 @@
 #!/bin/sh
 
 WALLPAPER_DIR="$HOME/.wallpapers"
-WALLPAPER="$WALLPAPER_DIR/black.jpg"
+WALLPAPER="$WALLPAPER_DIR/black.png"
 echo "Wallpaper path: $WALLPAPER"
 
 # Check if the wallpaper file exists

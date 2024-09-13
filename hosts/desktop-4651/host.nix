@@ -9,10 +9,6 @@ mkNixosConfiguration {
     gui = {
       enable = true;
       extra.hyprland = ''
-        env = WLR_NO_HARDWARE_CURSORS,0
-
-        exec-once = hyprctl setcursor Bibata-Modern-Ice 24
-
         input {
           follow_mouse = 0
         }
