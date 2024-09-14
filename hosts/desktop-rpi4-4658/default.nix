@@ -25,7 +25,7 @@
   ];
 
   # Swap configuration (optional, but recommended)
-  swapDevices = [ { device = "/swapfile"; size = 4096; } ];
+  swapDevices = [ { device = "/swapfile"; size = 2048; } ];
 
   console.enable = false;
   environment.systemPackages = with pkgs; [
