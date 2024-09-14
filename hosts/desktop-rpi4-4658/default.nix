@@ -64,12 +64,6 @@
         user = "guest";
       };
     };
-    xserver = {
-      enable = true;
-      desktopManager = {
-        gnome.enable = true;
-      };
-    };
   };
 
   services.xserver.displayManager.defaultSession = "gnome-wayland";
