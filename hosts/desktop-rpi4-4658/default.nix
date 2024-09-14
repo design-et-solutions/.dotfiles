@@ -13,8 +13,10 @@
     # Increase if you experience kernel panics
     kernelParams = [
       # "cma=128M" 
-      "cma=256M" 
-      "dtoverlay=vc4-fkms-v3d"
+      # "cma=256M" 
+      "cma=512M"
+      # "dtoverlay=vc4-fkms-v3d"
+      "dtoverlay=vc4-kms-v3d"
     ];
   };
 
@@ -34,7 +36,11 @@
 
   hardware = {
     raspberry-pi."4" = {
-      fkms-3d.enable = true;
+      fkms-3d.enable = false;
+      kms-3d.enable = true;
+      config = {
+        gpu_mem = 256;
+      };
     };
     enableRedistributableFirmware = true;
   };
