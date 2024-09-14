@@ -41,7 +41,7 @@
     };
     deviceTree = {
       enable = true;
-      filter = "*rpi-4-*.dtb";
+      filter = lib.mkForce "*rpi-4-*.dtb";
     };
     enableRedistributableFirmware = true;
   };
