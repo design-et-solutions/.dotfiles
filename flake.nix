@@ -62,7 +62,8 @@
           ++ extraModules
           # GUI
           ++ (if mergedSetup.gui.enable then [ ./nixos/optional/gui ] else [])
-          ++ (if mergedSetup.gui.hyprland then [ ./nixos/optional/hyprland ] else [])
+          ++ (if mergedSetup.gui.hyprland then [ ./nixos/optional/gui/hyprland.nix ] else [])
+          ++ (if mergedSetup.gui.wayfire then [ ./nixos/optional/gui/wayfire.nix ] else [])
           ++ (if mergedSetup.gui.nvidia then [ ./nixos/optional/drivers/gpu/nvidia ] else [])
           ++ (if mergedSetup.gui.steam then [ ./nixos/optional/pkgs/steam ] else [])
           ++ (if mergedSetup.gui.steam-run then [ ./nixos/optional/pkgs/steam ] else [])
