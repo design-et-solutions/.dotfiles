@@ -38,9 +38,9 @@
     raspberry-pi."4" = {
       fkms-3d.enable = false;
       kms-3d.enable = true;
-      config = {
-        gpu_mem = 256;
-      };
+      # config = {
+      #   gpu_mem = 256;
+      # };
     };
     enableRedistributableFirmware = true;
   };
