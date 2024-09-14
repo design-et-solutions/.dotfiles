@@ -14,8 +14,6 @@
     kernelParams = [
       "cma=256M" 
       "dtoverlay=vc4-kms-v3d"
-      "snd_bcm2835.enable_headphones=1"
-      "snd_bcm2835.enable_hdmi=1"
     ];
   };
 
@@ -31,22 +29,6 @@
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
-    mesa
-    mesa-demos
-
-    wayland
-    wlroots
-    xwayland
-
-    ffmpeg-full
-    gst_all_1.gstreamer
-    gst_all_1.gst-plugins-base
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-bad
-    gst_all_1.gst-plugins-ugly
-    gst_all_1.gst-libav
-
-    psmisc
   ];
 
   hardware = {
@@ -59,33 +41,29 @@
     deviceTree = {
       enable = true;
       filter = lib.mkForce "*rpi-4-*.dtb";
-      overlays = [
-        {
-          name = "vc4-kms-v3d";
-          dtsText = ''
-            /dts-v1/;
-            /plugin/;
-            / {
-              compatible = "brcm,bcm2711";
-              fragment@0 {
-                target = <&vc4>;
-                __overlay__ {
-                  status = "okay";
-                };
-              };
-            };
-          '';
-        }
-      ];
-    };
-    opengl = {
-      enable = true;
-      # driSupport = true;
+      # overlays = [
+      #   {
+      #     name = "vc4-kms-v3d";
+      #     dtsText = ''
+      #       /dts-v1/;
+      #       /plugin/;
+      #       / {
+      #         compatible = "brcm,bcm2711";
+      #         fragment@0 {
+      #           target = <&vc4>;
+      #           __overlay__ {
+      #             status = "okay";
+      #           };
+      #         };
+      #       };
+      #     '';
+      #   }
+      # ];
     };
     enableRedistributableFirmware = true;
   };
 
-  qt.platformTheme = "gtk2";
+  # qt.platformTheme = "gtk2";
   
   time.timeZone = "Europe/Paris";
 
@@ -109,15 +87,14 @@
   };
 
   services = { 
-    ratbagd.enable = true;
     dbus.enable = true;
   };
 
-  security.polkit.enable = true;
+  # security.polkit.enable = true;
 
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+  #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  # };
 }
