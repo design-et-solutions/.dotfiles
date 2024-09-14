@@ -59,6 +59,24 @@
     deviceTree = {
       enable = true;
       filter = lib.mkForce "*rpi-4-*.dtb";
+      overlays = [
+        {
+          name = "vc4-kms-v3d";
+          dtsText = ''
+            /dts-v1/;
+            /plugin/;
+            / {
+              compatible = "brcm,bcm2711";
+              fragment@0 {
+                target = <&vc4>;
+                __overlay__ {
+                  status = "okay";
+                };
+              };
+            };
+          '';
+        }
+      ];
     };
     opengl = {
       enable = true;
