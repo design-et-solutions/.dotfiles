@@ -35,30 +35,10 @@
     raspberry-pi."4" = {
       apply-overlays-dtmerge.enable = true;
       fkms-3d.enable = true;
-      # audio.enable = true;
-      # video.disable = false;
     };
     deviceTree = {
       enable = true;
       filter = lib.mkForce "*rpi-4-*.dtb";
-      # overlays = [
-      #   {
-      #     name = "vc4-kms-v3d";
-      #     dtsText = ''
-      #       /dts-v1/;
-      #       /plugin/;
-      #       / {
-      #         compatible = "brcm,bcm2711";
-      #         fragment@0 {
-      #           target = <&vc4>;
-      #           __overlay__ {
-      #             status = "okay";
-      #           };
-      #         };
-      #       };
-      #     '';
-      #   }
-      # ];
     };
     enableRedistributableFirmware = true;
   };
@@ -92,11 +72,8 @@
     };
   };
 
-  # security.polkit.enable = true;
+  services.xserver.displayManager.defaultSession = "gnome-wayland";
+  services.xserver.desktopManager.gnome.enable = true;
 
-  # xdg.portal = {
-  #   enable = true;
-  #   wlr.enable = true;
-  #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  # };
+  qt.platformTheme = "gtk2";
 }
