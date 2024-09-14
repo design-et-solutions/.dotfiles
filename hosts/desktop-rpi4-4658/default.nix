@@ -12,10 +12,10 @@
 
     # Increase if you experience kernel panics
     kernelParams = [
-      # "cma=128M" 
       "cma=256M" 
-      # "dtoverlay=vc4-fkms-v3d"
-      "dtoverlay=vc4-kms-v3d"
+      "dtoverlay=vc4-fkms-v3d"
+      "snd_bcm2835.enable_headphones=1"
+      "snd_bcm2835.enable_hdmi=1"
     ];
   };
 
@@ -47,10 +47,10 @@
     raspberry-pi."4" = {
       apply-overlays-dtmerge.enable = true;
       fkms-3d.enable = true;
-      audio.enable = true;
+      # audio.enable = true;
     };
     deviceTree = {
-      # enable = true;
+      enable = true;
       filter = lib.mkForce "*rpi-4-*.dtb";
     };
     enableRedistributableFirmware = true;
