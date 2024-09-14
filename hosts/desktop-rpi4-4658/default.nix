@@ -40,7 +40,7 @@
       fkms-3d.enable = true;
     };
     deviceTree = {
-      enable = true;
+      # enable = true;
       filter = lib.mkForce "*rpi-4-*.dtb";
     };
     enableRedistributableFirmware = true;
