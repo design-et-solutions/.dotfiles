@@ -66,8 +66,9 @@
     };
   };
 
-  services.xserver.displayManager.defaultSession = "wayfire";
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.defaultSession = "wayfire";
+  # services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager.wayfire.enable = true;
 
   qt.platformTheme = "gtk2";
 }
