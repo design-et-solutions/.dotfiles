@@ -3,7 +3,7 @@
   environment.systemPackages = with pkgs; [
     wayfire
     wf-config
-    wf-shell
+    # wf-shell
     wcm
     wlroots
     wayland
