@@ -60,6 +60,10 @@
       enable = true;
       filter = lib.mkForce "*rpi-4-*.dtb";
     };
+    opengl = {
+      enable = true;
+      driSupport = true;
+    };
     enableRedistributableFirmware = true;
   };
 
@@ -84,5 +88,18 @@
         user = "guest";
       };
     };
+  };
+
+  services = { 
+    ratbagd.enable = true;
+    dbus.enable = true;
+  };
+
+  security.polkit.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 }
