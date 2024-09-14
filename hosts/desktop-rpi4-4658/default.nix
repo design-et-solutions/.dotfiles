@@ -46,9 +46,8 @@
   hardware = {
     raspberry-pi."4" = {
       apply-overlays-dtmerge.enable = true;
-      # fkms-3d.enable = true;
-      fkms-3d.enable = lib.mkForce false;
-      vconsole.enable = true;
+      fkms-3d.enable = true;
+      audio.enable = true;
     };
     deviceTree = {
       # enable = true;
