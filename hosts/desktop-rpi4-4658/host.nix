@@ -8,8 +8,15 @@ mkNixosConfiguration {
   setup = {
     gui = {
       enable = true;
-      hyprland = false;
-      wayfire = true;
+      extra.hyprland = ''
+        input {
+          follow_mouse = 0
+        }
+
+        cursor {
+          inactive_timeout = 3
+        }
+      '';
       steam-run = false;
     };
     network = {
