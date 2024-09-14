@@ -45,6 +45,8 @@
     gst_all_1.gst-plugins-bad
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-libav
+
+    psmisc
   ];
 
   hardware = {
@@ -52,6 +54,7 @@
       apply-overlays-dtmerge.enable = true;
       fkms-3d.enable = true;
       # audio.enable = true;
+      video.disable = false;
     };
     deviceTree = {
       enable = true;
@@ -59,6 +62,8 @@
     };
     enableRedistributableFirmware = true;
   };
+
+  qt.platformTheme = "gtk2";
   
   time.timeZone = "Europe/Paris";
 
