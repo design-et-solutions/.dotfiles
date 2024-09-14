@@ -54,7 +54,7 @@
       apply-overlays-dtmerge.enable = true;
       fkms-3d.enable = true;
       # audio.enable = true;
-      video.disable = false;
+      # video.disable = false;
     };
     deviceTree = {
       enable = true;
