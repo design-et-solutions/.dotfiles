@@ -34,6 +34,10 @@
     mesa
     mesa-demos
 
+    wayland
+    wlroots
+    xwayland
+
     ffmpeg-full
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
