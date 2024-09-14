@@ -16,6 +16,7 @@
       };
     };
     ratbagd.enable = true; # DBus daemon to configure input devices
+    dbus.enable = true;
   };
 
   hardware = {

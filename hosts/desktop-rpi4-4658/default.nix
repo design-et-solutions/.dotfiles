@@ -86,10 +86,6 @@
     };
   };
 
-  services = { 
-    dbus.enable = true;
-  };
-
   # security.polkit.enable = true;
 
   # xdg.portal = {
@@ -97,4 +93,10 @@
   #   wlr.enable = true;
   #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   # };
+  xserver = {
+    enable = true;
+    desktopManager = {
+      gnome.enable = true;
+    };
+  };
 }
