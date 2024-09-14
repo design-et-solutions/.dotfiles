@@ -84,6 +84,12 @@
         user = "guest";
       };
     };
+    xserver = {
+      enable = true;
+      desktopManager = {
+        gnome.enable = true;
+      };
+    };
   };
 
   # security.polkit.enable = true;
@@ -93,10 +99,4 @@
   #   wlr.enable = true;
   #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   # };
-  xserver = {
-    enable = true;
-    desktopManager = {
-      gnome.enable = true;
-    };
-  };
 }
