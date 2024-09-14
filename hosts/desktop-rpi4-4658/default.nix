@@ -8,7 +8,7 @@
       efi.canTouchEfiVariables = false;
     };
     kernelPackages = pkgs.linuxPackages_rpi4;
-    initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
+    initrd.availableKernelModules = [ "usbhid" "usb_storage" "xhci_pci" ];
 
     # Increase if you experience kernel panics
     kernelParams = [
@@ -37,7 +37,7 @@
   hardware = {
     raspberry-pi."4" = {
       fkms-3d.enable = false;
-      kms-3d.enable = true;
+      # kms-3d.enable = true;
       # config = {
       #   gpu_mem = 256;
       # };

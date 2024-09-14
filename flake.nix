@@ -13,9 +13,11 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix, ... } @ inputs: 
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix, hyprland, ... } @ inputs: 
     let inherit (self) outputs;
     defaultSetup = import ./hosts/default-setup.nix;
     # NixOS configuration entrypoint
@@ -34,6 +36,7 @@
           inherit system;
           specialArgs = { inherit inputs outputs; };
           modules = [
+            hyprland.nixosModules.default
             ./nixos/core
             host
             home-manager.nixosModules.home-manager
