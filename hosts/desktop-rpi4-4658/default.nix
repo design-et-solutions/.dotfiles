@@ -13,7 +13,7 @@
     # Increase if you experience kernel panics
     kernelParams = [
       "cma=256M" 
-      "dtoverlay=vc4-kms-v3d"
+      "dtoverlay=vc4-fkms-v3d"
     ];
   };
 
