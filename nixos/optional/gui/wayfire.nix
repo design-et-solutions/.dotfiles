@@ -4,7 +4,7 @@
     wayfire
     wf-config
     # wf-shell
-    wcm
+    wayfirePlugins.wcm
     wlroots
     wayland
     xwayland
