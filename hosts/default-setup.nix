@@ -3,6 +3,7 @@
   gui = {
     enable = false;
     full = false;
+    hyprland = true;
     extra = {
       hyprland = "";
     };

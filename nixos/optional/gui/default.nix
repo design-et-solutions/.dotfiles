@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, mergedSetup, ... }:
 {
   imports = [
     ../pkgs/thunar 
@@ -30,5 +30,12 @@
 
   hardware = {
     graphics.enable = true;
+  };
+
+  environment.sessionVariables = {
+    WAYLAND_DISPLAY = "wayland-0";
+    XDG_SESSION_TYPE = "wayland";
+    QT_QPA_PLATFORM = "wayland";
+    GDK_BACKEND = "wayland";
   };
 }
