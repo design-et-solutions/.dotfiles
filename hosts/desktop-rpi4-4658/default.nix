@@ -13,8 +13,7 @@
     # Increase if you experience kernel panics
     kernelParams = [
       # "cma=128M" 
-      # "cma=256M" 
-      "cma=512M"
+      "cma=256M" 
       # "dtoverlay=vc4-fkms-v3d"
       "dtoverlay=vc4-kms-v3d"
     ];
@@ -26,18 +25,30 @@
   ];
 
   # Swap configuration (optional, but recommended)
-  swapDevices = [ { device = "/swapfile"; size = 2048; } ];
+  swapDevices = [ { device = "/swapfile"; size = 4096; } ];
 
   console.enable = false;
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
+    mesa
+    mesa-demos
+
+    ffmpeg-full
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
   ];
 
   hardware = {
     raspberry-pi."4" = {
       apply-overlays-dtmerge.enable = true;
-      fkms-3d.enable = true;
+      # fkms-3d.enable = true;
+      fkms-3d.enable = lib.mkForce false;
+      vconsole.enable = true;
     };
     deviceTree = {
       # enable = true;
