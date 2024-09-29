@@ -18,6 +18,7 @@ mkNixosConfiguration {
       vial = true;
       handbrake = true;
       vlc = true;
+      discord = true;
     };
     audio = {
       enable = true;

@@ -17,6 +17,7 @@
     vial = false;
     handbrake = false;
     vlc = false;
+    discord = false;
   };
   audio = {
     enable = false;

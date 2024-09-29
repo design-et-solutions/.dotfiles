@@ -72,6 +72,7 @@
           ++ (if mergedSetup.gui.streamio then [ ./nixos/optional/pkgs/stremio ] else [])
           ++ (if mergedSetup.gui.handbrake then [ ./nixos/optional/pkgs/handbrake ] else [])
           ++ (if mergedSetup.gui.vlc then [ ./nixos/optional/pkgs/vlc ] else [])
+          ++ (if mergedSetup.gui.discord then [ ./nixos/optional/pkgs/discord ] else [])
           # AUDIO
           ++ (if mergedSetup.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
           ++ (if mergedSetup.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
