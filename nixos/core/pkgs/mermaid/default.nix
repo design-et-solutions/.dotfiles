@@ -1,10 +1,6 @@
 { pkgs, ... }: 
 {
   environment.systemPackages = with pkgs; [
-    rustc
-    cargo
-    rust-analyzer
-    rustfmt
-    clippy
+    buildInputs = [ pkgs.nodePackages.mermaid-cli ];
   ];
 }
