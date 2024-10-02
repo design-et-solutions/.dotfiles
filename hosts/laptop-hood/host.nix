@@ -17,6 +17,7 @@ mkNixosConfiguration {
       handbrake = true;
       vlc = true;
       gimp = true;
+      via = true;
     };
     audio = {
       enable = true;
