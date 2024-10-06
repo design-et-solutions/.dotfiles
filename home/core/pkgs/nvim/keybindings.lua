@@ -40,3 +40,17 @@ vim.keymap.set('n', '<leader>sv', ':vsplit<CR>', { noremap = true, silent = true
 -- telescope
 vim.api.nvim_set_keymap("n", "<leader>t", ":ToggleTerm direction=float<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("t", "<leader>t", "<C-\\><C-n>:ToggleTerm<CR>", {noremap = true, silent = true})
+
+-- =============================== 
+-- neovim
+-- check type under cursor
+vim.api.nvim_set_keymap('n', '<leader>gt', '<Cmd>call CocAction("doHover")<CR>', {noremap = true, silent = true})
+-- go to definition
+vim.api.nvim_set_keymap('n', '<leader>gc', ':Git comment<CR>', {noremap = true, silent = true, desc = "git comment" })
+-- go to type definition
+vim.api.nvim_set_keymap('n', '<leader>gy', '<Plug>(coc-type-definition)', {silent = true})
+-- go to implementation
+vim.api.nvim_set_keymap('n', '<leader>gi', '<Plug>(coc-implementation)', {silent = true})
+-- go to references
+vim.api.nvim_set_keymap('n', '<leader>gr', '<Plug>(coc-references)', {silent = true})
+-- =============================== 

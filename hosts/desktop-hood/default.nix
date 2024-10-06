@@ -19,5 +19,12 @@
       bitrate = 250000;
     };
   };
+
+  programs.git = {
+    config = {
+      user.userName  = "Yves Cousteau";
+      user.userEmail = "comandant.cousteau1997@gmail.com";
+    };
+  };
 }
 

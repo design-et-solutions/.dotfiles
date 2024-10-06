@@ -109,3 +109,7 @@ require("colorizer").setup{
     filetypes = { "*" },
     buftypes = {},
 }
+
+require("which-key").setup {
+  plugins = {},
+}

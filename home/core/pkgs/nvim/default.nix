@@ -33,6 +33,8 @@
       telescope-nvim
       toggleterm-nvim
       nvim-colorizer-lua
+      fugitive
+      which-key-nvim
       {
         plugin = nvim-treesitter.withPlugins (
           plugins: with plugins; [
