@@ -16,6 +16,8 @@ mkNixosConfiguration {
       streamio = false;
       handbrake = true;
       vlc = true;
+      gimp = true;
+      via = true;
     };
     audio = {
       enable = true;

@@ -1,4 +1,4 @@
-{ ... }:{
+{ pkgs, ... }:{
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -15,7 +15,7 @@
       bitrate = 500000;
     };
     can1 = {
-      bitrate = 250000;
+      bitrate = 500000;
     };
   };
 

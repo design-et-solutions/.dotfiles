@@ -1,5 +1,5 @@
-{ pkgs, lib, ... }:{
+{ pkgs, ... }:{
   environment.systemPackages = with pkgs; [
-    vial
+    gimp
   ];
 }

@@ -14,6 +14,7 @@
     ./pkgs/rust
     ./pkgs/ssh
     ./pkgs/usb
+    ./pkgs/mermaid
   ];
 
   nixpkgs = {

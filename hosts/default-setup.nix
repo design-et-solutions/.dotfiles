@@ -18,6 +18,8 @@
     handbrake = false;
     vlc = false;
     discord = false;
+    gimp = false;
+    via = false;
   };
   audio = {
     enable = false;

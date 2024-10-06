@@ -16,6 +16,10 @@
       ${builtins.readFile ./config.lua}
       ${builtins.readFile ./keybindings.lua}
     '';
+    extraPackages = with pkgs; [
+      luajit
+      imagemagick
+    ];
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig
       vim-nix
@@ -35,6 +39,8 @@
       nvim-colorizer-lua
       fugitive
       which-key-nvim
+      rest-nvim
+      image-nvim
       {
         plugin = nvim-treesitter.withPlugins (
           plugins: with plugins; [
