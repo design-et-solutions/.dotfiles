@@ -11,15 +11,6 @@
     hostName = "desktop-hood";
   };
 
-  networking.can.interfaces = {
-    can0 = {
-      bitrate = 500000;
-    };
-    can1 = {
-      bitrate = 250000;
-    };
-  };
-
   programs.git = {
     config = {
       user.userName  = "Yves Cousteau";
