@@ -47,7 +47,7 @@ vim.api.nvim_set_keymap('n', '<leader>rt', '<Cmd>call CocAction("doHover")<CR>',
 -- go to definition
 vim.api.nvim_set_keymap('n', '<leader>rd', '<Plug>(coc-definition)', { noremap = true, silent = true, desc = "rust goto definition" })
 -- go to type definition
-vim.api.nvim_set_keymap('n', '<leader>rT', '<Plug>(coc-type-definition)', { noremap = true, silent = true, desc = "rust goto type definition" }})
+vim.api.nvim_set_keymap('n', '<leader>rT', '<Plug>(coc-type-definition)', { noremap = true, silent = true, desc = "rust goto type definition" })
 -- go to implementation
 vim.api.nvim_set_keymap('n', '<leader>ri', '<Plug>(coc-implementation)', { noremap = true, silent = true, desc = "rust goto implementation" })
 -- go to references
