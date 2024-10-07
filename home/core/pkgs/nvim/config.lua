@@ -110,6 +110,10 @@ require("colorizer").setup{
     buftypes = {},
 }
 
+require("which-key").setup {
+  plugins = {},
+}
+
 require("image").setup{
   backend = "kitty",
   integrations = {

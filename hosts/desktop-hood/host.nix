@@ -28,10 +28,6 @@ mkNixosConfiguration {
       wifi = {
         home =  true;
       };
-      can = {
-        enable = true;
-        peak = true;
-      };
     };
   };
 }

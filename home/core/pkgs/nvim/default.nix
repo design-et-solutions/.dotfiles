@@ -37,6 +37,8 @@
       telescope-nvim
       toggleterm-nvim
       nvim-colorizer-lua
+      fugitive
+      which-key-nvim
       rest-nvim
       image-nvim
       {
