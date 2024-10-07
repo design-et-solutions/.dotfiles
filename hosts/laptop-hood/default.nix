@@ -20,7 +20,9 @@
   };
 
   programs.git = {
-    userName  = "Yves Cousteau";
-    userEmail = "comandant.cousteau1997@gmail.com";
+    config = {
+      user.userName  = "Yves Cousteau";
+      user.userEmail = "comandant.cousteau1997@gmail.com";
+    };
   };
 }
