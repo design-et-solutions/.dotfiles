@@ -6,7 +6,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "./gruvbox.rasi"
+@import                          "./light-theme.rasi"
 
 /*****----- Main Window -----*****/
 window {

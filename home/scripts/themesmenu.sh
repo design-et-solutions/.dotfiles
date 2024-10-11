@@ -22,9 +22,13 @@ run_rofi() {
 # Execute Command
 run_cmd() {
     if [[ $1 == '--dark' ]]; then
-        # switch to dark theme
+        for file in $HOME/.local/share/rofi/themes/*.rasi; do
+            sed -i 's/@import ".*/@import ".\/dark-theme.rasi"/' "$file"
+        done
     elif [[ $1 == '--light' ]]; then
-        # switch to ligtht theme
+        for file in $HOME/.local/share/rofi/themes/*.rasi; do
+            sed -i 's/@import ".*/@import ".\/light-theme.rasi"/' "$file"
+        done
     fi
 }
 
