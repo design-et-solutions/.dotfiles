@@ -17,17 +17,20 @@
     font = "FiraCode Nerd Font 14";
   };
 
-  home.file.".local/share/rofi/themes/gruvbox.rasi".source = ./gruvbox.rasi;
   home.file.".local/share/rofi/themes/launcher.rasi".source = ./launcher.rasi;
   home.file.".local/share/rofi/themes/powermenu.rasi".source = ./powermenu.rasi;
+  home.file.".local/share/rofi/themes/themesmenu.rasi".source = ./themesmenu.rasi;
+
+  home.file.".local/share/rofi/themes/dark-theme.rasi".source = ./dark-theme.rasi;
+  home.file.".local/share/rofi/themes/light-theme.rasi".source = ./light-theme.rasi;
 
   home.file = {
     ".scripts/themesmenu.sh" = {
-      source = builtins.toString ../../scripts/themesmenu.sh;
+      source = builtins.toString ../../../scripts/themesmenu.sh;
       executable = true;
     };
     ".scripts/powermenu.sh" = {
-      source = builtins.toString ../../scripts/powermenu.sh;
+      source = builtins.toString ../../../scripts/powermenu.sh;
       executable = true;
     };
   };
