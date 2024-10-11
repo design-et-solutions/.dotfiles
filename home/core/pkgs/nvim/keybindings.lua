@@ -41,17 +41,20 @@ vim.api.nvim_set_keymap("n", "<leader>Tt", ":ToggleTerm direction=float<CR>", {n
 vim.api.nvim_set_keymap("t", "<leader>Tt", "<C-\\><C-n>:ToggleTerm<CR>", {noremap = true, silent = true})
 
 -- =============================== 
--- neovim
+-- coc
 -- check type under cursor
-vim.api.nvim_set_keymap('n', '<leader>rt', '<Cmd>call CocAction("doHover")<CR>', { noremap = true, silent = true, desc = "rust check type" })
+vim.api.nvim_set_keymap('n', '<leader>rt', '<Cmd>call CocAction("doHover")<CR>', { noremap = true, silent = true, desc = "check type" })
 -- go to definition
-vim.api.nvim_set_keymap('n', '<leader>rd', '<Plug>(coc-definition)', { noremap = true, silent = true, desc = "rust goto definition" })
+vim.api.nvim_set_keymap('n', '<leader>rd', '<Plug>(coc-definition)', { noremap = true, silent = true, desc = "goto definition" })
 -- go to type definition
-vim.api.nvim_set_keymap('n', '<leader>rT', '<Plug>(coc-type-definition)', { noremap = true, silent = true, desc = "rust goto type definition" })
+vim.api.nvim_set_keymap('n', '<leader>rT', '<Plug>(coc-type-definition)', { noremap = true, silent = true, desc = "goto type definition" })
 -- go to implementation
-vim.api.nvim_set_keymap('n', '<leader>ri', '<Plug>(coc-implementation)', { noremap = true, silent = true, desc = "rust goto implementation" })
+vim.api.nvim_set_keymap('n', '<leader>ri', '<Plug>(coc-implementation)', { noremap = true, silent = true, desc = "goto implementation" })
 -- go to references
-vim.api.nvim_set_keymap('n', '<leader>rr', '<Plug>(coc-references)', { noremap = true, silent = true, desc = "rust goto references" })
+vim.api.nvim_set_keymap('n', '<leader>rr', '<Plug>(coc-references)', { noremap = true, silent = true, desc = "goto references" })
+-- restart
+vim.api.nvim_set_keymap('n', '<leader>rR', '<Cmd>CocRestart<CR>', { noremap = true, silent = true, desc = "restart" })
+
 -- =============================== 
 -- git
 vim.api.nvim_set_keymap('n', '<leader>gc', ':Git comment<CR>', { noremap = true, silent = true, desc = "git comment" })

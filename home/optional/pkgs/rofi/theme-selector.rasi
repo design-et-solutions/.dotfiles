@@ -1,0 +1,28 @@
+configuration {
+    font: "Hack 12";
+    line-margin: 10;
+    lines: 2;
+    width: 300;
+}
+
+@theme "./current-theme.rasi"
+
+window {
+    border-radius: 5px;
+    padding: 20;
+}
+
+listview {
+    spacing: 10;
+}
+
+element {
+    padding: 10;
+    border-radius: 5px;
+}
+
+element selected {
+    background-color: @selected-normal-background;
+    text-color: @selected-normal-foreground;
+}
+
