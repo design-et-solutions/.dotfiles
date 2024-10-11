@@ -23,6 +23,7 @@ run_rofi() {
 run_cmd() {
     if [[ $1 == '--dark' ]]; then
         for file in $HOME/.local/share/rofi/themes/*.rasi; do
+            echo "lsdjflsdk $file"
             sed -i 's|@import\s*"\./light-theme\.rasi"|@import "./dark-theme.rasi"|'  "$file"
         done
     elif [[ $1 == '--light' ]]; then
@@ -34,6 +35,7 @@ run_cmd() {
 
 # Actions
 chosen="$(run_rofi)"
+echo "Chosen option: $chosen"
 case ${chosen} in
     $dark)
 		run_cmd --dark
