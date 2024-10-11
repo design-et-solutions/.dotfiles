@@ -35,10 +35,10 @@ run_cmd() {
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-    $shutdown)
+    $dark)
 		run_cmd --dark
         ;;
-    $reboot)
+    $light)
 		run_cmd --light
         ;;
 esac
