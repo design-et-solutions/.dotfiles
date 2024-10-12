@@ -1,8 +1,8 @@
 * {
-    background:     #282c34FF; // Dark gray/blue background
-    foreground:     #abb2bFFF; // Light gray/blue text
-    selected:       #61afefFF; // Blue for selected items
-    active:         #56b6c2FF; // Cyan for active items
-    urgent:         #e06c75FF; // Red/pink for urgent items
+    background:     #1a1b26FF;
+    foreground:     #24283bFF;
+    selected:       #414868FF;
+    active:         #7dcfffFF;
+    urgent:         #f7768eFF;
 }
 
