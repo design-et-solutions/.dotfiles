@@ -1,8 +1,7 @@
-:root {
-  --fg: #a9b1d6;
-  --bg: #1a1b26;
-  --red: #f7768e;
-  --green: #9ece6a;
-  --purple: #bb9af7;
-  --gray: #414868;
-}
+@define-color fg #a9b1d6;
+@define-color bg #1a1b26;
+@define-color red #f7768e;
+@define-color green #9ece6a;
+@define-color purple #bb9af7;
+@define-color gray #414868;
+
