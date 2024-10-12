@@ -21,8 +21,8 @@ run_rofi() {
 
 # Execute Command
 run_cmd() {
-    files_rofi = $HOME/.local/share/rofi/themes/*.rasi
-    file_waybar = $HOME/.config/waybar/style.css
+    files_rofi=$HOME/.local/share/rofi/themes/*.rasi
+    file_waybar=$HOME/.config/waybar/style.css
     if [[ $1 == '--dark' ]]; then
         for file in $files_rofi; do
             sed -i 's|@import\s*"\./light-theme\.rasi"|@import "./dark-theme.rasi"|'  "$file"
@@ -34,7 +34,7 @@ run_cmd() {
         done
         sed -i 's|@import\s*"\./dark-theme\.css";|@import "./light-theme.css";|' "$file_waybar"
     fi
-    hyprctl reload
+    pkill waybar && hyprctl dispatch exec waybar
 }
 
 # Actions

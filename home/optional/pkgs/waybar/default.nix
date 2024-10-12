@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   programs.waybar = {
     enable = true;
-    style = ./style.css;
     settings = {
       mainBar = {
         layer = "top";
@@ -183,12 +182,16 @@
     };
   };
 
-  home.file = {
-    ".config/waybar/light-theme.css" = {
+  xdg.configFile = {
+    "waybar/style.css" = {
+      source = ./style.css;
+      force = true;
+    };
+    "waybar/light-theme.css" = {
       source = ./light-theme.css;
       force = true;
     };
-    ".config/waybar/dark-theme.css" = {
+    "waybar/dark-theme.css" = {
       source = ./dark-theme.css;
       force = true;
     };
