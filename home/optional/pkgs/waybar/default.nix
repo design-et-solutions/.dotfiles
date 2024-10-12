@@ -182,4 +182,20 @@
       };
     };
   };
+
+  home.config = {
+    "waybar/style.css" = {
+      source = ./style.css;
+      force = true;
+    };
+    "waybar/light-theme.css" = {
+      source = ./light-theme.css;
+      force = true;
+    };
+    "waybar/dark-theme.css" = {
+      source = ./dark-theme.css;
+      force = true;
+    };
+  };
+
 }

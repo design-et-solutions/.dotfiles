@@ -1,13 +1,4 @@
-@define-color fg #3c3836;
-@define-color bg #fbf1c7;
-@define-color blue #458588;
-@define-color red #cc241d;
-@define-color yellow #d7ff21;
-@define-color green #98971a;
-@define-color purple #b16286;
-@define-color aqua #689d6a;
-@define-color gray #7c6f64;
-
+@import url("./light-theme.css");
 /* =============================== */
 /* Universal Styling */
 * {
@@ -21,16 +12,16 @@
 /* Bar Styling */
 #waybar {
     background: transparent;
-    color: @fg;
+    color: var(--fg);
 }
 
 /* =============================== */
 /* Workspaces */
 #workspaces {
     padding-left: 5px;
-    border: 4px solid @fg;
+    border: 4px solid var(--fg);
     border-right: 0;
-    background: @bg;
+    background: var(--bg);
 }
 
 /* =============================== */
@@ -38,9 +29,9 @@
 #window {
     margin-left: -5px;
     padding-right: 10px;
-    border: 4px solid @fg;
+    border: 4px solid var(--fg);
     border-left: 0;
-    background: @bg;
+    background: var(--bg);
 }
 
 /* =============================== */
@@ -49,12 +40,12 @@
 #memory,
 #disk,
 #temperature {
-    color: @gray;
+    color: var(--gray);
     font-weight: normal;
-    border: 4px solid @fg;
+    border: 4px solid var(--fg);
     padding-left: 10px;
     padding-right: 10px;
-    background: @bg;
+    background: var(--bg);
     margin-right: 10px;
 }
 
@@ -65,12 +56,12 @@
 #pulseaudio,
 #battery,
 #backlight {
-    color: @purple;
+    color: var(--purple);
     font-weight: normal;
-    border: 4px solid @fg;
+    border: 4px solid var(--fg);
     padding-left: 10px;
     padding-right: 10px;
-    background: @bg;
+    background: var(--bg);
     margin-right: 10px;
 }
 
@@ -79,22 +70,22 @@
 #clock {
     padding-left: 10px;
     padding-right: 10px;
-    background: @bg;
+    background: var(--bg);
 }
 #clock.date {
     padding-right: 18px;
-    border: 4px solid @fg;
+    border: 4px solid var(--fg);
 }
 #clock.time {
-    border: 4px solid @fg;
+    border: 4px solid var(--fg);
     margin-right: 10px;
 }
 
 /* =============================== */
 /* Spotify */
 #custom-spotify.playing {
-    color: @green;
+    color: var(--green);
 }
 #custom-spotify.paused {
-    color: @red;
+    color: var(--red);
 }

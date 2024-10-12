@@ -34,9 +34,9 @@ mainbox {
     spacing:                     10px;
     margin:                      0px;
     padding:                     20px;
-    border:                      2px solid;
+    border:                      4px solid;
     border-radius:               0px;
-    border-color:                @selected;
+    border-color:                @foreground;
     background-color:            transparent;
     children:                    [ "inputbar", "message", "listview" ];
 }
