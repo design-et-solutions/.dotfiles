@@ -183,3 +183,17 @@ require("image").setup{
     }
   }
 }
+
+function _G.ReloadConfig()
+    for name,_ in pairs(package.loaded) do
+        if name:match('^user') then
+            package.loaded[name] = nil
+        end
+    end
+    dofile(vim.env.HOME/.config/nvim/init.lua)
+    vim.notify("Neovim configuration reloaded!", vim.log.levels.INFO)
+end
+
+vim.api.nvim_create_user_command('ReloadConfig', function()
+  require('reload').reload_config()
+end, {})

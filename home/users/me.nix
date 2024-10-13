@@ -4,9 +4,5 @@
     homeDirectory = "/home/me";
   };
 
-  programs.git = {
-    enable = true;
-    userName = "me";
-    userEmail = "email@domain.com";
-  };
+  programs.home-manager.enable = true;
 }

@@ -38,16 +38,16 @@ in
 
 
   home.file = {
-    ".scripts/wallpapers-randomizer.sh" = {
-      source = builtins.toString ../../scripts/wallpapers-randomizer.sh;
-      executable = true;
-      force = true;
-    };
-    ".scripts/wallpapers-black.sh" = {
-      source = builtins.toString ../../scripts/wallpapers-black.sh;
-      executable = true;
-      force = true;
-    };
+    # ".scripts/wallpapers-randomizer.sh" = {
+    #   source = builtins.toString ../../scripts/wallpapers-randomizer.sh;
+    #   executable = true;
+    #   force = true;
+    # };
+    # ".scripts/wallpapers-black.sh" = {
+    #   source = builtins.toString ../../scripts/wallpapers-black.sh;
+    #   executable = true;
+    #   force = true;
+    # };
     ".wallpapers" = {
       source = ../../wallpapers;
       recursive = true;

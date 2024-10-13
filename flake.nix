@@ -39,9 +39,10 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
+                # verbose = true;
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                backupFileExtension = "backup";
+                backupFileExtension = "bk";
                 extraSpecialArgs = { inherit mergedSetup; };
                 users = nixpkgs.lib.genAttrs users (user: {
                   imports = [

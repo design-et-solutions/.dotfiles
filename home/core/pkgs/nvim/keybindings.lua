@@ -1,4 +1,8 @@
-vim.g.mapleader = " " -- =============================== 
+vim.g.mapleader = " " 
+-- =============================== 
+-- misc
+vim.keymap.set('n', '<leader>x', ':source $HOME/.config/nvim/init.lua<CR>', { noremap = true, silent = true, desc = "Reload Neovim Config" })
+-- =============================== 
 -- focus
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true, desc = "Switch window left" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true, desc = "Switch window right" })
