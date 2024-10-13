@@ -28,6 +28,7 @@
       coc-nvim
       coc-rust-analyzer
       gruvbox-nvim
+      tokyonight-nvim
       nvim-tree-lua
       nvim-web-devicons
       conform-nvim
