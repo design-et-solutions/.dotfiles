@@ -18,9 +18,9 @@
       }
       {
         plugin = tmuxPlugins.gruvbox;
-        extraConfig = ''
-          set -g @tmux-gruvbox 'light'
-        '';
+      }
+      {
+        plugin = tmuxPlugins.tokyo-night-tmux;
       }
     ];
     prefix = "C-f";
