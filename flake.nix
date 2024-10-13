@@ -42,7 +42,7 @@
                 # verbose = true;
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                backupFileExtension = "bk";
+                backupFileExtension = "backup-v";
                 extraSpecialArgs = { inherit mergedSetup; };
                 users = nixpkgs.lib.genAttrs users (user: {
                   imports = [

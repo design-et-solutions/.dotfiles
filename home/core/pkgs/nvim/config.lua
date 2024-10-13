@@ -190,10 +190,6 @@ function _G.ReloadConfig()
             package.loaded[name] = nil
         end
     end
-    dofile(vim.env.HOME/.config/nvim/init.lua)
+    dofile(vim.env.HOME .. "/.config/nvim/init.lua")
     vim.notify("Neovim configuration reloaded!", vim.log.levels.INFO)
 end
-
-vim.api.nvim_create_user_command('ReloadConfig', function()
-  require('reload').reload_config()
-end, {})

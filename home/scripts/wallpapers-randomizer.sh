@@ -1,6 +1,6 @@
 #!/bin/sh
 
-THEME="light-theme/"
+THEME="light-theme"
 WALLPAPER_DIR="$HOME/.wallpapers/$THEME"
 echo "wallpapers path: $WALLPAPER_DIR"
 
