@@ -1,6 +1,7 @@
 #!/bin/sh
 
-WALLPAPER_DIR="$HOME/.wallpapers"
+THEME="light-theme/"
+WALLPAPER_DIR="$HOME/.wallpapers/$THEME"
 echo "wallpapers path: $WALLPAPER_DIR"
 
 # Check if the wallpaper directory exists

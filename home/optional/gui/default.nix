@@ -50,6 +50,17 @@ in
     };
     ".wallpapers" = {
       source = ../../wallpapers;
+      recursive = true;
+      force = true;
+    };
+    ".wallpapers/light-theme" = {
+      source = ../../wallpapers/light-theme;
+      recursive = true;
+      force = true;
+    };
+    ".wallpapers/dark-theme" = {
+      source = ../../wallpapers/dark-theme;
+      recursive = true;
       force = true;
     };
   };
