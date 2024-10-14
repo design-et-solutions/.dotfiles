@@ -38,7 +38,6 @@ require("gruvbox").setup({
 })
 
 require("tokyonight").setup({
-    -- Your preferred style: "storm", "moon", "night", "day"
     style = "night",
 
     -- Enable this to disable setting the background color
@@ -70,21 +69,21 @@ require("tokyonight").setup({
         functions = {},
         variables = {},
         -- Background styles. Can be "dark", "transparent" or "normal"
-        sidebars = "dark",
-        floats = "dark",
+        -- sidebars = "dark",
+        -- floats = "dark",
     },
 
     -- Set dim_inactive to true to dim inactive windows
-    dim_inactive = false,
+    -- dim_inactive = false,
 
     -- Set day_brightness to a float between 0 and 1 (default is 0.3)
-    day_brightness = 0.3,
+    -- day_brightness = 0.3,
 
     -- Enabling this option will hide inactive statuslines and replace them with a thin border instead
-    hide_inactive_statusline = false,
+    -- hide_inactive_statusline = false,
 
     -- Lualine options
-    lualine_bold = false,
+    -- lualine_bold = false,
 })
 
 -- Set colorscheme
@@ -184,6 +183,7 @@ require("image").setup{
   }
 }
 
+-- reloader
 function _G.ReloadConfig()
     for name,_ in pairs(package.loaded) do
         if name:match('^user') then

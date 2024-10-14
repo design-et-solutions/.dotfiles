@@ -37,7 +37,7 @@ run_cmd() {
         # kitty
         sed -i 's|include\s*\./light-theme\.conf|include ./dark-theme.conf|' "$file_kitty"
         # tmux
-        sed -i 's|^#\(run-shell.*\/share\/tmux-plugins\/tokyo-night-tmux.*\.tmux\)|\1|' "$file_tmux"
+        sed -i 's|^#\(run-shell.*\/share\/tmux-plugins\/tmux-tokyo-night.*\.tmux\)|\1|' "$file_tmux"
         sed -i 's|^\(run-shell.*\/share\/tmux-plugins\/gruvbox.*\.tmux\)|#&|' "$file_tmux"
         # nvim
         sed -i 's|vim\.cmd("colorscheme gruvbox")|vim.cmd("colorscheme tokyonight-night")|' "$file_nvim"
@@ -54,7 +54,7 @@ run_cmd() {
         sed -i 's|include\s*\./dark-theme\.conf|include ./light-theme.conf|' "$file_kitty"
         # tmux
         sed -i 's|^#\(run-shell.*\/share\/tmux-plugins\/gruvbox.*\.tmux\)|\1|' "$file_tmux"
-        sed -i 's|^\(run-shell.*\/share\/tmux-plugins\/tokyo-night-tmux.*\.tmux\)|#&|' "$file_tmux"
+        sed -i 's|^\(run-shell.*\/share\/tmux-plugins\/tmux-tokyo-night.*\.tmux\)|#&|' "$file_tmux"
         # nvim
         sed -i 's|vim\.cmd("colorscheme tokyonight-night")|vim.cmd("colorscheme gruvbox")|' "$file_nvim"
         # wallpapers
