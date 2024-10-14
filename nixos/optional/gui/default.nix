@@ -23,8 +23,8 @@
     graphics.enable = true;
   };
 
-  # screenshot
   environment.systemPackages = with pkgs; [
+    # screenshot
     swappy
     grim
     slurp

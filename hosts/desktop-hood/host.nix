@@ -15,10 +15,11 @@ mkNixosConfiguration {
       steam-run = true;
       solaar = true;
       streamio = true;
-      vial = true;
+      via = true;
       handbrake = true;
       vlc = true;
       discord = true;
+      obs = true
     };
     audio = {
       enable = true;

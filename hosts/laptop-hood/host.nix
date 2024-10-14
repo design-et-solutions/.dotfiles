@@ -18,6 +18,8 @@ mkNixosConfiguration {
       vlc = true;
       gimp = true;
       via = true;
+      discord = true;
+      obs = true;
     };
     audio = {
       enable = true;

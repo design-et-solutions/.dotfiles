@@ -14,12 +14,12 @@
     steam-run = false;
     solaar = false;
     streamio = false;
-    vial = false;
     handbrake = false;
     vlc = false;
     discord = false;
     gimp = false;
     via = false;
+    obs = false;
   };
   audio = {
     enable = false;
