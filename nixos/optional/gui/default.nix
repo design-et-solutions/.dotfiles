@@ -3,6 +3,7 @@
   imports = [
     ../pkgs/thunar 
     ../pkgs/firefox
+    ../pkgs/shotman
   ];
 
   services = { 
