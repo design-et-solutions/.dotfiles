@@ -34,6 +34,15 @@ in
     "hypr/windowrule.conf".source = ./windowrule.conf;
     "hypr/keybindings.conf".source = ./keybindings.conf;
     "hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+    "swappy/config".text = ''
+      [Default]
+      save_dir=~/Screenshots
+      save_filename_format=screenshot-%Y%m%d-%H%M%S.png
+      show_panel=false
+      line_size=5
+      text_size=20
+      text_font=sans-serif
+    '';
   };
 
 
@@ -52,5 +61,12 @@ in
       source = ../../wallpapers;
       force = true;
     };
+  };
+
+  # screenshot
+  home.activation = {
+    createDirectories = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      mkdir -p ~/Screenshots
+    '';
   };
 }

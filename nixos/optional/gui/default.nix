@@ -3,7 +3,6 @@
   imports = [
     ../pkgs/thunar 
     ../pkgs/firefox
-    ../pkgs/shotman
   ];
 
   services = { 
@@ -23,4 +22,12 @@
   hardware = {
     graphics.enable = true;
   };
+
+  # screenshot
+  environment.systemPackages = with pkgs; [
+    swappy
+    grim
+    slurp
+    wl-clipboard
+  ]; 
 }
