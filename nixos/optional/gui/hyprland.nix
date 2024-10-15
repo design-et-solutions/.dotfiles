@@ -6,6 +6,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    hyprcursor
     hyprpaper
     wlr-randr
   ];
