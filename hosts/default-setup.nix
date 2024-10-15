@@ -19,7 +19,6 @@
     discord = false;
     gimp = false;
     via = false;
-    obs = false;
   };
   audio = {
     enable = false;

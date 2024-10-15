@@ -19,7 +19,6 @@ mkNixosConfiguration {
       handbrake = true;
       vlc = true;
       discord = true;
-      obs = true;
     };
     audio = {
       enable = true;

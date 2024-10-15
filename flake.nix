@@ -76,7 +76,6 @@
           ++ (if mergedSetup.gui.discord then [ ./nixos/optional/pkgs/discord ] else [])
           ++ (if mergedSetup.gui.gimp then [ ./nixos/optional/pkgs/gimp ] else [])
           ++ (if mergedSetup.gui.via then [ ./nixos/optional/pkgs/via ] else [])
-          ++ (if mergedSetup.gui.obs then [ ./nixos/optional/pkgs/obs ] else [])
           # AUDIO
           ++ (if mergedSetup.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
           ++ (if mergedSetup.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
