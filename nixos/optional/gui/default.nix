@@ -24,6 +24,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    brightnessctl
+
     # screenshot
     swappy
     grim
