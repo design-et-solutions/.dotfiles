@@ -34,6 +34,7 @@ in
     "hypr/windowrule.conf".source = ./windowrule.conf;
     "hypr/keybindings.conf".source = ./keybindings.conf;
     "hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+    "hypr/hyprlock.conf".source = ./hyprlock.conf;
     "swappy/config".text = ''
       [Default]
       save_dir=~/Screenshots
