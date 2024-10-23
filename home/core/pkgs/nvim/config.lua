@@ -143,6 +143,10 @@ require("toggleterm").setup{
     float_opts = {
         winblend = 0,
     },
+    float_opts = {
+        winblend = 0,
+        border = 'single',  -- You can use 'single', 'double', 'rounded', 'solid', 'shadow', etc.
+    },
     highlights = {
         FloatBorder = {
           guifg = vim.api.nvim_get_hl_by_name("Normal", true).background,
@@ -153,6 +157,8 @@ require("toggleterm").setup{
         },
     },
 }
+
+require("telescope").load_extension("rest")
 
 require("colorizer").setup{
     filetypes = { "*" },

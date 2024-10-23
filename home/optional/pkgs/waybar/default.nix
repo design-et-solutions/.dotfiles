@@ -104,13 +104,13 @@
           interval = 2;
         };
         "pulseaudio" = {
-          format = "{icon}  {volume}%";
-          format-bluetooth = "{icon}  {volume}%";
+          format = "{icon} {volume}%";
+          format-bluetooth = "{icon}  {volume}% {desc}";
           format-muted = "";
           format-icons = {
             headphones = "";
-            handsfree = "";
-            headset = "";
+            handsfree = "";
+            headset = "";
             phone = "";
             phone-muted = "";
             portable = "";
