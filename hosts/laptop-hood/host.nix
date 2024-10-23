@@ -19,6 +19,7 @@ mkNixosConfiguration {
       gimp = true;
       via = true;
       discord = true;
+      slack = true;
     };
     audio = {
       enable = true;

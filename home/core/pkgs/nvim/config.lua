@@ -158,7 +158,7 @@ require("toggleterm").setup{
     },
 }
 
-require("telescope").load_extension("rest")
+require('rest-nvim').setup({})
 
 require("colorizer").setup{
     filetypes = { "*" },
