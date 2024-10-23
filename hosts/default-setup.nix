@@ -19,6 +19,7 @@
     discord = false;
     gimp = false;
     via = false;
+    slack = false;
   };
   audio = {
     enable = false;

@@ -19,6 +19,7 @@ mkNixosConfiguration {
       handbrake = true;
       vlc = true;
       discord = true;
+      slack = true;
     };
     audio = {
       enable = true;
