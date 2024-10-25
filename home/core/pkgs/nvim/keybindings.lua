@@ -67,3 +67,10 @@ vim.api.nvim_set_keymap('n', '<leader>gp', ':Git pull<CR>', { noremap = true, si
 vim.api.nvim_set_keymap('n', '<leader>gm', ':Git merge<CR>', { noremap = true, silent = true, desc = "git merge" })
 vim.api.nvim_set_keymap('n', '<leader>ga', ':Git add<CR>', { noremap = true, silent = true, desc = "git add" })
 
+-- =============================== 
+-- rest
+vim.api.nvim_set_keymap('n', '<leader>e', ':Rest run<CR>', { noremap = true, silent = true, desc = "rest run" })
+
+-- =============================== 
+-- db
+-- vim.api.nvim_set_keymap('n', '<leader>a', ':<CR>', { noremap = true, silent = true, desc = "rest run" })

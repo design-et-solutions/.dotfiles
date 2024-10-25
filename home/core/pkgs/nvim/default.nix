@@ -19,6 +19,7 @@
     extraPackages = with pkgs; [
       luajit
       imagemagick
+      postgresql
     ];
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig
@@ -42,6 +43,8 @@
       which-key-nvim
       rest-nvim
       image-nvim
+      vim-dadbod
+      vim-dadbod-ui
       {
         plugin = nvim-treesitter.withPlugins (
           plugins: with plugins; [
