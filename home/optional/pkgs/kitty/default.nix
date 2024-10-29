@@ -14,7 +14,7 @@
       size = 12.0;
     };
     settings = {
-      shell = "tmux";
+      shell = "${toString ./../../../scripts/tmux_start.sh}";;
       window_padding_width = 4;
     };
     keybindings = {
@@ -33,5 +33,11 @@
       source = ./dark-theme.conf;
       force = true;
     };
+  };
+
+  home.file.".scripts/wallpapers-randomizer.sh" = {
+    source = builtins.toString ../../../scripts/tmux_start.sh;
+    executable = true;
+    force = true;
   };
 }
