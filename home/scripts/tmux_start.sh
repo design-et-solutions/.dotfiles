@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if tmux has-session 2>/dev/null; then
-  exec tmux attach-session
+  tmux attach-session
 else
-  exec tmux new-session
+  tmux new-session
 fi

@@ -14,7 +14,7 @@
       size = 12.0;
     };
     settings = {
-      shell = "${toString ./../../../scripts/tmux_start.sh}";;
+      shell = "${toString ./../../../scripts/tmux_start.sh}";
       window_padding_width = 4;
     };
     keybindings = {
@@ -35,7 +35,7 @@
     };
   };
 
-  home.file.".scripts/wallpapers-randomizer.sh" = {
+  home.file.".scripts/tmux_start.sh" = {
     source = builtins.toString ../../../scripts/tmux_start.sh;
     executable = true;
     force = true;
