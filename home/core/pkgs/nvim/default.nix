@@ -45,6 +45,7 @@
       image-nvim
       vim-dadbod
       vim-dadbod-ui
+      markdown-preview-nvim
       {
         plugin = nvim-treesitter.withPlugins (
           plugins: with plugins; [
