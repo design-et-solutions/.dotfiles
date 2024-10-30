@@ -34,6 +34,7 @@ pkgs.mkShell {
 
         echo ""
         echo "-----FUNCTIONS------"
+        echo 0 . init_wallet
         echo 1 . network_info
         echo 2 . new_address
         echo 3 . generate_blocks
@@ -48,6 +49,14 @@ pkgs.mkShell {
         echo 12. external_utxos recipient_address
         echo "--------------------"
 
+        init_wallet() {
+            echo "initialize wallet"
+            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" createwallet "main"
+            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" createwallet "watchonly" true true
+            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" loadwallet "main"
+            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" loadwallet "watchonly"
+        }
+
         network_info() {
             echo "ensure your Bitcoin node is running and accessible"
             bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" getblockchaininfo
@@ -59,28 +68,40 @@ pkgs.mkShell {
         }
         
         generate_blocks() {
-            echo "generate 101 blocks and reward coins to a new address for $WALLET"
+            if [ -z "$1" ]; then
+                echo "Error: No wallet provided."
+                return 1
+            fi
+            echo "generate 101 blocks and reward coins to a new address for $1"
             echo "the reason for generating 101 blocks is to bypass the 100-block maturity period so you can immediately spend the coins."
-            address=$(bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" -rpcwallet=$WALLET getnewaddress)
-            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" -rpcwallet=$WALLET generatetoaddress 101 "$address"
+            address=$(bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" -rpcwallet=$1 getnewaddress)
+            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" -rpcwallet=$1 generatetoaddress 101 "$address"
         }
 
         wallet_balance() {
-            echo "see the balance of your wallet $WALLET"
-            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" -rpcwallet=$WALLET getbalance
+            if [ -z "$1" ]; then
+                echo "Error: No wallet provided."
+                return 1
+            fi
+            echo "see the balance of your wallet $1"
+            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" -rpcwallet=$1 getbalance
         }
 
         send_coins() {
             if [ -z "$1" ]; then
-                echo "Error: No address provided."
+                echo "Error: No wallet provided."
                 return 1
             fi
             if [ -z "$2" ]; then
+                echo "Error: No address provided."
+                return 1
+            fi
+            if [ -z "$3" ]; then
                 echo "Error: No amount provided."
                 return 1
             fi
-            echo "send coins ($2) to $1"
-            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" -rpcwallet="$WALLET" sendtoaddress "$1" $2
+            echo "send coins ($3) to $2"
+            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" -rpcwallet="$1" sendtoaddress "$2" $3
         }
 
         utxos() {
@@ -99,22 +120,20 @@ pkgs.mkShell {
 
         create_wallet() {
             if [ -z "$1" ]; then
-                echo "No wallet name provided."
-            else 
-                export WALLET=$1
+                echo "Error: No wallet provided."
+                return 1
             fi
-            echo "create a new wallet $WALLET"
-            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" createwallet "$WALLET"
+            echo "create a new wallet $1"
+            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" createwallet "$1"
         }
 
         create_wallet_watch_only() {
             if [ -z "$1" ]; then
-                echo "No wallet name provided."
-            else 
-                export WALLET=$1
+                echo "Error: No wallet provided."
+                return 1
             fi
-            echo "create a new wallet $WALLET"
-            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" createwallet "$WALLET" true true
+            echo "create a new wallet $1"
+            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" createwallet "$1" true true
         }
 
         all_wallets() {
@@ -124,28 +143,31 @@ pkgs.mkShell {
 
         load_wallet() {
             if [ -z "$1" ]; then
-                echo "No wallet name provided."
-            else
-                export WALLET=$1
+                echo "Error: No wallet provided."
+                return 1
             fi
-            echo "loading wallet $WALLET"
-            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" loadwallet "$WALLET"
+            echo "loading wallet $1"
+            bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" loadwallet "$1"
         }
 
         external_utxos() {
+            if [ -z "$2" ]; then
+                echo "Error: No wallet provided."
+                return 1
+            fi
             if [ -z "$1" ]; then
                 echo "Error: No address provided."
                 return 1
             fi
-            DESCRIPTOR_INFO=$(bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" getdescriptorinfo "addr($1)")
+            DESCRIPTOR_INFO=$(bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" getdescriptorinfo "addr($2)")
             CHECKSUM=$(echo "$DESCRIPTOR_INFO" | jq -r '.checksum')
-            DESCRIPTOR="addr($1)#$CHECKSUM"
+            DESCRIPTOR="addr($2)#$CHECKSUM"
 
-            IMPORT_RESULT=$(bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" -rpcwallet="$WALLET" importdescriptors \
+            IMPORT_RESULT=$(bitcoin-cli -regtest -datadir="$BITCOIN_DATA_DIR" -rpcwallet="$1" importdescriptors \
                 "[{ \"desc\": \"$DESCRIPTOR\", \"label\": \"automated_import\", \"timestamp\": \"now\" }]")
 
             if echo "$IMPORT_RESULT" | grep -q '"success": false'; then
-                echo "Failed to import descriptor for address $1."
+                echo "Failed to import descriptor for address $2."
                 return 1
             fi
 
