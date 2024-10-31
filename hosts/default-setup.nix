@@ -36,5 +36,6 @@
       peak = false;
     };
   };
+  print = true;
 }
 
