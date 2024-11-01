@@ -85,7 +85,7 @@
           ++ (if mergedSetup.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
           ++ (if mergedSetup.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
           ++ (if mergedSetup.network.can.enable then [ ./nixos/optional/network/can ] else [])
-          ++ (if mergedSetup.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else []);
+          ++ (if mergedSetup.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else [])
           ## PRINT
           ++ (if mergedSetup.print then [ ./nixos/optional/drivers/print ] else []);
           # MISC
