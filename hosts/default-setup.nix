@@ -39,6 +39,7 @@
   print = true;
   misc = {
     mgba = false;
-  }
+    xbox_controller = false;
+  };
 }
 

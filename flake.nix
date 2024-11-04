@@ -87,9 +87,10 @@
           ++ (if mergedSetup.network.can.enable then [ ./nixos/optional/network/can ] else [])
           ++ (if mergedSetup.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else [])
           ## PRINT
-          ++ (if mergedSetup.print then [ ./nixos/optional/drivers/print ] else []);
+          ++ (if mergedSetup.print then [ ./nixos/optional/drivers/print ] else [])
           # MISC
           ++ (if mergedSetup.misc.mgba then [ ./nixos/optional/pkgs/mgba ] else []);
+          ++ (if mergedSetup.misc.xbox_controller then [ ./nixos/optional/pkgs/xbox_controller ] else []);
         };
 
         nixosConfigurations = import ./hosts {

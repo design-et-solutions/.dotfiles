@@ -32,6 +32,7 @@ mkNixosConfiguration {
     };
     misc = {
       mgba = true;
-    }
+      xbox_controller = true;
+    };
   };
 }
