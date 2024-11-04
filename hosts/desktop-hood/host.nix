@@ -30,5 +30,8 @@ mkNixosConfiguration {
         home =  true;
       };
     };
+    misc = {
+      mgba = true;
+    }
   };
 }

@@ -37,5 +37,8 @@
     };
   };
   print = true;
+  misc = {
+    mgba = false;
+  }
 }
 

@@ -89,6 +89,7 @@
           ## PRINT
           ++ (if mergedSetup.print then [ ./nixos/optional/drivers/print ] else []);
           # MISC
+          ++ (if mergedSetup.misc.mgba then [ ./nixos/optional/pkgs/mgba ] else []);
         };
 
         nixosConfigurations = import ./hosts {
