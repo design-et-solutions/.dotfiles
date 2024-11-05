@@ -8,31 +8,43 @@ mkNixosConfiguration {
     gui = {
       enable = true;
       full = true;
-      nvidia = true;
-      unity = false;
-      steam = false;
-      steam-run = true;
-      solaar = true;
-      streamio = false;
-      handbrake = true;
-      vlc = true;
-      gimp = true;
-      via = true;
-      discord = true;
-      slack = true;
-    };
-    audio = {
-      enable = true;
-      spotify = true;
-    };
-    network = {
-      wifi = {
-        home =  true;
+      driver = {
+        nvidia = true;
       };
-      bluetooth = true;
-      can = {
+      comm = {
+        discord = true;
+        slack = true;
+      };
+      tool = {
+        solaar = true;
+        handbrake = true;
+        vlc = true;
+        gimp = true;
+        vial = true;
+        drawio = true;
+      };
+      misc = {
+        steam-run = true;
+      };
+    };
+    nogui = {
+      audio = {
         enable = true;
-        peak = true;
+        spotify = true;
+      };
+      network = {
+        wifi = {
+          home =  true;
+          emergency = true;
+        };
+        bluetooth = true;
+        can = {
+          enable = true;
+          peak = true;
+        };
+      };
+      driver = {
+        printer = true;
       };
     };
   };

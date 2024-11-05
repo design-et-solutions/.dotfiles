@@ -8,38 +8,51 @@
     extra = {
       hyprland = "";
     };
-    nvidia = false;
-    unity = false;
-    steam = false;
-    steam-run = false;
-    solaar = false;
-    streamio = false;
-    handbrake = false;
-    vlc = false;
-    discord = false;
-    gimp = false;
-    via = false;
-    slack = false;
-  };
-  audio = {
-    enable = false;
-    spotify = false;
-  };
-  network = {
-    wifi = {
-      home = false;
-      emergency = false;
+    driver = {
+      nvidia = false;
     };
-    bluetooth = false;
-    can = {
+    comm = {
+      discord = false;
+      slack = false;
+    };
+    tool = {
+      unity = false;
+      vlc = false;
+      solaar = false;
+      handbrake = false;
+      gimp = false;
+      vial = false;
+      drawio = false;
+    };
+    misc = {
+      steam = false;
+      steam-run = false;
+      streamio = false;
+      mgba = false;
+    };
+  };
+  nogui = {
+    audio = {
       enable = false;
-      peak = false;
+      spotify = false;
     };
-  };
-  print = true;
-  misc = {
-    mgba = false;
-    xbox_controller = false;
+    network = {
+      wifi = {
+        home = false;
+        emergency = false;
+      };
+      bluetooth = false;
+      can = {
+        enable = false;
+        peak = false;
+      };
+    };
+    driver = {
+      print = true;
+    };
+    misc = {
+      xbox_controller = false;
+    };
   };
 }
 
