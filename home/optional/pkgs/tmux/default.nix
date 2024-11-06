@@ -20,12 +20,12 @@
       {
         plugin = pkgs.tmuxPlugins.mkTmuxPlugin {
           pluginName = "tmux-tokyo-night";
-          version = "1.8.0";
+          version = "1.9.0";
           src = pkgs.fetchFromGitHub {
             owner = "fabioluciano";
             repo = "tmux-tokyo-night";
             rev = "main";
-            sha256 = "sha256-s6110RKud0/M50VPcQpHEUXWh9l92mwXY3V70q5ttU4=";
+            sha256 = "sha256-ODl2h8t1U9mBRDmreZ5pRxWcvAulJJ+PfaLi78/YfPU=";
           };
           postInstall = ''
             mv $out/share/tmux-plugins/tmux-tokyo-night/tmux-tokyo-night.tmux $out/share/tmux-plugins/tmux-tokyo-night/tmux_tokyo_night.tmux

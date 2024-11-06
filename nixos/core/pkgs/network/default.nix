@@ -12,7 +12,6 @@
 
   environment.systemPackages = with pkgs; [
     networkmanager   
-    networkmanager-openvpn
     protobuf       
     nmap
   ];

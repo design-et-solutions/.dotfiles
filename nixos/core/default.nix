@@ -50,6 +50,8 @@
 
   # tools and libs
   environment.systemPackages = with pkgs; [
+    nix-prefetch-git
+
     libnotify   # notification manager
     gcc         # collection of compilers
     unzip
