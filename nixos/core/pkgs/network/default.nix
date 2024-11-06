@@ -1,6 +1,8 @@
 { pkgs, ... }: {
   networking= {
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+    };
     firewall = {
       enable = true;
       allowedTCPPorts = [ 80 443 8080 ];
@@ -9,8 +11,9 @@
   };
 
   environment.systemPackages = with pkgs; [
-    networkmanager # network cli tools  
-    protobuf       # protobuf
+    networkmanager   
+    networkmanager-openvpn
+    protobuf       
     nmap
   ];
 }

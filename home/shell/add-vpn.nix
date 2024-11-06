@@ -1,21 +1,22 @@
 { pkgs ? import <nixpkgs> {} }:
+
 pkgs.mkShell {
-  buildInputs = [
-    pkgs.network-manager-pptp
+  buildInputs = with pkgs; [
+    networkmanager
   ];
 
   shellHook = ''
     start() {
-      nmcli connection add type vpn vpn-type pptp con-name "VPN_NAME" ifname "*" \
+      sudo nmcli connection add type vpn vpn-type pptp con-name "$1" ifname "*" \
       -- \
-      vpn.data "gateway=VPN_SERVER_ADDRESS,user=YOUR_USERNAME" \
-      vpn.secrets "password=YOUR_PASSWORD"
+      vpn.data "gateway=$2,user=$3" \
+      vpn.secrets "password=$4"
 
-      nmcli connection modify "VPN_NAME" ipv4.never-default yes
+      sudo nmcli connection modify "$1" ipv4.never-default yes
 
-      nmcli connection up "YourVPN_NAME"
+      sudo nmcli connection up "$1"
 
-      nmcli connection show --active
+      sudo nmcli connection show --active
     }
   '';
 }
