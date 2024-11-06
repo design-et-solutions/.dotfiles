@@ -14,6 +14,8 @@
     comm = {
       discord = false;
       slack = false;
+      teams = false;
+      whatsapp = false;
     };
     tool = {
       unity = false;

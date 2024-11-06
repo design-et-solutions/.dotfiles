@@ -15,7 +15,8 @@ mkNixosConfiguration {
       comm = {
         discord = true;
         slack = true;
-
+        teams = true;
+        whatsapp = true;
       };
       tool = {
         unity = true;
