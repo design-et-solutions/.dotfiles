@@ -24,7 +24,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    swaylock
+    swaylock-effects
     brightnessctl
 
     # screenshot
