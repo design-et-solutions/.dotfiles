@@ -11,7 +11,10 @@
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;
-    extraConfig = builtins.readFile ./config.vim;
+    extraConfig = ''
+      ${builtins.readFile ./config.vim}
+      set shadafile=~/.local/share/nvim/custom.shada
+    '';
     extraLuaConfig = ''
       ${builtins.readFile ./config.lua}
       ${builtins.readFile ./keybindings.lua}
