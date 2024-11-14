@@ -7,7 +7,7 @@
       la = "ls -a";
       lg = "lazygit"; 
       clippy-hard = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all -W clippy::pedantic -W clippy::nursery -W clippy::cargo"; 
-      cargo-check = "cargo +nightly udeps"; 
+      cargo-check = "cargo +nightly udeps --all-features"; 
     };
     interactiveShellInit = ''
       starship init fish | source
