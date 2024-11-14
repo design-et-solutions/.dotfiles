@@ -7,7 +7,8 @@
       la = "ls -a";
       lg = "lazygit"; 
       clippy-hard = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all -W clippy::pedantic -W clippy::nursery -W clippy::cargo"; 
-      cargo-check = "cargo +nightly udeps --all-features"; 
+      # to install `rustup run nightly cargo install cargo-udeps`
+      cargo-check = "rustup run nightly cargo udeps --all-targets  --all-features"; 
     };
     interactiveShellInit = ''
       starship init fish | source
