@@ -6,7 +6,8 @@
       ll = "ls -l";
       la = "ls -a";
       lg = "lazygit"; 
-      clippy-hard = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all -W clippy::restriction -W clippy::pedantic -W clippy::nursery -W clippy::cargo"; 
+      clippy-hard = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all -W clippy::pedantic -W clippy::nursery -W clippy::cargo"; 
+      cargo-check = "cargo +nightly udeps"; 
     };
     interactiveShellInit = ''
       starship init fish | source
