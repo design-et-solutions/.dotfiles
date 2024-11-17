@@ -27,7 +27,8 @@
       clippy-suspicious = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::suspicious"; 
       # code that is outright wrong or useless
       clippy-correctness = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::correctness"; 
-      cargo-check = "rustup run nightly cargo udeps --all-targets  --all-features"; 
+      cargo-check-udeps = "rustup run nightly cargo udeps --all-targets  --all-features"; 
+      cargo-tree-search = "cargo tree -i ";
     };
     interactiveShellInit = ''
       starship init fish | source

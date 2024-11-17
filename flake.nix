@@ -13,9 +13,11 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix, ... } @ inputs: 
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix, rust-overlay, ... } @ inputs: 
     let inherit (self) outputs;
     defaultSetup = import ./hosts/default-setup.nix;
     # NixOS configuration entrypoint
