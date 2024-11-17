@@ -6,7 +6,7 @@
       ll = "ls -l";
       la = "ls -a";
       lg = "lazygit"; 
-      clippy-full = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all -W clippy::pedantic -W clippy::nursery -W clippy::cargo -W clippy::perf -W clippy::complexity -W clippy::suspicious -W clippy::style -W clippy::correctness"; 
+      clippy-full = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all -W clippy::pedantic -W clippy::nursery -W clippy::perf -W clippy::complexity -W clippy::suspicious -W clippy::style -W clippy::correctness"; 
       # all lints that are on by default (correctness, suspicious, style, complexity, perf)
       clippy-all = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all"; 
       # lints for the cargo manifest
