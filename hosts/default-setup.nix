@@ -12,6 +12,7 @@
       nvidia = false;
     };
     comm = {
+      mail = false;
       discord = false;
       slack = false;
       teams = false;
@@ -39,7 +40,6 @@
       spotify = false;
     };
     network = {
-      mail = false;
       wifi = {
         home = false;
         emergency = false;

@@ -1,7 +1,5 @@
 { pkgs, lib, ... }:{
   environment.systemPackages = with pkgs; [
-    neomutt
+    thunderbird
   ];
-
-  environment.etc."neomuttrc".source = .source = ./config;
 }

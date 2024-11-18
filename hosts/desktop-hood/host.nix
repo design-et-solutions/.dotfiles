@@ -13,6 +13,7 @@ mkNixosConfiguration {
         nvidia = true;
       };
       comm = {
+        mail = true;
         discord = true;
         slack = true;
         teams = true;
@@ -39,7 +40,6 @@ mkNixosConfiguration {
         spotify = true;
       };
       network = {
-        mail = true;
         wifi = {
           home =  true;
         };

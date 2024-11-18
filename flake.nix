@@ -75,6 +75,7 @@
           ++ (if mergedSetup.gui.comm.slack then [ ./nixos/optional/pkgs/slack ] else [])
           ++ (if mergedSetup.gui.comm.teams then [ ./nixos/optional/pkgs/teams ] else [])
           ++ (if mergedSetup.gui.comm.whatsapp then [ ./nixos/optional/pkgs/whatsapp ] else [])
+          ++ (if mergedSetup.gui.comm.mail then [ ./nixos/optional/pkgs/mail ] else [])
           #   TOOL
           ++ (if mergedSetup.gui.tool.solaar then [ ./nixos/optional/pkgs/solaar ] else [])
           ++ (if mergedSetup.gui.tool.unity then [ ./nixos/optional/pkgs/unity ] else [])
@@ -94,7 +95,6 @@
           ++ (if mergedSetup.nogui.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
           ++ (if mergedSetup.nogui.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
           #   NETWORK
-          ++ (if mergedSetup.nogui.network.mail then [ ./nixos/optional/pkgs/mail ] else [])
           ++ (if mergedSetup.nogui.network.wifi.home then [ ./nixos/optional/network/wifi/home.nix ] else [])
           ++ (if mergedSetup.nogui.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
           ++ (if mergedSetup.nogui.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
