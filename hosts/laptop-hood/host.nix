@@ -35,6 +35,7 @@ mkNixosConfiguration {
         spotify = true;
       };
       network = {
+        mail = false;
         wifi = {
           home =  true;
           emergency = true;

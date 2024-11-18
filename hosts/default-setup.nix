@@ -39,6 +39,7 @@
       spotify = false;
     };
     network = {
+      mail = false;
       wifi = {
         home = false;
         emergency = false;
