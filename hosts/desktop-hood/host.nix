@@ -13,6 +13,7 @@ mkNixosConfiguration {
         nvidia = true;
       };
       comm = {
+        mail = true;
         discord = true;
         slack = true;
         teams = true;

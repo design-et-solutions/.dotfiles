@@ -12,6 +12,7 @@
       nvidia = false;
     };
     comm = {
+      mail = false;
       discord = false;
       slack = false;
       teams = false;
