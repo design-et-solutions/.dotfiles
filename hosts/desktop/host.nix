@@ -12,43 +12,23 @@ mkNixosConfiguration {
       driver = {
         nvidia = true;
       };
-      comm = {
-        mail = true;
-        discord = true;
-        slack = true;
-        teams = true;
-        whatsapp = true;
-      };
       tool = {
         unity = true;
-        solaar = true;
-        vial = true;
         handbrake = true;
         vlc = true;
-        drawio = true;
       };
       misc = {
-        steam = true;
         steam-run = true;
-        mgba = true;
-        streamio = true;
       };
     };
     nogui = {
       audio = {
         enable = true;
-        spotify = true;
       };
       network = {
         wifi = {
           home =  true;
         };
-      };
-      driver = {
-        printer = true;
-      };
-      misc = {
-        xbox_controller = true;
       };
     };
   };
