@@ -7,7 +7,6 @@
       enable = true;
       allowedTCPPorts = [ 80 443 8080 ];
       allowedUDPPorts = [ 53 ];
-      denyUnresolved = true;
     };
   };
 
