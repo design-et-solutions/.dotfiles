@@ -11,9 +11,8 @@ sudo parted $disk -- mkpart ESP fat32 1MB 512MB
 # Create the primary partition 512MiB (right after the previous ESP partition) and extending to the rest of the disk (100% of the remaining space)
 sudo parted $disk -- mkpart primary 512MiB 100%
 
-# Made sure to set the ESP & BOOT property on the first partition
+# Made sure to set the ESP property on the first partition
 sudo parted $disk -s set 1 esp on
-sudo parted $disk -s set 1 boot on
 
 # Formats the first partition with a FAT32 file system named BOOT
 sudo mkfs.fat -F 32 -n BOOT ${disk}1
@@ -26,6 +25,7 @@ curl https://github.com/worproject/rpi5-uefi/releases/download/v0.3/RPi5_UEFI_Re
 
 sudo mount ${disk}1 /mnt/
 sudo unzip ./RPi5_UEFI_Release_v0.3.zip -d /mnt/
+sudo umount
 ```
 Flash NixOS arm64 minimial installer to USB drive:
 ```shell
