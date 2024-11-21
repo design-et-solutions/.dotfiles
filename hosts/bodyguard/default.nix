@@ -16,8 +16,8 @@
     # Create a Private Network
     # Bypass Network Restrictions
     # Use as a Secure Gateway
-    wireguard = {
-      enable = true;
+    # wireguard = {
+      # enable = true;
       # interfaces = {
         # Generate Keys for WireGuard:
         # $wg genkey | tee /etc/wireguard/private.key | wg pubkey > /etc/wireguard/public.key
@@ -63,15 +63,15 @@
         #   ];
         # };
       # };
-    };
+    # };
     # allow VPN Port
-    firewall = {
-      allowedTCPPorts = [ 51820 ];
-      allowedUDPPorts = [ 51820 ];  
-    };
-  };
+    # firewall = {
+      # allowedTCPPorts = [ 51820 ];
+      # allowedUDPPorts = [ 51820 ];  
+    # };
+  # };
 
-  services = {
+  # services = {
     # pihole = {
     #   enable = true;
     #   extraConfig = ''
@@ -88,7 +88,7 @@
     #   enable = true;
     #   interface = "eth0"; 
     # };
-  };
+  # };
   
 }
 
