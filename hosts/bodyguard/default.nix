@@ -79,15 +79,15 @@
         BLOCKING_METHOD=IP-NODATA-AAAA
       '';
     };
-    ntp.enable = true;
-    ntopng = {
-      enable = true;
-      listenAddress = "0.0.0.0:3000";
-    };
-    suricata = {
-      enable = true;
-      interface = "eth0"; 
-    };
+    # ntp.enable = true;
+    # ntopng = {
+    #   enable = true;
+    #   listenAddress = "0.0.0.0:3000";
+    # };
+    # suricata = {
+    #   enable = true;
+    #   interface = "eth0"; 
+    # };
   };
   
 }
