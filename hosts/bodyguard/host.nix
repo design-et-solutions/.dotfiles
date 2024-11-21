@@ -5,5 +5,11 @@ mkNixosConfiguration {
   system = "aarch64-linux";
   host = ./.;
   users = [ "bodyguard" ];
-  setup = {};
+  setup = {
+    nogui = {
+      network = {
+        suricata = true;
+      };
+    };
+  };
 }

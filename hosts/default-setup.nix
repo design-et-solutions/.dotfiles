@@ -40,6 +40,7 @@
       spotify = false;
     };
     network = {
+      suricata = false;
       wifi = {
         home = false;
         emergency = false;

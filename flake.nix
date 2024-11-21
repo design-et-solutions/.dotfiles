@@ -95,6 +95,7 @@
           ++ (if mergedSetup.nogui.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
           ++ (if mergedSetup.nogui.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
           #   NETWORK
+          ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/suricata ] else [])
           ++ (if mergedSetup.nogui.network.wifi.home then [ ./nixos/optional/network/wifi/home.nix ] else [])
           ++ (if mergedSetup.nogui.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
           ++ (if mergedSetup.nogui.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
