@@ -72,13 +72,13 @@
   };
 
   services = {
-    pihole = {
-      enable = true;
-      extraConfig = ''
-        BLOCKING_ENABLED=true
-        BLOCKING_METHOD=IP-NODATA-AAAA
-      '';
-    };
+    # pihole = {
+    #   enable = true;
+    #   extraConfig = ''
+    #     BLOCKING_ENABLED=true
+    #     BLOCKING_METHOD=IP-NODATA-AAAA
+    #   '';
+    # };
     # ntp.enable = true;
     # ntopng = {
     #   enable = true;
