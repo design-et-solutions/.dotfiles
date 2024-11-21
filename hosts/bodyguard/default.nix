@@ -9,9 +9,6 @@
 
   networking= {
     hostName = "bodyguard";
-    # Enable IP forwarding on the server
-    enableIPv4Forwarding = true;
-    # WireGuard is a modern, lightweight, and fast VPN
     # Encrypt and Secure Your Internet Traffic
     #   Privacy: Prevents your ISP, network admins, or attackers from seeing your internet activity.
     #   Security: Protects your data from being intercepted by encrypting all traffic.
