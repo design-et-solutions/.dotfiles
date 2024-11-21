@@ -2,7 +2,7 @@
 { mkNixosConfiguration, nixos-hardware, ... }:
 
 mkNixosConfiguration {
-  system = "arrm64-linux";
+  system = "aarch64-linux";
   host = ./.;
   users = [ "bodyguard" ];
   setup = {};
