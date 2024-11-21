@@ -41,6 +41,8 @@
     };
     network = {
       suricata = false;
+      nikto = false;
+      wireshark = false;
       wifi = {
         home = false;
         emergency = false;
@@ -56,6 +58,7 @@
     };
     misc = {
       xbox_controller = false;
+      elk = false;
     };
   };
 }

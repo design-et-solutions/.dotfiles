@@ -96,6 +96,8 @@
           ++ (if mergedSetup.nogui.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
           #   NETWORK
           ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/suricata ] else [])
+          ++ (if mergedSetup.nogui.network.nikto then [ ./nixos/optional/pkgs/nikto ] else [])
+          ++ (if mergedSetup.nogui.network.wireshark then [ ./nixos/optional/pkgs/wireshark ] else [])
           ++ (if mergedSetup.nogui.network.wifi.home then [ ./nixos/optional/network/wifi/home.nix ] else [])
           ++ (if mergedSetup.nogui.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
           ++ (if mergedSetup.nogui.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
@@ -104,7 +106,8 @@
           #   DRIVER
           ++ (if mergedSetup.nogui.driver.print then [ ./nixos/optional/drivers/print ] else [])
           #   MISC
-          ++ (if mergedSetup.nogui.misc.xbox_controller then [ ./nixos/optional/pkgs/xbox_controller ] else []);
+          ++ (if mergedSetup.nogui.misc.xbox_controller then [ ./nixos/optional/pkgs/xbox_controller ] else [])
+          ++ (if mergedSetup.nogui.misc.elk then [ ./nixos/optional/pkgs/elk ] else []);
         };
 
         nixosConfigurations = import ./hosts {

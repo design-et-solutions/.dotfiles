@@ -9,6 +9,11 @@ mkNixosConfiguration {
     nogui = {
       network = {
         suricata = true;
+        nikto = true;
+        wireshark = true;
+      };
+      misc = {
+        elk = true;
       };
     };
   };
