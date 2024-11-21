@@ -37,27 +37,27 @@
               # laptop
               publicKey = "peer-public-key";
               allowedIPs = [ "10.0.0.2/32" ];
-            },
+            }
             {
               # desktop
               publicKey = "peer-public-key";
               allowedIPs = [ "10.0.0.3/32" ];
-            },
+            }
             {
               # tv
               publicKey = "peer-public-key";
               allowedIPs = [ "10.0.0.4/32" ];
-            },
+            }
             {
               # phone1
               publicKey = "peer-public-key";
               allowedIPs = [ "10.0.0.4/32" ];
-            },
+            }
             {
               # phone2
               publicKey = "peer-public-key";
               allowedIPs = [ "10.0.0.5/32" ];
-            },
+            }
             {
               # print
               publicKey = "peer-public-key";
