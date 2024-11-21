@@ -69,7 +69,7 @@
       # allowedTCPPorts = [ 51820 ];
       # allowedUDPPorts = [ 51820 ];  
     # };
-  # };
+  };
 
   # services = {
     # pihole = {
