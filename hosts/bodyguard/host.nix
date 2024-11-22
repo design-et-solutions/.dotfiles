@@ -16,10 +16,6 @@ mkNixosConfiguration {
         };
       };
     };
-      misc = {
-        elk = true;
-      };
-    };
     controller = {
       rpi5 = true;
     };
