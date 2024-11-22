@@ -110,7 +110,7 @@
           ++ (if mergedSetup.nogui.misc.elk then [ ./nixos/optional/pkgs/elk ] else [])
 
           # CONTROLLER
-          ++ (if mergedSetup.nogui.controller.rpi5 then [ ./nixos/optional/controller/rpi5 ] else []);
+          ++ (if mergedSetup.controller.rpi5 then [ ./nixos/optional/controller/rpi5 ] else []);
         };
 
         nixosConfigurations = import ./hosts {
