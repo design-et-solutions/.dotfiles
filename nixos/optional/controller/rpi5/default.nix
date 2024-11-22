@@ -10,10 +10,13 @@
       "brcmfmac" 
     ];
     kernelParams = [
-      "dtoverlay=disable-bt"
-      "dtoverlay=disable-wifi"
+      # "dtoverlay=disable-bt"
+      # "dtoverlay=disable-wifi"
     ];
   };
 
-  hardware.enableAllFirmware = true;
+  hardware = {
+    enableAllFirmware = true;
+    firmware = [ pkgs.linux-firmware ];
+  };
 }
