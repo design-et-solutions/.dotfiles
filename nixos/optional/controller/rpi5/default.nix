@@ -9,6 +9,10 @@
     kernelModules = [ 
       "brcmfmac" 
     ];
+    kernelParams = [
+      "dtoverlay=disable-bt"
+      "dtoverlay=disable-wifi"
+    ];
   };
 
   hardware.enableAllFirmware = true;
