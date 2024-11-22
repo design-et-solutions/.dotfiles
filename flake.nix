@@ -7,17 +7,26 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     rust-overlay.url = "github:oxalica/rust-overlay";
+    nix-rpi5.url = "git+https://gitlab.com/vriska/nix-rpi5.git";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix, rust-overlay, ... } @ inputs: 
+  outputs = { 
+    self, 
+    nixpkgs, 
+    home-manager, 
+    nixos-hardware, 
+    sops-nix, 
+    rust-overlay, 
+    nix-rpi5,
+    ... 
+  } @ inputs: 
     let inherit (self) outputs;
     defaultSetup = import ./hosts/default-setup.nix;
     # NixOS configuration entrypoint
@@ -95,7 +104,9 @@
           ++ (if mergedSetup.nogui.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
           ++ (if mergedSetup.nogui.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
           #   NETWORK
-          ++ (if mergedSetup.nogui.network.wifi.home then [ ./nixos/optional/network/wifi/home.nix ] else [])
+          ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/suricata ] else [])
+          ++ (if mergedSetup.nogui.network.nikto then [ ./nixos/optional/pkgs/nikto ] else [])
+          ++ (if mergedSetup.nogui.network.wireshark then [ ./nixos/optional/pkgs/wireshark ] else [])
           ++ (if mergedSetup.nogui.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
           ++ (if mergedSetup.nogui.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
           ++ (if mergedSetup.nogui.network.can.enable then [ ./nixos/optional/network/can ] else [])
@@ -103,7 +114,11 @@
           #   DRIVER
           ++ (if mergedSetup.nogui.driver.print then [ ./nixos/optional/drivers/print ] else [])
           #   MISC
-          ++ (if mergedSetup.nogui.misc.xbox_controller then [ ./nixos/optional/pkgs/xbox_controller ] else []);
+          ++ (if mergedSetup.nogui.misc.xbox_controller then [ ./nixos/optional/pkgs/xbox_controller ] else [])
+          ++ (if mergedSetup.nogui.misc.elk then [ ./nixos/optional/pkgs/elk ] else [])
+
+          # CONTROLLER
+          ++ (if mergedSetup.controller.rpi5 then [ ./nixos/optional/controller/rpi5 ] else []);
         };
 
         nixosConfigurations = import ./hosts {

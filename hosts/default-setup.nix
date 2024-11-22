@@ -40,8 +40,10 @@
       spotify = false;
     };
     network = {
+      suricata = false;
+      nikto = false;
+      wireshark = false;
       wifi = {
-        home = false;
         emergency = false;
       };
       bluetooth = false;
@@ -55,7 +57,11 @@
     };
     misc = {
       xbox_controller = false;
+      elk = false;
     };
+  };
+  controller = {
+    rpi5 = false;
   };
 }
 

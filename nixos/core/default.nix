@@ -57,6 +57,7 @@
     unzip
     tree
     websocat
+    parted
   ];
 
   services.printing = {

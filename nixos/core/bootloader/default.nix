@@ -5,6 +5,6 @@
     systemd-boot.efiSecBoot = true;
     efi.canTouchEfiVariables = true;
     timeout = 3;
-    loader.grub.efiSupport = true
+    grub.efiSupport = true;
   };
 }
