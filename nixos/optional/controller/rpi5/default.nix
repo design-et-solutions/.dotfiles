@@ -7,6 +7,7 @@
 
   boot.kernelParams = [
     "dtoverlay=rpi-poe"
+    "dtparam=i2c_arm=on"
     "dtoverlay=gpio-fan,gpiopin=14,temp=55000"
   ];
 }
