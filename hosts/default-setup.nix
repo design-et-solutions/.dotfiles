@@ -61,5 +61,8 @@
       elk = false;
     };
   };
+  controller = {
+    rpi5 = false;
+  };
 }
 

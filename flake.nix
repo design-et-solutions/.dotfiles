@@ -107,7 +107,10 @@
           ++ (if mergedSetup.nogui.driver.print then [ ./nixos/optional/drivers/print ] else [])
           #   MISC
           ++ (if mergedSetup.nogui.misc.xbox_controller then [ ./nixos/optional/pkgs/xbox_controller ] else [])
-          ++ (if mergedSetup.nogui.misc.elk then [ ./nixos/optional/pkgs/elk ] else []);
+          ++ (if mergedSetup.nogui.misc.elk then [ ./nixos/optional/pkgs/elk ] else [])
+
+          # CONTROLLER
+          ++ (if mergedSetup.nogui.controller.rpi5 then [ ./nixos/optional/controller/rpi5 ] else []);
         };
 
         nixosConfigurations = import ./hosts {
