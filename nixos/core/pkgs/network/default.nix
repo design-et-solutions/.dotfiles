@@ -14,5 +14,7 @@
     networkmanager   
     protobuf       
     nmap
+    wget
+    websocat
   ];
 }

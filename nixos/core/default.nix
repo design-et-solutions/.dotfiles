@@ -1,6 +1,5 @@
 {
-  inputs,
-  lib,
+  inputs, lib,
   config,
   pkgs,
   ...
@@ -56,7 +55,6 @@
     gcc         # collection of compilers
     unzip
     tree
-    websocat
     parted
   ];
 
