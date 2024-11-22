@@ -7,7 +7,7 @@
   programs.home-manager.enable = true;
 
   programs.git = {
-    userName  = "Yves Cousteau";
-    userEmail = "comandant.cousteau1997@gmail.com";
+    userName  = "YvesCousteau";
+    userEmail = "45556867+YvesCousteau@users.noreply.github.com";
   };
 }
