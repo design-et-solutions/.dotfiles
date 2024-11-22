@@ -37,7 +37,6 @@ mkNixosConfiguration {
       };
       network = {
         wifi = {
-          home =  true;
           emergency = true;
         };
         bluetooth = true;

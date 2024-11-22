@@ -44,7 +44,6 @@
       nikto = false;
       wireshark = false;
       wifi = {
-        home = false;
         emergency = false;
       };
       bluetooth = false;

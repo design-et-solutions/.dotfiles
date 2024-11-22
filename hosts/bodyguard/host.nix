@@ -11,7 +11,11 @@ mkNixosConfiguration {
         suricata = true;
         nikto = true;
         wireshark = true;
+        wifi = {
+          emergency =  true;
+        };
       };
+    };
       misc = {
         elk = true;
       };

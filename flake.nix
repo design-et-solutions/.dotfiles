@@ -107,7 +107,6 @@
           ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/suricata ] else [])
           ++ (if mergedSetup.nogui.network.nikto then [ ./nixos/optional/pkgs/nikto ] else [])
           ++ (if mergedSetup.nogui.network.wireshark then [ ./nixos/optional/pkgs/wireshark ] else [])
-          ++ (if mergedSetup.nogui.network.wifi.home then [ ./nixos/optional/network/wifi/home.nix ] else [])
           ++ (if mergedSetup.nogui.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
           ++ (if mergedSetup.nogui.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
           ++ (if mergedSetup.nogui.network.can.enable then [ ./nixos/optional/network/can ] else [])
