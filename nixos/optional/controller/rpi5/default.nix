@@ -3,7 +3,7 @@
     lm_sensors 
   ];
 
-  boot.kernelModules = [ "bcm2835_thermal" "gpio-fan" ];
+  boot.kernelModules = [ "bcm2835_thermal" "gpio-fan" "i2c-dev" ];
 
   boot.kernelParams = [
     "dtoverlay=rpi-poe"
