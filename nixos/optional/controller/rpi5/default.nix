@@ -10,8 +10,7 @@
       "brcmfmac" 
     ];
     kernelParams = [
-      # "dtoverlay=disable-bt"
-      # "dtoverlay=disable-wifi"
+      "dtoverlay=disable-bt"
     ];
   };
 
