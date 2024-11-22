@@ -6,8 +6,6 @@
   
   time.timeZone = "Europe/Paris";
 
-  boot.loader.grub.device = "nodev";
-
   networking= {
     hostName = "rpi5-hood";
   };

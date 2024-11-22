@@ -69,7 +69,7 @@ OK
 ```
 Then you can install NixOS with:
 ```shell
-sudo nixos-install --root /mnt
+sudo nixos-install
 ```
 Then to boot the vendor kernel, in the UEFI settings switch from ACPI to Device Tree in
 ```
