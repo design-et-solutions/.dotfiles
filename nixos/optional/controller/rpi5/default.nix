@@ -21,9 +21,9 @@
       cp ${pkgs.linux-firmware}/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.* $out/lib/firmware/brcm/
 
       # Decompress firmware files
-      ${pkgs.zstd} -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.bin.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.bin
-      ${pkgs.zstd} -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.clm_blob.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.clm_blob
-      ${pkgs.zstd} -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt
+      ${pkgs.zstd}/bin/zstd -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.bin.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.bin
+      ${pkgs.zstd}/bin/zstd -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.clm_blob.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.clm_blob
+      ${pkgs.zstd}/bin/zstd -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt
 
       # Remove compressed files
       ${pkgs.coreutils}/bin/rm $out/lib/firmware/brcm/*.zst
