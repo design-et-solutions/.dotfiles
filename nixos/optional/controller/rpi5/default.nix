@@ -17,7 +17,7 @@
     } ''
       mkdir -p $out/lib/firmware/brcm
 
-      cp /nix/store/*-firmware/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.* /lib/firmware/brcm/
+      cp /nix/store/*-firmware/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.* $out/lib/firmware/brcm/
 
       # # Copy firmware files
       # cp ${pkgs.linux-firmware}/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt $out/lib/firmware/brcm/
