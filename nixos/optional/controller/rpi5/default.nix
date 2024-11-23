@@ -11,9 +11,5 @@
     initrd.availableKernelModules = [ "brcmfmac" ];
   };
 
-  hardware = {
-    firmware = {
-      uncompressFirmware = true;
-    };
-  };
+  hardware.firmware = [ pkgs.linux-firmware ];
 }
