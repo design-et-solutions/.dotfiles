@@ -17,7 +17,11 @@
     } ''
       mkdir -p $out/lib/firmware/brcm
 
-      cp /nix/store/*-firmware/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt.zst $out/lib/firmware/brcm/
+      # cp /nix/store/*-firmware/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt.zst $out/lib/firmware/brcm/
+
+      ls /nix/store/*-firmware/lib/firmware/brcm/
+
+      cp /nix/store/*-firmware/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt.zst $out/lib/firmware/brcm/ || echo "Failed to copy firmware"
 
       # Remove compressed files
       rm $out/lib/firmware/brcm/*.zst
