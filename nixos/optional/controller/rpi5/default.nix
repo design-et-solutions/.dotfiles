@@ -18,7 +18,9 @@
       ${pkgs.coreutils}/bin/mkdir -p $out/lib/firmware/brcm
 
       # Copy firmware files
-      cp ${pkgs.linux-firmware}/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.* $out/lib/firmware/brcm/
+      cp ${pkgs.linux-firmware}/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt $out/lib/firmware/brcm/
+      cp ${pkgs.linux-firmware}/brcmfmac43455-sdio.raspberrypi,5-model-b.bin $out/lib/firmware/brcm/
+      cp ${pkgs.linux-firmware}/brcmfmac43455-sdio.raspberrypi,5-model-b.clm_blob $out/lib/firmware/brcm/
 
       # Decompress firmware files
       ${pkgs.zstd}/bin/zstd -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.bin.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.bin
