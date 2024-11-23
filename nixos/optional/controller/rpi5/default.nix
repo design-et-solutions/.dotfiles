@@ -17,6 +17,7 @@
       ExecStart = ''
         ${pkgs.coreutils}/bin/mkdir -p /lib/firmware/brcm
         for firmware in ${pkgs.findutils}/bin/find /nix/store/*-firmware/lib/firmware/brcm/ -name '*.zst'; do
+          target=$(${pkgs.coreutils}/bin/readlink -f "$firmware")
           ${pkgs.zstd}/bin/zstd -d "$firmware" -o "/lib/firmware/brcm/$(basename "$firmware" .zst)"
         done
       '';
