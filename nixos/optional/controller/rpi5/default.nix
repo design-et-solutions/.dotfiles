@@ -40,6 +40,10 @@
   #   };
   # };
 
+  environment.systemPackages = with pkgs; [
+    zst
+  ];
+
   systemd.services.install-custom-firmware = {
     description = "Install custom firmware into /lib/firmware";
     wantedBy = [ "multi-user.target" ];
