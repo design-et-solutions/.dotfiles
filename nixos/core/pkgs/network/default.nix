@@ -16,5 +16,6 @@
     nmap
     wget
     websocat
+    curl
   ];
 }
