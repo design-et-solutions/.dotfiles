@@ -15,9 +15,9 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStart = ''
-        mkdir -p /lib/firmware/brcm
-        for firmware in /nix/store/*-firmware/lib/firmware/brcm/*.zst; do
-          zstd -d "$firmware" -o "/lib/firmware/brcm/$(basename "$firmware" .zst)"
+        ${pkgs.coreutils}/bin/mkdir -p /lib/firmware/brcm
+        for firmware in ${pkgs.findutils}/bin/find /nix/store/*-firmware/lib/firmware/brcm/ -name '*.zst'; do
+          ${pkgs.zstd}/bin/zstd -d "$firmware" -o "/lib/firmware/brcm/$(basename "$firmware" .zst)"
         done
       '';
       Type = "oneshot";
