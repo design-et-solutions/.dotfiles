@@ -1,5 +1,5 @@
-# hosts/desktop-hood.nix
 { mkNixosConfiguration, ... }:
+
 mkNixosConfiguration {
   system = "x86_64-linux";
   host = ./.;

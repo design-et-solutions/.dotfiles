@@ -1,6 +1,4 @@
-# hosts/desktop-hood.nix
-{ mkNixosConfiguration, nixos-hardware, ... }:
-
+{ mkNixosConfiguration, ... }:
 mkNixosConfiguration {
   system = "aarch64-linux";
   host = ./.;

@@ -1,5 +1,4 @@
-# hosts/desktop-hood.nix
-{ mkNixosConfiguration, nixos-hardware, ... }:
+{ mkNixosConfiguration, ... }:
 
 mkNixosConfiguration {
   system = "x86_64-linux";
