@@ -10,9 +10,10 @@
   };
 
   hardware.firmware = [
-    (pkgs.fetchzip {
-      url = "https://github.com/RPi-Distro/firmware-nonfree/archive/refs/heads/master.zip";
-      sha256 = "sha256-4WTrs/tUyOugufRrrh0qsEmhPclQD64ypYysxsnOyS8="; 
-    })
+    (pkgs.runCommand "rpi-firmware" {} ''
+      mkdir -p $out/lib/firmware/brcm
+      curl -L -o $out/lib/firmware/brcm/brcmfmac43455-sdio.bin https://github.com/RPi-Distro/firmware-nonfree/raw/master/brcm/brcmfmac43455-sdio.bin
+      curl -L -o $out/lib/firmware/brcm/brcmfmac43455-sdio.txt https://github.com/RPi-Distro/firmware-nonfree/raw/master/brcm/brcmfmac43455-sdio.txt
+    '')
   ];
 }
