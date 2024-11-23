@@ -10,7 +10,7 @@
   };
 
   hardware.firmware = [
-    (pkgs.runCommand "rpi-firmware" {} ''
+    (pkgs.runCommand "rpi-firmware" { buildInputs = [ pkgs.curl ]; } ''
       mkdir -p $out/lib/firmware/brcm
       curl -L -o $out/lib/firmware/brcm/brcmfmac43455-sdio.bin https://github.com/RPi-Distro/firmware-nonfree/raw/master/brcm/brcmfmac43455-sdio.bin
       curl -L -o $out/lib/firmware/brcm/brcmfmac43455-sdio.txt https://github.com/RPi-Distro/firmware-nonfree/raw/master/brcm/brcmfmac43455-sdio.txt
