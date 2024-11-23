@@ -13,20 +13,20 @@
   hardware.firmware = [
     pkgs.linux-firmware
     (pkgs.runCommand "custom-brcmfmac-firmware" {
-      buildInputs = [ pkgs.zstd ];
+      buildInputs = [ pkgs.zstd pkgs.coreutils ];
     } ''
-      mkdir -p $out/lib/firmware/brcm
+      ${pkgs.coreutils}/bin/mkdir -p $out/lib/firmware/brcm
 
       # Copy firmware files
       cp ${pkgs.linux-firmware}/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.* $out/lib/firmware/brcm/
 
       # Decompress firmware files
-      zstd -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.bin.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.bin
-      zstd -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.clm_blob.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.clm_blob
-      zstd -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt
+      ${pkgs.zstd} -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.bin.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.bin
+      ${pkgs.zstd} -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.clm_blob.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.clm_blob
+      ${pkgs.zstd} -d $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt.zst -o $out/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,5-model-b.txt
 
       # Remove compressed files
-      rm $out/lib/firmware/brcm/*.zst
+      ${pkgs.coreutils}/bin/rm $out/lib/firmware/brcm/*.zst
     '')
   ];
 }
