@@ -26,10 +26,9 @@
 
   systemd.services.install-custom-firmware = {
     description = "Install custom firmware into /lib/firmware";
-    after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.coreutils}/bin/cp -r /nix/store/*custom-brcmfmac-firmware*/lib/firmware/brcm /lib/firmware/";
+      ExecStart = "${pkgs.coreutils}/bin/cp -r /nix/store/$(basename $(readlink -f /nix/store/*custom-brcmfmac-firmware*/))/lib/firmware/brcm /lib/firmware/";
       ExecStartPost = "${pkgs.coreutils}/bin/ls -l /lib/firmware/brcm";
       Type = "oneshot";
       RemainAfterExit = true;
