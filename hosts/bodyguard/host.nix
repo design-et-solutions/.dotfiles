@@ -9,6 +9,7 @@ mkNixosConfiguration {
         suricata = true;
         nikto = true;
         wireshark = true;
+        vpn = true;
         wifi = {
           emergency =  true;
         };

@@ -40,6 +40,7 @@
       spotify = false;
     };
     network = {
+      vpn = false;
       suricata = false;
       nikto = false;
       wireshark = false;

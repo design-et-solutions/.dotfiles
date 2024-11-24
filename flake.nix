@@ -104,6 +104,7 @@
           ++ (if mergedSetup.nogui.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
           ++ (if mergedSetup.nogui.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
           #   NETWORK
+          ++ (if mergedSetup.nogui.network.vpn then [ ./nixos/optional/network/vpn ] else [])
           ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/suricata ] else [])
           ++ (if mergedSetup.nogui.network.nikto then [ ./nixos/optional/pkgs/nikto ] else [])
           ++ (if mergedSetup.nogui.network.wireshark then [ ./nixos/optional/pkgs/wireshark ] else [])
