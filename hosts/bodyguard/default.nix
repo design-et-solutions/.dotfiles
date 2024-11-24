@@ -36,12 +36,12 @@
               persistentKeepalive = 25;
             }
             {
-              publicKey = "TBF";
+              publicKey = "JEXspdTfOxZ83z7tIcvUWN2Ir9nzsDUSA51tFB5002I=";
               allowedIPs = [ "10.100.0.3/32" ];
               persistentKeepalive = 25;
             }
             {
-              publicKey = "TBF";
+              publicKey = "JEXspdTfOxZ83z7tIcvUWN2Ir9nzsDUSA51tFB5002I=";
               allowedIPs = [ "10.100.0.4/32" ];
               persistentKeepalive = 25;
             }
