@@ -35,6 +35,16 @@
               allowedIPs = [ "10.100.0.2/32" ];
               persistentKeepalive = 25;
             }
+            {
+              publicKey = "TBF";
+              allowedIPs = [ "10.100.0.3/32" ];
+              persistentKeepalive = 25;
+            }
+            {
+              publicKey = "TBF";
+              allowedIPs = [ "10.100.0.4/32" ];
+              persistentKeepalive = 25;
+            }
           ];
         };
       };

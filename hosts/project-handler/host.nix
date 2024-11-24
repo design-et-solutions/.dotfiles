@@ -6,6 +6,7 @@ mkNixosConfiguration {
   setup = {
     nogui = {
       network = {
+        vpn = true;
         wifi = {
           emergency =  true;
         };

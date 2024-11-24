@@ -2,7 +2,7 @@
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
-    ./../bodyguard/vpn-client.nix
+    ./../bodyguard/vpn-client-int.nix
   ];
   
   time.timeZone = "Europe/Paris";

@@ -39,6 +39,7 @@ mkNixosConfiguration {
         spotify = true;
       };
       network = {
+        vpn = true;
         wifi = {
           emergency =  true;
         };
