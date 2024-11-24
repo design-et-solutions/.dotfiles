@@ -9,14 +9,10 @@ mkNixosConfiguration {
         suricata = true;
         nikto = true;
         wireshark = true;
-        vpn = true;
-        wifi = {
-          emergency =  true;
-        };
+        vpn.server = true;
+        wifi.emergency =  true;
       };
     };
-    controller = {
-      rpi5 = true;
-    };
+    controller.rpi5 = true;
   };
 }

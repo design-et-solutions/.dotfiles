@@ -36,15 +36,18 @@ mkNixosConfiguration {
         spotify = true;
       };
       network = {
-        vpn = true;
+        vpn = {
+          client = true;
+          is_external = true;
+        };
         wifi = {
           emergency = true;
         };
-        bluetooth = true;
-        can = {
-          enable = true;
-          peak = true;
-        };
+        # bluetooth = true;
+        # can = {
+          # enable = true;
+          # peak = true;
+        # };
       };
       driver = {
         printer = true;

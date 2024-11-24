@@ -6,29 +6,11 @@
   
   time.timeZone = "Europe/Paris";
 
-  environment.systemPackages = with pkgs; [
-    iptables
-    wireguard-tools
-  ];
-
   networking= {
     hostName = "bodyguard";
-    # Network Address Translation
-    nat = {
-      enable = true;
-      externalInterface = "wlan0";
-      internalInterfaces = [ "wg0" ];
-    };
     wireguard = {
       interfaces = {
         wg0 = {
-          ips = [ "10.100.0.1/24" ];
-          postSetup = ''
-            ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
-          '';
-          postShutdown = ''
-            ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
-          '';
           peers = [
             {
               publicKey = "fiwHXP5XpdiIy8qmV3hU4PbwMEiXyiS2M5EpEhFKywA=";

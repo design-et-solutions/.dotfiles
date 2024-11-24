@@ -6,14 +6,10 @@ mkNixosConfiguration {
   setup = {
     nogui = {
       network = {
-        vpn = true;
-        wifi = {
-          emergency =  true;
-        };
+        vpn.client = true;
+        wifi.emergency =  true;
       };
     };
-    controller = {
-      rpi5 = true;
-    };
+    controller.rpi5 = true;
   };
 }

@@ -8,9 +8,7 @@ mkNixosConfiguration {
     gui = {
       enable = true;
       full = true;
-      driver = {
-        nvidia = true;
-      };
+      driver.nvidia = true;
       comm = {
         mail = true;
         discord = true;
@@ -39,17 +37,11 @@ mkNixosConfiguration {
         spotify = true;
       };
       network = {
-        vpn = true;
-        wifi = {
-          emergency =  true;
-        };
+        vpn.client = true;
+        wifi.emergency =  true;
       };
-      driver = {
-        printer = true;
-      };
-      misc = {
-        xbox_controller = true;
-      };
+      driver.printer = true;
+      misc.xbox_controller = true;
     };
   };
 }

@@ -40,6 +40,7 @@
     }: 
     let
       mergedSetup = nixpkgs.lib.recursiveUpdate defaultSetup setup;
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     nixpkgs.lib.nixosSystem {
           inherit system;
@@ -104,7 +105,13 @@
           ++ (if mergedSetup.nogui.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
           ++ (if mergedSetup.nogui.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
           #   NETWORK
-          ++ (if mergedSetup.nogui.network.vpn then [ ./nixos/optional/network/vpn ] else [])
+          ++ (if mergedSetup.nogui.network.vpn.server then [ ./nixos/optional/network/vpn/server.nix ] else [])
+          ++ (if mergedSetup.nogui.network.vpn.client then [ 
+            (import ./nixos/optional/network/vpn/client.nix { 
+              inherit pkgs;
+              is_external = mergedSetup.nogui.network.vpn.is_external; 
+            }) 
+          ] else [])          
           ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/suricata ] else [])
           ++ (if mergedSetup.nogui.network.nikto then [ ./nixos/optional/pkgs/nikto ] else [])
           ++ (if mergedSetup.nogui.network.wireshark then [ ./nixos/optional/pkgs/wireshark ] else [])
