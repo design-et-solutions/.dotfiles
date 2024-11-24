@@ -3,9 +3,18 @@
   programs.fish = {
     enable = true;
     shellAliases = {
+      # MISC
       ll = "ls -l";
       la = "ls -a";
-      lg = "lazygit"; 
+
+      # GITHUB
+      gh = "lazygit"; 
+      gh-reset-last-commit= "git commit --amend";
+      gh-stash = "git stash";
+      gh-stash-back = "git stash pop";
+      gh-tag = "git tag";
+      
+      # RUST
       clippy-full = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all -W clippy::pedantic -W clippy::nursery -W clippy::perf -W clippy::complexity -W clippy::suspicious -W clippy::style -W clippy::correctness"; 
       # all lints that are on by default (correctness, suspicious, style, complexity, perf)
       clippy-all = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all"; 
