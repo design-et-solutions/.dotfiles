@@ -29,6 +29,17 @@
 
   services.xserver.videoDrivers = [ "modesetting" ];
 
+  # services.getty.autologin = {
+  #   enable = true;
+  #   user = "me"; 
+  # };
+  services.xserver.displayManager.gdm = {
+    autoLogin = {
+      enable = true;
+      user = "me";
+    };
+  };
+
   # to run gui
   # add to /boot/config.txt:
   #   dtoverlay=vc4-kms-v3d-pi5
