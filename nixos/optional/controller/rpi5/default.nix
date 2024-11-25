@@ -23,21 +23,18 @@
     # Support the Video Audio (Hardware) Acceleration API
     gst_all_1.gst-vaapi
     mesa
+    mesa-demos
     libva
     libva-utils
   ];
 
   environment.variables = {
-    GST_PLUGIN_PATH = "${pkgs.gst_all_1.gstreamer}/lib/gstreamer-1.0";
-    GST_PLUGIN_SYSTEM_PATH = "${pkgs.gst_all_1.gstreamer}/lib/gstreamer-1.0";
+    GST_PLUGIN_PATH = "${pkgs.gst_all_1}/lib/gstreamer-1.0";
+    GST_PLUGIN_SYSTEM_PATH = "${pkgs.gst_all_1}/lib/gstreamer-1.0";
   };
 
   services.xserver.videoDrivers = [ "modesetting" ];
 
-  # services.getty.autologin = {
-  #   enable = true;
-  #   user = "me"; 
-  # };
   services.displayManager.autoLogin = {
     enable = true;
     user = "me";
