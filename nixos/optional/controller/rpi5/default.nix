@@ -29,8 +29,8 @@
   ];
 
   environment.variables = {
-    GST_PLUGIN_PATH = "${pkgs.gst_all_1}/lib/gstreamer-1.0";
-    GST_PLUGIN_SYSTEM_PATH = "${pkgs.gst_all_1}/lib/gstreamer-1.0";
+    GST_PLUGIN_PATH = "${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0";
+    GST_PLUGIN_SYSTEM_PATH = "${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0";
   };
 
   services.xserver.videoDrivers = [ "modesetting" ];
