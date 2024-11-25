@@ -33,11 +33,9 @@
   #   enable = true;
   #   user = "me"; 
   # };
-  services.xserver.displayManager.gdm = {
-    autoLogin = {
-      enable = true;
-      user = "me";
-    };
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "me";
   };
 
   # to run gui
