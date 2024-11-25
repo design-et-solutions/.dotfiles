@@ -16,10 +16,10 @@
     kernelPackages = inputs.nix-rpi5.legacyPackages.aarch64-linux.linuxPackages_rpi5;
     loader.efi.canTouchEfiVariables = lib.mkForce false;
     kernelParams = [ 
-      "cma=256M" 
+      # "cma=256M" 
       # "dtoverlay=vc4-kms-v3d"
-      "dtoverlay=vc4-kms-v3d-pi5"
-      "gpu_mem=256"                  
+      # "dtoverlay=vc4-kms-v3d-pi5"
+      # "gpu_mem=256"                  
     ];
     #  extraConfig = ''
     # '';
