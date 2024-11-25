@@ -7,7 +7,6 @@
       enable = true;
       allowedTCPPorts = [ 80 443 8080 ];
       allowedUDPPorts = [ 53 ];
-      denyUnresolved = true;
     };
   };
 
@@ -15,5 +14,8 @@
     networkmanager   
     protobuf       
     nmap
+    wget
+    websocat
+    curl
   ];
 }
