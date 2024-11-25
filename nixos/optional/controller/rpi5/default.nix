@@ -14,9 +14,9 @@
       "dtoverlay=vc4-kms-v3d"
       # "dtoverlay=vc4-kms-v3d-pi5"
     ];
-     extraConfig = ''
-      gpu_mem=256                  # Allocate 256MB for GPU rendering
-    '';
+    #  extraConfig = ''
+    #   gpu_mem=256                  # Allocate 256MB for GPU rendering
+    # '';
   };
 
   systemd.services.update-brcmfmac43455 = {
