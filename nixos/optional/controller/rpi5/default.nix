@@ -15,15 +15,10 @@
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
-
-    # Common plugins like "filesrc" to combine within e.g. gst-launch
-    # Specialized plugins separated by quality
-    # gst_all_1.gst-plugins-bad
-    # gst_all_1.gst-plugins-ugly
-    # Plugins to reuse ffmpeg to play almost every video format
-    # gst_all_1.gst-libav
-    # Support the Video Audio (Hardware) Acceleration API
-    # gst_all_1.gst-vaapi
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
+    gst_all_1.gst-vaapi
 
     mesa
     mesa-demos
@@ -33,10 +28,7 @@
   ];
 
   environment.variables = {
-    # GST_PLUGIN_PATH = "${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-bad}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-ugly}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-libav}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-vaapi}/lib/gstreamer-1.0";
-    # GST_PLUGIN_SYSTEM_PATH = "${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-bad}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-ugly}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-libav}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-vaapi}/lib/gstreamer-1.0";
-    # GST_PLUGIN_SYSTEM_PATH="${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0/:${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0/";
-    GST_PLUGIN_SYSTEM_PATH_1_0="${pkgs.gst_all_1.gstreamer.out}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0";
+    GST_PLUGIN_SYSTEM_PATH_1_0="${pkgs.gst_all_1.gstreamer.out}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-bad}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-ugly}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-vaapi}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-libav}/lib/gstreamer-1.0";
     PATH="$PATH:${pkgs.gst_all_1.gstreamer.dev}/bin";
   };
 
