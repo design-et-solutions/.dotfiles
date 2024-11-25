@@ -3,26 +3,35 @@
   environment.systemPackages = with pkgs; [ 
     lm_sensors 
     zstd
+
+    # gui
     wayland
     wlroots
     xwayland
     hyprland
     sway
     weston
+    gst-plugins-base
+    gst-plugins-good
+    gst-plugins-bad
+    gst-plugins-ugly
+    gst-libav
+    gstreamer-vaapi
   ];
+
+  # to run gui
+  # add to /boot/config.txt:
+  #   dtoverlay=vc4-kms-v3d-pi5
+  #   
+  # $ git clone --depth=1 https://github.com/raspberrypi/firmware
+  # $ sudo mkdir -p /boot/overlays
+  # $ sudo cp firmware/boot/overlays/vc4-kms-v3d-pi5.dtbo /boot/overlays/
 
   boot = {
     loader.grub.device = "nodev";
     kernelPackages = inputs.nix-rpi5.legacyPackages.aarch64-linux.linuxPackages_rpi5;
     loader.efi.canTouchEfiVariables = lib.mkForce false;
-    kernelParams = [ 
-      # "cma=256M" 
-      "dtoverlay=vc4-kms-v3d"
-      # "dtoverlay=vc4-kms-v3d-pi5"
-      # "gpu_mem=256"                  
-    ];
-    #  extraConfig = ''
-    # '';
+    kernelParams = [];
   };
 
   systemd.services.update-brcmfmac43455 = {
@@ -35,11 +44,4 @@
       RemainAfterExit = true;
     };
   };
-
-  # hardware = {
-  #   opengl.enable = true;
-  #   video.drivers = [ "modesetting" ]; # VC4 driver requires "modesetting"
-  # };
-
-   # Allocate memory for the GPU
 }
