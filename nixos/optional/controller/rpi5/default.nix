@@ -22,7 +22,10 @@
     gst_all_1.gst-libav
     # Support the Video Audio (Hardware) Acceleration API
     gst_all_1.gst-vaapi
+    mesa
   ];
+
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   # to run gui
   # add to /boot/config.txt:
