@@ -21,4 +21,11 @@
       RemainAfterExit = true;
     };
   };
+
+  hardware = {
+    opengl.enable = true;
+    video.drivers = [ "modesetting" ]; # VC4 driver requires "modesetting"
+  };
+
+  boot.kernelParams = [ "cma=256M" ]; # Allocate memory for the GPU
 }
