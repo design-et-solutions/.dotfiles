@@ -6,15 +6,11 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
-    nogui = {
-      network = {
-        wifi = {
-          emergency =  true;
-        };
-      };
+    gui = {
+      enable = true;
+      full = true;
     };
-    controller = {
-      rpi5 = true;
-    };
+    nogui.networkwifi.emergency =  true;
+    controller.rpi5 = true;
   };
 }

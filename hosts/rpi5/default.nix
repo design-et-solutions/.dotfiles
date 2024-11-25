@@ -7,7 +7,6 @@
   time.timeZone = "Europe/Paris";
 
   networking= {
-    hostName = "rpi5-hood";
+    hostName = "rpi5";
   };
 }
-
