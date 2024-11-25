@@ -17,8 +17,8 @@
     loader.efi.canTouchEfiVariables = lib.mkForce false;
     kernelParams = [ 
       # "cma=256M" 
-      # "dtoverlay=vc4-kms-v3d"
-      "dtoverlay=vc4-kms-v3d-pi5"
+      "dtoverlay=vc4-kms-v3d"
+      # "dtoverlay=vc4-kms-v3d-pi5"
       # "gpu_mem=256"                  
     ];
     #  extraConfig = ''
