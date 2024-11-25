@@ -9,6 +9,10 @@
     loader.grub.device = "nodev";
     kernelPackages = inputs.nix-rpi5.legacyPackages.aarch64-linux.linuxPackages_rpi5;
     loader.efi.canTouchEfiVariables = lib.mkForce false;
+    kernelParams = [ 
+      "cma=256M" 
+      "dtoverlay=vc4-kms-v3d-pi5"
+    ];
   };
 
   systemd.services.update-brcmfmac43455 = {
@@ -22,10 +26,10 @@
     };
   };
 
-  hardware = {
-    opengl.enable = true;
-    video.drivers = [ "modesetting" ]; # VC4 driver requires "modesetting"
-  };
+  # hardware = {
+  #   opengl.enable = true;
+  #   video.drivers = [ "modesetting" ]; # VC4 driver requires "modesetting"
+  # };
 
-  boot.kernelParams = [ "cma=256M" ]; # Allocate memory for the GPU
+   # Allocate memory for the GPU
 }
