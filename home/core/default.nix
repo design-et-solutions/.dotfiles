@@ -6,6 +6,7 @@
     [
       ./fonts
       ./pkgs/nvim
+      ./pkgs/rust
       ./pkgs/git
     ];
 

@@ -5,6 +5,7 @@
     rustup
     pkg-config
     openssl   
+    mold
   ];
 
   environment.variables = {
