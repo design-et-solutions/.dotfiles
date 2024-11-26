@@ -41,6 +41,8 @@
     };
     interactiveShellInit = ''
       starship init fish | source
+      set fish_vi_key_bindings
+      fzf --fish | source
     '';
   };
 
@@ -52,6 +54,12 @@
   environment.systemPackages = with pkgs; [
     fish
     starship
+    fishPlugins.done # Automatically receive notifications when long processes finish
+    fishPlugins.fzf-fish # Augment your fish command line with fzf key bindings
+    fishPlugins.forgit # Utility tool powered by fzf for using git interactively
+    fzf
+    fishPlugins.grc
+    grc
   ];
 
   environment.shells = with pkgs; [ fish ];

@@ -7,6 +7,9 @@ set softtabstop=4
 set shiftwidth=4
 set smartindent
 set termguicolors
+set cursorline
+set cursorlineopt=number
+"set signcolumn=yes
 
 " Rust-specific settings
 let g:rustfmt_autosave = 1

@@ -1,9 +1,9 @@
 { pkgs ? import <nixpkgs> {} }:
 
 pkgs.mkShell {
-    buildInputs = [
-        pkgs.bitcoin
-        pkgs.jq
+    buildInputs = with pkgs; [
+        bitcoin
+        jq
     ];
 
     shellHook = ''
