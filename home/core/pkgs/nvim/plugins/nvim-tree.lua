@@ -24,6 +24,9 @@ require("nvim-tree").setup({
         custom = { '.git' },
         git_ignored = true,
     },
+    update_focused_file = {
+        enable = true,
+    },
 })
 
 require'nvim-treesitter.configs'.setup {
