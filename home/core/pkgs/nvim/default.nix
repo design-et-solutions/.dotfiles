@@ -17,6 +17,15 @@
     '';
     extraLuaConfig = ''
       ${builtins.readFile ./config.lua}
+      ${builtins.readFile ./plugins/bufferline.lua}
+      ${builtins.readFile ./plugins/colorizer.lua}
+      ${builtins.readFile ./plugins/gruvbox.lua}
+      ${builtins.readFile ./plugins/image.lua}
+      ${builtins.readFile ./plugins/nvim-tree.lua}
+      ${builtins.readFile ./plugins/rest-nvim.lua}
+      ${builtins.readFile ./plugins/toggleterm.lua}
+      ${builtins.readFile ./plugins/tokyonight.lua}
+      ${builtins.readFile ./plugins/which-key.lua}
       ${builtins.readFile ./keybindings.lua}
     '';
     extraPackages = with pkgs; [

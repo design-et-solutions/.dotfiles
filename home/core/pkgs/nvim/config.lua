@@ -1,13 +1,3 @@
-require("plugins.nvim-tree")
-require("plugins.bufferline")
-require("plugins.toggleterm")
-require("plugins.rest-nvim")
-require("plugins.colorizer")
-require("plugins.image")
-require("plugins.which-key")
-require("plugins.gruvbox")
-require("plugins.tokyonight")
-
 -- Set completeopt for better completion experience
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
