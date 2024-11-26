@@ -6,6 +6,7 @@
     pkg-config
     openssl   
     mold
+    clang
   ];
 
   environment.variables = {
