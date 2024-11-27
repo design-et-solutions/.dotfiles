@@ -21,8 +21,10 @@
       ${builtins.readFile ./plugins/colorizer.lua}
       ${builtins.readFile ./plugins/gruvbox.lua}
       ${builtins.readFile ./plugins/image.lua}
+      ${builtins.readFile ./plugins/lspconfig.lua}
       ${builtins.readFile ./plugins/nvim-tree.lua}
       ${builtins.readFile ./plugins/rest-nvim.lua}
+      ${builtins.readFile ./plugins/rust-tools.lua}
       ${builtins.readFile ./plugins/toggleterm.lua}
       ${builtins.readFile ./plugins/tokyonight.lua}
       ${builtins.readFile ./plugins/which-key.lua}
@@ -53,6 +55,7 @@
       nvim-tree-lua           # https://github.com/nvim-tree/nvim-tree.lua
       nvim-web-devicons       # https://github.com/nvim-tree/nvim-web-devicons
       rest-nvim               # https://github.com/rest-nvim/rest.nvim
+      rust-tools-nvim         # https://github.com/simrat39/rust-tools.nvim
       rust-vim                # https://github.com/rust-lang/rust.vim
       telescope-coc-nvim      # https://github.com/fannheyward/telescope-coc.nvim
       telescope-nvim          # https://github.com/nvim-telescope/telescope.nvim
