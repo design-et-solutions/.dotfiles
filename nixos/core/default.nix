@@ -58,6 +58,7 @@
     tree
     websocat
     parted
+    nodejs_22
   ];
 
   services.printing = {
