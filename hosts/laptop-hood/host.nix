@@ -43,7 +43,7 @@ mkNixosConfiguration {
         wifi = {
           emergency = true;
         };
-        # bluetooth = true;
+        bluetooth = true;
         # can = {
           # enable = true;
           # peak = true;
