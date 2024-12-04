@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    nerd-fonts.fira-code
+    # (nerdfonts.override { fonts = [ "FiraCode" ]; })
     noto-fonts-emoji
   ];
 

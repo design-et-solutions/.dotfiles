@@ -15,6 +15,7 @@ mkNixosConfiguration {
         slack = true;
         teams = true;
         whatsapp = true;
+        rustdesk = true;
       };
       tool = {
         unity = true;

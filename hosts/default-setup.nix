@@ -26,6 +26,7 @@
       gimp = false;
       vial = false;
       drawio = false;
+      rustdesk = false;
     };
     misc = {
       steam = false;

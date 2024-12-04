@@ -86,6 +86,7 @@
           ++ (if mergedSetup.gui.comm.teams then [ ./nixos/optional/pkgs/teams ] else [])
           ++ (if mergedSetup.gui.comm.whatsapp then [ ./nixos/optional/pkgs/whatsapp ] else [])
           ++ (if mergedSetup.gui.comm.mail then [ ./nixos/optional/pkgs/mail ] else [])
+          ++ (if mergedSetup.gui.comm.rustdesk then [ ./nixos/optional/pkgs/rustdesk ] else [])
           #   TOOL
           ++ (if mergedSetup.gui.tool.solaar then [ ./nixos/optional/pkgs/solaar ] else [])
           ++ (if mergedSetup.gui.tool.unity then [ ./nixos/optional/pkgs/unity ] else [])
