@@ -15,7 +15,6 @@ mkNixosConfiguration {
         slack = true;
         teams = true;
         whatsapp = true;
-        rustdesk = true;
       };
       tool = {
         unity = true;
@@ -30,6 +29,7 @@ mkNixosConfiguration {
         steam-run = true;
         mgba = true;
         streamio = true;
+        game = true;
       };
     };
     nogui = {

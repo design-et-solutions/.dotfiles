@@ -86,7 +86,6 @@
           ++ (if mergedSetup.gui.comm.teams then [ ./nixos/optional/pkgs/teams ] else [])
           ++ (if mergedSetup.gui.comm.whatsapp then [ ./nixos/optional/pkgs/whatsapp ] else [])
           ++ (if mergedSetup.gui.comm.mail then [ ./nixos/optional/pkgs/mail ] else [])
-          ++ (if mergedSetup.gui.comm.rustdesk then [ ./nixos/optional/pkgs/rustdesk ] else [])
           #   TOOL
           ++ (if mergedSetup.gui.tool.solaar then [ ./nixos/optional/pkgs/solaar ] else [])
           ++ (if mergedSetup.gui.tool.unity then [ ./nixos/optional/pkgs/unity ] else [])
@@ -100,6 +99,7 @@
           ++ (if mergedSetup.gui.misc.steam-run then [ ./nixos/optional/pkgs/steam ] else [])
           ++ (if mergedSetup.gui.misc.streamio then [ ./nixos/optional/pkgs/stremio ] else [])
           ++ (if mergedSetup.gui.misc.mgba then [ ./nixos/optional/pkgs/mgba ] else [])
+          ++ (if mergedSetup.gui.misc.game then [ ./nixos/optional/pkgs/game ] else [])
 
           # NOGUI
           #   AUDIO

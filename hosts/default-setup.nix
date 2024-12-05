@@ -26,13 +26,13 @@
       gimp = false;
       vial = false;
       drawio = false;
-      rustdesk = false;
     };
     misc = {
       steam = false;
       steam-run = false;
       streamio = false;
       mgba = false;
+      game = false;
     };
   };
   nogui = {
