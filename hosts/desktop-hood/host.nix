@@ -23,13 +23,13 @@ mkNixosConfiguration {
         handbrake = true;
         vlc = true;
         drawio = true;
+        appimage = true;
       };
       misc = {
         steam = true;
         steam-run = true;
         mgba = true;
         streamio = true;
-        game = true;
       };
     };
     nogui = {

@@ -1,6 +1,5 @@
-{ pkgs, ... }:{
+{ pkgs, lib, ... }:{
   environment.systemPackages = with pkgs; [
-    fuse
-    libfuse
+    appimage-run
   ];
 }
