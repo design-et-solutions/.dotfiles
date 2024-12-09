@@ -25,7 +25,7 @@
             owner = "fabioluciano";
             repo = "tmux-tokyo-night";
             rev = "main";
-            sha256 = "sha256-ODl2h8t1U9mBRDmreZ5pRxWcvAulJJ+PfaLi78/YfPU=";
+            sha256 = "sha256-9nDgiJptXIP+Hn9UY+QFMgoghw4HfTJ5TZq0f9KVOFg=";
           };
           postInstall = ''
             mv $out/share/tmux-plugins/tmux-tokyo-night/tmux-tokyo-night.tmux $out/share/tmux-plugins/tmux-tokyo-night/tmux_tokyo_night.tmux

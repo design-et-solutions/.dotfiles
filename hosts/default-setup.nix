@@ -26,6 +26,7 @@
       gimp = false;
       vial = false;
       drawio = false;
+      appimage = false;
     };
     misc = {
       steam = false;

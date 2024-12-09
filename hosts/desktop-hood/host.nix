@@ -23,6 +23,7 @@ mkNixosConfiguration {
         handbrake = true;
         vlc = true;
         drawio = true;
+        appimage = true;
       };
       misc = {
         steam = true;
