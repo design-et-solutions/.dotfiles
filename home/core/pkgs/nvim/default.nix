@@ -65,6 +65,7 @@
       vim-nix                 # https://github.com/LnL7/vim-nix
       vim-lastplace           # https://github.com/ethanholz/nvim-lastplace
       which-key-nvim          # https://github.com/liuchengxu/vim-which-key
+      vim-flog                # https://github.com/rbong/vim-flog
       {
         # https://github.com/nvim-treesitter/nvim-treesitter
         plugin = nvim-treesitter.withPlugins (
