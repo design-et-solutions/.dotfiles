@@ -32,7 +32,14 @@
         defaultTimeout = 5000;
         extraConfig = ''
           [urgency=low]
-          border-color=#b8bb26
+          border-color=#306B34
+          [urgency=normal]
+          border-color=#F7DD72
+          [urgency=critical]
+          border-color=#CD533B
+
+          [category=info]
+          icon=~/.local/share/icons/info.svg
         '';
   };
 }

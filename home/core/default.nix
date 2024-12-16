@@ -31,4 +31,10 @@
     source = ../shell;
     force = true;
   };
+
+  home.file.".local/share/icons" = {
+    source = ../icons;
+    force = true;
+  };
+
 }
