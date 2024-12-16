@@ -4,10 +4,10 @@
         enable = true;
         # null or one of "top-right", "top-center", "top-left", "bottom-right", "bottom-center", "bottom-left", "center"
         anchor = "bottom-right";
-        backgroundColor = "#1c0f13";
-        borderColor = "#5762D5";
-        textColor = "#BBBAC6";
-        progressColor = "over #5588AAFF";
+        backgroundColor = "#fbf1c7";
+        borderColor = "#3c3836";
+        textColor = "#3c3836";
+        progressColor = "over #5588AA";
         borderRadius = 0;
         borderSize = 4;
         font = "FiraCode Nerd Font Mono 10";
@@ -32,7 +32,13 @@
         defaultTimeout = 5000;
         extraConfig = ''
           [urgency=low]
-          border-color=#b8bb26
+          border-color=#458588
+          [urgency=critical]
+          border-color=#cc241d
+
+          # [category=info]
+          # icon=󰻠
+          # text-color=#FFFFFF
         '';
   };
 }
