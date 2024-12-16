@@ -24,6 +24,7 @@ in
       ../pkgs/waybar 
     ]) ++
     [
+      ../pkgs/mako
       ../pkgs/kitty 
       ../pkgs/rofi 
       ../pkgs/mpv 
