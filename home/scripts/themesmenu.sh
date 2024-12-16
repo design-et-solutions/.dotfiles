@@ -43,6 +43,7 @@ run_cmd() {
         sed -i 's|vim\.cmd("colorscheme gruvbox")|vim.cmd("colorscheme tokyonight-night")|' "$file_nvim"
         # wallpapers
         sed -i 's|THEME="light-theme"|THEME="dark-theme"|' "$file_wallpaper"
+        export THEME="DARK"
     elif [[ $1 == '--light' ]]; then
         # rofi
         for file in $files_rofi; do
@@ -59,6 +60,7 @@ run_cmd() {
         sed -i 's|vim\.cmd("colorscheme tokyonight-night")|vim.cmd("colorscheme gruvbox")|' "$file_nvim"
         # wallpapers
         sed -i 's|THEME="dark-theme"|THEME="light-theme"|' "$file_wallpaper"
+        export THEME="LIGHT"
     fi
     pkill waybar && hyprctl dispatch exec waybar
     kill -SIGUSR1 $(pgrep kitty)

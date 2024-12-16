@@ -33,13 +33,12 @@
         extraConfig = ''
           [urgency=low]
           border-color=#306B34
-          [urgency=normal]
-          border-color=#F7DD72
           [urgency=critical]
           border-color=#CD533B
 
           [category=info]
-          icon=~/.local/share/icons/info.svg
+          icon=󰻠
+          text-color=#FFFFFF
         '';
   };
 }

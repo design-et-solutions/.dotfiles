@@ -5,6 +5,11 @@
     ../pkgs/firefox
   ];
 
+  environment.variables = {
+    THEME = "LIGHT";
+  };
+
+
   services = { 
     xserver = {
       enable = true;

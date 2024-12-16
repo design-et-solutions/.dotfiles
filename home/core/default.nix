@@ -32,7 +32,7 @@
     force = true;
   };
 
-  home.file.".local/share/icons" = {
+  home.file.".icons" = {
     source = ../icons;
     force = true;
   };
