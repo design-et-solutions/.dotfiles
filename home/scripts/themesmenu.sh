@@ -27,6 +27,7 @@ run_cmd() {
     file_tmux=$HOME/.config/tmux/tmux.conf
     file_nvim=$HOME/.config/nvim/init.lua
     file_wallpaper=$HOME/.scripts/wallpapers-randomizer.sh
+    file_mako=$HOME/.config/mako/config 
     if [[ $1 == '--dark' ]]; then
         # rofi
         for file in $files_rofi; do
@@ -43,7 +44,10 @@ run_cmd() {
         sed -i 's|vim\.cmd("colorscheme gruvbox")|vim.cmd("colorscheme tokyonight-night")|' "$file_nvim"
         # wallpapers
         sed -i 's|THEME="light-theme"|THEME="dark-theme"|' "$file_wallpaper"
-        export THEME="DARK"
+        # mako
+        sed -i 's|background-color=#fbf1c7|background-color=#1a1b26|' "$file_mako"
+        sed -i 's|border-color=#3c3836|border-color=#a9b1d6|' "$file_mako"
+        sed -i 's|text-color=#3c3836|text-color=#a9b1d6|' "$file_mako"
     elif [[ $1 == '--light' ]]; then
         # rofi
         for file in $files_rofi; do
@@ -60,7 +64,10 @@ run_cmd() {
         sed -i 's|vim\.cmd("colorscheme tokyonight-night")|vim.cmd("colorscheme gruvbox")|' "$file_nvim"
         # wallpapers
         sed -i 's|THEME="dark-theme"|THEME="light-theme"|' "$file_wallpaper"
-        export THEME="LIGHT"
+        # mako
+        sed -i 's|background-color=#1a1b26|background-color=#fbf1c7|' "$file_mako"
+        sed -i 's|border-color=#a9b1d6|border-color=#3c3836|' "$file_mako"
+        sed -i 's|text-color=#a9b1d6|text-color=#3c3836|' "$file_mako"
     fi
     pkill waybar && hyprctl dispatch exec waybar
     kill -SIGUSR1 $(pgrep kitty)
