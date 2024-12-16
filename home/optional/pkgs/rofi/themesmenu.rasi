@@ -23,7 +23,7 @@ window {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
+    border-color:                @foreground;
     cursor:                      "default";
     background-color:            @background;
 }
