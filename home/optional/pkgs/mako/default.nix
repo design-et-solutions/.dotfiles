@@ -39,8 +39,10 @@ in {
 
           [urgency=low]
           border-color=#458588
+
           [urgency=critical]
           border-color=#cc241d
+          default-timeout=0
 
           [category=info]
           text-color=#0000ff
