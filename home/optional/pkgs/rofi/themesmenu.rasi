@@ -23,7 +23,7 @@ window {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @foreground;
+    border-color:                @selected;
     cursor:                      "default";
     background-color:            @background;
 }
@@ -34,9 +34,9 @@ mainbox {
     spacing:                     10px;
     margin:                      0px;
     padding:                     20px;
-    border:                      0px solid;
+    border:                      4px solid;
     border-radius:               0px;
-    border-color:                @selected;
+    border-color:                @foreground;
     background-color:            transparent;
     children:                    [ "inputbar", "message", "listview" ];
 }
@@ -62,14 +62,14 @@ textbox-prompt-colon {
     padding:                     10px 20px 10px 16px;
     border-radius:               0px;
     background-color:            @urgent;
-    text-color:                  @foreground;
+    text-color:                  @background;
 }
 prompt {
     enabled:                     true;
     padding:                     10px 14px;
     border-radius:               0px;
     background-color:            @active;
-    text-color:                  @foreground;
+    text-color:                  @background;
 }
 
 /*****----- Message -----*****/
