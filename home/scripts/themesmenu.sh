@@ -48,6 +48,7 @@ run_cmd() {
         sed -i 's|background-color=#fbf1c7|background-color=#1a1b26|' "$file_mako"
         sed -i 's|border-color=#3c3836|border-color=#a9b1d6|' "$file_mako"
         sed -i 's|text-color=#3c3836|text-color=#a9b1d6|' "$file_mako"
+        sed -i 's|.icons/light|.icons/dark|' "$file_mako"
     elif [[ $1 == '--light' ]]; then
         # rofi
         for file in $files_rofi; do
@@ -68,6 +69,7 @@ run_cmd() {
         sed -i 's|background-color=#1a1b26|background-color=#fbf1c7|' "$file_mako"
         sed -i 's|border-color=#a9b1d6|border-color=#3c3836|' "$file_mako"
         sed -i 's|text-color=#a9b1d6|text-color=#3c3836|' "$file_mako"
+        sed -i 's|.icons/dark|.icons/light|' "$file_mako"
     fi
     pkill waybar && hyprctl dispatch exec waybar
     kill -SIGUSR1 $(pgrep kitty)
@@ -76,6 +78,7 @@ run_cmd() {
         nvim --server "$server_name" --remote-send ":lua ReloadConfig()<CR>"
     done
     $file_wallpaper
+    makoctl reload
 }
 
 # Actions

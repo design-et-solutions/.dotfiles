@@ -1,4 +1,8 @@
-{ ... }: {
+{ config, ... }: 
+let
+  # homeDir = builtins.getEnv "HOME";
+  homeDir = config.home.homeDirectory;
+in {
     # https://www.mankier.com/5/mako
     services.mako = {
         enable = true;
@@ -15,9 +19,9 @@
         groupBy = null;
         height = 100;
         width = 300;
-        margin = "0";
-        padding = "10";
-        iconPath = null;
+        margin = "5, 0";
+        padding = "5";
+        iconPath = "${homeDir}/.icons/light";
         icons = true;
         ignoreTimeout = false;
         # null or one of "background", "bottom", "top", "overlay"
@@ -31,14 +35,15 @@
         sort = "-time";
         defaultTimeout = 5000;
         extraConfig = ''
+          outer-margin=20
+
           [urgency=low]
           border-color=#458588
           [urgency=critical]
           border-color=#cc241d
 
-          # [category=info]
-          # icon=󰻠
-          # text-color=#FFFFFF
+          [category=info]
+          text-color=#0000ff
         '';
   };
 }
