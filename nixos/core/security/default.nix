@@ -1,13 +1,12 @@
-{ ... }: {
+{ pkgs, ... }: {
   environment.etc."scripts/systemd-security-check.sh" = {
     source = ../../scripts/systemd-security-check.sh;
-    executable = true;
-    force = true;
+    mode = "0555";
   };
 
   systemd.services.systemd-security-check = {
     description = "Run systemd security check and send notification";
-    script = "/etc/scripts/systemd-security-check.sh";
+    script = "${pkgs.bash}/bin/bash /etc/scripts/systemd-security-check.sh";
     wantedBy = [ "multi-user.target" ];
   };
 
