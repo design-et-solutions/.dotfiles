@@ -25,6 +25,12 @@
               persistentKeepalive = 25;
             }
             {
+              # laptop-hood
+              publicKey = "5vxIRcUsxCwK0KajAKKjWbW7ENH2Yka9khBtp4vS9Xk=";
+              allowedIPs = [ "10.100.0.5/32" ];
+              persistentKeepalive = 25;
+            }
+            {
               # project-handler
               publicKey = "JEXspdTfOxZ83z7tIcvUWN2Ir9nzsDUSA51tFB5002I=";
               allowedIPs = [ "10.100.0.4/32" ];
