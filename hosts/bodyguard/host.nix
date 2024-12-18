@@ -6,11 +6,14 @@ mkNixosConfiguration {
   setup = {
     nogui = {
       network = {
-        suricata = true;
-        nikto = true;
         wireshark = true;
         vpn.server = true;
         wifi.emergency =  true;
+      };
+      security = {
+        blocky = true;
+        suricata = true;
+        nikto = true;
       };
     };
     controller.rpi5 = true;

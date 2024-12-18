@@ -49,6 +49,9 @@ mkNixosConfiguration {
           # peak = true;
         # };
       };
+      security = {
+        blocky = true;
+      };
       driver = {
         printer = true;
       };

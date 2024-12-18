@@ -1,8 +1,8 @@
 { pkgs, mergedSetup, ... }:
 {
   imports = [
-    ../pkgs/thunar 
-    ../pkgs/firefox
+    ../pkgs/too/thunar 
+    ../pkgs/web/firefox
   ];
 
   services = { 

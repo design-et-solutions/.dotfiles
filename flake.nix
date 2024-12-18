@@ -81,30 +81,32 @@
           #   DRIVER
           ++ (if mergedSetup.gui.driver.nvidia then [ ./nixos/optional/drivers/gpu/nvidia ] else [])
           #   COMM
-          ++ (if mergedSetup.gui.comm.discord then [ ./nixos/optional/pkgs/discord ] else [])
-          ++ (if mergedSetup.gui.comm.slack then [ ./nixos/optional/pkgs/slack ] else [])
-          ++ (if mergedSetup.gui.comm.teams then [ ./nixos/optional/pkgs/teams ] else [])
-          ++ (if mergedSetup.gui.comm.whatsapp then [ ./nixos/optional/pkgs/whatsapp ] else [])
-          ++ (if mergedSetup.gui.comm.mail then [ ./nixos/optional/pkgs/mail ] else [])
+          ++ (if mergedSetup.gui.comm.discord then [ ./nixos/optional/pkgs/comm/discord ] else [])
+          ++ (if mergedSetup.gui.comm.slack then [ ./nixos/optional/pkgs/comm/slack ] else [])
+          ++ (if mergedSetup.gui.comm.teams then [ ./nixos/optional/pkgs/comm/teams ] else [])
+          ++ (if mergedSetup.gui.comm.whatsapp then [ ./nixos/optional/pkgs/comm/whatsapp ] else [])
+          ++ (if mergedSetup.gui.comm.mail then [ ./nixos/optional/pkgs/comm/thunderbird ] else [])
           #   TOOL
-          ++ (if mergedSetup.gui.tool.solaar then [ ./nixos/optional/pkgs/solaar ] else [])
-          ++ (if mergedSetup.gui.tool.unity then [ ./nixos/optional/pkgs/unity ] else [])
-          ++ (if mergedSetup.gui.tool.handbrake then [ ./nixos/optional/pkgs/handbrake ] else [])
-          ++ (if mergedSetup.gui.tool.vlc then [ ./nixos/optional/pkgs/vlc ] else [])
-          ++ (if mergedSetup.gui.tool.gimp then [ ./nixos/optional/pkgs/gimp ] else [])
-          ++ (if mergedSetup.gui.tool.vial then [ ./nixos/optional/pkgs/vial ] else [])
-          ++ (if mergedSetup.gui.tool.drawio then [ ./nixos/optional/pkgs/drawio ] else [])
-          ++ (if mergedSetup.gui.tool.appimage then [ ./nixos/optional/pkgs/appimage ] else [])
+          ++ (if mergedSetup.gui.tool.drawio then [ ./nixos/optional/pkgs/tool/drawio ] else [])
+          ++ (if mergedSetup.gui.tool.gimp then [ ./nixos/optional/pkgs/tool/gimp ] else [])
+          ++ (if mergedSetup.gui.tool.handbrake then [ ./nixos/optional/pkgs/tool/handbrake ] else [])
+          ++ (if mergedSetup.gui.misc.steam-run then [ ./nixos/optional/pkgs/tool/steam-run ] else [])
+          ++ (if mergedSetup.gui.tool.unity then [ ./nixos/optional/pkgs/tool/unity ] else [])
+          ++ (if mergedSetup.gui.tool.vial then [ ./nixos/optional/pkgs/tool/vial ] else [])
+          ++ (if mergedSetup.gui.tool.vlc then [ ./nixos/optional/pkgs/tool/vlc ] else [])
           #   MISC
-          ++ (if mergedSetup.gui.misc.steam then [ ./nixos/optional/pkgs/steam ] else [])
-          ++ (if mergedSetup.gui.misc.steam-run then [ ./nixos/optional/pkgs/steam ] else [])
-          ++ (if mergedSetup.gui.misc.streamio then [ ./nixos/optional/pkgs/stremio ] else [])
-          ++ (if mergedSetup.gui.misc.mgba then [ ./nixos/optional/pkgs/mgba ] else [])
+          ++ (if mergedSetup.gui.misc.steam then [ ./nixos/optional/pkgs/misc/steam ] else [])
+          ++ (if mergedSetup.gui.misc.streamio then [ ./nixos/optional/pkgs/misc/stremio ] else [])
+          ++ (if mergedSetup.gui.misc.mgba then [ ./nixos/optional/pkgs/misc/mgba ] else [])
 
           # NOGUI
+          #   TOOL
+          ++ (if mergedSetup.nogui.tool.appimage then [ ./nixos/optional/pkgs/tool/appimage ] else [])
+          ++ (if mergedSetup.nogui.tool.docker then [ ./nixos/optional/pkgs/tool/docker ] else [])
+          ++ (if mergedSetup.nogui.tool.solaar then [ ./nixos/optional/pkgs/tool/solaar ] else [])
           #   AUDIO
+          ++ (if mergedSetup.nogui.audio.spotify then [ ./nixos/optional/pkgs/misc/spotify ] else [])
           ++ (if mergedSetup.nogui.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
-          ++ (if mergedSetup.nogui.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
           #   NETWORK
           ++ (if mergedSetup.nogui.network.vpn.server then [ ./nixos/optional/network/vpn/server.nix ] else [])
           ++ (if mergedSetup.nogui.network.vpn.client then [ 
@@ -113,18 +115,19 @@
               is_external = mergedSetup.nogui.network.vpn.is_external; 
             }) 
           ] else [])          
-          ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/suricata ] else [])
-          ++ (if mergedSetup.nogui.network.nikto then [ ./nixos/optional/pkgs/nikto ] else [])
-          ++ (if mergedSetup.nogui.network.wireshark then [ ./nixos/optional/pkgs/wireshark ] else [])
+          ++ (if mergedSetup.nogui.network.wireshark then [ ./nixos/optional/pkgs/network/wireshark ] else [])
           ++ (if mergedSetup.nogui.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
           ++ (if mergedSetup.nogui.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
           ++ (if mergedSetup.nogui.network.can.enable then [ ./nixos/optional/network/can ] else [])
           ++ (if mergedSetup.nogui.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else [])
+          #   SECURITY
+          ++ (if mergedSetup.nogui.network.nikto then [ ./nixos/optional/pkgs/security/nikto ] else [])
+          ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/security/suricata ] else [])
+          ++ (if mergedSetup.nogui.network.blocky then [ ./nixos/optional/pkgs/security/blocky ] else [])
           #   DRIVER
           ++ (if mergedSetup.nogui.driver.print then [ ./nixos/optional/drivers/print ] else [])
           #   MISC
-          ++ (if mergedSetup.nogui.misc.xbox_controller then [ ./nixos/optional/pkgs/xbox_controller ] else [])
-          ++ (if mergedSetup.nogui.misc.elk then [ ./nixos/optional/pkgs/elk ] else [])
+          ++ (if mergedSetup.nogui.misc.xbox_controller then [ ./nixos/optional/pkgs/misc/xbox_controller ] else [])
           # CONTROLLER
           ++ (if mergedSetup.controller.rpi5 then [ ./nixos/optional/controller/rpi5 ] else []);
         };

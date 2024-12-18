@@ -18,12 +18,10 @@ mkNixosConfiguration {
       };
       tool = {
         unity = true;
-        solaar = true;
         vial = true;
         handbrake = true;
         vlc = true;
         drawio = true;
-        appimage = true;
       };
       misc = {
         steam = true;
@@ -36,6 +34,10 @@ mkNixosConfiguration {
       audio = {
         enable = true;
         spotify = true;
+      };
+      tool = {
+        solaar = true;
+        appimage = true;
       };
       network = {
         vpn.client = true;

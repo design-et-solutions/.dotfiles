@@ -21,12 +21,10 @@
     tool = {
       unity = false;
       vlc = false;
-      solaar = false;
       handbrake = false;
       gimp = false;
       vial = false;
       drawio = false;
-      appimage = false;
     };
     misc = {
       steam = false;
@@ -40,14 +38,17 @@
       enable = false;
       spotify = false;
     };
+    security = {
+      suricata = false;
+      nikto = false;
+      blocky = false;
+    };
     network = {
       vpn = {
         client = false;
         server = false;
         is_external = false;
       };
-      suricata = false;
-      nikto = false;
       wireshark = false;
       wifi = {
         emergency = false;
@@ -57,6 +58,11 @@
         enable = false;
         peak = false;
       };
+    };
+    tool = {
+      solaar = false;
+      docker = false;
+      appimage = false;
     };
     driver = {
       print = true;
