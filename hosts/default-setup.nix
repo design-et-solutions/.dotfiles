@@ -42,6 +42,7 @@
       nikto = false;
       blocky = false;
       lynis = false;
+      chkrootkit = true;
     };
     network = {
       suricata = false;
