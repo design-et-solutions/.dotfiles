@@ -9,11 +9,12 @@ mkNixosConfiguration {
         wireshark = true;
         vpn.server = true;
         wifi.emergency =  true;
+        suricata = true;
       };
       security = {
         blocky = true;
-        suricata = true;
         nikto = true;
+        lynis = true;
       };
     };
     controller.rpi5 = true;

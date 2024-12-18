@@ -51,6 +51,7 @@ mkNixosConfiguration {
       };
       security = {
         blocky = true;
+        lynis = true;
       };
       driver = {
         printer = true;

@@ -39,11 +39,12 @@
       spotify = false;
     };
     security = {
-      suricata = false;
       nikto = false;
       blocky = false;
+      lynis = false;
     };
     network = {
+      suricata = false;
       vpn = {
         client = false;
         server = false;

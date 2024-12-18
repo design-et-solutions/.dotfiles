@@ -116,14 +116,15 @@
             }) 
           ] else [])          
           ++ (if mergedSetup.nogui.network.wireshark then [ ./nixos/optional/pkgs/network/wireshark ] else [])
+          ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/network/suricata ] else [])
           ++ (if mergedSetup.nogui.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
           ++ (if mergedSetup.nogui.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
           ++ (if mergedSetup.nogui.network.can.enable then [ ./nixos/optional/network/can ] else [])
           ++ (if mergedSetup.nogui.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else [])
           #   SECURITY
-          ++ (if mergedSetup.nogui.network.nikto then [ ./nixos/optional/pkgs/security/nikto ] else [])
-          ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/security/suricata ] else [])
-          ++ (if mergedSetup.nogui.network.blocky then [ ./nixos/optional/pkgs/security/blocky ] else [])
+          ++ (if mergedSetup.nogui.security.nikto then [ ./nixos/optional/pkgs/security/nikto ] else [])
+          ++ (if mergedSetup.nogui.security.lynis then [ ./nixos/optional/pkgs/security/lynis ] else [])
+          ++ (if mergedSetup.nogui.security.blocky then [ ./nixos/optional/pkgs/security/blocky ] else [])
           #   DRIVER
           ++ (if mergedSetup.nogui.driver.print then [ ./nixos/optional/drivers/print ] else [])
           #   MISC
