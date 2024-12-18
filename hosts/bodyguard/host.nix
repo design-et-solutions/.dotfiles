@@ -14,7 +14,6 @@ mkNixosConfiguration {
       security = {
         blocky = true;
         nikto = true;
-        lynis = true;
       };
     };
     controller.rpi5 = true;

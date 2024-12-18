@@ -125,7 +125,7 @@
           ++ (if mergedSetup.nogui.security.nikto then [ ./nixos/optional/pkgs/security/nikto ] else [])
           ++ (if mergedSetup.nogui.security.lynis then [ ./nixos/optional/pkgs/security/lynis ] else [])
           ++ (if mergedSetup.nogui.security.blocky then [ ./nixos/optional/pkgs/security/blocky ] else [])
-          ++ (if mergedSetup.nogui.security.chkrootkit then [ ./nixos/optional/pkgs/security/chkrootkit ] else [])
+          ++ (if mergedSetup.nogui.security.clamav then [ ./nixos/optional/pkgs/security/clamav ] else [])
           #   DRIVER
           ++ (if mergedSetup.nogui.driver.print then [ ./nixos/optional/drivers/print ] else [])
           #   MISC

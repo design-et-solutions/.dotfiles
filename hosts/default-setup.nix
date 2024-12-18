@@ -41,8 +41,8 @@
     security = {
       nikto = false;
       blocky = false;
-      lynis = false;
-      chkrootkit = true;
+      lynis = true;
+      clamav = true;
     };
     network = {
       suricata = false;
