@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-# Initialize counters
-ok=0
-total=0
+# Service to monitor
+SERVICE_NAME="systemd-security-check"
 
-# Command to analyze and count OK services
-result=$(systemd-analyze security | awk '/OK/ {ok++} {total++} END {print "OK: " ok " / Total: " total}')
+# Get the latest log entry from the systemd service
+result=$(journalctl -u "$SERVICE_NAME" -n 1 --no-pager --quiet | tail -n 1)
 
-# Extract ok and total from the result for comparison
 ok=$(echo "$result" | awk '{print $2}')
 total=$(echo "$result" | awk '{print $5}')
 
