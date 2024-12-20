@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   # The Linux audit framework provides a CAPP-compliant (Controlled Access Protection Profile) \
   # auditing system that reliably collects information \
   # about any security-relevant (or non-security-relevant) event on a system. 
@@ -13,4 +13,10 @@
       enable = true;
     };
   };
+
+  # environment.systemPackages = with pkgs; [ audit ];
+  # environment.etc."audit/auditd.conf".source = "${pkgs.audit}";
+  environment.etc."audit/auditd.conf".source = "${pkgs.audit.out}/etc/audit/auditd.conf";
+  environment.etc."audit/audit.rules".source = builtins.toString ./audit.rules;
+  # environment.etc."audit/auditd.tes".source = "${pkgs.audit.out}";
 }
