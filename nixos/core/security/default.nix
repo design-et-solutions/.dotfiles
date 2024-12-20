@@ -52,7 +52,7 @@
     enable = true;
     timerConfig = {
       OnBootSec = "5m";
-      OnUnitActiveSec = "1m";
+      OnUnitActiveSec = "1h";
       Unit = "systemd-security-check.service";
       Persistent = true;
     };
