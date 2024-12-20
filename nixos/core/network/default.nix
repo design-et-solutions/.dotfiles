@@ -9,6 +9,7 @@
       allowedUDPPorts = [ 53 ];
     };
   };
+  
 
   environment.systemPackages = with pkgs; [
     networkmanager   

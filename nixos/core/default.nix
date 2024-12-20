@@ -7,14 +7,14 @@
   imports = [
     ./bootloader
     ./shell/fish
+    ./ssh
+    ./network
+    ./security
     ./pkgs/git
     ./pkgs/monitoring
-    ./pkgs/network
     ./pkgs/rust
-    ./pkgs/ssh
     ./pkgs/usb
     ./pkgs/mermaid
-    ./security
   ];
 
   nixpkgs = {
