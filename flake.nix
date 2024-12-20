@@ -108,16 +108,16 @@
           ++ (if mergedSetup.nogui.audio.spotify then [ ./nixos/optional/pkgs/misc/spotify ] else [])
           ++ (if mergedSetup.nogui.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
           #   NETWORK
-          ++ (if mergedSetup.nogui.network.vpn.server then [ ./nixos/optional/network/vpn/server.nix ] else [])
+          ++ (if mergedSetup.nogui.network.vpn.server then [ ./nixos/optional/networking/vpn/server.nix ] else [])
           ++ (if mergedSetup.nogui.network.vpn.client then [ 
-            (import ./nixos/optional/network/vpn/client.nix { 
+            (import ./nixos/optional/networking/vpn/client.nix { 
               inherit pkgs;
               is_external = mergedSetup.nogui.network.vpn.is_external; 
             }) 
           ] else [])          
           ++ (if mergedSetup.nogui.network.wireshark then [ ./nixos/optional/pkgs/network/wireshark ] else [])
           ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/network/suricata ] else [])
-          ++ (if mergedSetup.nogui.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
+          ++ (if mergedSetup.nogui.network.wifi.emergency then [ ./nixos/optional/networking/wifi/emergency.nix ] else [])
           ++ (if mergedSetup.nogui.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
           ++ (if mergedSetup.nogui.network.can.enable then [ ./nixos/optional/network/can ] else [])
           ++ (if mergedSetup.nogui.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else [])
