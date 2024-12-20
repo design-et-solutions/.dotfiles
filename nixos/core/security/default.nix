@@ -5,6 +5,7 @@
   ];
 
 
+  environment.systemPackages = with pkgs; [ vulnix ];
   # security.auditd.enable
 
   # systemd.services.auditd = {
