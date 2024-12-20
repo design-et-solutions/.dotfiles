@@ -13,15 +13,9 @@
         wg0 = {
           peers = [
             {
-              # bodyguard
+              # desktop-hood
               publicKey = "fiwHXP5XpdiIy8qmV3hU4PbwMEiXyiS2M5EpEhFKywA=";
               allowedIPs = [ "10.100.0.2/32" ];
-              persistentKeepalive = 25;
-            }
-            {
-              # desktop-hood
-              publicKey = "1bSJ9EnMTuFXulRmajkuPj8UZfUouwJvbE42ijIDOB4=";
-              allowedIPs = [ "10.100.0.3/32" ];
               persistentKeepalive = 25;
             }
             {
