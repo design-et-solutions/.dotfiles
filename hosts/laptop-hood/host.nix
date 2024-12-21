@@ -49,6 +49,10 @@ mkNixosConfiguration {
           # peak = true;
         # };
       };
+      tool = {
+        solaar = true;
+        appimage = true;
+      };
       security = {
         blocky = true;
         lynis = true;
