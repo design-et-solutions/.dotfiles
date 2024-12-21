@@ -20,7 +20,7 @@
             }
             {
               # laptop-hood
-              publicKey = "5vxIRcUsxCwK0KajAKKjWbW7ENH2Yka9khBtp4vS9Xk=";
+              publicKey = "1EV9jwhokB7LkDhKdTmGBgQ9e+JwTpqGU9CUDsEi4Hw=";
               allowedIPs = [ "10.100.0.5/32" ];
               persistentKeepalive = 25;
             }
