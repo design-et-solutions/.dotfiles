@@ -11,7 +11,7 @@
     wg-quick = {
       interfaces = {
         wg0 = {
-          address = [ "10.100.0.2/24" ];
+          address = [ "10.100.0.2/32" ];
         };
       };
     };

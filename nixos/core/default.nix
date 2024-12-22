@@ -8,7 +8,7 @@
     ./bootloader
     ./shell/fish
     ./ssh
-    ./network
+    ./networking
     ./security
     ./pkgs/git
     ./pkgs/monitoring
@@ -57,6 +57,7 @@
     unzip
     tree
     parted
+    busybox
   ];
 
   services.printing = {
