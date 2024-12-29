@@ -4,8 +4,10 @@
     ./audit.nix
   ];
 
+  # services.systemd.journald.enable = true;
+  # services.rsyslog.enable = true;
 
-  environment.systemPackages = with pkgs; [ vulnix ];
+  # environment.systemPackages = with pkgs; [ vulnix ];
   # security.auditd.enable
 
   # systemd.services.auditd = {
