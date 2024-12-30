@@ -1,10 +1,10 @@
 {
-  systemd.services.rescue.serviceConfig = {
+  programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS
+
+  systemd.services.nix-daemon.serviceConfig = {
     PrivateTmp = true;
     PrivateHome = true;
     NoNewPrivileges = true;
-    PrivateDevices = true;
-    DevicePolicy= "closed";
     ProtectKernelModules = true; 
     ProtectKernelTunables = true;
     ProtectKernelLogs = true;

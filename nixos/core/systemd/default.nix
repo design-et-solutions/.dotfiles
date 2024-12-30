@@ -33,6 +33,8 @@
     PrivateTmp = true;
     PrivateHome = true;
     NoNewPrivileges = true;
+    ProtectHostname = true;
+    RestrictRealtime = true;
   };
 
 }

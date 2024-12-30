@@ -7,6 +7,8 @@
   imports = [
     ./bootloader
     ./shell/fish
+    ./nix
+    ./tty
     ./ssh
     ./nscd
     ./dbus
@@ -49,10 +51,6 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
-  programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS
-
-  services.dbus.enable = true;   # inter-process communication (IPC), allows apps to comm with one another
-
   # tools and libs
   environment.systemPackages = with pkgs; [
     nix-prefetch-git
@@ -68,11 +66,6 @@
     parted
     busybox
   ];
-
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.hplip pkgs.gutenprint ];
-  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

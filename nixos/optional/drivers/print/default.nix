@@ -22,14 +22,6 @@
     ];
   };
 
-  # systemd.services.set-cupsd-conf-permissions = {
-  #   description = "Set permissions for cupsd.conf";
-  #   after = [ "cups.service" ];
-  #   wantedBy = [ "cups.service" ];
-  #   serviceConfig.ExecStart = ''
-  #     chmod 600 /etc/cups/cupsd.conf
-  #   '';
-  # };
   systemd.services.cups.serviceConfig = {
     ProtectSystem = "full";
     ProtectHome = true;
