@@ -13,18 +13,35 @@
     };
   };  
 
-  # systemd.services.NetworkManager.serviceConfig = {
-  #   ProtectSystem = "strict";
-  #   ProtectHome = true;
-  #   NoNewPrivileges = true;
-  # };
+  systemd.services.NetworkManager.serviceConfig = {
+    # ProtectSystem = "strict";
+    ProtectTmp = true;
+    NoNewPrivileges = true;
+    PrivateDevices = true;
+    DevicePolicy= "closed";
+    ProtectKernelModules = true; 
+    ProtectKernelTunables = true;
+  };
+
+  systemd.services.NetworkManager-dispatcher.serviceConfig = {
+    ProtectSystem = "strict";
+    ProtectTmp = true;
+    NoNewPrivileges = true;
+    PrivateDevices = true;
+    DevicePolicy= "closed";
+    ProtectKernelModules = true; 
+    ProtectKernelTunables = true;
+  };
 
   systemd.services.wpa_supplicant.serviceConfig = {
     ProtectSystem = "strict";
     ProtectHome = true;
     PrivateTmp = true;
-    ProtectKernelModules = true;
     NoNewPrivileges = true;
+    PrivateDevices = true;
+    DevicePolicy= "closed";
+    ProtectKernelModules = true; 
+    ProtectKernelTunables = true;
   };
 
   environment.systemPackages = with pkgs; [
