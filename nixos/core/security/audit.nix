@@ -18,9 +18,13 @@
   environment.etc."audit/audit.rules".source = builtins.toString ./audit.rules;
 
   systemd.services.auditd.serviceConfig = {
-    ProtectSystem = "full";
+    # ProtectSystem = "strict"; # fail in read only
     ProtectHome = true;
     PrivateTmp = true;
     NoNewPrivileges = true;
+    PrivateDevices = true;
+    DevicePolicy= "closed";
+    ProtectKernelModules = true; 
+    ProtectKernelTunables = true;
   };
 }
