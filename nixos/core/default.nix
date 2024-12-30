@@ -6,9 +6,8 @@
 }: {
   imports = [
     ./bootloader
-    ./shell/fish
+    ./shell
     ./nix
-    ./tty
     ./ssh
     ./nscd
     ./dbus

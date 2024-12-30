@@ -34,6 +34,12 @@
     ProtectKernelLogs = true;
   };
 
+  systemd.services."getty@tty7".serviceConfig = {
+    NoNewPrivileges = true;
+    ProtectHostname = true;
+    RestrictRealtime = true;
+  };
+
   environment.systemPackages = with pkgs; [
     swaylock-effects
     brightnessctl
