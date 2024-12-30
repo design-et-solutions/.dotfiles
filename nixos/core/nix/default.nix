@@ -5,9 +5,15 @@
     # PrivateTmp = true;
     # PrivateHome = true;
     NoNewPrivileges = true;
+    MemoryDenyWriteExecute = true;
+    LockPersonality = true; 
+    ProtectHostname = true;
+    RestrictRealtime = true;
+    PrivateTmp = true;
+    PrivateDevices = true;
+    DevicePolicy= "closed";
     # ProtectKernelModules = true; 
     # ProtectKernelTunables = true;
     # ProtectKernelLogs = true;
-    # ProtectHostname = true;
   };
 }

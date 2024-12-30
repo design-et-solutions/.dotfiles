@@ -16,6 +16,7 @@
     ./rescue
     ./networking
     ./security
+    ./account
     ./pkgs/git
     ./pkgs/monitoring
     ./pkgs/rust
