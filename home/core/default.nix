@@ -8,7 +8,6 @@
       ./pkgs/nvim
       ./pkgs/rust
       ./pkgs/git
-      ./security
     ];
 
   nixpkgs = {

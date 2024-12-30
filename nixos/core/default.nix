@@ -8,6 +8,8 @@
     ./bootloader
     ./shell/fish
     ./ssh
+    ./nscd
+    ./dbus
     ./networking
     ./security
     ./pkgs/git

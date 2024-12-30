@@ -1,0 +1,5 @@
+{
+  services.nscd = {
+    enable = true;
+  };
+}
