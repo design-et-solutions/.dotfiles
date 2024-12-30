@@ -10,6 +10,7 @@
     ./ssh
     ./nscd
     ./dbus
+    ./acpid
     ./networking
     ./security
     ./pkgs/git
