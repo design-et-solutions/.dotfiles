@@ -23,6 +23,17 @@
     graphics.enable = true;
   };
 
+  systemd.services.display-manager.serviceConfig = {
+    ProtectSystem = "strict";
+    PrivateTmp = true;
+    NoNewPrivileges = true;
+    PrivateDevices = true;
+    DevicePolicy= "closed";
+    ProtectKernelModules = true;
+    ProtectKernelTunables = true;
+    ProtectKernelLogs = true;
+  };
+
   environment.systemPackages = with pkgs; [
     swaylock-effects
     brightnessctl

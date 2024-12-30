@@ -11,6 +11,7 @@
     ./nscd
     ./dbus
     ./acpid
+    ./systemd
     ./networking
     ./security
     ./pkgs/git

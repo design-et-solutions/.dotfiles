@@ -8,5 +8,8 @@
     PrivateTmp = true;
     PrivateHome = true;
     NoNewPrivileges = true;
+    LockPersonality = true;
+    PrivateUsers = true; 
+    ProtectHostname = true;
   };
 }
