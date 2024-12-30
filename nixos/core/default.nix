@@ -12,6 +12,7 @@
     ./dbus
     ./acpid
     ./systemd
+    ./rescue
     ./networking
     ./security
     ./pkgs/git

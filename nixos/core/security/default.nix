@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ./services.nix.nix
+    ./services.nix
     ./audit.nix
   ];
 
