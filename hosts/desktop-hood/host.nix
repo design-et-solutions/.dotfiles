@@ -17,7 +17,7 @@ mkNixosConfiguration {
         whatsapp = true;
       };
       tool = {
-        unity = true;
+        # unity = true;
         vial = true;
         handbrake = true;
         vlc = true;

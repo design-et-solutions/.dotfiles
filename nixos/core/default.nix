@@ -53,7 +53,11 @@
     nix-prefetch-git
 
     libnotify   # notification manager
+
     gcc         # collection of compilers
+    # libstdc++
+    glibc
+
     unzip
     tree
     parted

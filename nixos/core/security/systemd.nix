@@ -34,7 +34,7 @@
           echo "XDG_RUNTIME_DIR: $XDG_RUNTIME_DIR"
           echo "DBUS_SESSION_BUS_ADDRESS: $DBUS_SESSION_BUS_ADDRESS"
 
-          runuser -u $username -- notify-send --urgency=$urgency --category info "Systemd Security Check" "$result"
+          runuser -u $username -- notify-send --urgency=$urgency --icon info --category info "Systemd Security Check" "$result"
 
         else
           echo "Non-GUI session skipped: $session_type"

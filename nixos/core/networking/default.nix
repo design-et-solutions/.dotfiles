@@ -11,8 +11,21 @@
       allowedTCPPorts = [ 80 443 8080 ];
       allowedUDPPorts = [ 53 ];
     };
+  };  
+
+  # systemd.services.NetworkManager.serviceConfig = {
+  #   ProtectSystem = "strict";
+  #   ProtectHome = true;
+  #   NoNewPrivileges = true;
+  # };
+
+  systemd.services.wpa_supplicant.serviceConfig = {
+    ProtectSystem = "strict";
+    ProtectHome = true;
+    PrivateTmp = true;
+    ProtectKernelModules = true;
+    NoNewPrivileges = true;
   };
-  
 
   environment.systemPackages = with pkgs; [
     networkmanager   

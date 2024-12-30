@@ -1,5 +1,6 @@
 { ... }:
 {
+  # https://mynixos.com/options/boot.loader
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
@@ -7,6 +8,7 @@
     grub = {
       # enable = true;
       # devices = [ "nodev" ];
+      configurationLimit = 2;
       efiSupport = true;
       extraConfig = ''
         set superusers="root"

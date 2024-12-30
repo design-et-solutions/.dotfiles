@@ -1,5 +1,8 @@
 {
   description = "Nix config with Flake";
+  # TO CLEAR CACHE
+  # sudo rm -rf /nix/var/nix/profiles/per-user/root/
+  # sudo nix-collect-garbage -d
 
   inputs = {
     # Nixpkgs

@@ -22,4 +22,28 @@
       ClientAliveCountMax 2
     '';
   };
+
+  systemd.services.sshd.serviceConfig = {
+    ProtectSystem = "strict"; # Mounts everything read-only with the exception of /dev, /proc and /sys
+    ProtectHome = true;
+    NoNewPrivileges = true;
+    RestrictAddressFamilies = "AF_UNIX AF_INET AF_INET6 AF_NETLINK"; # Restrict the available socket address families
+    PrivateTmp = true; # Private directory for temporary files
+    PrivateDevices = true; # Prevents access to physical devices
+    ProtectKernelModules = true; # Prevents explicit Kernel module loading
+    DevicePolicy= "closed"; # Prevent access to physical devices unless explicitly allowed
+    ProtectControlGroups = true; # Protects the Linux Control Groups from modification
+    ProtectKernelTunables = true; # Prevents Kernel tunables from being modified
+    RestrictNamespaces = true; # Access to namespacing functionality is restricted
+    RestrictRealtime = true; # Prevents the service from enabling realtime scheduling policies, which could be used to fully occupy the system
+    RestrictSUIDSGID = true; # Prevents the setting of the SUID or GUID on files or directories
+    MemoryDenyWriteExecute = true; # Prevents the creation or modification of memory mappings as executable
+    LockPersonality = true; # Prevents the change of the personality settings for this process
+    PrivateUsers = true; # Prevents the access to the home directories of other users
+    ProtectKernelLogs = true; # Denies access to the Kernel log ring buffer
+    ProtectHostname = true; # Prevents the service from changing the hostname and/or react to changes of the hostname
+    ProtectClock = false; # Denies all write requests to the hardware clock.
+
+    CapabilityBoundingSet = "~CAP_LINUX_IMMUTABLE CAP_IPC_LOCK CAP_SYS_CHROOT CAP_BLOCK_SUSPEND CAP_LEASE CAP_SYS_ADMIN CAP_SYS_BOOT CAP_SYS_PACCT CAP_SYS_PTRACE CAP_SYS_RAWIO CAP_SYS_TIME CAP_SYS_TTY_CONFIG CAP_WAKE_ALARM CAP_MAC_ADMIN CAP_MAC_OVERRIDE CAP_SETUID CAP_SETGID CAP_SETPCAP CAP_CHOWN CAP_NET_ADMIN CAP_FSETID CAP_SETFCAP CAP_DAC_OVERRIDE CAP_DAC_READ_SEARCH CAP_FOWNER CAP_IPC_OWNER";
+  };
 }

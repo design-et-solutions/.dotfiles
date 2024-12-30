@@ -45,7 +45,6 @@ in {
           default-timeout=0
 
           [category=info]
-          text-color=#0000ff
         '';
   };
 }

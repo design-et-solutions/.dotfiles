@@ -14,9 +14,13 @@
     };
   };
 
-  # environment.systemPackages = with pkgs; [ audit ];
-  # environment.etc."audit/auditd.conf".source = "${pkgs.audit}";
   environment.etc."audit/auditd.conf".source = "${pkgs.audit.out}/etc/audit/auditd.conf";
   environment.etc."audit/audit.rules".source = builtins.toString ./audit.rules;
-  # environment.etc."audit/auditd.tes".source = "${pkgs.audit.out}";
+
+  systemd.services.auditd.serviceConfig = {
+    ProtectSystem = "full";
+    ProtectHome = true;
+    PrivateTmp = true;
+    NoNewPrivileges = true;
+  };
 }
