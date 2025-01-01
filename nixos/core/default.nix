@@ -7,21 +7,10 @@
   imports = [
     ./bootloader
     ./shell
-    ./nix
-    ./ssh
-    ./nscd
-    ./dbus
-    ./acpid
-    ./systemd
-    ./rescue
     ./networking
     ./security
-    ./account
-    ./pkgs/git
-    ./pkgs/monitoring
-    ./pkgs/rust
-    ./pkgs/usb
-    ./pkgs/mermaid
+    ./pkgs
+    ./system
   ];
 
   nixpkgs = {
