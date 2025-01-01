@@ -3,7 +3,7 @@
   # https://mynixos.com/options/boot.loader
   boot.loader = {
     systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+    # efi.canTouchEfiVariables = true;
     timeout = 3;
     grub = {
       # enable = true;

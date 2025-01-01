@@ -1,12 +1,9 @@
-{ ... }:
 {
-  networking.wireless = {
-    networks.Emergency = {
-      psk = "%saveme%";
-    };
+  services.nscd = {
+    enable = true;
   };
 
-  systemd.services.emergency.serviceConfig = {
+  systemd.services.acpid.serviceConfig = {
     # nonewprivileges = true;
     #
     # protectsystem = "strict"; # mounts everything read-only with the exception of /dev, /proc and /sys

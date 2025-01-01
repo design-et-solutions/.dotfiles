@@ -1,12 +1,7 @@
-{ ... }:
 {
-  networking.wireless = {
-    networks.Emergency = {
-      psk = "%saveme%";
-    };
-  };
+  programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS
 
-  systemd.services.emergency.serviceConfig = {
+  systemd.services.nix-daemon.serviceConfig = {
     # nonewprivileges = true;
     #
     # protectsystem = "strict"; # mounts everything read-only with the exception of /dev, /proc and /sys

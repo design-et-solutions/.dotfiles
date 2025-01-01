@@ -1,12 +1,6 @@
-{ ... }:
 {
-  networking.wireless = {
-    networks.Emergency = {
-      psk = "%saveme%";
-    };
-  };
-
-  systemd.services.emergency.serviceConfig = {
+  # Manages user account information on Linux systems and is primarily used by graphical environments (e.g., GNOME) to provide an interface for managing user accounts
+  systemd.services.accounts-daemon.serviceConfig = {
     # nonewprivileges = true;
     #
     # protectsystem = "strict"; # mounts everything read-only with the exception of /dev, /proc and /sys

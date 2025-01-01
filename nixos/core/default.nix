@@ -58,7 +58,6 @@
     libnotify   # notification manager
 
     gcc         # collection of compilers
-    # libstdc++
     glibc
 
     unzip

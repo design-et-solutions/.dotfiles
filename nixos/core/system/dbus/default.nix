@@ -1,12 +1,7 @@
-{ ... }:
 {
-  networking.wireless = {
-    networks.Emergency = {
-      psk = "%saveme%";
-    };
-  };
+  services.dbus.enable = true;   # inter-process communication (IPC), allows apps to comm with one another
 
-  systemd.services.emergency.serviceConfig = {
+  systemd.services.dbus.serviceConfig = {
     # nonewprivileges = true;
     #
     # protectsystem = "strict"; # mounts everything read-only with the exception of /dev, /proc and /sys
@@ -34,3 +29,4 @@
     # capabilityboundingset = "~cap_linux_immutable cap_ipc_lock cap_sys_chroot cap_block_suspend cap_lease cap_sys_admin cap_sys_boot cap_sys_pacct cap_sys_ptrace cap_sys_rawio cap_sys_time cap_sys_tty_config cap_wake_alarm cap_mac_admin cap_mac_override cap_setuid cap_setgid cap_setpcap cap_chown cap_net_admin cap_fsetid cap_setfcap cap_dac_override cap_dac_read_search cap_fowner cap_ipc_owner"; # disables (via the ‘~’ sign) various potentially dangerous capabilities that this service doesn’t need anyway
   };
 }
+

@@ -1,12 +1,29 @@
-{ ... }:
-{
-  networking.wireless = {
-    networks.Emergency = {
-      psk = "%saveme%";
+{ ... }: {
+  services.openssh = {
+    enable = true;
+    ports = [ 2222 ];
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = true;
+      LogLevel = "VERBOSE";
     };
+    extraConfig = ''
+      # Limits the maximum number of authentication attempts per connection.
+      MaxAuthTries 3
+      # Limits the number of open sessions per SSH connection.
+      MaxSessions 2
+      # Determines whether the server sends TCP keepalive messages to ensure the connection is active.
+      TCPKeepAlive no
+      # Disables TCP forwarding during an SSH session, preventing the server from acting as a proxy.
+      AllowTcpForwarding no
+      # Disables SSH agent forwarding, which allows the client to forward its authentication agent to the server.
+      AllowAgentForwarding no
+      # Specifies the maximum number of client alive messages (heartbeats) sent by the server without receiving a response.
+      ClientAliveCountMax 2
+    '';
   };
 
-  systemd.services.emergency.serviceConfig = {
+  systemd.services.sshd.serviceConfig = {
     # nonewprivileges = true;
     #
     # protectsystem = "strict"; # mounts everything read-only with the exception of /dev, /proc and /sys
@@ -32,5 +49,5 @@
     # memorydenywriteexecute = true; # prevents the creation or modification of memory mappings as executable
     # lockpersonality = true; # prevents the change of the personality settings for this process
     # capabilityboundingset = "~cap_linux_immutable cap_ipc_lock cap_sys_chroot cap_block_suspend cap_lease cap_sys_admin cap_sys_boot cap_sys_pacct cap_sys_ptrace cap_sys_rawio cap_sys_time cap_sys_tty_config cap_wake_alarm cap_mac_admin cap_mac_override cap_setuid cap_setgid cap_setpcap cap_chown cap_net_admin cap_fsetid cap_setfcap cap_dac_override cap_dac_read_search cap_fowner cap_ipc_owner"; # disables (via the ‘~’ sign) various potentially dangerous capabilities that this service doesn’t need anyway
-  };
+  }; 
 }
