@@ -36,7 +36,7 @@ mkNixosConfiguration {
         spotify = true;
       };
       tool = {
-        solaar = true;
+        # solaar = true;
         appimage = true;
       };
       network = {

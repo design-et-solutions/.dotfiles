@@ -16,7 +16,6 @@
       "uas" 
       "sd_mod" 
       "rtsx_usb_sdmmc" 
-      "hid_cherry"
     ];
   boot.initrd.kernelModules = [ ]; 
   boot.kernelModules = [ "kvm-intel" ];
