@@ -27,10 +27,11 @@
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
+  fileSystems."/boot/efi" =
     { device = "/dev/disk/by-uuid/0F79-1FA5";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      # options = [ "fmask=0022" "dmask=0022" ];
+      options = [ "fmask=0077" "dmask=0077" ]; # Restrict access
     };
 
   swapDevices = [ ];

@@ -4,6 +4,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    nix-prefetch-git
     lazygit
 
     # https://github.com/AGWA/git-crypt
