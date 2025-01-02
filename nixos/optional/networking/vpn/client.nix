@@ -6,8 +6,8 @@
 
   networking= {
    wg-quick = let
-      peerPublicKey = "Jn1su3Fd9CPJHLhscEM8ecWMZ7abYfcu/DOhlNJBDVA=";
-      privateKeyFilePath = "/etc/wireguard/private.key";
+      peerPublicKey = "haAhlUmkUw1srH+rDLpMJzSgiieEVSG7N4yw8/1QdlM=";
+      privateKeyFilePath = "/etc/wireguard/wg0";
     in {
       interfaces = {
         wg0 = {

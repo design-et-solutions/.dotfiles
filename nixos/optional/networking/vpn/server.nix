@@ -23,7 +23,7 @@
           # sudo mkdir -p /etc/wireguard
           # sudo bash -c "wg genkey > /etc/wireguard/private.key" 
           # sudo chmod 600 /etc/wireguard/private.key 
-          privateKeyFile = "/etc/wireguard/private.key";
+          privateKeyFile = "/etc/wireguard/wg0";
           postSetup = ''
             ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
           '';

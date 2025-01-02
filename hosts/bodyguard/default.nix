@@ -1,4 +1,7 @@
-{ pkgs, lib, ... }:{
+{ pkgs, lib, ... }:
+let 
+  name = "bodyguard";
+in {
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -7,7 +10,7 @@
   time.timeZone = "Europe/Paris";
 
   networking= {
-    hostName = "bodyguard";
+    hostName = name;
     wireguard = {
       interfaces = {
         wg0 = {
@@ -20,13 +23,13 @@
             }
             {
               # laptop-hood
-              publicKey = "1EV9jwhokB7LkDhKdTmGBgQ9e+JwTpqGU9CUDsEi4Hw=";
+              publicKey = "DeMeT8992rWF22jR2fMOVsDHaf3PqpqbpmHE3umweEk=";
               allowedIPs = [ "10.100.0.5/32" ];
               persistentKeepalive = 25;
             }
             {
               # project-handler
-              publicKey = "JEXspdTfOxZ83z7tIcvUWN2Ir9nzsDUSA51tFB5002I=";
+              publicKey = "bv2sLtWDO3V8N1Zug5EbI0Og+IMG9eNCVbF+GTlGoz4=";
               allowedIPs = [ "10.100.0.4/32" ];
               persistentKeepalive = 25;
             }
@@ -34,6 +37,10 @@
         };
       };
     };
+  };
+
+  environment.etc."wireguard/wg0" = {
+    source = builtins.toString ../../secrets/${name}/wg0;
   };
 
   services = {
