@@ -14,7 +14,7 @@
           peers = [
             {
               # desktop-hood
-              publicKey = "fiwHXP5XpdiIy8qmV3hU4PbwMEiXyiS2M5EpEhFKywA=";
+              publicKey = "cTtT4fNnJ4fgIsxRpwAPLQVd5iTD0SRt1QFxnFzQHi0=";
               allowedIPs = [ "10.100.0.2/32" ];
               persistentKeepalive = 25;
             }
