@@ -2,7 +2,7 @@
 
 if [ -e /dev/mapper/encrypted-key ]; then
   echo "Unmounting and closing LUKS-encrypted USB key..."
-  umount /media/usb-key || {
+  umount /media/encrypted-key || {
     echo "Failed to unmount filesystem!" >&2
     exit 1
   }
