@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
-    ./services.nix
-    ./audit.nix
+    ./scan
+    ./audit
   ];
 
   environment.systemPackages = with pkgs; [ 
