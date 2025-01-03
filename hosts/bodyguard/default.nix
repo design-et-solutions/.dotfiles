@@ -29,31 +29,6 @@ in {
     # };
   };
 
-  systemd.services.close-luks-usb = {
-    description = "Unmount and close LUKS-encrypted USB key";
-    wantedBy = [ "shutdown.target" ]; # Ensure it runs on shutdown
-    before = [ "shutdown.target" ];  # Runs before shutdown completes
-
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "/bin/true"; # No action on start
-      ExecStop = ''
-        if [ -e /dev/mapper/encrypted-key ]; then
-          echo "Unmounting and closing LUKS-encrypted USB key..."
-          umount /media/usb-key || {
-            echo "Failed to unmount filesystem!" >&2
-            exit 1
-          }
-          cryptsetup close encrypted-key || {
-            echo "Failed to close LUKS device!" >&2
-            exit 1
-          }
-        fi
-      '';
-    };
-    install.wantedBy = [ "shutdown.target" ]; # Activate the service during shutdown
-  };
-
   systemd.services.open-luks-usb = {
     description = "Unlock and mount LUKS-encrypted USB key";
     wantedBy = [ "multi-user.target" ]; # Start the service at boot
@@ -74,6 +49,30 @@ in {
           echo "Failed to mount filesystem!" >&2
           exit 1
         }
+      '';
+    };
+  };
+
+  systemd.services.close-luks-usb = {
+    description = "Unmount and close LUKS-encrypted USB key";
+    wantedBy = [ "shutdown.target" ]; # Ensure it runs on shutdown
+    before = [ "shutdown.target" ];  # Runs before shutdown completes
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "/bin/true"; # No action on start
+      ExecStop = ''
+        if [ -e /dev/mapper/encrypted-key ]; then
+          echo "Unmounting and closing LUKS-encrypted USB key..."
+          umount /media/usb-key || {
+            echo "Failed to unmount filesystem!" >&2
+            exit 1
+          }
+          cryptsetup close encrypted-key || {
+            echo "Failed to close LUKS device!" >&2
+            exit 1
+          }
+        fi
       '';
     };
   };
