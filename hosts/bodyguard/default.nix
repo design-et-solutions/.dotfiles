@@ -49,7 +49,7 @@ in {
     serviceConfig = {
       Type = "oneshot"; # Run the commands only once
       RemainAfterExit = true; # Keep the service as "active" after execution
-      ExecStart = "${pkgs.bash}/bin/bash -c '/etc/scripts/open-luks-usb.sh'";
+      ExecStart = "sudo ${pkgs.bash}/bin/bash -c '/etc/scripts/open-luks-usb.sh'";
       Environment = [
         "PATH=${pkgs.bash}/bin:${pkgs.cryptsetup}/bin:${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:$PATH"
       ];
@@ -64,7 +64,7 @@ in {
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "/bin/true"; # No action on start
-      ExecStop = "${pkgs.bash}/bin/bash -c '/etc/scripts/close-luks-usb.sh'";
+      ExecStop = "sudo ${pkgs.bash}/bin/bash -c '/etc/scripts/close-luks-usb.sh'";
       Environment = [
         "PATH=${pkgs.bash}/bin:${pkgs.cryptsetup}/bin:${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:$PATH"
       ];
