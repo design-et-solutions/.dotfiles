@@ -27,17 +27,14 @@
   xdg.configFile = {
     "kitty/light-theme.conf" = {
       source = ./light-theme.conf;
-      force = true;
     };
     "kitty/dark-theme.conf" = {
       source = ./dark-theme.conf;
-      force = true;
     };
   };
 
   home.file.".scripts/tmux_start.sh" = {
     source = builtins.toString ../../../scripts/tmux_start.sh;
     executable = true;
-    force = true;
   };
 }

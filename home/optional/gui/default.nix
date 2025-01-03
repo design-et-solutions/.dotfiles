@@ -51,20 +51,16 @@ in
     ".scripts/wallpapers-randomizer.sh" = {
       source = builtins.toString ../../scripts/wallpapers-randomizer.sh;
       executable = true;
-      force = true;
     };
     ".scripts/wallpapers-black.sh" = {
       source = builtins.toString ../../scripts/wallpapers-black.sh;
       executable = true;
-      force = true;
     };
     ".wallpapers" = {
       source = ../../wallpapers;
-      force = true;
     };
     ".local/share/icons" = {
       source = ../../cursors;
-      force = true;
     };
   };
 

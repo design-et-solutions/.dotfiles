@@ -34,7 +34,6 @@
 
   home.file.".icons" = {
     source = ../icons;
-    force = true;
   };
 
 }

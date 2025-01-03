@@ -14,8 +14,16 @@
     };
   };
 
-  environment.etc."audit/auditd.conf".source = "${pkgs.audit.out}/etc/audit/auditd.conf";
-  environment.etc."audit/audit.rules".source = builtins.toString ./audit.rules;
+  environment.etc = {
+    "audit/auditd.conf" = {
+      source = "${pkgs.audit.out}/etc/audit/auditd.conf";
+      mode = "0400";
+    };
+    "audit/audit.rules" = {
+      source = builtins.toString ./audit.rules;
+      mode = "0400";
+    };
+  };
 
   systemd.services.auditd.serviceConfig = {
     # nonewprivileges = true;

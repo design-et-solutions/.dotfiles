@@ -22,5 +22,6 @@ in {
 
   environment.etc."wireguard/wg0" = {
     source = builtins.toString ../../secrets/${name}/wg0;
+    mode = "0400";
   };
 }
