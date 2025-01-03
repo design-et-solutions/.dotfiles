@@ -40,22 +40,6 @@ in {
     };
   };
 
-
-  systemd.services.open-luks-usb = {
-    description = "Unlock and mount LUKS-encrypted USB key";
-    wantedBy = [ "multi-user.target" ]; # Start the service at boot
-    after = [ "local-fs.target" ]; # Ensure filesystems are available
-
-    serviceConfig = {
-      Type = "oneshot"; # Run the commands only once
-      RemainAfterExit = true; # Keep the service as "active" after execution
-      ExecStart = "sudo ${pkgs.bash}/bin/bash -c '/etc/scripts/open-luks-usb.sh'";
-      Environment = [
-        "PATH=${pkgs.bash}/bin:${pkgs.cryptsetup}/bin:${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:$PATH"
-      ];
-    };
-  };
-
   systemd.services.close-luks-usb = {
     description = "Unmount and close LUKS-encrypted USB key";
     wantedBy = [ "shutdown.target" ]; # Ensure it runs on shutdown
@@ -64,7 +48,7 @@ in {
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "/bin/true"; # No action on start
-      ExecStop = "sudo ${pkgs.bash}/bin/bash -c '/etc/scripts/close-luks-usb.sh'";
+      ExecStop = "${pkgs.bash}/bin/bash -c '/etc/scripts/close-luks-usb.sh'";
       Environment = [
         "PATH=${pkgs.bash}/bin:${pkgs.cryptsetup}/bin:${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:$PATH"
       ];
