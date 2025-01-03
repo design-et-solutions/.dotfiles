@@ -53,6 +53,10 @@
     busybox
   ];
 
+  system.activationScripts.createMnt = ''
+    mkdir -p /mnt
+  '';
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
 }

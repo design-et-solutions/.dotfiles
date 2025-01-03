@@ -17,7 +17,10 @@
     # ❯ gpg --import private-key-backup.asc
     # ❯ gpg --import public-key-backup.asc
     gnupg
+    # Dependency
     pinentry-curses
+
+    cryptsetup # encrypted filesystems
   ];
 }
 
