@@ -47,7 +47,7 @@ in {
 
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "/bin/true"; # No action on start
+      ExecStart = "${pkgs.coreutils}/bin/true"; # No action on start
       ExecStop = "${pkgs.bash}/bin/bash -c '/etc/scripts/close-luks-usb.sh'";
       Environment = [
         "PATH=${pkgs.bash}/bin:${pkgs.cryptsetup}/bin:${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:$PATH"
