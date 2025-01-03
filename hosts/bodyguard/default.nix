@@ -13,10 +13,6 @@ in {
     hostName = name;
   };
 
-  environment.etc."wireguard/wg0" = {
-    source = builtins.toString ../../secrets/${name}/wg0;
-  };
-
   services = {
     # ntp.enable = true;
     # ntopng = {
@@ -37,6 +33,10 @@ in {
     "scripts/close-luks-usb.sh" = {
       source = builtins.toString ../../nixos/scripts/close-luks-usb.sh;
       mode = "0755";
+    };
+    "wireguard/wg0" = {
+      source = builtins.toString ../../secrets/${name}/wg0;
+      mode = "0644";
     };
   };
 

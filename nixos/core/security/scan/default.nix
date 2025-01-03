@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   environment.etc."scripts/systemd-analyzer-security.sh" = {
-    source = builtins.toString ../../scripts/systemd-analayser-security.sh;
+    source = builtins.toString ../../../scripts/systemd-analayser-security.sh;
     mode = "0755";
   };
 
