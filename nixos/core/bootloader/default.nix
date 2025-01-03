@@ -12,7 +12,6 @@
     grub = {
       enable = true;
       device = "nodev";
-      # efiInstallAsRemovable = true;
       efiSupport = true;
       extraConfig = ''
         set superusers="root"
