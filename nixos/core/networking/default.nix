@@ -91,7 +91,6 @@
     # capabilityboundingset = "CAP_NET_ADMIN CAP_NET_RAW";
     # # Provides a set of capabilities to the service that are available in its "ambient" capability set
     # ambientcapabilities = "CAP_NET_ADMIN CAP_NET_RAW";
-
   };
 
   programs.mtr.enable = true;

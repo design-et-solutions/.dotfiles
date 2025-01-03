@@ -30,8 +30,28 @@
           postShutdown = ''
             ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
           '';
+          peers = [
+            {
+              # desktop-hood
+              publicKey = "KhpnhE1PrhNAVfDx+a7PoasfcgvmotdOMmUfMlWAZ1g=";
+              allowedIPs = [ "10.100.0.2/32" ];
+              persistentKeepalive = 25;
+            }
+            {
+              # laptop-hood
+              publicKey = "nbFQwLqGY9riKyd044lTBCQyLPv1xA6g9Hh07g8Fq28=";
+              allowedIPs = [ "10.100.0.5/32" ];
+              persistentKeepalive = 25;
+            }
+            {
+              # project-handler
+              publicKey = "WdtpFPPAHlwHBYrLuYB0pQQNfeqFgsqgyUZTftL910c=";
+              allowedIPs = [ "10.100.0.4/32" ];
+              persistentKeepalive = 25;
+            }
+          ];
         };
-      };
+        };
     };
   };
 }

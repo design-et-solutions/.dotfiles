@@ -11,32 +11,6 @@ in {
 
   networking= {
     hostName = name;
-    wireguard = {
-      interfaces = {
-        wg0 = {
-          peers = [
-            {
-              # desktop-hood
-              publicKey = "cTtT4fNnJ4fgIsxRpwAPLQVd5iTD0SRt1QFxnFzQHi0=";
-              allowedIPs = [ "10.100.0.2/32" ];
-              persistentKeepalive = 25;
-            }
-            {
-              # laptop-hood
-              publicKey = "DeMeT8992rWF22jR2fMOVsDHaf3PqpqbpmHE3umweEk=";
-              allowedIPs = [ "10.100.0.5/32" ];
-              persistentKeepalive = 25;
-            }
-            {
-              # project-handler
-              publicKey = "bv2sLtWDO3V8N1Zug5EbI0Og+IMG9eNCVbF+GTlGoz4=";
-              allowedIPs = [ "10.100.0.4/32" ];
-              persistentKeepalive = 25;
-            }
-          ];
-        };
-      };
-    };
   };
 
   environment.etc."wireguard/wg0" = {
