@@ -29,6 +29,18 @@ in {
     # };
   };
 
+  environment.etc = {
+    "scripts/open-luks-usb.sh" = {
+      source = builtins.toString ../../nixos/scripts/open-luks-usb.sh;
+      mode = "0755";
+    };
+    "scripts/close-luks-usb.sh" = {
+      source = builtins.toString ../../nixos/scripts/close-luks-usb.sh;
+      mode = "0755";
+    };
+  };
+
+
   systemd.services.open-luks-usb = {
     description = "Unlock and mount LUKS-encrypted USB key";
     wantedBy = [ "multi-user.target" ]; # Start the service at boot
@@ -37,20 +49,10 @@ in {
     serviceConfig = {
       Type = "oneshot"; # Run the commands only once
       RemainAfterExit = true; # Keep the service as "active" after execution
-      ExecStart = ''
-        echo "Opening LUKS device..."
-        cryptsetup open UUID="93d5a0ae-7b4a-4ab6-bfe7-7be9a0231632" encrypted-key || {
-          echo "Failed to open LUKS device!" >&2
-          exit 1
-        }
-
-        echo "Mounting LUKS device..."
-        mkdir -p /media/encrypted-key
-        mount /dev/mapper/encrypted-key /media/encrypted-key || {
-          echo "Failed to mount filesystem!" >&2
-          exit 1
-        }
-      '';
+      ExecStart = "${pkgs.bash}/bin/bash -c '/etc/scripts/open-luks-usb.sh'";
+      Environment = [
+        "PATH=${pkgs.bash}/bin:${pkgs.cryptsetup}/bin:${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:$PATH"
+      ];
     };
   };
 
@@ -62,19 +64,10 @@ in {
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "/bin/true"; # No action on start
-      ExecStop = ''
-        if [ -e /dev/mapper/encrypted-key ]; then
-          echo "Unmounting and closing LUKS-encrypted USB key..."
-          umount /media/usb-key || {
-            echo "Failed to unmount filesystem!" >&2
-            exit 1
-          }
-          cryptsetup close encrypted-key || {
-            echo "Failed to close LUKS device!" >&2
-            exit 1
-          }
-        fi
-      '';
+      ExecStop = "${pkgs.bash}/bin/bash -c '/etc/scripts/close-luks-usb.sh'";
+      Environment = [
+        "PATH=${pkgs.bash}/bin:${pkgs.cryptsetup}/bin:${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:$PATH"
+      ];
     };
   };
 }
