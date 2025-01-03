@@ -45,7 +45,8 @@ in {
         }
 
         echo "Mounting LUKS device..."
-        mount /dev/mapper/encrypted-key /media/usb-key || {
+        mkdir -p /media/encrypted-key
+        mount /dev/mapper/encrypted-key /media/encrypted-key || {
           echo "Failed to mount filesystem!" >&2
           exit 1
         }
