@@ -70,27 +70,37 @@
   };
 
   systemd.services.wpa_supplicant.serviceConfig = {
-    nonewprivileges = true;
+    NoNewPrivileges = true;
 
-    protectsystem = "full";
-    protecthome = true;
-    protectkernelmodules = true;
-    protectcontrolhroups = true;
-    protectkerneltunables = true;
-    protectnetwork = true;
+    ProtectSystem = "strict";
+    ProtectHome = true;
+    ProtectKernelModules = true;
+    ProtectControlGroups = true;
+    ProtectKernelTunables = true;
+    ProtectClock = true; 
+    ProtectProc = "strict";
 
-    privatetmp= true;
+    PrivateTmp = true;
 
-    restrictrealtime = true;
-    restrictaddressfamilies = "AF_INET AF_INET6";
+    RestrictRealtime = true;
+    # RestrictAddressFamilies = "AF_UNIX AF_INET AF_INET6 AF_NETLINK";
 
-    readonlypaths = "/etc";
-    readwritepaths = "/etc/wpa_supplicant";
+    MemoryDenyWriteExecute = true;
 
-    # # CAP_NET_RAW   : Allows sending and receiving raw packets
-    # capabilityboundingset = "CAP_NET_ADMIN CAP_NET_RAW";
-    # # Provides a set of capabilities to the service that are available in its "ambient" capability set
-    # ambientcapabilities = "CAP_NET_ADMIN CAP_NET_RAW";
+    ReadOnlyPaths = [ "/etc" "/usr" "/bin" "/sbin" ];
+
+    InaccessiblePaths = [ "/home" "/root" "/run/user" ];
+
+    SystemCallFilter = [
+      "~@mount"      # Deny mounting operations
+      "~@raw-io"     # Deny raw I/O operations
+      "~@privileged" # Deny privileged operations
+    ];
+
+    # CAP_NET_RAW   : Allows sending and receiving raw packets
+    CapabilityBoundingSet = "CAP_NET_ADMIN CAP_NET_RAW";
+    # Provides a set of capabilities to the service that are available in its "ambient" capability set
+    AmbientCapabilities = "CAP_NET_ADMIN CAP_NET_RAW";
   };
 
   programs.mtr.enable = true;
