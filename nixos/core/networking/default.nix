@@ -69,6 +69,7 @@
     # capabilityboundingset = "~cap_linux_immutable cap_ipc_lock cap_sys_chroot cap_block_suspend cap_lease cap_sys_admin cap_sys_boot cap_sys_pacct cap_sys_ptrace cap_sys_rawio cap_sys_time cap_sys_tty_config cap_wake_alarm cap_mac_admin cap_mac_override cap_setuid cap_setgid cap_setpcap cap_chown cap_net_admin cap_fsetid cap_setfcap cap_dac_override cap_dac_read_search cap_fowner cap_ipc_owner"; # disables (via the ‘~’ sign) various potentially dangerous capabilities that this service doesn’t need anyway
   };
 
+  # Managing wireless network connections
   systemd.services.wpa_supplicant.serviceConfig = {
     NoNewPrivileges = true;
 
@@ -78,12 +79,17 @@
     ProtectControlGroups = true;
     ProtectKernelTunables = true;
     ProtectClock = true; 
-    ProtectProc = "strict";
+    ProtectHostname = true;
 
     PrivateTmp = true;
 
     RestrictRealtime = true;
-    # RestrictAddressFamilies = "AF_UNIX AF_INET AF_INET6 AF_NETLINK";
+    # AF_INET    : Allow IPv4 internet protocol for regular network communication
+    # AF_INET6   : Allow IPv6 internet protocol for regular network communication
+    # AF_UNIX    : Allow Unix domain socket for local interprocess communication (IPC)
+    # AF_NETLINK : Allow Netlink socket for interacting with the kernel's nl80211 interface
+    # AF_PACKET  : Allow raw packet socket for direct packet-level operations
+    RestrictAddressFamilies = "AF_INET AF_INET6 AF_UNIX AF_NETLINK AF_PACKET";
 
     MemoryDenyWriteExecute = true;
 
@@ -95,9 +101,13 @@
       "~@mount"      # Deny mounting operations
       "~@raw-io"     # Deny raw I/O operations
       "~@privileged" # Deny privileged operations
+      "~@keyring"    # Deny kernel keyring operations
+      "ptrace"       # Deny process tracing operations
     ];
 
-    # CAP_NET_RAW   : Allows sending and receiving raw packets
+    # Set of Linux capabilities that the service process and its child processes are allowed to retai
+    # CAP_NET_ADMIN   : Allows a process to perform a wide range of privileged network-related operations
+    # CAP_NET_RAW     : Allows sending and receiving raw packets
     CapabilityBoundingSet = "CAP_NET_ADMIN CAP_NET_RAW";
     # Provides a set of capabilities to the service that are available in its "ambient" capability set
     AmbientCapabilities = "CAP_NET_ADMIN CAP_NET_RAW";
