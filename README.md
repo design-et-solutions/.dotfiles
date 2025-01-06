@@ -86,3 +86,6 @@ If you only need it always on all hosts so:
 
 > [!TIP]
 > to update `waybar` rebuild your `kernel` and smile 
+
+# Links
+* https://fedoraproject.org/wiki/Changes/SystemdSecurityHardening

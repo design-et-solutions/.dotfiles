@@ -84,6 +84,7 @@
     ProtectProc = "invisible";
 
     PrivateTmp = true;
+    PrivateMounts = true;
 
     RestrictRealtime = true;
     # AF_INET    : Allow IPv4 internet protocol for regular network communication
