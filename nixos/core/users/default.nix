@@ -25,8 +25,8 @@
     # NoExecPaths = [ "/tmp" "/var/tmp" ];
     # TemporaryFileSystem = [ "/var:ro" "/opt:ro" ];
 
-    IPAddressDeny = "any";
-    IPAddressAllow = [ "127.0.0.1" ];
+    # IPAddressDeny = "any";
+    # IPAddressAllow = [ "127.0.0.1" ];
 
     CapabilityBoundingSet = [ ];  # Drop all capabilities if possible
     AmbientCapabilities = [ ]; # Ensure this is either not set or explicitly empty
