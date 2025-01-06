@@ -84,7 +84,6 @@
     ProtectProc = "invisible";
 
     PrivateTmp = true;
-    PrivateMounts = true;
 
     RestrictRealtime = true;
     # AF_INET    : Allow IPv4 internet protocol for regular network communication
@@ -111,7 +110,7 @@
       "~@module"     # Deny kernel module options
       "~@debug"      # Deny debug operations
       "~@swap"       # Deny swap operations
-      "ptrace"       # Deny process tracing operations
+      "ptrace"       # ALlow process tracing operations
     ];
     SystemCallArchitectures = "native";
 
