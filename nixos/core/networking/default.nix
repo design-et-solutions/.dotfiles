@@ -84,8 +84,6 @@
     ProtectProc = "invisible";
 
     PrivateTmp = true;
-    # PrivateDevices = true;
-    PrivateUsers = true;
 
     RestrictRealtime = true;
     # AF_INET    : Allow IPv4 internet protocol for regular network communication
@@ -116,10 +114,6 @@
     ];
     SystemCallArchitectures = "native";
 
-    # DevicePolicy = "closed";
-
-    LockPersonality = true;
-    
     # Set of Linux capabilities that the service process and its child processes are allowed to retai
     # CAP_NET_ADMIN   : Allows a process to perform a wide range of privileged network-related operations
     # CAP_NET_RAW     : Allows sending and receiving raw packets
