@@ -24,44 +24,10 @@
       "~@swap"       # Deny swap operations
       "~@debug"      # Deny debug operations
       "~@module"     # Deny kernel module options
-      # "~@raw-io"     # Deny raw I/O operations
-
-      # "~@privileged" # Deny privileged operations
-      # "~@mount"      # Deny mounting operations
-      # "~@setuid"     # Prevent UID manipulation
-      # "~@setpcap"
-
-      # "~@exec"       # Prevent executing new processes
-      # "~@fork"       # Prevent process creation
-      # "~@clone"      # Prevent cloning processes or creating threads
-      # "~@chroot"     # Prevent chroot operations
-      # "~@mount"      # Prevent mounting filesystems
     ];
     SystemCallArchitectures = "native";
 
     CapabilityBoundingSet = [ ];
     AmbientCapabilities = [ ];
-
-    # ReadOnlyPaths = [ "/etc" "/usr" "/var" "/home" ];  # Make /home read-only
-    # ReadWritePaths = [ "/var/lib/service" ];  # Specific paths the service can write to
-    #
-    # LockPersonality = true;
-    # RestrictUserNS = true;
-    #
-    # CPUQuota = "25%";         # Further restrict CPU usage
-    # MemoryMax = "256M";       # Limit memory usage
-    #
-    # RestrictSockets = true;
-    # RestrictNetworkNamespaces = true;
-
-    # PrivateDevices = true;
-
-    # MemoryLock = "0";
-    # RestrictGroupNS = true;
-
-    # IOAccounting = true;
-    # BlockIOAccounting = true;
-
-    # DevicePolicy = "strict";
   };
 }
