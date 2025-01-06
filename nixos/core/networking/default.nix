@@ -76,11 +76,12 @@
     ProtectSystem = "strict";
     ProtectHome = true;
     ProtectKernelModules = true;
-    ProtectControlGroups = true;
     ProtectKernelTunables = true;
     ProtectKernelLogs = true;
+    ProtectControlGroups = true;
     ProtectClock = true; 
     ProtectHostname = true;
+    ProtectProc = "invisible";
 
     PrivateTmp = true;
 
@@ -92,6 +93,7 @@
     # AF_PACKET  : Allow raw packet socket for direct packet-level operations
     RestrictAddressFamilies = "AF_INET AF_INET6 AF_UNIX AF_NETLINK AF_PACKET";
     RestrictNamespaces = true;
+    RestrictSUIDSGID = true;
 
     MemoryDenyWriteExecute = true;
 
@@ -108,6 +110,8 @@
     ];
     SystemCallArchitectures = "native";
 
+    DevicePolicy = "closed";
+    
     # Set of Linux capabilities that the service process and its child processes are allowed to retai
     # CAP_NET_ADMIN   : Allows a process to perform a wide range of privileged network-related operations
     # CAP_NET_RAW     : Allows sending and receiving raw packets
