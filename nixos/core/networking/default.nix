@@ -106,6 +106,7 @@
       "~@keyring"    # Deny kernel keyring operations
       "ptrace"       # Deny process tracing operations
     ];
+    SystemCallArchitectures = "native";
 
     # Set of Linux capabilities that the service process and its child processes are allowed to retai
     # CAP_NET_ADMIN   : Allows a process to perform a wide range of privileged network-related operations
