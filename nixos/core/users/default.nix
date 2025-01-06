@@ -6,6 +6,7 @@
     ProtectSystem = "full";
     ProtectClock = true; 
     ProtectHostname = true;
+    ProtectProc = "invisible";
 
     PrivateTmp = true;
     PrivateNetwork = true;
@@ -14,10 +15,18 @@
 
     RestrictAddressFamilies = [ "AF_UNIX" ];
     RestrictNamespaces = true;
-
-    NoExecPaths = [ "/home" "/tmp" "/var/tmp" ];
+    RestrictRealtime = true;
+    RestrictSUIDSGID = true;
 
     SystemCallArchitectures = "native";
+
+    DevicePolicy = "closed";
+
+    # NoExecPaths = [ "/tmp" "/var/tmp" ];
+    # TemporaryFileSystem = [ "/var:ro" "/opt:ro" ];
+
+    IPAddressDeny = "any";
+    IPAddressAllow = [ "127.0.0.1" ];
 
     CapabilityBoundingSet = [ ];  # Drop all capabilities if possible
     AmbientCapabilities = [ ]; # Ensure this is either not set or explicitly empty
