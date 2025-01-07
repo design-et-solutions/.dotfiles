@@ -9,5 +9,6 @@
     ./rescue
     ./account
     ./rtkit
+    ./colord
   ];
 }
