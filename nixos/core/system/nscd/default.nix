@@ -13,15 +13,8 @@
     ProtectControlGroups = true; 
     ProtectProc = "invisible";
 
-    PrivateNetwork = true;
-
     RestrictNamespaces = true;
     RestrictRealtime = true;
-    RestrictAddressFamilies = [ 
-      "~AF_INET6"  
-      "~AF_INET"
-      "~AF_PACKET"
-    ];
 
     MemoryDenyWriteExecute = true;
 
