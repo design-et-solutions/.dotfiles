@@ -1,7 +1,6 @@
 { pkgs, ... }:{
   environment.systemPackages = with pkgs; [
     acpid
-    acpica-tools
   ];
 
   # Manages power and thermal events on Linux systems using the Advanced Configuration and Power Interface (ACPI).
