@@ -30,12 +30,86 @@
 
   # Prompts for a password or passphrase on the active virtual terminal (VT) where the user is logged in.
   systemd.services.systemd-ask-password-console.serviceConfig = {
+    NoNewPrivileges = true;
 
+    ProtectSystem = "strict";
+    ProtectHome = true;
+    ProtectClock = true; 
+    ProtectHostname = true;
+    ProtectKernelTunables = true;
+    ProtectKernelModules = true;
+    ProtectKernelLogs = true;
+    ProtectProc = "invisible";
+
+    PrivateTmp = true;
+    PrivateMounts = true;
+    PrivateNetwork = true;
+    PrivateDevices = true;
+
+    RestrictNamespaces = true;
+    RestrictRealtime = true;
+    RestrictSUIDSGID = true;
+    RestrictAddressFamilies = [ 
+      "~AF_INET6"  
+      "~AF_INET"
+    ];
+
+    MemoryDenyWriteExecute = true;
+
+    DevicePolicy = "closed";
+
+    LockPersonality = true;
+
+    SystemCallFilter = [
+      "~@keyring"       # Deny kernel keyring operations
+      "~@swap"          # Deny swap operations
+      "~@clock"         
+      "~@module"        # Deny kernel module options
+      "~@obsolete"      # Deny system calls outdated, deprecated, or rarely used in modern Linux systems 
+      "~@cpu-emulation" # Deny system calls that are related to CPU state manipulation or virtualization 
+    ];
   };
 
   # Display password prompts on all active virtual terminals (VTs) of a system. 
   systemd.services.systemd-ask-password-wall.serviceConfig = {
+    NoNewPrivileges = true;
 
+    ProtectSystem = "strict";
+    ProtectHome = true;
+    ProtectClock = true; 
+    ProtectHostname = true;
+    ProtectKernelTunables = true;
+    ProtectKernelModules = true;
+    ProtectKernelLogs = true;
+    ProtectProc = "invisible";
+
+    PrivateTmp = true;
+    PrivateMounts = true;
+    PrivateNetwork = true;
+    PrivateDevices = true;
+
+    RestrictNamespaces = true;
+    RestrictRealtime = true;
+    RestrictSUIDSGID = true;
+    RestrictAddressFamilies = [ 
+      "~AF_INET6"  
+      "~AF_INET"
+    ];
+
+    MemoryDenyWriteExecute = true;
+
+    DevicePolicy = "closed";
+
+    LockPersonality = true;
+
+    SystemCallFilter = [
+      "~@keyring"       # Deny kernel keyring operations
+      "~@swap"          # Deny swap operations
+      "~@clock"         
+      "~@module"        # Deny kernel module options
+      "~@obsolete"      # Deny system calls outdated, deprecated, or rarely used in modern Linux systems 
+      "~@cpu-emulation" # Deny system calls that are related to CPU state manipulation or virtualization 
+    ];
   };
 
   systemd.services.systemd-journald.serviceConfig = {
@@ -52,6 +126,7 @@
     NoNewPrivileges = true;
 
     ProtectSystem = "strict";
+    ProtectHome = true;
     ProtectClock = true; 
     ProtectHostname = true;
     ProtectKernelTunables = true;
