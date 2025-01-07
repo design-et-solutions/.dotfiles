@@ -4,6 +4,7 @@
     NoNewPrivileges = true;
 
     ProtectSystem = "strict";
+    ProtectHome = true;
     ProtectHostname = true;
     ProtectKernelTunables = true;
     ProtectKernelModules = true;
