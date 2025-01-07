@@ -8,5 +8,6 @@
     ./systemd
     ./rescue
     ./account
+    ./rtkit
   ];
 }
