@@ -14,7 +14,11 @@
 
     MemoryDenyWriteExecute = true;
 
-    RestrictAddressFamilies = [ "AF_UNIX" "AF_NETLINK" "AF_BLUETOOTH" ];
+    RestrictAddressFamilies = [ 
+      "AF_UNIX"      # Socket family used for inter-process communication (IPC) 
+      "AF_NETLINK"   # Socket family used for communication between user-space applications and the Linux kernel
+      "AF_BLUETOOTH" # Socket family used for communication over Bluetooth
+    ];
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
