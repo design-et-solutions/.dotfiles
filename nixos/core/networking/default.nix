@@ -76,7 +76,6 @@
     ProtectSystem = "strict";
     ProtectHome = true;
     ProtectKernelModules = true;
-    ProtectKernelTunables = true;
     ProtectKernelLogs = true;
     ProtectControlGroups = true;
     ProtectClock = true; 
@@ -84,6 +83,7 @@
     ProtectProc = "invisible";
 
     PrivateTmp = true;
+    PrivateMounts = true;
 
     RestrictRealtime = true;
     RestrictAddressFamilies = [ 
@@ -98,29 +98,24 @@
 
     MemoryDenyWriteExecute = true;
 
-    ReadOnlyPaths = [ "/etc" "/usr" "/bin" "/sbin" ];
-
-    InaccessiblePaths = [ "/home" "/root" "/run/user" ];
-
     SystemCallFilter = [
-      "~@mount"      # Deny mounting operations
-      "~@raw-io"     # Deny raw I/O operations
-      "~@privileged" # Deny privileged operations
-      "~@keyring"    # Deny kernel keyring operations
-      "~@reboot"     # Deny rebooting operations
-      "~@module"     # Deny kernel module options
-      "~@debug"      # Deny debug operations
-      "~@swap"       # Deny swap operations
-      "ptrace"       # ALlow process tracing operations
+      "~@mount"         # Deny mounting operations
+      "~@raw-io"        # Deny raw I/O operations
+      "~@privileged"    # Deny privileged operations
+      "~@keyring"       # Deny kernel keyring operations
+      "~@reboot"        # Deny rebooting operations
+      "~@module"        # Deny kernel module options
+      "~@swap"          # Deny swap operations
+      "~@resources"     # Deny resource management 
+      "~@obsolete"      # Deny system calls outdated, deprecated, or rarely used in modern Linux systems 
+      "~@cpu-emulation" # Deny system calls that are related to CPU state manipulation or virtualization 
+      "ptrace"          # ALlow process tracing operations
     ];
     SystemCallArchitectures = "native";
 
-    # Set of Linux capabilities that the service process and its child processes are allowed to retai
-    # CAP_NET_ADMIN   : Allows a process to perform a wide range of privileged network-related operations
-    # CAP_NET_RAW     : Allows sending and receiving raw packets
+    LockPersonality= true; 
+
     CapabilityBoundingSet = "CAP_NET_ADMIN CAP_NET_RAW";
-    # Provides a set of capabilities to the service that are available in its "ambient" capability set
-    AmbientCapabilities = "CAP_NET_ADMIN CAP_NET_RAW";
   };
 
   programs.mtr.enable = true;
