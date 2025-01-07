@@ -21,6 +21,7 @@
     LockPersonality = true;
 
     SystemCallFilter = [
+      "~@mount"         # Deny mount operations
       "~@swap"          # Deny swap operations
       "~@clock"         # Deny all system calls related to clock and timer management
       "~@obsolete"      # Deny system calls outdated, deprecated, or rarely used in modern Linux systems 
