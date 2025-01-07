@@ -1,4 +1,6 @@
 {
+  services.colord.enable = true;
+
   # Manages International Color Consortium (ICC) profiles.
   systemd.services.colord.serviceConfig = {
     NoNewPrivileges = true;

@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
-  # manage print http://localhost:631/
+  # Manage print http://localhost:631/
 
-  # print ip ipp://192.168.100.232/ipp/print
+  # Print ip ipp://192.168.100.232/ipp/print
 
   # Nmap scan report for 192.168.100.232
   # Host is up (0.019s latency).
@@ -14,6 +14,7 @@
   # 631/tcp  open  ipp
   # 9100/tcp open  jetdirect
 
+  # sudo lpadmin -p Canon_TS5100 -E -v ipp://192.168.10.122/ipp/print -m everywhere
   services.printing = {
     enable = true;
     drivers = with pkgs; [ 
@@ -29,12 +30,16 @@
     ProtectSystem = "full";
     ProtectHome = true;
     ProtectKernelModules = true;
+    ProtectKernelTunables = true; 
     ProtectKernelLogs = true;
     ProtectControlGroups = true;
     ProtectHostname = true;
+    ProtectClock = true;
     ProtectProc = "invisible";
 
     RestrictRealtime = true;
+    RestrictNamespaces = true;
+    RestrictSUIDSGID = true;
     RestrictAddressFamilies = [ 
       "AF_UNIX"      # Socket family used for inter-process communication (IPC) 
       "AF_NETLINK"   # Socket family used for communication between user-space applications and the Linux kernel
@@ -42,13 +47,11 @@
       "AF_INET6"     # IPv6 internet protocol for regular network communication
       "AF_PACKET"    # Raw packet socket for direct packet-level operations
     ];
-    RestrictNamespaces = true;
-    RestrictSUIDSGID = true;
 
     MemoryDenyWriteExecute = true;
 
     SystemCallFilter = [
-      "~@resources"
+      "~@clock"
       "~@reboot"
       "~@debug"
       "~@module"        # Deny kernel module options
@@ -61,12 +64,6 @@
     LockPersonality= true; 
 
     CapabilityBoundingSet= [
-      "~CAP_MAC_*"
-      "~CAP_CHOWN"
-      "~CAP_FSETID"
-      "~CAP_SETFCAP"
     ];
   };
-
-  services.colord.enable = true;
 }
