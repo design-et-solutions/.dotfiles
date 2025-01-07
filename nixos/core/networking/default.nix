@@ -86,12 +86,13 @@
     PrivateTmp = true;
 
     RestrictRealtime = true;
-    # AF_INET    : Allow IPv4 internet protocol for regular network communication
-    # AF_INET6   : Allow IPv6 internet protocol for regular network communication
-    # AF_UNIX    : Allow Unix domain socket for local interprocess communication (IPC)
-    # AF_NETLINK : Allow Netlink socket for interacting with the kernel's nl80211 interface
-    # AF_PACKET  : Allow raw packet socket for direct packet-level operations
-    RestrictAddressFamilies = "AF_INET AF_INET6 AF_UNIX AF_NETLINK AF_PACKET";
+    RestrictAddressFamilies = [ 
+      "AF_UNIX"      # Socket family used for inter-process communication (IPC) 
+      "AF_NETLINK"   # Socket family used for communication between user-space applications and the Linux kernel
+      "AF_INET"      # IPv4 internet protocol for regular network communication
+      "AF_INET6"     # IPv6 internet protocol for regular network communication
+      "AF_PACKET"    # Raw packet socket for direct packet-level operations
+    ];
     RestrictNamespaces = true;
     RestrictSUIDSGID = true;
 
