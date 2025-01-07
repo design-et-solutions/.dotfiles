@@ -28,10 +28,11 @@
       "~@swap"       # Deny swap operations
       "~@debug"      # Deny debug operations
       "~@module"     # Deny kernel module options
+      "~@obsolete"      # Deny system calls outdated, deprecated, or rarely used in modern Linux systems 
+      "~@cpu-emulation" # Deny system calls that are related to CPU state manipulation or virtualization 
     ];
     SystemCallArchitectures = "native";
 
-    CapabilityBoundingSet = [ ];
-    AmbientCapabilities = [ ];
+    # CapabilityBoundingSet = "~CAP_SYS_ADMIN";
   };
 }
