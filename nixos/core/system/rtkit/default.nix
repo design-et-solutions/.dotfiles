@@ -11,7 +11,6 @@
     ProtectKernelModules = true;
     ProtectKernelLogs = true;
     ProtectControlGroups = true; 
-    ProtectProc = "invisible";
 
     PrivateTmp = true;
     PrivateMounts = true;
