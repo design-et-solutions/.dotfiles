@@ -8,6 +8,5 @@
     ./systemd
     ./rescue
     ./account
-    # ./qemu
   ];
 }
