@@ -42,11 +42,10 @@
       "~@mount"
       "~@swap"
       "~@clock"
-      # "~@privileged"
-      # "~@module"
-      # "~@reboot"
-      # "~@debug"
+      "~@obsolete"
       "~@cpu-emulation"
+      "~@debug"
+      "~@module"
     ];
     SystemCallArchitectures = "native";
 
