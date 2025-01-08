@@ -28,7 +28,7 @@
     ProtectSystem = "full";
     # ProtectKernelLogs = true;
     # ProtectControlGroups = true;
-    # ProtectClock = true;
+    ProtectClock = true;
 
     PrivateMounts = true;
 
@@ -49,9 +49,9 @@
     SystemCallFilter = [
       "~@obsolete"
       "~@cpu-emulation"
-      # "~@clock"
-      # "~@swap"
-      # "~@module"
+      "~@clock"
+      "~@swap"
+      "~@module"
       # "~@reboot"
       # "~@mount"
 
