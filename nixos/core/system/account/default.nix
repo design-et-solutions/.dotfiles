@@ -18,7 +18,7 @@
       "~@swap"
       "~@resources"
       "~@raw-io"
-      "~@privileged"
+      # "~@privileged"
       "~@mount"
       "~@module"
       "~@reboot"

@@ -42,8 +42,6 @@
     SystemCallArchitectures = "native";
 
     CapabilityBoundingSet= [
-      "~CAP_MAC_ADMIN"
-      "~CAP_MAC_OVERRIDE"
       "~CAP_CHOWN"
       "~CAP_FSETID"
       "~CAP_SETFCAP"

@@ -200,7 +200,10 @@
 
     LockPersonality = true;
 
-    CapabilityBoundingSet = "~CAP_SYS_PTRACE ~CAP_SYS_PACCT";
+    CapabilityBoundingSet = [
+      "~CAP_SYS_PTRACE" 
+      "~CAP_SYS_PACCT"
+    ];
   };
 
   # Responsible for managing device nodes in the /dev directory and handling dynamic device management events.
