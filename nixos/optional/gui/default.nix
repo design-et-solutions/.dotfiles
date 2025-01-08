@@ -23,31 +23,34 @@
     graphics.enable = true;
   };
 
+  # Managing the graphical display system on your computer.
   systemd.services.display-manager.serviceConfig = {
-    # ProtectSystem = "full";
-    # ProtectHome = true;
+    ProtectSystem = "full";
     # ProtectHostname = true;
-    # ProtectKernelTunables = true;
-    # ProtectKernelModules = true;
-    # ProtectKernelLogs = true;
-    # ProtectControlGroups = true;
-    # ProtectClock = true;
-    # ProtectProc = "invisible";
+    ProtectKernelTunables = true;
+    ProtectKernelLogs = true;
+    ProtectControlGroups = true;
+    ProtectClock = true;
 
-    # PrivateNetwork = true;
+    PrivateMounts = true;
 
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
 
     SystemCallFilter = [
+      "~@raw-io"
+      "~@mount"
       "~@swap"
+      "~@clock"
       # "~@privileged"
       # "~@module"
       # "~@reboot"
       # "~@debug"
-      # "~@cpu-emulation"
+      "~@cpu-emulation"
     ];
     SystemCallArchitectures = "native";
+
+    LockPersonality = true;
   };
 
   systemd.services."getty@tty7".serviceConfig = {
