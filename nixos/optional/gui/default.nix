@@ -24,8 +24,6 @@
   };
 
   systemd.services.display-manager.serviceConfig = {
-    NoNewPrivileges = true;
-
     # ProtectSystem = "full";
     # ProtectHome = true;
     # ProtectHostname = true;
@@ -36,7 +34,6 @@
     # ProtectClock = true;
     # ProtectProc = "invisible";
 
-    # PrivateTmp = true;
     # PrivateNetwork = true;
 
     RestrictSUIDSGID = true;
