@@ -26,8 +26,7 @@
   # Managing the graphical display system on your computer.
   systemd.services.display-manager.serviceConfig = {
     ProtectSystem = "full";
-    # ProtectKernelLogs = true;
-    # ProtectControlGroups = true;
+    ProtectControlGroups = true;
     ProtectClock = true;
 
     PrivateMounts = true;
@@ -56,7 +55,7 @@
     ];
     SystemCallArchitectures = "native";
 
-    # LockPersonality = true;
+    LockPersonality = true;
 
     # CapabilityBoundingSet= [
     #   # "~CAP_SYS_PACCT"
