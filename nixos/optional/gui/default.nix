@@ -38,21 +38,15 @@
 
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
-    RestrictNamespaces = true;
-    RestrictAddressFamilies = [ 
-      "~AF_INET6"  
-      "~AF_INET"
-      "~AF_PACKET"
-    ];
 
-    # SystemCallFilter = [
-    #   "~@swap"
-    #   # "~@privileged"
-    #   # "~@module"
-    #   "~@reboot"
-    #   "~@debug"
-    #   "~@cpu-emulation"
-    # ];
+    SystemCallFilter = [
+      "~@swap"
+      # "~@privileged"
+      # "~@module"
+      # "~@reboot"
+      # "~@debug"
+      # "~@cpu-emulation"
+    ];
     SystemCallArchitectures = "native";
   };
 
