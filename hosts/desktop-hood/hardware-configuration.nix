@@ -8,29 +8,20 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-    boot.initrd.availableKernelModules = [ 
-      "xhci_pci" 
-      "nvme" 
-      "usb_storage" 
-      "usbhid" 
-      "uas" 
-      "sd_mod" 
-      "rtsx_usb_sdmmc" 
-    ];
-  boot.initrd.kernelModules = [ ]; 
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/9871b1b4-73e9-4645-8692-b19bef1af341";
+    { device = "/dev/disk/by-uuid/c2eb0881-6470-4bdc-80e7-9ee4cc2415fc";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/0F79-1FA5";
+    { device = "/dev/disk/by-uuid/46B6-E1C4";
       fsType = "vfat";
-      # options = [ "fmask=0022" "dmask=0022" ];
-      options = [ "fmask=0077" "dmask=0077" ]; # Restrict access
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices = [ ];
@@ -40,7 +31,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp1s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
