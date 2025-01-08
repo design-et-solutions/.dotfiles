@@ -57,15 +57,20 @@
 
     LockPersonality = true;
 
-    # CapabilityBoundingSet= [
-    #   # "~CAP_SYS_PACCT"
-    #   # "~CAP_SYS_MODULE"
-    #   # "~CAP_BPF"
-    #   # "~CAP_SYS_BOOT"
-    #   # "~CAP_SYS_RAWIO"
-    #   # "~CAP_SYS_CHROOT"
-    #   # "~CAP_BLOCK_SUSPEND"
-    # ];
+    CapabilityBoundingSet= [
+      "~CAP_SYS_PACCT"
+      "~CAP_SYS_MODULE"
+      "~CAP_SYS_RAWIO"
+      "~CAP_MAC_OVERRIDE"
+      "~CAP_MAC_ADMIN"
+      
+      # "~CAP_MKNOD"
+      # "~CAP_LEASE"
+      # "~CAP_BPF"
+      # "~CAP_SYS_BOOT"
+      # "~CAP_SYS_CHROOT"
+      # "~CAP_BLOCK_SUSPEND"
+    ];
   };
 
   systemd.services."getty@tty7".serviceConfig = {
