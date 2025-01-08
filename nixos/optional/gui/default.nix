@@ -26,7 +26,6 @@
   # Managing the graphical display system on your computer.
   systemd.services.display-manager.serviceConfig = {
     ProtectSystem = "full";
-    # ProtectHostname = true;
     ProtectKernelTunables = true;
     ProtectKernelLogs = true;
     ProtectControlGroups = true;
@@ -38,18 +37,24 @@
     RestrictRealtime = true;
 
     SystemCallFilter = [
-      "~@raw-io"
       "~@mount"
       "~@swap"
       "~@clock"
       "~@obsolete"
       "~@cpu-emulation"
-      "~@debug"
-      "~@module"
+      "~@reboot"
     ];
     SystemCallArchitectures = "native";
 
     LockPersonality = true;
+
+    CapabilityBoundingSet= [
+      "~CAP_SYS_PACCT"
+      "~CAP_SYS_MODULE"
+      "~CAP_BPF"
+      "~CAP_SYS_RAWIO"
+      "~CAP_SYS_BOOT"
+    ];
   };
 
   systemd.services."getty@tty7".serviceConfig = {
