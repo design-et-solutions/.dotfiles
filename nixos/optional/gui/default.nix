@@ -52,13 +52,7 @@
       "~@clock"
       "~@swap"
       "~@module"
-      # "~@reboot"
-      # "~@mount"
-
-      # "~@privileged"
-      # "~@debug"
-      # "~@resources"
-      # "~@raw-io"
+      "~@reboot"
     ];
     SystemCallArchitectures = "native";
 
