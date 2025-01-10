@@ -74,16 +74,11 @@
       # "~CAP_BLOCK_SUSPEND"
     ];
     RestrictNamespaces = [ 
-      # "~mnt"
       "~cgroup"
-      "~user"
+      # "~user" # firefox issue but 0.3 score
     ];
-    # KeyringMode = "";
+    ProtectKernelModules = true;
     # ProcSubset = ;
-    # ProtectKernelTunables = true;
-    # ProtectKernelModules = true;
-    # ProtectKernelLogs = true;
-    # ProtectProc = "invisible";
   };
 
   systemd.services."getty@tty7".serviceConfig = {
