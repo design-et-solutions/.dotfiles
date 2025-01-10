@@ -65,6 +65,20 @@
       "~CAP_NET_RAW"
       "~CAP_SYS_NICE"
       "~CAP_SYS_RESOURCE"
+      "~CAP_SYS_PTRACE"
+
+      # "~CAP_IPC_OWNER"
+      # "~CAP_FOWNER"
+      # "~CAP_DAC_ADMIN"
+      # "~CAP_DAC_OVERRIDE"
+
+      # "~CAP_SETUID"
+      # "~CAP_SETGID"
+      # "~CAP_SETPCAP"
+      
+      # "~CAP_NET_BIND_SERVICE"
+      # "~CAP_NET_BROADCAST"
+      # "~CAP_NET_RAW"
       
       # "~CAP_MKNOD"
       # "~CAP_LEASE"
