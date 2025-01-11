@@ -38,7 +38,6 @@
     RestrictAddressFamilies = [ 
       "AF_UNIX"      # Socket family used for inter-process communication (IPC) 
       "AF_NETLINK"   # Socket family used for communication between user-space applications and the Linux kernel
-      "~AF_PACKET"    # Raw packet socket for direct packet-level operations
       "AF_INET"      # IPv4 internet protocol for regular network communication
       "AF_INET6"     # IPv6 internet protocol for regular network communication
     ];
@@ -51,7 +50,6 @@
       # "~pid"
 
       # "~user"
-      #
     ];
 
     SystemCallFilter = [
@@ -69,8 +67,6 @@
     ];
     SystemCallArchitectures = "native";
 
-    # LockPersonality = true;
-
     CapabilityBoundingSet= [
       "~CAP_SYS_PACCT"
       "~CAP_SYS_MODULE"
@@ -87,22 +83,37 @@
       "~CAP_AUDIT_WRITE"
       "~CAP_AUDIT_READ"
       "~CAP_AUDIT_CONTROL"
+      "~CAP_NET_ADMIN"
+      "~CAP_BPF"
+      "~CAP_LINUX_IMMUTABLE"
 
+      # "~CAP_KILL"
       # "~CAP_SYSLOG"
-
-      # "~CAP_LINUX_IMMUTABLE"
       # "~CAP_LEASE"
       # "~CAP_IPC_LOCK"
-      # "~CAP_BPF"
-      #
+      # "~CAP_SYS_TTY_CONFIG"
+      # "~CAP_SYS_BOOT"
+      # "CAP_SYS_CHROOT"
+      # "CAP_BLOCK_SUSPEND"
+
       # "~CAP_NET_BIND_SERVICE"
       # "~CAP_NET_BROADCAST"
       # "~CAP_NET_RAW" 
+
+      # ""
+      # ""
     ];
+    # LockPersonality = true;
+
     # ProcSubset = "pid";
     # DynamicUser = true;
     # UMask = "0022";
     # ProtectHostname = true;
+    # NoNewPrivileges= true;
+    # PrivateDevices = true;
+    # ProtectKernelLogs = true;
+    # MemoryDenyWriteExecute = true;
+    # User = true;
   };
 
   systemd.services."getty@tty7".serviceConfig = {
