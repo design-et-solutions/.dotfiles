@@ -28,8 +28,10 @@
     ProtectSystem = "full";
     ProtectControlGroups = true;
     ProtectClock = true;
+    ProtectKernelModules = true;
 
     PrivateMounts = true;
+    PrivateIPC = true;
 
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
@@ -40,6 +42,9 @@
       "AF_INET6"     # IPv6 internet protocol for regular network communication
       "AF_PACKET"    # Raw packet socket for direct packet-level operations
     ];
+    RestrictNamespaces = [ 
+      "~cgroup"
+    ];
 
     SystemCallFilter = [
       "~@obsolete"
@@ -48,6 +53,7 @@
       "~@swap"
       "~@module"
       "~@reboot"
+      "~@raw-io"
     ];
     SystemCallArchitectures = "native";
 
@@ -59,40 +65,30 @@
       "~CAP_SYS_RAWIO"
       "~CAP_MAC_OVERRIDE"
       "~CAP_MAC_ADMIN"
-      
-      "~CAP_NET_BIND_SERVICE"
+      "~CAP_NET_BIND_SERVICE" 
       "~CAP_NET_BROADCAST"
       "~CAP_NET_RAW"
       "~CAP_SYS_NICE"
       "~CAP_SYS_RESOURCE"
       "~CAP_SYS_PTRACE"
+      "~CAP_MKNOD"
+      "~CAP_AUDIT_WRITE"
+      "~CAP_AUDIT_READ"
+      "~CAP_AUDIT_CONTROL"
 
-      # "~CAP_IPC_OWNER"
-      # "~CAP_FOWNER"
-      # "~CAP_DAC_ADMIN"
-      # "~CAP_DAC_OVERRIDE"
+      # "~CAP_SYSLOG"
+      # "~CAP_LINUX_IMMUTABLE"
+      # "~CAP_LEASE"
+      # "~CAP_IPC_LOCK"
+      # "~CAP_BPF"
 
-      # "~CAP_SETUID"
-      # "~CAP_SETGID"
-      # "~CAP_SETPCAP"
-      
       # "~CAP_NET_BIND_SERVICE"
       # "~CAP_NET_BROADCAST"
-      # "~CAP_NET_RAW"
-      
-      # "~CAP_MKNOD"
-      # "~CAP_LEASE"
-      # "~CAP_BPF"
-      # "~CAP_SYS_BOOT"
-      # "~CAP_SYS_CHROOT"
-      # "~CAP_BLOCK_SUSPEND"
+      # "~CAP_NET_RAW" 
     ];
-    RestrictNamespaces = [ 
-      "~cgroup"
-      # "~user" # firefox issue but 0.3 score
-    ];
-    ProtectKernelModules = true;
     # ProcSubset = ;
+
+    # UMask = "0022";
   };
 
   systemd.services."getty@tty7".serviceConfig = {
