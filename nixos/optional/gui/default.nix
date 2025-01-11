@@ -54,10 +54,14 @@
       "~@module"
       "~@reboot"
       "~@raw-io"
+      # "~@resources"
+      "~@debug"
+      # "~@mount"
+      # "~@privileged"
     ];
     SystemCallArchitectures = "native";
 
-    LockPersonality = true;
+    # LockPersonality = true;
 
     CapabilityBoundingSet= [
       "~CAP_SYS_PACCT"
@@ -77,6 +81,7 @@
       "~CAP_AUDIT_CONTROL"
 
       # "~CAP_SYSLOG"
+
       # "~CAP_LINUX_IMMUTABLE"
       # "~CAP_LEASE"
       # "~CAP_IPC_LOCK"
@@ -86,8 +91,8 @@
       # "~CAP_NET_BROADCAST"
       # "~CAP_NET_RAW" 
     ];
-    # ProcSubset = ;
-
+    # ProcSubset = "pid";
+    # DynamicUser = true;
     # UMask = "0022";
   };
 
