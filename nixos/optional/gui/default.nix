@@ -29,19 +29,16 @@
     ProtectControlGroups = true;
     ProtectClock = true;
     ProtectKernelModules = true;
-
     PrivateMounts = true;
     PrivateIPC = true;
-
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
     RestrictAddressFamilies = [ 
-      "AF_UNIX"      # Socket family used for inter-process communication (IPC) 
-      "AF_NETLINK"   # Socket family used for communication between user-space applications and the Linux kernel
-      "AF_INET"      # IPv4 internet protocol for regular network communication
-      "AF_INET6"     # IPv6 internet protocol for regular network communication
+      "AF_UNIX"
+      "AF_NETLINK"
+      "AF_INET"
+      "AF_INET6"
     ];
-
     SystemCallErrorNumber = "EPERM";
     SystemCallFilter = [
       "~@obsolete"
@@ -54,46 +51,35 @@
       "~@debug"
     ];
     SystemCallArchitectures = "native";
-
     LockPersonality = true;
-    UMask = 0022;
     IPAddressDeny = ["0.0.0.0/0" "::/0"];
-
-    RestrictNamespaces = [ 
-      "~cgroup"
-    ];
-
+    RestrictNamespaces = [ "~cgroup" ];
     CapabilityBoundingSet = [
       "CAP_SYS_ADMIN" 
       "CAP_SETUID"
       "CAP_SETGID"
+      "CAP_KILL"
+      "CAP_CHOWN"
+      "CAP_SYS_TTY_CONFIG"
       "CAP_SETPCAP"
       "CAP_DAC_OVERRIDE"
       "CAP_DAC_READ_SEARCH"
       "CAP_FOWNER"
-      "CAP_IPC_OWNER"
-      "CAP_KILL"
-      "CAP_CHOWN"
+      "CAP_IPC_OWNER" 
       "CAP_FSETID"
       "CAP_SETFCAP"
-      "CAP_SYS_TTY_CONFIG"
     ];
 
-    # ProtectKernelTunables = false;
-    # ProcSubset = "all";
-    # ProtectProc = "default";
-    # MemoryDenyWriteExecute = false;
-    # PrivateUsers = false;
-    # ProtectHome = false;
-    # ProtectKernelLogs = false;
-    # DynamicUser = false;
-    # NoNewPrivileges= false;
-    # PrivateTmp = false;
-    # ProtectHostname = false;
-    # PrivateNetwork = false;
-    # PrivateDevices = false;
-    # KeyringMode = "shared";
-    # DevicePolicy = "auto";
+    SupplementaryGroups = [ "tty" "input" "video" ];
+    DeviceAllow = [
+      "/dev/tty1" "rw"           # TTY for login (adjust to your setup)
+      "/dev/tty7" "rw"           # Common TTY for graphical interface
+      "/dev/dri/card*" "rw"      # GPU devices
+      "/dev/dri/renderD128" "rw" # Render node
+      "/dev/input/*" "r"         # Input devices
+    ];
+    DevicePolicy = "closed";
+    UMask = 0077;
   };
 
   systemd.services."getty@tty7".serviceConfig = {
