@@ -59,6 +59,8 @@
     UMask = 0022;
     IPAddressDeny = ["0.0.0.0/0" "::/0"];
 
+    # Group = "nogroup";
+
     RestrictNamespaces = [ 
       "~cgroup"
 
@@ -88,15 +90,16 @@
       "~CAP_AUDIT_READ"
       "~CAP_AUDIT_CONTROL"
       "~CAP_NET_ADMIN"
-      # "~CAP_BPF"
-      # "~CAP_IPC_LOCK"
-      # "~CAP_LINUX_IMMUTABLE"
+
+      "~CAP_LEASE"
+      "~CAP_SYS_BOOT"
 
       # "~CAP_SYSLOG"
 
-      # "~CAP_LEASE"
+      # "~CAP_BPF"
+      # "~CAP_IPC_LOCK"
+      # "~CAP_LINUX_IMMUTABLE"
       # "~CAP_SYS_TTY_CONFIG"
-      # "~CAP_SYS_BOOT"
       # "~CAP_SYS_CHROOT"
       # "~CAP_BLOCK_SUSPEND"
       #
