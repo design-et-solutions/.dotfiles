@@ -59,6 +59,7 @@
     websocat
     parted
     nodejs_22
+    feh
   ];
 
   services.printing = {
