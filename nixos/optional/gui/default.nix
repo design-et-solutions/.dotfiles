@@ -61,6 +61,16 @@
       "~@reboot"
       "~@raw-io"
       "~@debug"
+
+      # "~@keyring"
+      # "~@memlock" 
+      # "~@pkey" 
+      # "~@sandbox" 
+      # "~@setuid" 
+      # "~@sync" 
+      # "~@timer" 
+
+      # error
       # "~@resources"
       # "~@mount"
       # "~@privileged"
@@ -86,34 +96,55 @@
       "~CAP_NET_ADMIN"
       "~CAP_BPF"
       "~CAP_LINUX_IMMUTABLE"
+      "~CAP_IPC_LOCK"
 
-      # "~CAP_KILL"
+
       # "~CAP_SYSLOG"
+
       # "~CAP_LEASE"
-      # "~CAP_IPC_LOCK"
       # "~CAP_SYS_TTY_CONFIG"
       # "~CAP_SYS_BOOT"
-      # "CAP_SYS_CHROOT"
-      # "CAP_BLOCK_SUSPEND"
-
+      # "~CAP_SYS_CHROOT"
+      # "~CAP_BLOCK_SUSPEND"
+      #
       # "~CAP_NET_BIND_SERVICE"
       # "~CAP_NET_BROADCAST"
       # "~CAP_NET_RAW" 
 
-      # ""
-      # ""
+      # error
+      # "~CAP_DAC_*"
+      # "~CAP_FOWNER"
+      # "~CAP_IPC_OWNER"
+      # "~CAP_KILL"
+      # "~CAP_SETUID"
+      # "~CAP_SETGID"
+      # "~CAP_SETPCAP"
+      # "~CAP_CHOWN"
+      # "~CAP_FSETID"
+      # "~CAP_SETFCAP"
+      # "~CAP_SYS_ADMIN"
     ];
-    # LockPersonality = true;
+    LockPersonality = true;
+    UMask = 0022;
 
+    #
+    # error
+    # ProtectKernelTunables = true;
     # ProcSubset = "pid";
-    # DynamicUser = true;
-    # UMask = "0022";
-    # ProtectHostname = true;
-    # NoNewPrivileges= true;
-    # PrivateDevices = true;
-    # ProtectKernelLogs = true;
+    # ProtectProc = "noaccess";
+    # # ProtectProc = "invisible";
+    # # ProtectProc = "default";
+    # # ProtectProc = "ptraceable";
+    # UMask = 0077;
     # MemoryDenyWriteExecute = true;
-    # User = true;
+    # PrivateUsers = true;
+    # ProtectHome = true;
+    # ProtectKernelLogs = true;
+    # DynamicUser = true;
+    # NoNewPrivileges= true;
+    # ProtectHostname = true;
+    # PrivateNetwork = true;
+    # PrivateDevices = true;
   };
 
   systemd.services."getty@tty7".serviceConfig = {
