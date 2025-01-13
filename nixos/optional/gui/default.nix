@@ -51,17 +51,18 @@
       "~@reboot"
       "~@raw-io"
       "~@debug"
-      # "~@mount"
+      "@mount"
     ];
     SystemCallArchitectures = "native";
     LockPersonality = true;
     IPAddressDeny = ["0.0.0.0/0" "::/0"];
     RestrictNamespaces = [ 
       "~cgroup" 
-      # "~uts"
-      # "~mnt"
-      # "~pid"
-      # "~net"
+      "uts"
+      "mnt"
+      "pid"
+      "net"
+      "user"
     ];
     CapabilityBoundingSet = [
       "CAP_SYS_ADMIN" 
@@ -72,7 +73,7 @@
 
       "CAP_KILL"
 
-      # "CAP_SYS_TTY_CONFIG"
+      "CAP_SYS_TTY_CONFIG"
 
       "CAP_DAC_OVERRIDE"
       "CAP_DAC_READ_SEARCH"
@@ -86,8 +87,6 @@
 
     DeviceAllow = [
       "/dev/tty1" "rw"           # TTY for login
-      # "/dev/tty2" "rw"
-      # "/dev/tty3" "rw"
       "/dev/tty7" "rw"           # TTY for graphical interface 
       "/dev/dri/card*" "rw"      # GPU devices
       "/dev/dri/renderD128" "rw" # Render node
@@ -96,37 +95,44 @@
       "/dev/rtc" "r"              # Real-Time Clock (needed for time-related operations)
     ];
     DevicePolicy = "closed";
-
     UMask = 0077;
-    ProtectProc= "default";
+    
 
-    # SecureBits = "keep-caps-locked no-setuid-fixup no-setuid-fixup-locked noroot-locked";
-    # ReadWritePaths = "/run /var/log/nginx";
-    # ExecPaths = "/usr/sbin/nginx /usr/lib";
-    # NoExecPaths = "/";
-    # InaccessiblePaths = "/dev/shm";
-    #
-    # PrivatePIDs = true; 
-    # RemoveIPC = true;
-    # SocketBindDeny = true;
-    # SocketBindAllow = [ "tcp:80" "tcp:443" "udp:443" ];
-    # ProcSubset = "pid";
+    SecureBits = "keep-caps-locked no-setuid-fixup no-setuid-fixup-locked noroot-locked";
+    ReadWritePaths = "/run /var/log/nginx";
+    ExecPaths = "/usr/sbin/nginx /usr/lib";
+    NoExecPaths = "/";
+    InaccessiblePaths = "/dev/shm";
+    CPUQuota = "100%";
+    PrivatePIDs = true; 
+    RemoveIPC = true;
+    SocketBindDeny = "any";
+    SocketBindAllow = [ "tcp:80" "tcp:443" "udp:443" ];
+    RestrictFileSystems = [ "~devtmpfs" "~devpts" ];
+    BindPaths = [ "/var/log" ];
+    BindReadOnlyPaths = [ "/etc/passwd" "/etc/group" ];
+    LimitNOFILE = 1024;
+    LimitNPROC = 64;
+    LimitMEMLOCK = "64M";
+    ReadOnlyPaths = [ "/etc" "/usr" ];
+    TemporaryFileSystem = "/var:ro";
+    # IPAddressAllow = [ "localhost" "link-local" ];
+    RestrictNetworkInterfaces = [ "lo" "eth0" "wlan0" ];
 
     # AAAAAAAAHHHHHHHHHHHH
-    # NoNewPrivileges= true;
-
-    # PrivateNetwork=true;
-    # PrivateDevices=true;
-    # PrivateTmp = true;
-    # PrivateUsers=true;
-
-    # ProtectProc= "invisible";
-    # ProtectKernelTunables = true;
-    # ProtectKernelLogs = true;
-    # ProtectHome = true;
-    # ProtectHostname=true;
-
-    # MemoryDenyWriteExecute = true;
+    NoNewPrivileges = false;
+    PrivateNetwork = false;
+    PrivateDevices = false;
+    PrivateTmp = false;
+    PrivateUsers = false;
+    ProtectProc = "default";
+    ProtectKernelTunables = false;
+    ProtectKernelLogs = false;
+    ProtectHome = false;
+    ProtectHostname = false;
+    ProcSubset = "all";
+    MemoryDenyWriteExecute = false;
+    DynamicUser = false;
   };
 
   systemd.services."getty@tty7".serviceConfig = {
