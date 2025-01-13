@@ -41,17 +41,8 @@
       "AF_INET"      # IPv4 internet protocol for regular network communication
       "AF_INET6"     # IPv6 internet protocol for regular network communication
     ];
-    RestrictNamespaces = [ 
-      "~cgroup"
-      # "~ipc"
-      # "~mnt"
-      # "~net"
-      # "~uts"
-      # "~pid"
 
-      # "~user"
-    ];
-
+    SystemCallErrorNumber = "EPERM";
     SystemCallFilter = [
       "~@obsolete"
       "~@cpu-emulation"
@@ -61,21 +52,24 @@
       "~@reboot"
       "~@raw-io"
       "~@debug"
-
-      # "~@keyring"
-      # "~@memlock" 
-      # "~@pkey" 
-      # "~@sandbox" 
-      # "~@setuid" 
-      # "~@sync" 
-      # "~@timer" 
-
-      # error
-      # "~@resources"
-      # "~@mount"
-      # "~@privileged"
     ];
     SystemCallArchitectures = "native";
+
+    LockPersonality = true;
+    UMask = 0022;
+    IPAddressDeny = ["0.0.0.0/0" "::/0"];
+
+    RestrictNamespaces = [ 
+      "~cgroup"
+
+      # error
+      # "~ipc"
+      # "~mnt"
+      # "~net"
+      # "~uts"
+      # "~pid"
+      # "~user"
+    ];
 
     CapabilityBoundingSet= [
       "~CAP_SYS_PACCT"
@@ -94,10 +88,9 @@
       "~CAP_AUDIT_READ"
       "~CAP_AUDIT_CONTROL"
       "~CAP_NET_ADMIN"
-      "~CAP_BPF"
-      "~CAP_LINUX_IMMUTABLE"
-      "~CAP_IPC_LOCK"
-
+      # "~CAP_BPF"
+      # "~CAP_IPC_LOCK"
+      # "~CAP_LINUX_IMMUTABLE"
 
       # "~CAP_SYSLOG"
 
@@ -111,8 +104,10 @@
       # "~CAP_NET_BROADCAST"
       # "~CAP_NET_RAW" 
 
+
       # error
       # "~CAP_DAC_*"
+      # "~CAP_DAC_READ_SEARCH"
       # "~CAP_FOWNER"
       # "~CAP_IPC_OWNER"
       # "~CAP_KILL"
@@ -124,17 +119,19 @@
       # "~CAP_SETFCAP"
       # "~CAP_SYS_ADMIN"
     ];
-    LockPersonality = true;
-    UMask = 0022;
-
+    # # IPAddressAllow = [
+    # #   "192.168.10.0/24" 
+    # #   "10.100.0.0/24" 
+    # # ];
     #
-    # error
-    # ProtectKernelTunables = true;
-    # ProcSubset = "pid";
-    # ProtectProc = "noaccess";
-    # # ProtectProc = "invisible";
-    # # ProtectProc = "default";
-    # # ProtectProc = "ptraceable";
+    # #
+    # # error
+    # # ProtectKernelTunables = true;
+    # # ProcSubset = "pid";
+    # # ProtectProc = "noaccess";
+    # # # ProtectProc = "invisible";
+    # # # ProtectProc = "default";
+    # # # ProtectProc = "ptraceable";
     # UMask = 0077;
     # MemoryDenyWriteExecute = true;
     # PrivateUsers = true;
@@ -142,9 +139,18 @@
     # ProtectKernelLogs = true;
     # DynamicUser = true;
     # NoNewPrivileges= true;
+    # PrivateTmp = true;
     # ProtectHostname = true;
     # PrivateNetwork = true;
     # PrivateDevices = true;
+    # User = true;
+    # KeyringMode = "shared";
+    # KeyringMode = "private";
+
+    # PrivatePIDs = true;
+    # MemoryKSM = true;
+
+    # RemoveIPC=true;
   };
 
   systemd.services."getty@tty7".serviceConfig = {
