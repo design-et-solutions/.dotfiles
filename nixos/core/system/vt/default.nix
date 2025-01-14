@@ -1,6 +1,6 @@
 {
   # Service template that manages virtual terminals (VTs).
-  systemd.services."autovt@tty".serviceConfig = {
+  systemd.services."autovt@".serviceConfig = {
     NoNewPrivileges = true;
 
     ProtectSystem = "stric";
@@ -10,6 +10,7 @@
     ProtectKernelTunables = true;
     ProtectKernelModules = true;
     ProtectKernelLogs = true;
+    ProtectClock = true;
 
     PrivateMounts = true;
     PrivateTmp = true;
@@ -29,6 +30,7 @@
       "~@debug"
       "~@reboot"
       "~@swap"
+      "~@clock"
       "~@cpu-emulation"
    ];
 
