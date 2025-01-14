@@ -96,3 +96,5 @@ If you only need it always on all hosts so:
 * **LINK** => `https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html`
 ## Print
 * **CMD**  => `sudo lpadmin -p name_&&_description -E -v ipp://192.168.1.XXX/ipp/print -m everywhere`
+## Nix
+* **LINK** => `https://nixos.org/manual/nixos/stable/`
