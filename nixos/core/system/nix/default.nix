@@ -14,7 +14,6 @@
     ProtectKernelLogs = true;
 
     PrivateMounts = true;
-    PrivatePIDs = true;
     PrivateTmp = true;
     PrivateDevices = true;
 
