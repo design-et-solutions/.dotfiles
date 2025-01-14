@@ -4,6 +4,7 @@
     ./ssh
     ./nscd
     ./vt
+    ./tty
     ./dbus
     ./acpid
     ./systemd
