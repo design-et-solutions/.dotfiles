@@ -5,7 +5,6 @@
   systemd.services.nix-daemon.serviceConfig = {
     NoNewPrivileges = true;
 
-    ProtectSystem = "stric";
     ProtectControlGroups = true;
     ProtectHome = true;
     ProtectHostname = true;
