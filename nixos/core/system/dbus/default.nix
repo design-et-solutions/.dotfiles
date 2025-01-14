@@ -15,6 +15,7 @@
     PrivateMounts = true;
     PrivatePIDs = true;
     PrivateDevices = true;
+    PrivateTmp = true;
 
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
