@@ -40,7 +40,6 @@
     # ProtectProc = "invisible";
     # wont boot
     # ProtectHome = true;
-
     PrivateMounts = true;
     PrivateIPC = true;
     # no ethernet connection
@@ -51,10 +50,25 @@
     # PrivateTmp = true;
     # wont boot
     # PrivateUsers = true;
-
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
-    RestrictNamespaces = [ "~cgroup" ];
+    RestrictNamespaces = [ 
+      "~cgroup" 
+      # error: unable to start build process
+      # "~net"
+      # error: this system does not support the kernel namespaces that are required for sandboxing; use '--no-sandbox' to disable sandboxing
+      # "~pid"
+      # error: unable to start build process
+      # "~uts"
+      # error: this system does not support the kernel namespaces that are required for sandboxing; use '--no-sandbox' to disable sandboxing
+      # "~mnt"
+      # warning: on firefox 
+      # "~usr"
+      # error: unable to start build process
+      # "~ipc"
+    ];
+    # error: this system does not support the kernel namespaces that are required for sandboxing; use '--no-sandbox' to disable sandboxing
+    # RestrictNamespaces = true;
     RestrictAddressFamilies = [ 
       "AF_UNIX"
       "AF_NETLINK"
@@ -82,7 +96,23 @@
       # wont boot
       # "~@system-service"
       # can't open a window see if i should enable some services
-      # "@system-service"
+      # "~@default"
+      # "~@aio"
+      # "~@basic-io"
+      # "~@chown"
+      # "~@file-system"
+      # "~@io-event"
+      # "~@ipc"
+      # "~@keyring"
+      # "~@memlock"
+      # "~@network-io"
+      # "~@pkey"
+      # "~@process"
+      # "~@sandbox"
+      # "~@setuid"
+      # "~@signal"
+      # "~@sync"
+      # "~@timer"
     ];
     SystemCallArchitectures = "native";
     LockPersonality = true;
@@ -108,7 +138,6 @@
       "CAP_SETFCAP"
       "CAP_CHOWN"
     ];
-
     DeviceAllow = [
       "/dev/tty7" "rw"           # TTY for graphical interface 
       # "/dev/tty1" "rw"           # TTY for login
@@ -126,28 +155,8 @@
     # MemoryDenyWriteExecute = true;
     # wont boot
     # DynamicUser = true;
-
-
-    # SecureBits = "keep-caps-locked no-setuid-fixup no-setuid-fixup-locked noroot-locked";
-    # ReadWritePaths = "/run /var/log/nginx";
-    # ExecPaths = "/usr/sbin/nginx /usr/lib";
-    # NoExecPaths = "/";
-    # InaccessiblePaths = "/dev/shm";
-    # CPUQuota = "100%";
-    # PrivatePIDs = true; 
-    # RemoveIPC = true;
-    # SocketBindDeny = "any";
-    # SocketBindAllow = [ "tcp:80" "tcp:443" "udp:443" ];
-    # RestrictFileSystems = [ "~devtmpfs" "~devpts" ];
-    # BindPaths = [ "/var/log" ];
-    # BindReadOnlyPaths = [ "/etc/passwd" "/etc/group" ];
-    # LimitNOFILE = 1024;
-    # LimitNPROC = 64;
-    # LimitMEMLOCK = "64M";
-    # ReadOnlyPaths = [ "/etc" "/usr" ];
-    # TemporaryFileSystem = "/var:ro";
-    # # IPAddressAllow = [ "localhost" "link-local" ];
-    # RestrictNetworkInterfaces = [ "lo" "eth0" "wlan0" ];
+    LogLevelMax = "debug";
+    KeyringMode = lib.mkForce "private";
   };
 
   systemd.services."getty@tty7".serviceConfig = {
