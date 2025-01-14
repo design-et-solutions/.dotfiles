@@ -3,6 +3,7 @@
     ./nix
     ./ssh
     ./nscd
+    ./vt
     ./dbus
     ./acpid
     ./systemd
