@@ -72,9 +72,7 @@
       "CAP_SETFCAP"
       "CAP_CHOWN"
     ];
-    DeviceAllow = [
-      "/dev/tty7" "rw"           # TTY for graphical interface 
-    ];
+    DeviceAllow = "/dev/tty7 rw"; # TTY for graphical interface
     DevicePolicy = "closed";
     UMask = 0077;
     LogLevelMax = "debug";
