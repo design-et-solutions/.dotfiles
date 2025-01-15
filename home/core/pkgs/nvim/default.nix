@@ -47,6 +47,8 @@
                               # fuzzy finder over lists
       nvim-notify             # https://github.com/rcarriga/nvim-notify
                               # notify  
+      vim-dadbod-ui           # https://github.com/kristijanhusak/vim-dadbod-ui
+                              # navigation database gui 
       # ========================
       # code
       # ========================
@@ -113,8 +115,6 @@
       #                         #
       # vim-dadbod-completion   # https://github.com/kristijanhusak/vim-dadbod-completion
       #                         #
-      # vim-dadbod-ui           # https://github.com/kristijanhusak/vim-dadbod-ui
-      #                         # 
       # dressing-nvim           # https://github.com/stevearc/dressing.nvim 
       #                         # input improvement
       {
