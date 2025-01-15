@@ -26,7 +26,6 @@
   # Managing printers and print jobs on Linux and other UNIX-like operating systems.
   systemd.services.cups.serviceConfig = {
     NoNewPrivileges = true;
-
     ProtectSystem = "full";
     ProtectHome = true;
     ProtectKernelModules = true;
@@ -36,34 +35,28 @@
     ProtectHostname = true;
     ProtectClock = true;
     ProtectProc = "invisible";
-
     RestrictRealtime = true;
     RestrictNamespaces = true;
     RestrictSUIDSGID = true;
     RestrictAddressFamilies = [ 
-      "AF_UNIX"      # Socket family used for inter-process communication (IPC) 
-      "AF_NETLINK"   # Socket family used for communication between user-space applications and the Linux kernel
-      "AF_INET"      # IPv4 internet protocol for regular network communication
-      "AF_INET6"     # IPv6 internet protocol for regular network communication
-      "AF_PACKET"    # Raw packet socket for direct packet-level operations
+      "AF_UNIX" 
+      "AF_NETLINK"
+      "AF_INET"
+      "AF_INET6"
+      "AF_PACKET"
     ];
 
     MemoryDenyWriteExecute = true;
-
     SystemCallFilter = [
       "~@clock"
       "~@reboot"
       "~@debug"
-      "~@module"        # Deny kernel module options
-      "~@swap"          # Deny swap operations
-      "~@obsolete"      # Deny system calls outdated, deprecated, or rarely used in modern Linux systems 
-      "~@cpu-emulation" # Deny system calls that are related to CPU state manipulation or virtualization 
+      "~@module"
+      "~@swap"
+      "~@obsolete" 
+      "~@cpu-emulation" 
     ];
     SystemCallArchitectures = "native";
-
     LockPersonality= true; 
-
-    CapabilityBoundingSet= [
-    ];
   };
 }

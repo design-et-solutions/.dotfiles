@@ -1,13 +1,6 @@
 { lib, config, pkgs, isGui, ... }:
 {
-  # hardware.pulseaudio = {
-  #   enable = true;
-  #   support32Bit = true;
-  # };
-  #
-  # services.pipewire.enable = false;
-
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   services.pipewire = {
     enable = true;

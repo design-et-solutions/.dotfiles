@@ -36,7 +36,6 @@
     ProtectHostname = true;
     ProtectControlGroups = true; 
     ProtectProc = "invisible";
-
     SystemCallFilter = [
       "~@obsolete"
       "~@cpu-emulation"

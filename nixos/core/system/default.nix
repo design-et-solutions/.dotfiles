@@ -9,7 +9,7 @@
     ./acpid
     ./systemd
     ./rescue
-    ./account
+    ./accounts
     ./rtkit
     ./colord
   ];

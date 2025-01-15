@@ -2,7 +2,6 @@
   # Service template that manages virtual terminals (VTs).
   systemd.services."autovt@".serviceConfig = {
     NoNewPrivileges = true;
-
     ProtectSystem = "stric";
     ProtectControlGroups = true;
     ProtectHome = true;
@@ -11,10 +10,8 @@
     ProtectKernelModules = true;
     ProtectKernelLogs = true;
     ProtectClock = true;
-
     PrivateMounts = true;
     PrivateTmp = true;
-
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
     RestrictAddressFamilies = [ 
@@ -22,7 +19,6 @@
       "AF_NETLINK"
     ];
     RestrictNamespaces = true;
-
     SystemCallErrorNumber = "EPERM";
     SystemCallArchitectures = "native";
     SystemCallFilter = [
@@ -32,12 +28,10 @@
       "~@swap"
       "~@clock"
       "~@cpu-emulation"
-   ];
-
+    ];
     LockPersonality = true;
     IPAddressDeny = ["0.0.0.0/0" "::/0"];
     MemoryDenyWriteExecute = true;
-
     UMask = 0077;
   };
 }

@@ -25,7 +25,6 @@
 
   systemd.services.sshd.serviceConfig = {
     NoNewPrivileges = true;
-
     ProtectSystem = "strict";
     ProtectHome = "read-only";
     ProtectClock = true; 
@@ -35,30 +34,22 @@
     ProtectKernelLogs = true;
     ProtectControlGroups = true; 
     ProtectProc = "invisible";
-
     PrivateTmp = true;
     PrivateMounts = true;
     PrivateDevices = true;
-
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
-    RestrictAddressFamilies = [ 
-    ];
-
     MemoryDenyWriteExecute = true;
-
     LockPersonality = true;
-
     DevicePolicy = "closed";
-
     SystemCallFilter = [
-      "~@keyring"       # Deny kernel keyring operations
-      "~@swap"          # Deny swap operations
+      "~@keyring"
+      "~@swap"
       "~@clock"         
-      "~@module"        # Deny kernel module options
-      "~@obsolete"      # Deny system calls outdated, deprecated, or rarely used in modern Linux systems 
-      "~@cpu-emulation" # Deny system calls that are related to CPU state manipulation or virtualization 
+      "~@module"
+      "~@obsolete"
+      "~@cpu-emulation"
     ];
     SystemCallArchitectures = "native";
   }; 

@@ -28,7 +28,6 @@
   # Collecting, recording, and managing security-related audit events on the system.
   systemd.services.auditd.serviceConfig = {
     NoNewPrivileges = true;
-
     ProtectSystem = "full";
     ProtectHome = true;
     ProtectHostname = true;
@@ -37,12 +36,10 @@
     ProtectControlGroups = true; 
     ProtectProc = "invisible";
     ProtectClock = true;
-
     PrivateTmp = true;
     PrivateNetwork = true;
     PrivateMounts = true;
     PrivateDevices = true;
-
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
@@ -51,21 +48,17 @@
       "~AF_INET"
       "~AF_PACKET"
     ];
-
     MemoryDenyWriteExecute = true;
-
     LockPersonality = true;
-
     SystemCallFilter = [
-      "~@clock"         # Deny clock operations
-      "~@module"        # Deny kernel operations
-      "~@mount"         # Deny mount operations
-      "~@swap"          # Deny swap operations
-      "~@obsolete"      # Deny system calls outdated, deprecated, or rarely used in modern Linux systems 
-      "~@cpu-emulation" # Deny system calls that are related to CPU state manipulation or virtualization 
+      "~@clock"
+      "~@module"
+      "~@mount"
+      "~@swap"
+      "~@obsolete"
+      "~@cpu-emulation"
     ];
     SystemCallArchitectures = "native";
-
     CapabilityBoundingSet= [
       "~CAP_CHOWN"
       "~CAP_FSETID"
