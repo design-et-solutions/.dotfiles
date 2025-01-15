@@ -1,7 +1,13 @@
 vim.g.mapleader = " " 
 -- =============================== 
 -- misc
-vim.keymap.set('n', '<leader>x', ':source $HOME/.config/nvim/init.lua<CR>', { noremap = true, silent = true, desc = "Reload Neovim Config" })
+vim.api.nvim_set_keymap('n', '<leader>mm', ':MarkdownPreview<CR>', { noremap = true, silent = true, desc = "markdown preview" })
+vim.api.nvim_set_keymap("n", "<leader>mt", ":ToggleTerm direction=float<CR>", {noremap = true, silent = true , desc = "terminal" })
+vim.api.nvim_set_keymap("t", "<leader>mt", "<C-\\><C-n>:ToggleTerm<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>mg", ":Telescope live_grep<CR>", {noremap = true, silent = true , desc = "live grep" })
+vim.api.nvim_set_keymap("n", "<leader>mf", ":Telescope find_files<CR>", {noremap = true, silent = true , desc = "find files" })
+vim.api.nvim_set_keymap("n", "<leader>mb", ":Telescope buffers<CR>", {noremap = true, silent = true , desc = "buffers" })
+vim.api.nvim_set_keymap("n", "<leader>mh", ":Telescope help_tags<CR>", {noremap = true, silent = true , desc = "help tags" })
 -- =============================== 
 -- focus
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true, desc = "Switch window left" })
@@ -40,23 +46,12 @@ vim.keymap.set('n', '<leader>sh', ':split<CR>', { noremap = true, silent = true,
 vim.keymap.set('n', '<leader>sv', ':vsplit<CR>', { noremap = true, silent = true, desc = "Split window vertically" })
 
 -- =============================== 
--- telescope
-vim.api.nvim_set_keymap("n", "<leader>Tt", ":ToggleTerm direction=float<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("t", "<leader>Tt", "<C-\\><C-n>:ToggleTerm<CR>", {noremap = true, silent = true})
-
--- =============================== 
 -- coc
--- check type under cursor
 vim.api.nvim_set_keymap('n', '<leader>rt', '<Cmd>call CocAction("doHover")<CR>', { noremap = true, silent = true, desc = "check type" })
--- go to definition
 vim.api.nvim_set_keymap('n', '<leader>rd', '<Plug>(coc-definition)', { noremap = true, silent = true, desc = "goto definition" })
--- go to type definition
 vim.api.nvim_set_keymap('n', '<leader>rT', '<Plug>(coc-type-definition)', { noremap = true, silent = true, desc = "goto type definition" })
--- go to implementation
 vim.api.nvim_set_keymap('n', '<leader>ri', '<Plug>(coc-implementation)', { noremap = true, silent = true, desc = "goto implementation" })
--- go to references
 vim.api.nvim_set_keymap('n', '<leader>rr', '<Plug>(coc-references)', { noremap = true, silent = true, desc = "goto references" })
--- restart
 vim.api.nvim_set_keymap('n', '<leader>rR', '<Cmd>CocRestart<CR>', { noremap = true, silent = true, desc = "restart" })
 
 -- =============================== 
@@ -66,7 +61,7 @@ vim.api.nvim_set_keymap('n', '<leader>gP', ':Git push<CR>', { noremap = true, si
 vim.api.nvim_set_keymap('n', '<leader>gp', ':Git pull<CR>', { noremap = true, silent = true, desc = "git pull" })
 vim.api.nvim_set_keymap('n', '<leader>gm', ':Git merge<CR>', { noremap = true, silent = true, desc = "git merge" })
 vim.api.nvim_set_keymap('n', '<leader>ga', ':Git add<CR>', { noremap = true, silent = true, desc = "git add" })
-
+vim.api.nvim_set_keymap('n', '<leader>gg', ':Flog', { noremap = true, silent = true, desc = "git graph" })
 -- =============================== 
 -- rest
 vim.api.nvim_set_keymap('n', '<leader>e', ':Rest run<CR>', { noremap = true, silent = true, desc = "rest run" })
