@@ -5,10 +5,7 @@
   systemd.services.nix-daemon.serviceConfig = {
     NoNewPrivileges = true;
     ProtectControlGroups = true;
-    ProtectHostname = true;
-    ProtectKernelTunables = true;
     ProtectKernelModules = true;
-    ProtectKernelLogs = true;
     PrivateMounts = true;
     PrivateTmp = true;
     PrivateDevices = true;
@@ -22,6 +19,15 @@
       "AF_INET"
     ];
     CapabilityBoundingSet= [ 
+      "~CAP_SYS_CHROOT"
+      "~CAP_BPF"
+      "~CAP_AUDIT_WRITE"
+      "~CAP_AUDIT_CONTROL"
+      "~CAP_AUDIT_READ"
+      "~CAP_SYS_PTRACE"
+      "~CAP_SYS_NICE"
+      "~CAP_SYS_RESOURCE"
+      "~CAP_SYS_RAWIO"
       "~CAP_SYS_TIME" 
       "~CAP_SYS_PACCT" 
       "~CAP_LINUX_IMMUTABLE" 
