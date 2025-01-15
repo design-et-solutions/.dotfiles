@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-result=$(echo $(systemd-analyze security | awk '/OK/ {ok++} {total++} END {print "OK: " ok " / Total: " total}'))
+result=$(echo $(systemd-analyze security | awk '/OK/ {ok++} {total++} END {print "OK: " ok " / Total: " total-2}'))
 echo $result
 
 

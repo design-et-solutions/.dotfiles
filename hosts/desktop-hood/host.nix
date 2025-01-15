@@ -37,6 +37,7 @@ mkNixosConfiguration {
       };
       tool = {
         # solaar = true;
+        docker = true;
         appimage = true;
       };
       network = {

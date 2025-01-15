@@ -11,6 +11,7 @@
     ./security
     ./pkgs
     ./system
+    ./users
   ];
 
   nixpkgs = {

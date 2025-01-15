@@ -1,7 +1,6 @@
 {
-  services.dbus.enable = true;   # inter-process communication (IPC), allows apps to comm with one another
-
-  systemd.services.dbus.serviceConfig = {
+  # Service template that manages virtual terminals (VTs).
+  systemd.services."autovt@".serviceConfig = {
     NoNewPrivileges = true;
     ProtectSystem = "stric";
     ProtectControlGroups = true;
@@ -10,31 +9,29 @@
     ProtectKernelTunables = true;
     ProtectKernelModules = true;
     ProtectKernelLogs = true;
+    ProtectClock = true;
     PrivateMounts = true;
-    PrivateDevices = true;
     PrivateTmp = true;
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
     RestrictAddressFamilies = [ 
       "AF_UNIX"
+      "AF_NETLINK"
     ];
     RestrictNamespaces = true;
     SystemCallErrorNumber = "EPERM";
     SystemCallArchitectures = "native";
     SystemCallFilter = [
       "~@obsolete"
-      "~@resources"
       "~@debug"
-      "~@mount"
       "~@reboot"
       "~@swap"
+      "~@clock"
       "~@cpu-emulation"
-   ];
+    ];
     LockPersonality = true;
     IPAddressDeny = ["0.0.0.0/0" "::/0"];
     MemoryDenyWriteExecute = true;
-    DevicePolicy = "closed";
     UMask = 0077;
   };
 }
-

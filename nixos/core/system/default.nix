@@ -3,11 +3,14 @@
     ./nix
     ./ssh
     ./nscd
+    ./vt
+    ./tty
     ./dbus
     ./acpid
     ./systemd
     ./rescue
-    ./account
-    # ./qemu
+    ./accounts
+    ./rtkit
+    ./colord
   ];
 }

@@ -4,6 +4,15 @@
     ./audit
   ];
 
+  security = {
+    sudo-rs = {
+      enable = true;
+      wheelNeedsPassword = true;
+      execWheelOnly = true;
+    };
+    shadow.enable = true;
+  };
+
   environment.systemPackages = with pkgs; [ 
     vulnix 
 

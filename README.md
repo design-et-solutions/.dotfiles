@@ -86,3 +86,15 @@ If you only need it always on all hosts so:
 
 > [!TIP]
 > to update `waybar` rebuild your `kernel` and smile 
+
+# Resources 
+## Security
+### Systemd
+* **CMD**  => `systemd-analyze security`
+* **CMD**  => `systemd-analyze security <service_name>`
+* **CMD**  => `journactl -n 100 -fu <service_name>`
+* **LINK** => `https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html`
+## Print
+* **CMD**  => `sudo lpadmin -p name_&&_description -E -v ipp://192.168.1.XXX/ipp/print -m everywhere`
+## Nix
+* **LINK** => `https://nixos.org/manual/nixos/stable/`
