@@ -45,6 +45,8 @@
                               # floating terminal
       telescope-nvim          # https://github.com/nvim-telescope/telescope.nvim
                               # fuzzy finder over lists
+      nvim-notify             # https://github.com/rcarriga/nvim-notify
+                              # notify  
       # ========================
       # code
       # ========================
@@ -146,6 +148,16 @@
         );
         type = "lua";
       }
+    ] ++ [
+      (pkgs.vimUtils.buildVimPlugin { # https://github.com/atiladefreitas/dooing
+        name = "dooing";              # todo minimalist
+        src = pkgs.fetchFromGitHub {
+          owner = "atiladefreitas";
+          repo = "dooing";
+          rev = "main";
+          sha256 = "sha256-NiFayjm5NL0ZCJkO5kC21GNB4wn4XmMUSoZ7r3B/cTg=";
+        };
+      })
     ];
   };
 
