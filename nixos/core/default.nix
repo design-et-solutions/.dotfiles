@@ -59,7 +59,11 @@
     websocat
     parted
     nodejs_22
-    feh
+    vlc
+    glib
+    glib.dev
+    pkg-config
+    gobject-introspection
   ];
 
   services.printing = {
@@ -67,6 +71,84 @@
     drivers = [ pkgs.hplip pkgs.gutenprint ];
   };
 
+  #systemd.services.visionary = {
+    #description = "Service visionary";
+    #enable = true;
+    #wantedBy = ["multi-user.target"];
+    #after = [ "network.target" "SUBA-maquette-registry.service" ];
+    #after = ["network.target"];
+    #requires = [ "SUBA-maquette-registry.service" ];
+    #environment = {
+    #  WAYLAND_DISPLAY = "wayland-1";
+    #  XDG_RUNTIME_DIR = "/run/user/1001";
+    #};
+    #serviceConfig = {
+      #ExecStart = "./home/me/Manager/core/visionary/target/release/visionary";
+      #ExecStart = "echo 'hello'";
+      #Restart = "always";
+      #RestartSec = "30s";
+    #};
+    # "SUBA-maquette-gateway" = {
+    #   description = "Service gateway";
+    #   wantedBy = [ "multi-user.target" ];
+    #   after = [ "network.target" "SUBA-maquette-registry.service" ];
+    #   requires = [ "SUBA-maquette-registry.service" ];
+    #   serviceConfig = {
+    #     #ExecStart = "${pkgs.nix}/bin/nix-shell /etc/fatherhood/shell.nix --run /etc/fatherhood/gateway";
+    #     ExecStart = "./home/me/Manager/core/gateway/target/release/visionary";
+    #     Restart = "always";
+    #     RestartSec = "30s";
+    #     #EnvironmentFile= "/etc/fatherhood/.env";
+    #   };
+    # };
+    # "SUBA-maquette-registry" = {
+    #   description = "Service Tracker";
+    #   wantedBy = [ "multi-user.target" ];
+    #   after = [ "network.target" ];
+    #   serviceConfig = {
+    #     ExecStart = "${pkgs.nix}/bin/nix-shell /home/me/Manager/core/tracker/nix/shell.nix --run 'cargo run'";
+    #     Restart = "always";
+    #     RestartSec = "30s";
+    #     #EnvironmentFile= "/etc/fatherhood/.env";
+    #   };
+    # };
+  #};
+
+  systemd.services.foo = {
+    enable = true;
+    description = "bar";
+    unitConfig = {
+      Type = "simple";
+    };
+    serviceConfig = {
+      ExecStart = "echo 'coucou'";
+    };
+    wantedBy = ["multi-user.target"];
+  };
+
+
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
+
+
+
+
+  #systemd.services.display-image = {
+   #description = "Display an image on startup";
+    #after = [ "graphical.target" ]; # S'assurer que l'interface graphique est prête
+    #wantedBy = [ "graphical.target" ];
+    #serviceConfig = {
+      #ExecStart="${pkgs.bash}/bin/bash -c /home/me/start-image.sh";
+      #Restart = "always";
+      #RestartSec = 5;
+      #User = "me";
+      #Environment = [
+        #"DISPLAY=:0"
+        #"WAYLAND_DISPLAY=wayland-1"
+        #"PATH=${pkgs.bash}/bin:${pkgs.vlc}/bin:$PATH"
+      #];
+    #};
+  #};
+
 }
