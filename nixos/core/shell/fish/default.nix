@@ -43,8 +43,6 @@
       starship init fish | source
       fzf --fish | source
       fish_vi_key_bindings
-
-      source (fzf --key-bindings --completion)
     '';
   };
 
