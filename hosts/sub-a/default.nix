@@ -7,6 +7,12 @@
   time.timeZone = "Europe/Paris";
 
   networking= {
-    hostName = "rpi5";
+    hostName = "sub-a";
+  };
+
+  system.services.test = {
+    serviceConfig = {
+      ExecStart = "echo 'Hello'";
+    }
   };
 }

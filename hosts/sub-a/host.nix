@@ -2,15 +2,13 @@
 { mkNixosConfiguration, nixos-hardware, ... }:
 
 mkNixosConfiguration {
-  system = "aarch64-linux";
+  system = "intel64-linux";
   host = ./.;
   users = [ "me" ];
   setup = {
     gui = {
       enable = true;
-      full = true;
     };
-    nogui.networkwifi.emergency =  true;
-    controller.rpi5 = true;
+    nogui.network.wifi.emergency =  true;
   };
 }
