@@ -16,25 +16,25 @@
           set -g @continuum-save-interval '60' # minutes
         '';
       }
-      gruvbox
-      {
-        plugin = pkgs.tmuxPlugins.mkTmuxPlugin {
-          pluginName = "tmux-tokyo-night";
-          version = "1.9.0";
-          src = pkgs.fetchFromGitHub {
-            owner = "fabioluciano";
-            repo = "tmux-tokyo-night";
-            rev = "main";
-            sha256 = "sha256-ODl2h8t1U9mBRDmreZ5pRxWcvAulJJ+PfaLi78/YfPU=";
-          };
-          postInstall = ''
-            mv $out/share/tmux-plugins/tmux-tokyo-night/tmux-tokyo-night.tmux $out/share/tmux-plugins/tmux-tokyo-night/tmux_tokyo_night.tmux
-          '';
-        };
-        extraConfig = ''
-          set -g @theme_variation 'night'
-        '';
-      }
+      # gruvbox
+      # {
+      #   plugin = pkgs.tmuxPlugins.mkTmuxPlugin {
+      #     pluginName = "tmux-tokyo-night";
+      #     version = "1.9.0";
+      #     src = pkgs.fetchFromGitHub {
+      #       owner = "fabioluciano";
+      #       repo = "tmux-tokyo-night";
+      #       rev = "main";
+      #       sha256 = "sha256-ODl2h8t1U9mBRDmreZ5pRxWcvAulJJ+PfaLi78/YfPU=";
+      #     };
+      #     postInstall = ''
+      #       mv $out/share/tmux-plugins/tmux-tokyo-night/tmux-tokyo-night.tmux $out/share/tmux-plugins/tmux-tokyo-night/tmux_tokyo_night.tmux
+      #     '';
+      #   };
+      #   extraConfig = ''
+      #     set -g @theme_variation 'night'
+      #   '';
+      # }
     ];
     prefix = "C-f";
     keyMode = "vi";
