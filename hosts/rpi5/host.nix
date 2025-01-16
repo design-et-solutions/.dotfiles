@@ -8,7 +8,7 @@ mkNixosConfiguration {
   setup = {
     gui = {
       enable = true;
-      full = true;
+      full = false;
     };
     nogui.networkwifi.emergency =  true;
     controller.rpi5 = true;

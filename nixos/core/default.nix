@@ -71,62 +71,115 @@
     drivers = [ pkgs.hplip pkgs.gutenprint ];
   };
 
-  #systemd.services.visionary = {
-    #description = "Service visionary";
-    #enable = true;
-    #wantedBy = ["multi-user.target"];
-    #after = [ "network.target" "SUBA-maquette-registry.service" ];
-    #after = ["network.target"];
-    #requires = [ "SUBA-maquette-registry.service" ];
-    #environment = {
-    #  WAYLAND_DISPLAY = "wayland-1";
-    #  XDG_RUNTIME_DIR = "/run/user/1001";
-    #};
-    #serviceConfig = {
-      #ExecStart = "./home/me/Manager/core/visionary/target/release/visionary";
-      #ExecStart = "echo 'hello'";
-      #Restart = "always";
-      #RestartSec = "30s";
-    #};
-    # "SUBA-maquette-gateway" = {
-    #   description = "Service gateway";
+  systemd.services = {
+    visionary = {
+      description = "Service visionary";
+      enable = true;
+      wantedBy = ["multi-user.target"];
+      after = [ "network.target" "tracker.service" ];
+      requires = [ "tracker.service" ];
+      environment = {
+        WAYLAND_DISPLAY = "wayland-1";
+        XDG_RUNTIME_DIR = "/run/user/1001";
+        RUST_LOG = "DEBUG";
+        APP_HOST = "0.0.0.0";
+        TRACKER_HOST = "0.0.0.0";
+        TRACKER_PORT = "50200";
+      };
+      serviceConfig = {
+        ExecStart = "/home/me/Manager/core/visionary/target/release/visionary";
+        Restart = "always";
+        RestartSec = "30s";
+      };
+    };
+    gateway = {
+      description = "Service gateway";
+      enable = true;
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" "tracker.service" ];
+      requires = [ "tracker.service" ];
+      serviceConfig = {
+        # ExecStart = "/home/me/Manager/core/gateway/target/release/gateway";
+        ExecStart = "${pkgs.nix}/bin/nix-shell /home/me/Manager/core/gateway/nix/shell.nix --run /home/me/Manager/core/gateway/target/release/gateway";
+        Restart = "always";
+        RestartSec = "30s";
+        Environment = [
+          "RUST_LOG='DEBUG'"
+          "APP_HOST='0.0.0.0'"
+          "APP_PORT=8080"
+          "TRACKER_HOST='0.0.0.0'"
+          "TRACKER_PORT=50200"        
+        ];
+      };
+    };
+    tracker = {
+      description = "Service Tracker";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
+      serviceConfig = {
+        ExecStart = "/home/me/Manager/core/tracker/target/release/registry";
+        Restart = "always";
+        RestartSec = "30s";
+        Environment = [
+          "RUST_LOG='DEBUG'"
+          "APP_HOST='0.0.0.0'"
+          "APP_PORT=50200"
+        ];
+      };
+    };
+    # requete = {
+    #   description = "Service requete";
+    #   enable = true;
     #   wantedBy = [ "multi-user.target" ];
-    #   after = [ "network.target" "SUBA-maquette-registry.service" ];
-    #   requires = [ "SUBA-maquette-registry.service" ];
+    #   after = [ "network.target" "tracker.service" "visionary.service" "gateway.service" ];
+    #   requires = [ "tracker.service" "visionary.service" "gateway.service"] ;
     #   serviceConfig = {
-    #     #ExecStart = "${pkgs.nix}/bin/nix-shell /etc/fatherhood/shell.nix --run /etc/fatherhood/gateway";
-    #     ExecStart = "./home/me/Manager/core/gateway/target/release/visionary";
-    #     Restart = "always";
-    #     RestartSec = "30s";
-    #     #EnvironmentFile= "/etc/fatherhood/.env";
+    #     Type = "oneshot"; # Définir le type du service comme "oneshot"
+    #     ExecStart = "
+    #       sleep 10s; # Attendre 10 secondes avant d'exécuter la requête
+    #       curl -X POST http://localhost:8080/visionary/play/media \
+    #       -H 'Content-Type: application/json'\
+    #       -d '{
+    #         \"service\": \"visionary\",
+    #         \"monitor_index\": 1,
+    #         \"media_path\": \"/home/me/Manager/example/TCPM-WELCOME1_ANIM_1_new.mp4\",
+    #         \"is_looping\": false
+    #       }'
+    #     ";      
+    #     Restart = "on-failure"; # Le service redémarrera en cas d'échec
+    #     RestartSec = "30s"; # Attendre 30 secondes avant de redémarrer si le service échoue:
     #   };
     # };
-    # "SUBA-maquette-registry" = {
-    #   description = "Service Tracker";
-    #   wantedBy = [ "multi-user.target" ];
-    #   after = [ "network.target" ];
-    #   serviceConfig = {
-    #     ExecStart = "${pkgs.nix}/bin/nix-shell /home/me/Manager/core/tracker/nix/shell.nix --run 'cargo run'";
-    #     Restart = "always";
-    #     RestartSec = "30s";
-    #     #EnvironmentFile= "/etc/fatherhood/.env";
-    #   };
-    # };
-  #};
 
-  systemd.services.foo = {
-    enable = true;
-    description = "bar";
-    unitConfig = {
-      Type = "simple";
+
+
+
+    requete = {
+      description = "Service requete";
+      enable = true;
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" "tracker.service" "visionary.service" "gateway.service" ];
+      requires = [ "tracker.service" "visionary.service" "gateway.service" ];
+      serviceConfig = {
+        Type = "oneshot"; # Définir le type du service comme "oneshot"
+        ExecStart = ''
+          /bin/sh -c "sleep 10s && /run/current-system/sw/bin/curl -X POST http://localhost:8080/visionary/play/media \
+            -H 'Content-Type: application/json' \
+            -d '{ \
+              \"service\": \"visionary\", \
+              \"monitor_index\": 1, \
+              \"media_path\": \"/home/me/Manager/example/TCPM-WELCOME1_ANIM_4.mp4\", \
+              \"is_looping\": true \
+            }'"
+        '';
+        Restart = "on-failure"; # Le service redémarrera en cas d'échec
+        RestartSec = "30s"; # Attendre 30 secondes avant de redémarrer si le service échoue
+      };
     };
-    serviceConfig = {
-      ExecStart = "echo 'coucou'";
-    };
-    wantedBy = ["multi-user.target"];
+
+
+
   };
-
-
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
@@ -134,21 +187,21 @@
 
 
 
-  #systemd.services.display-image = {
-   #description = "Display an image on startup";
-    #after = [ "graphical.target" ]; # S'assurer que l'interface graphique est prête
-    #wantedBy = [ "graphical.target" ];
-    #serviceConfig = {
-      #ExecStart="${pkgs.bash}/bin/bash -c /home/me/start-image.sh";
-      #Restart = "always";
-      #RestartSec = 5;
-      #User = "me";
-      #Environment = [
-        #"DISPLAY=:0"
-        #"WAYLAND_DISPLAY=wayland-1"
-        #"PATH=${pkgs.bash}/bin:${pkgs.vlc}/bin:$PATH"
-      #];
-    #};
-  #};
-
-}
+#   systemd.services.display-image = {
+#    description = "Display an image on startup";
+#     after = [ "graphical.target" ]; # S'assurer que l'interface graphique est prête
+#     wantedBy = [ "graphical.target" ];
+#     serviceConfig = {
+#       #ExecStart="${pkgs.bash}/bin/bash -c /home/me/start-image.sh";
+#       ExecStart="/run/current-system/sw/bin/echo 'pas coucou'";
+#       Restart = "always";
+#       RestartSec = 5;
+#       User = "me";
+#       #Environment = [
+#         #"DISPLAY=:0"
+#         #"WAYLAND_DISPLAY=wayland-1"
+#         #"PATH=${pkgs.bash}/bin:${pkgs.vlc}/bin:$PATH"
+#       #];
+#     };
+#   };
+ }
