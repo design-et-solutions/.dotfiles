@@ -10,9 +10,9 @@
     hostName = "sub-a";
   };
 
-  system.services.test = {
+  systemd.services.test = {
     serviceConfig = {
       ExecStart = "echo 'Hello'";
-    }
+    };
   };
 }

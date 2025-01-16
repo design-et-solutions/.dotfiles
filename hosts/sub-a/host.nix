@@ -2,7 +2,7 @@
 { mkNixosConfiguration, nixos-hardware, ... }:
 
 mkNixosConfiguration {
-  system = "intel64-linux";
+  system = "x86_64-linux";
   host = ./.;
   users = [ "me" ];
   setup = {
