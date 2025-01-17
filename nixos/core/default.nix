@@ -163,7 +163,7 @@
       serviceConfig = {
         Type = "oneshot"; # Définir le type du service comme "oneshot"
         ExecStart = ''
-          /bin/sh -c "sleep 10s && /run/current-system/sw/bin/curl -X POST http://localhost:8080/visionary/play/media \
+          /bin/sh -c "sleep 15s && /run/current-system/sw/bin/curl -X POST http://localhost:8080/visionary/play/media \
             -H 'Content-Type: application/json' \
             -d '{ \
               \"service\": \"visionary\", \
