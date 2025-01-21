@@ -86,6 +86,8 @@
                               # git graph  
       fugitive                # https://github.com/tpope/vim-fugitive (git)
                               # git commands
+      neogit                  # https://github.com/NeogitOrg/neogit
+                              # git interface
       # ========================
       # clean gui
       # ========================
