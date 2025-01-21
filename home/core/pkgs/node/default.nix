@@ -1,6 +1,5 @@
 { pkgs, ... }:{
   home.packages = with pkgs; [
-    nodejs
-    nodePackages.npm
+    nodejs_23
   ];
 }
