@@ -2,7 +2,6 @@
 {
   gui = {
     enable = false;
-    full = false;
     hyprland = true;
     wayfire = false;
     extra = {

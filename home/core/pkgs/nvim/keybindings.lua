@@ -8,6 +8,7 @@ vim.api.nvim_set_keymap("n", "<leader>mg", ":Telescope live_grep<CR>", {noremap 
 vim.api.nvim_set_keymap("n", "<leader>mf", ":Telescope find_files<CR>", {noremap = true, silent = true , desc = "find files" })
 vim.api.nvim_set_keymap("n", "<leader>mb", ":Telescope buffers<CR>", {noremap = true, silent = true , desc = "buffers" })
 vim.api.nvim_set_keymap("n", "<leader>mh", ":Telescope help_tags<CR>", {noremap = true, silent = true , desc = "help tags" })
+vim.api.nvim_set_keymap("n", "<leader>mT", ":Telescope<CR>", {noremap = true, silent = true , desc = "telescope" })
 -- =============================== 
 -- focus
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true, desc = "Switch window left" })

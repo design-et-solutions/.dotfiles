@@ -1,0 +1,58 @@
+@define-color fg #a9b1d6;
+@define-color bg #1a1b26;
+@define-color red #f7768e;
+@define-color green #9ece6a;
+@define-color purple #bb9af7;
+@define-color gray #414868;
+
+/* =============================== */
+/* Universal Styling */
+* {
+    border: none;
+    font-family: 'FiraCode Nerd Font', monospace;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* =============================== */
+/* Bar Styling */
+#waybar {
+    background: transparent;
+    color: @fg;
+}
+
+#cpu,
+#memory,
+#disk,
+#network,
+#temperature {
+    font-weight: normal;
+    border: 2px solid @fg;
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: @bg;
+    margin-left: 5px;
+}
+
+#custom-spotify,
+#pulseaudio,
+#battery,
+#clock.date,
+#clock.time,
+#backlight {
+    font-weight: normal;
+    border: 2px solid @fg;
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: @bg;
+    margin-left: 5px;
+}
+
+#custom-spotify.playing {
+    color: @green;
+}
+#custom-spotify.paused {
+    color: @red;
+}

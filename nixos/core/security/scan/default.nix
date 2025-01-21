@@ -1,6 +1,6 @@
 { pkgs, ... }: {
-  environment.etc."scripts/systemd-analyzer-security.sh" = {
-    source = builtins.toString ../../../scripts/systemd-analayser-security.sh;
+  environment.etc."scripts/systemd-analyzer-security.fish" = {
+    source = builtins.toString ../../../scripts/systemd-analayser-security.fish;
     mode = "0755";
   };
 
@@ -8,9 +8,9 @@
     description = "Run systemd security check";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.bash}/bin/bash -c '/etc/scripts/systemd-analyzer-security.sh'";
+      ExecStart = "${pkgs.fish}/bin/fish -c '/etc/scripts/systemd-analyzer-security.fish'";
       Environment = [
-        "PATH=${pkgs.bash}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.coreutils}/bin:${pkgs.gawk}/bin:${pkgs.systemd}/bin:${pkgs.libnotify}/bin:${pkgs.procps}/bin:${pkgs.util-linux}/bin:$PATH"
+        "PATH=${pkgs.fish}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.coreutils}/bin:${pkgs.gawk}/bin:${pkgs.systemd}/bin:${pkgs.libnotify}/bin:${pkgs.procps}/bin:${pkgs.util-linux}/bin:$PATH"
       ];
     };
     wantedBy = [ "multi-user.target" ];

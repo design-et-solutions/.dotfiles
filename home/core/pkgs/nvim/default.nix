@@ -4,6 +4,14 @@
     EDITOR = "nvim";
   };
 
+  home.file = {
+    ".scripts/nvim_reloader.fish" = {
+      source = builtins.toString ../../../scripts/nvim_reloader.fish;
+      executable = true;
+    };
+  };
+
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -16,31 +24,24 @@
       set shadafile=~/.local/share/nvim/custom.shada
     '';
     extraLuaConfig = ''
-      ${builtins.readFile ./config.lua}
+      ${builtins.readFile ./plugins/gruvbox.lua}
+      ${builtins.readFile ./plugins/tokyonight.lua}
+      ${builtins.readFile ./plugins/notify.lua}
       ${builtins.readFile ./plugins/bufferline.lua}
       ${builtins.readFile ./plugins/colorizer.lua}
-      ${builtins.readFile ./plugins/gruvbox.lua}
-      ${builtins.readFile ./plugins/image.lua}
       ${builtins.readFile ./plugins/nvim-tree.lua}
       ${builtins.readFile ./plugins/rest-nvim.lua}
       ${builtins.readFile ./plugins/toggleterm.lua}
-      ${builtins.readFile ./plugins/tokyonight.lua}
       ${builtins.readFile ./plugins/which-key.lua}
       ${builtins.readFile ./plugins/conform.lua}
       ${builtins.readFile ./keybindings.lua}
+      ${builtins.readFile ./config.lua}
     '';
-    extraPackages = with pkgs; [
-      luajit
-      imagemagick
-      postgresql
-    ];
     # https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/editors/vim/plugins/vim-plugin-names
     plugins = with pkgs.vimPlugins; [
       # ========================
       # misc 
       # ========================
-      image-nvim              # https://github.com/samodostal/image.nvim
-                              # show image in terminal
       toggleterm-nvim         # https://github.com/akinsho/toggleterm.nvim
                               # floating terminal
       telescope-nvim          # https://github.com/nvim-telescope/telescope.nvim
@@ -160,8 +161,16 @@
       })
     ];
   };
-
   home.packages = with pkgs; [
+    luajit
+    imagemagick
+    postgresql
+    stylua
+    nixfmt-rfc-style
+    prettierd
+    isort
+    black
+    nodePackages.prettier
     ripgrep
   ];
 }

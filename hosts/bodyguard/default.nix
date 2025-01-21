@@ -26,12 +26,12 @@ in {
   };
 
   environment.etc = {
-    "scripts/open-luks-usb.sh" = {
-      source = builtins.toString ../../nixos/scripts/open-luks-usb.sh;
+    "scripts/open-luks-usb.fish" = {
+      source = builtins.toString ../../nixos/scripts/open-luks-usb.fish;
       mode = "0755";
     };
-    "scripts/close-luks-usb.sh" = {
-      source = builtins.toString ../../nixos/scripts/close-luks-usb.sh;
+    "scripts/close-luks-usb.fish" = {
+      source = builtins.toString ../../nixos/scripts/close-luks-usb.fish;
       mode = "0755";
     };
     "wireguard/wg0" = {
@@ -48,9 +48,9 @@ in {
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${pkgs.coreutils}/bin/true"; # No action on start
-      ExecStop = "${pkgs.bash}/bin/bash -c '/etc/scripts/close-luks-usb.sh'";
+      ExecStop = "${pkgs.fish}/bin/fish -c '/etc/scripts/close-luks-usb.fish'";
       Environment = [
-        "PATH=${pkgs.bash}/bin:${pkgs.cryptsetup}/bin:${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:$PATH"
+        "PATH=${pkgs.fish}/bin:${pkgs.cryptsetup}/bin:${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:$PATH"
       ];
     };
   };

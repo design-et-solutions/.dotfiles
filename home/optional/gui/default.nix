@@ -1,34 +1,29 @@
 { pkgs, lib, mergedSetup, ... }:
 let
-  waybarCommand = if mergedSetup.gui.full or false then ''
-    exec-once = waybar
-  '' else "";
-  hyprpaperCommand = if mergedSetup.gui.full or false then ''
-    exec-once = hyprpaper
-    exec-once = while true; do $HOME/.scripts/wallpapers-randomizer.sh; sleep 900; done
-  '' else ''
-    exec-once = hyprpaper
-    exec-once = $HOME/.scripts/wallpapers-black.sh
+  waybarCommand = ''
+    exec = $HOME/.scripts/waybar.fish
+  '';
+  hyprpaperCommand = ''
+    exec = hyprpaper
+    exec = $HOME/.scripts/misc/wallpapers_rand.fish
+    exec = $HOME/.scripts/hypr_reloader.fish
   '';
   hyprlandConf = pkgs.substituteAll {
     src = ./hyprland.conf;
     waybar_command = waybarCommand;
     hyprpaper_command = hyprpaperCommand;
-    animations_enable = if mergedSetup.gui.full or false then "true" else "false";
+    animations_enable = "true";
     custom = mergedSetup.gui.extra.hyprland;
   };
 in
 {
-  imports = 
-    (lib.optionals mergedSetup.gui.full [
-      ../pkgs/waybar 
-    ]) ++
-    [
-      ../pkgs/mako
-      ../pkgs/kitty 
-      ../pkgs/rofi 
-      ../pkgs/mpv 
-    ];
+  imports = [ 
+    ../pkgs/waybar 
+    ../pkgs/mako
+    ../pkgs/kitty 
+    ../pkgs/rofi 
+    ../pkgs/mpv 
+  ];
 
   xdg.configFile = {
     "hypr/hyprland.conf".source = hyprlandConf;
@@ -48,12 +43,20 @@ in
   };
 
   home.file = {
-    ".scripts/wallpapers-randomizer.sh" = {
-      source = builtins.toString ../../scripts/wallpapers-randomizer.sh;
+    ".scripts/hypr_reloader.fish" = {
+      source = builtins.toString ../../scripts/hypr_reloader.fish;
       executable = true;
     };
-    ".scripts/wallpapers-black.sh" = {
-      source = builtins.toString ../../scripts/wallpapers-black.sh;
+    ".scripts/misc/loading_notif.fish" = {
+      source = builtins.toString ../../scripts/misc/loading_notif.fish;
+      executable = true;
+    };
+    ".scripts/misc/theme_reloader.fish" = {
+      source = builtins.toString ../../scripts/misc/theme_reloader.fish;
+      executable = true;
+    };
+    ".scripts/misc/wallpapers_rand.fish" = {
+      source = builtins.toString ../../scripts/misc/wallpapers_rand.fish;
       executable = true;
     };
     ".wallpapers" = {
@@ -62,12 +65,5 @@ in
     ".local/share/icons" = {
       source = ../../cursors;
     };
-  };
-
-  # screenshot
-  home.activation = {
-    createDirectories = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      mkdir -p ~/Screenshots
-    '';
   };
 }
