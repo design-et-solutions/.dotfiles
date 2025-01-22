@@ -1,4 +1,4 @@
-require("colorizer").setup{
-    filetypes = { "*" },
-    buftypes = {},
-}
+require("colorizer").setup({
+	filetypes = { "*" },
+	buftypes = {},
+})

@@ -1,3 +1,3 @@
-require("which-key").setup {
-  plugins = {},
-}
+require("which-key").setup({
+	plugins = {},
+})
