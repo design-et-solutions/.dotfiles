@@ -1,5 +1,6 @@
-{ pkgs, ... }:{
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
-    nodejs_23
+    nodejs # > npx create-next-app@latest
   ];
 }
