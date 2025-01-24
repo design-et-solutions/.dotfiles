@@ -1,18 +1,20 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   environment.sessionVariables = {
     BROWSER = "firefox";
   };
 
   programs.firefox = {
     enable = true;
-    languagePacks = [ "fr" "en-US" ];
+    languagePacks = [
+      "en-US"
+    ];
     policies = {
-      # BlockAboutConfig = true;
       DefaultDownloadDirectory = "~/Downloads";
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
       EnableTrackingProtection = {
-        Value= true;
+        Value = true;
         Locked = true;
         Cryptomining = true;
         Fingerprinting = true;
@@ -24,6 +26,7 @@
       OverrideFirstRunPage = "";
       OverridePostUpdatePage = "";
       DontCheckDefaultBrowser = true;
+      # BlockAboutConfig = true;
       # ExtensionSettings = {
       #   "*".installation_mode = "blocked"; # blocks all addons except below
       #   "vimium-ff@vimium.com" = {
@@ -31,19 +34,17 @@
       #     installation_mode = "force_installed";
       #   };
       # };
-      Preferences = { 
-        "browser.startup.homepage" = "https://nixos.org";
-        # "browser.search.region" = "FR";
-        # "browser.search.isUS" = false;
+      Preferences = {
+        "browser.startup.homepage" = "https://homepage-brown-ten.vercel.app/";
+        "extensions.screenshots.disabled" = true;
         # "browser.bookmarks.managed.enabled" = true;
-        # "extensions.screenshots.disabled" = true;
-        extensions = [
-          (pkgs.fetchFirefoxAddon {
-            name = "vimium";
-            url = "https://addons.mozilla.org/firefox/downloads/file/4259790/vimium_ff-2.1.2.xpi";
-            sha256 = "sha256-O51D7id/83TjsRU/l9wgywbmVBFqgzZ0x5tDuIh4IOE=";
-          })
-        ];
+        # extensions = [
+        #   (pkgs.fetchFirefoxAddon {
+        #     name = "vimium";
+        #     url = "https://addons.mozilla.org/firefox/downloads/file/4259790/vimium_ff-2.1.2.xpi";
+        #     sha256 = "sha256-O51D7id/83TjsRU/l9wgywbmVBFqgzZ0x5tDuIh4IOE=";
+        #   })
+        # ];
         # "font.name.monospace.x-western" = "FiraCode Nerd";
         # "font.name.sans-serif.x-western" = "FiraCode Nerd";
         # "font.name.serif.x-western" = "FiraCode Nerd";
@@ -67,68 +68,6 @@
         # "extensions.pocket.enabled" = { Value = false; Status = "locked"; };
         # "extensions.screenshots.disabled" = { Value = true; Status = "locked"; };
       };
-      ManagedBookmarks = [
-        {
-          title = "Perplexity";
-          url = "https://www.perplexity.ai/";
-        }
-        {
-          title = "Reddit";
-          url = "https://www.reddit.com";
-        }
-        {
-          title = "Programing";
-          children = [
-            {
-              title = "Icons";
-              children = [
-                {
-                  title = "Google";
-                  url = "https://fonts.google.com/icons";
-                }
-                {
-                  title = "Font Awesome 5";
-                  url = "https://fontawesome.com/v5/search";
-                }
-              ];
-            }
-            {
-              title = "Github";
-              url = "https://github.com/";
-            }
-            {
-              title = "Nerd Fonts";
-              url = "https://www.nerdfonts.com/";
-            }
-            {
-              title = "Colors";
-              url = "https://coolors.co/";
-            }
-            {
-              title = "Nixos";
-              url = "https://mynixos.com/";
-            }
-          ];
-        }
-        {
-          title = "Work";
-          children = [
-            {
-              title = "DS Services";
-              url = "http://192.168.5.16";
-            }
-          ];
-        }
-        {
-          title = "Wallpapers";
-          children = [
-            {
-              title = "Gruvbox";
-              url = "https://gruvbox-wallpapers.pages.dev";
-            }
-          ];
-        }
-      ];
     };
   };
 }
