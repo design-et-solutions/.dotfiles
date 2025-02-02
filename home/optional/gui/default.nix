@@ -1,28 +1,40 @@
-{ pkgs, lib, mergedSetup, ... }:
+{
+  pkgs,
+  lib,
+  mergedSetup,
+  ...
+}:
 let
-  waybarCommand = ''
+  notifyCommand = ''
+    exec = $HOME/.scripts/mako_reloader.fish
+  '';
+  barCommand = ''
     exec = $HOME/.scripts/waybar.fish
   '';
-  hyprpaperCommand = ''
+  wallpaperCommand = ''
     exec = hyprpaper
     exec = $HOME/.scripts/misc/wallpapers_rand.fish
+  '';
+  hyprlandCommand = ''
     exec = $HOME/.scripts/hypr_reloader.fish
   '';
   hyprlandConf = pkgs.substituteAll {
     src = ./hyprland.conf;
-    waybar_command = waybarCommand;
-    hyprpaper_command = hyprpaperCommand;
+    notify_command = notifyCommand;
+    bar_command = barCommand;
+    wallpaper_command = wallpaperCommand;
+    hyperland_command = hyprlandCommand;
     animations_enable = "true";
     custom = mergedSetup.gui.extra.hyprland;
   };
 in
 {
-  imports = [ 
-    ../pkgs/waybar 
+  imports = [
+    ../pkgs/waybar
     ../pkgs/mako
-    ../pkgs/kitty 
-    ../pkgs/rofi 
-    ../pkgs/mpv 
+    ../pkgs/kitty
+    ../pkgs/rofi
+    ../pkgs/mpv
   ];
 
   xdg.configFile = {
