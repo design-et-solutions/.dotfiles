@@ -23,7 +23,7 @@ let
     notify_command = notifyCommand;
     bar_command = barCommand;
     wallpaper_command = wallpaperCommand;
-    hyperland_command = hyprlandCommand;
+    hyprland_command = hyprlandCommand;
     animations_enable = "true";
     custom = mergedSetup.gui.extra.hyprland;
   };
