@@ -3,6 +3,12 @@ vim.g.mapleader = " "
 -- misc
 vim.api.nvim_set_keymap(
 	"n",
+	"<leader>mo",
+	"<C-\\><C-n>:Oil<CR>",
+	{ noremap = true, silent = true, desc = "oil file explorer" }
+)
+vim.api.nvim_set_keymap(
+	"n",
 	"<leader>mm",
 	":MarkdownPreview<CR>",
 	{ noremap = true, silent = true, desc = "markdown preview" }

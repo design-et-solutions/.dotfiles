@@ -114,6 +114,9 @@
         neogit
         # https://github.com/NeogitOrg/neogit
         # git interface
+        lazygit-nvim
+        # https://github.com/kdheepak/lazygit.nvim
+        # git interface
         # ========================
         # clean gui
         # ========================
@@ -199,14 +202,16 @@
       ]
       ++ [
         (pkgs.vimUtils.buildVimPlugin {
-          # https://github.com/YvesCousteau/nvim-whatelse
+          # # https://github.com/YvesCousteau/nvim-whatelse
+          # name = "rewind.nvim";
+          # src = pkgs.fetchFromGitHub {
+          #   owner = "YvesCousteau";
+          #   repo = "rewind.nvim";
+          #   rev = "init";
+          #   sha256 = "sha256-pGkA4TF1VfR5xWLSzJIT+Sd16xVtwRoxIBASzQvWlOk=";
+          # };
           name = "rewind.nvim";
-          src = pkgs.fetchFromGitHub {
-            owner = "YvesCousteau";
-            repo = "rewind.nvim";
-            rev = "init";
-            sha256 = "sha256-/W6jnoBmn4wSk4SzKX6TMqPxP93VP3a+x/QqfTfGA0Y=";
-          };
+          src = /home/me/perso/rewind.nvim;
         })
       ];
   };
