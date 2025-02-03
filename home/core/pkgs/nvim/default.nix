@@ -23,17 +23,18 @@
       set shadafile=~/.local/share/nvim/custom.shada
     '';
     extraLuaConfig = ''
-      ${builtins.readFile ./plugins/rewind.lua}
-      ${builtins.readFile ./plugins/gruvbox.lua}
-      ${builtins.readFile ./plugins/tokyonight.lua}
-      ${builtins.readFile ./plugins/notify.lua}
       ${builtins.readFile ./plugins/bufferline.lua}
       ${builtins.readFile ./plugins/colorizer.lua}
-      ${builtins.readFile ./plugins/nvim-tree.lua}
-      ${builtins.readFile ./plugins/rest-nvim.lua}
-      ${builtins.readFile ./plugins/toggleterm.lua}
-      ${builtins.readFile ./plugins/which-key.lua}
       ${builtins.readFile ./plugins/conform.lua}
+      ${builtins.readFile ./plugins/gruvbox.lua}
+      ${builtins.readFile ./plugins/notify.lua}
+      ${builtins.readFile ./plugins/nvim-tree.lua}
+      ${builtins.readFile ./plugins/oil.lua}
+      ${builtins.readFile ./plugins/rewind.lua}
+      ${builtins.readFile ./plugins/toggleterm.lua}
+      ${builtins.readFile ./plugins/tokyonight.lua}
+      ${builtins.readFile ./plugins/rest-nvim.lua}
+      ${builtins.readFile ./plugins/which-key.lua}
       ${builtins.readFile ./keybindings.lua}
       ${builtins.readFile ./config.lua}
     '';
@@ -56,6 +57,9 @@
         vim-dadbod-ui
         # https://github.com/kristijanhusak/vim-dadbod-ui
         # navigation database gui
+        oil-nvim
+        # https://github.com/stevearc/oil.nvim/
+        # file explorer that lets you edit your filesystem like a normal Neovim buffer.
         # ========================
         # code
         # ========================
@@ -200,8 +204,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "YvesCousteau";
             repo = "rewind.nvim";
-            rev = "main";
-            sha256 = "sha256-HnISBgikmUf+X8n42zHKwJ6vvW30mOeg0GkTNLEpXGQ=";
+            rev = "init";
+            sha256 = "sha256-/W6jnoBmn4wSk4SzKX6TMqPxP93VP3a+x/QqfTfGA0Y=";
           };
         })
       ];
