@@ -45,6 +45,12 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true, desc = "help tags" }
 )
 vim.api.nvim_set_keymap("n", "<leader>mT", ":Telescope<CR>", { noremap = true, silent = true, desc = "telescope" })
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>mr",
+	":RewindToggle<CR>",
+	{ noremat = true, silent = true, desc = "rewind toggle" }
+)
 -- ===============================
 -- focus
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true, desc = "Switch window left" })
