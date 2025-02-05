@@ -49,7 +49,7 @@ vim.api.nvim_set_keymap(
 	"n",
 	"<leader>mr",
 	":RewindToggle<CR>",
-	{ noremat = true, silent = true, desc = "rewind toggle" }
+	{ noremap = true, silent = true, desc = "rewind toggle" }
 )
 -- ===============================
 -- focus
