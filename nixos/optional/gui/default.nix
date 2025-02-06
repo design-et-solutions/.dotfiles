@@ -96,5 +96,7 @@
     swappy
     grim
     slurp
+    # copy paste
+    wl-clipboard
   ];
 }
