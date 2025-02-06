@@ -1,11 +1,16 @@
-{ pkgs, mergedSetup, lib, ... }:
+{
+  pkgs,
+  mergedSetup,
+  lib,
+  ...
+}:
 {
   imports = [
-    ../pkgs/tool/thunar 
+    ../pkgs/tool/thunar
     ../pkgs/web/firefox
   ];
 
-  services = { 
+  services = {
     xserver = {
       enable = true;
       displayManager = {
@@ -34,10 +39,10 @@
     PrivateIPC = true;
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
-    RestrictNamespaces = [ 
-      "~cgroup" 
+    RestrictNamespaces = [
+      "~cgroup"
     ];
-    RestrictAddressFamilies = [ 
+    RestrictAddressFamilies = [
       "AF_UNIX"
       "AF_NETLINK"
       "AF_INET"
@@ -56,9 +61,12 @@
     ];
     SystemCallArchitectures = "native";
     LockPersonality = true;
-    IPAddressDeny = ["0.0.0.0/0" "::/0"];
+    IPAddressDeny = [
+      "0.0.0.0/0"
+      "::/0"
+    ];
     CapabilityBoundingSet = [
-      "CAP_SYS_ADMIN" 
+      "CAP_SYS_ADMIN"
       "CAP_SETUID"
       "CAP_SETGID"
       "CAP_SETPCAP"
@@ -67,26 +75,26 @@
       "CAP_DAC_OVERRIDE"
       "CAP_DAC_READ_SEARCH"
       "CAP_FOWNER"
-      "CAP_IPC_OWNER" 
+      "CAP_IPC_OWNER"
       "CAP_FSETID"
       "CAP_SETFCAP"
       "CAP_CHOWN"
     ];
     DeviceAllow = "/dev/tty7 rw";
     DevicePolicy = "closed";
-    UMask = 0077;
+    UMask = 77;
     LogLevelMax = "debug";
     KeyringMode = lib.mkForce "private";
   };
 
   environment.systemPackages = with pkgs; [
-    swaylock-effects
+    # brightness management
     brightnessctl
-
-    # screenshot
+    # screen recorder
+    kooha
+    # screen print
     swappy
     grim
     slurp
-    wl-clipboard
-  ]; 
+  ];
 }
