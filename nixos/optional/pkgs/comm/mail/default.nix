@@ -4,4 +4,6 @@
     thunderbird
     mailcheck
   ];
+
+  environment.etc."mailcheksrc".source = builtins.toString ./mailcheksrc;
 }
