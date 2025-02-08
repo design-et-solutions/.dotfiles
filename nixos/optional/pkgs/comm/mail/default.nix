@@ -5,5 +5,5 @@
     mailcheck
   ];
 
-  environment.etc."mailcheksrc".source = builtins.toString ./mailcheksrc;
+  environment.etc."mailchekrc".source = builtins.toString ./mailchekrc;
 }
