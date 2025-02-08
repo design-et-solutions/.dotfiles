@@ -188,7 +188,10 @@
           interval = 1;
           exec = "${pkgs.writeShellScript "net-tx" ''
             INTERFACE=$(ip route get 1.1.1.1 | grep -oP 'dev\s+\K[^ ]+')
-            NET_TX=$(ifstat 1 $INTERFACE -j | jq ".kernel.$INTERFACE.tx_bytes")
+            NET_TX1=$(ifstat -j | jq ".kernel.$INTERFACE.tx_bytes")
+            sleep 1
+            NET_TX2=$(ifstat -j | jq ".kernel.$INTERFACE.tx_bytes")
+            NET_TX=$((NET_TX2 - NET_TX1))
             if [ $NET_TX -ge 1073741824 ]; then
               RATE=$(echo "scale=2; $NET_TX / 1073741824" | bc)
               UNIT="GB/s"
@@ -223,7 +226,10 @@
           interval = 1;
           exec = "${pkgs.writeShellScript "net-rx" ''
             INTERFACE=$(ip route get 1.1.1.1 | grep -oP 'dev\s+\K[^ ]+')
-            NET_RX=$(ifstat 1 $INTERFACE -j | jq ".kernel.$INTERFACE.rx_bytes")
+            NET_RX1=$(ifstat -j | jq ".kernel.$INTERFACE.rx_bytes")
+            sleep 1
+            NET_RX2=$(ifstat -j | jq ".kernel.$INTERFACE.rx_bytes")
+            NET_RX=$((NET_RX2 - NET_RX1))
             if [ $NET_RX -ge 1073741824 ]; then
               RATE=$(echo "scale=2; $NET_RX / 1073741824" | bc)
               UNIT="GB/s"
