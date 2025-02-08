@@ -5,34 +5,33 @@
 @define-color purple #bb9af7;
 @define-color gray #414868;
 
-/* =============================== */
-/* Universal Styling */
 * {
-    border: none;
-    font-family: 'FiraCode Nerd Font', monospace;
-    font-size: 12px;
-    font-weight: bold;
+  border: none;
+  font-family: "FiraCode Nerd Font", monospace;
+  font-size: 12px;
+  font-weight: bold;
 }
 
-/* =============================== */
-/* Bar Styling */
 #waybar {
-    background: transparent;
-    color: @fg;
+  background: transparent;
+  color: @fg;
 }
 
 #cpu,
+#custom-gpu,
 #memory,
 #disk,
 #network,
+#custom-tx-net,
+#custom-rx-net,
 #temperature {
-    font-weight: normal;
-    border: 2px solid @fg;
-    border-radius: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background: @bg;
-    margin-left: 5px;
+  font-weight: normal;
+  border: 2px solid @fg;
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: @bg;
+  margin-left: 5px;
 }
 
 #custom-spotify,
@@ -41,18 +40,11 @@
 #clock.date,
 #clock.time,
 #backlight {
-    font-weight: normal;
-    border: 2px solid @fg;
-    border-radius: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background: @bg;
-    margin-left: 5px;
-}
-
-#custom-spotify.playing {
-    color: @green;
-}
-#custom-spotify.paused {
-    color: @red;
+  font-weight: normal;
+  border: 2px solid @fg;
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: @bg;
+  margin-left: 5px;
 }

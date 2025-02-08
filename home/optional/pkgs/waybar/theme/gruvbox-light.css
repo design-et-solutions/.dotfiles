@@ -5,102 +5,46 @@
 @define-color purple #b16286;
 @define-color gray #7c6f64;
 
-/* =============================== */
-/* Universal Styling */
 * {
-    border: none;
-    font-family: 'FiraCode Nerd Font', monospace;
-    font-size: 12px;
-    font-weight: bold;
+  border: none;
+  font-family: "FiraCode Nerd Font", monospace;
+  font-size: 12px;
+  font-weight: bold;
 }
 
-/* =============================== */
-/* Bar Styling */
 #waybar {
-    background: transparent;
-    color: @fg;
+  background: transparent;
+  color: @fg;
 }
 
-/* =============================== */
-/* Workspaces */
-#workspaces {
-    font-weight: normal;
-    padding-left: 5px;
-    border: 2px solid @fg;
-    border-radius: 4px;
-    border-right: 0;
-    background: @bg;
-}
-
-/* =============================== */
-/* Window */
-#window {
-    font-weight: normal;
-    margin-left: -0px;
-    padding-right: 10px;
-    border: 2px solid @fg;
-    border-radius: 4px;
-    border-left: 0;
-    background: @bg;
-}
-
-/* =============================== */
-/* Perfs */
 #cpu,
+#custom-gpu,
 #memory,
 #disk,
+#network,
+#custom-tx-net,
+#custom-rx-net,
 #temperature {
-    font-weight: normal;
-    border: 2px solid @fg;
-    border-radius: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background: @bg;
-    margin-left: 5px;
+  font-weight: normal;
+  border: 2px solid @fg;
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: @bg;
+  margin-left: 5px;
 }
 
-/* =============================== */
-/* Others */
 #custom-spotify,
-#network,
 #pulseaudio,
 #battery,
+#clock.date,
+#clock.time,
 #backlight {
-    font-weight: normal;
-    border: 2px solid @fg;
-    border-radius: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background: @bg;
-    margin-left: 5px;
-}
-
-/* =============================== */
-/* Clock */
-#clock.date {
-    font-weight: normal;
-    border: 2px solid @fg;
-    padding-left: 10px;
-    padding-right: 10px;
-    background: @bg;
-    border-radius: 4px;
-    margin-right: 5px;
-}
-#clock.time {
-    font-weight: normal;
-    border: 2px solid @fg;
-    padding-left: 10px;
-    padding-right: 10px;
-    background: @bg;
-    border-radius: 4px;
-    margin-right: 5px;
-}
-
-/* =============================== */
-/* Spotify */
-#custom-spotify.playing {
-    color: @green;
-}
-#custom-spotify.paused {
-    color: @red;
+  font-weight: normal;
+  border: 2px solid @fg;
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: @bg;
+  margin-left: 5px;
 }
