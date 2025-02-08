@@ -1,7 +1,7 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   services.xserver = {
-    videoDrivers = ["nvidia"];
+    videoDrivers = [ "nvidia" ];
   };
 
   hardware = {
@@ -11,4 +11,8 @@
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    nvidia_x11
+  ];
 }
