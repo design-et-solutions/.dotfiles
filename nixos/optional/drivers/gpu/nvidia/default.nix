@@ -13,6 +13,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    nvidia_x11
+    linuxPackages.nvidia_x11
   ];
 }
