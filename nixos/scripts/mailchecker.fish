@@ -1,19 +1,27 @@
 #!/usr/bin/env fish
 
-function get_unread_mail
-    grep '(^A1=' "$argv[1]" | tail -n1 | sed -r 's/.*\(\^A1=(\w+)\).*/\1/' | xargs -n1 -L1 --replace=__ printf '%d\n' 0x__
+function get_unread_count
+    if test -f "$argv[1]"
+        set count (grep -oP '\^A1=\K[0-9a-fA-F]+' "$argv[1]" | tail -n1 | xargs -I {} printf '%d\n' 0x{})
+        if test -n "$count"
+            printf '%d\n' "0x$count"
+        else
+            echo 0
+        end
+    else
+        echo 0
+    end
 end
 
-# Gmail unread count
-set gmail_file "/home/me/.thunderbird/odk6gi5m.default/ImapMail/imap.gmail.com/INBOX.msf"
-set gmail_unread (get_unread_count "$gmail_file")
-echo "Gmail unread: $gmail_unread"
+set thunderbird_dir "$HOME/.thunderbird"
+set profile_dir (grep -oP '(?<=Path=).*' "$thunderbird_dir/profiles.ini" | head -n1)
 
-# Outlook unread count
-set outlook_file="/home/me/.thunderbird/odk6gi5m.default/ImapMail/outlook.office365.com/INBOX.msf"
-set outlook_unread (get_unread_count "$outlook_file")
-echo "Outlook unread: $outlook_unread"
+set total_unread 0
+for inbox_file in $thunderbird_dir/$profile_dir/ImapMail/*/INBOX.msf
+    set account_name (string split -r -m1 -f2 '/' $inbox_file | string split -f1 '.')
+    set unread_count (get_unread_count "$inbox_file")
+    echo "$account_name unread: $unread_count"
+    set total_unread (math $total_unread + $unread_count)
+end
 
-# Total unread count
-set total_unread (gmail_unread + outlook_unread)
-echo "Total unread: $total_unread"
+echo $total_unread
