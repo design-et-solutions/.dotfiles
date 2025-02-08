@@ -2,8 +2,12 @@
 {
   environment.systemPackages = with pkgs; [
     thunderbird
-    mailcheck
   ];
 
-  environment.etc."mailcheckrc".source = builtins.toString ./mailcheckrc;
+  environment.etc = {
+    "scripts/mailchecker.fish" = {
+      source = builtins.toString ../../../../scripts/mailchecker.fish;
+      mode = "0755";
+    };
+  };
 }
