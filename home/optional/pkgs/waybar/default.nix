@@ -20,6 +20,7 @@
           "network"
           "custom/tx-net"
           "custom/rx-net"
+          "custom/unread-mail"
         ];
         modules-center = [
           "custom/spotify"
@@ -248,6 +249,34 @@
           exec-if = "${pkgs.writeShellScript "check-interface" ''
             INTERFACE_COUNT=$(ip route get 1.1.1.1 | grep -oP 'dev\s+\K[^ ]+' | wc -l)
             if [[ $INTERFACE_COUNT -gt 0 ]]; then
+              exit 0
+            else
+              exit 1
+            fi
+          ''}";
+        };
+        "custom/unread-mail" = {
+          format = "{icon} {}";
+          format-icons = {
+            no-empty = "󰻧 ";
+            empty = "󰻩 ";
+          };
+          return-type = "json";
+          tooltip = false;
+          interval = 1;
+          exec = "${pkgs.writeShellScript "unread-mail" ''
+            UNREAD_MAIL=$(/etc/scripts/mailchecker.fish | tail -n 1)
+            if [[ $UNREAD_MAIL  -gt 0 ]]; then
+              ALT="no-empty"
+            else
+              ALT="empty"
+            fi
+            echo "{\"text\": \"$UNREAD_MAIL\", \"alt\": \"$ALT\"}"
+
+          ''}";
+          exec-if = "${pkgs.writeShellScript "check-interface" ''
+            MAIL_ACCOUNT_COUNT=$(/etc/scripts/mailchecker.fish | wc -l)
+            if [[ $MAIL_ACCOUNT_COUNT  -gt 1 ]]; then
               exit 0
             else
               exit 1

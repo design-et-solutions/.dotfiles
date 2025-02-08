@@ -24,6 +24,7 @@
 #network,
 #custom-tx-net,
 #custom-rx-net,
+#custom-unread-mail,
 #temperature {
   font-weight: normal;
   border: 2px solid @fg;
