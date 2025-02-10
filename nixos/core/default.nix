@@ -48,6 +48,8 @@
 
   # tools and libs
   environment.systemPackages = with pkgs; [
+    nix-index
+
     libnotify # notification manager
 
     gcc # collection of compilers
