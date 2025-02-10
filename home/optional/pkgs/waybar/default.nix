@@ -171,12 +171,7 @@
             echo "{\"text\": \"$GPU_USAGE%\", \"alt\": \"running\"}"
           ''}";
           exec-if = "${pkgs.writeShellScript "check-gpu" ''
-            GPU_COUNT=$(nvidia-smi -L | wc -l)
-            if [[ $GPU_COUNT -gt 0 ]]; then
-              exit 0
-            else
-              exit 1
-            fi
+            nvidia-smi
           ''}";
         };
         "custom/tx-net" = {
