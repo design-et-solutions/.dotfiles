@@ -1,4 +1,5 @@
-{ pkgs, ... }: let 
+{ pkgs, ... }:
+let
   tokyonight = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "tokyonight";
     version = "latest";
@@ -9,7 +10,8 @@
       sha256 = "sha256-9nDgiJptXIP+Hn9UY+QFMgoghw4HfTJ5TZq0f9KVOFg=";
     };
   };
-in {
+in
+{
   programs.tmux = {
     enable = true;
     shell = "${pkgs.fish}/bin/fish";
@@ -19,10 +21,10 @@ in {
       # https://github.com/tmux-plugins/tmux-cpu
       cpu
       # https://github.com/tmux-plugins/tmux-resurrect
-      {
-        plugin = resurrect;
-        # extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-      }
+      # {
+      #   plugin = resurrect;
+      #   # extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+      # }
       # https://github.com/tmux-plugins/tmux-continuum
       {
         plugin = continuum;
@@ -56,7 +58,7 @@ in {
   };
 
   home.file.".scripts/tmux_reloader.fish" = {
-      source = builtins.toString ../../../scripts/tmux_reloader.fish;
-      executable = true;
+    source = builtins.toString ../../../scripts/tmux_reloader.fish;
+    executable = true;
   };
 }

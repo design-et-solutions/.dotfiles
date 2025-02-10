@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./scan
     ./audit
@@ -13,8 +14,8 @@
     shadow.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ 
-    vulnix 
+  environment.systemPackages = with pkgs; [
+    # vulnix
 
     # Init
     # echo "pinentry-program $(which pinentry)" >> ~/.gnupg/gpg-agent.conf
@@ -32,4 +33,3 @@
     cryptsetup # encrypted filesystems
   ];
 }
-

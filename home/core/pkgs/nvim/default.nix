@@ -196,7 +196,7 @@
             owner = "atiladefreitas";
             repo = "dooing";
             rev = "main";
-            sha256 = "sha256-NiFayjm5NL0ZCJkO5kC21GNB4wn4XmMUSoZ7r3B/cTg=";
+            sha256 = "sha256-E4QVGPbH+24+BzB7p2e+kzJylCcz6PBYCY68/hAOEow=";
           };
         })
       ]
