@@ -22,6 +22,7 @@
     description = "Run Firefox with a specific URL";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
+      User = "me";
       ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:300";
       Restart = "always";
       RestartSec = "5s";
