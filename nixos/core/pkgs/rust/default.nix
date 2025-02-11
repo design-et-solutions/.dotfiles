@@ -1,10 +1,10 @@
-{ pkgs, ... }: 
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     rust-analyzer
     rustup
     pkg-config
-    openssl   
+    openssl
     mold
     clang
   ];
@@ -14,4 +14,3 @@
     LD_LIBRARY_PATH = "${pkgs.openssl}/lib:${pkgs.openssl.out}/lib:$LD_LIBRARY_PATH";
   };
 }
-
