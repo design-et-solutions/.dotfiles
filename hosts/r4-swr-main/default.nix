@@ -10,4 +10,11 @@
   networking = {
     hostName = "r4-swr-main";
   };
+
+  services.xserver.displayManager = {
+    autoLogin = {
+      enable = true;
+      user = "me";
+    };
+  };
 }
