@@ -25,6 +25,9 @@
       ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:300";
       Restart = "always";
       RestartSec = "5s";
+      Environment = [
+        "WAYLAND_DISPLAY=wayland-0"
+      ];
     };
   };
 }
