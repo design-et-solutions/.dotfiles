@@ -23,7 +23,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
-      ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:300";
+      ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:3000";
       Restart = "always";
       RestartSec = "5s";
       Environment = [
