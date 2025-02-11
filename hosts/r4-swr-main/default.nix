@@ -11,10 +11,20 @@
     hostName = "r4-swr-main";
   };
 
-  services.xserver.displayManager = {
-    autoLogin = {
-      enable = true;
-      user = "me";
+  ## auto login
+  services.xserver.displayManager.autoLogin = {
+    enable = true;
+    user = "me";
+  };
+
+  ## open nav
+  systemd.services."test-web" = {
+    description = "Run Firefox with a specific URL";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:300";
+      Restart = "always";
+      RestartSec = "5s";
     };
   };
 }
