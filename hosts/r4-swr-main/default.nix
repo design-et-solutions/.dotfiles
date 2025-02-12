@@ -59,7 +59,7 @@
     serviceConfig = {
       WorkingDirectory = "/home/me/poc/rtsp-client";
       # ExecStart = "/run/current-system/sw/bin/npm start";
-      ExecStart = "ls";
+      ExecStart = "/run/current-system/sw/bin/ls";
       Restart = "always";
       RestartSec = "5s";
     };
