@@ -46,6 +46,7 @@
     description = "Run WS Server";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
+      User = "me";
       WorkingDirectory = "/home/me/poc/rtsp-client";
       ExecStart = "nix-shell shell.nix --run 'node stream.js'";
       Restart = "always";
@@ -57,6 +58,7 @@
     description = "Run React Client";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
+      User = "me";
       WorkingDirectory = "/home/me/poc/rtsp-client";
       ExecStart = "${pkgs.nodejs}/bin/npm start";
       Restart = "always";
