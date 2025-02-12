@@ -48,7 +48,7 @@
     serviceConfig = {
       User = "me";
       WorkingDirectory = "/home/me/poc/rtsp-client";
-      ExecStart = "/run/current-system/sw/bin/nix-shell shell.nix --run 'node stream.js'";
+      ExecStart = "/run/current-system/sw/bin/nix-shell shell.nix --pure --run 'node stream.js'";
       Restart = "always";
       RestartSec = "5s";
     };
