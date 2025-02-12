@@ -11,7 +11,7 @@
     hostName = "r4-swr-main";
   };
 
-  services.xserver.displayManager.autoLogin = {
+  services.displayManager.autoLogin = {
     enable = true;
     user = "me";
   };
