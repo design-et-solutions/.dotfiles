@@ -58,7 +58,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       WorkingDirectory = "/home/me/poc/rtsp-client";
-      ExecStart = "/etc/profiles/per-user/me/bin/npm start";
+      ExecStart = "/run/current-system/sw/bin/npm start";
       Restart = "always";
       RestartSec = "5s";
     };
