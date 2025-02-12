@@ -63,6 +63,7 @@
       ExecStart = "${pkgs.nodejs}/bin/npm start";
       Restart = "always";
       RestartSec = "5s";
+      Environment = "PATH=/run/current-system/sw/bin:/bin:/usr/bin";
     };
   };
 }
