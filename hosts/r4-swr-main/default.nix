@@ -36,7 +36,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       WorkingDirectory = "/home/me/poc/rtsp-server";
-      ExecStart = "nix-shell shell.nix --run './target/release/main'";
+      ExecStart = "/run/current-system/sw/bin/nix-shell shell.nix --run './target/release/main'";
       Restart = "always";
       RestartSec = "5s";
     };
@@ -48,7 +48,7 @@
     serviceConfig = {
       User = "me";
       WorkingDirectory = "/home/me/poc/rtsp-client";
-      ExecStart = "nix-shell shell.nix --run 'node stream.js'";
+      ExecStart = "/run/current-system/sw/bin/nix-shell shell.nix --run 'node stream.js'";
       Restart = "always";
       RestartSec = "5s";
     };
