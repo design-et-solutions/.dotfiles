@@ -58,8 +58,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       WorkingDirectory = "/home/me/poc/rtsp-client";
-      # ExecStart = "/run/current-system/sw/bin/npm start";
-      ExecStart = "/run/current-system/sw/bin/ls";
+      ExecStart = "${pkgs.nodePackages}/bin/npm start";
       Restart = "always";
       RestartSec = "5s";
     };
