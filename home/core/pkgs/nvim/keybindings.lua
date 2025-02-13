@@ -140,8 +140,19 @@ vim.api.nvim_set_keymap(
 	":NeogitComment<CR>",
 	{ noremap = true, silent = true, desc = "git comment" }
 )
-vim.api.nvim_set_keymap("n", "<leader>gl", ":NeogitLogCurrent<CR>", { noremap = true, silent = true, desc = "git log" })
-vim.api.nvim_set_keymap("n", "<leader>gg", ":Neogit<CR>", { noremap = true, silent = true, desc = "git interface" })
+vim.api.nvim_set_keymap("n", "<leader>g+", ":NeogitLogCurrent<CR>", { noremap = true, silent = true, desc = "git log" })
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>gn",
+	":Neogit<CR>",
+	{ noremap = true, silent = true, desc = "git interface neogit" }
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>gl",
+	":Neogit<CR>",
+	{ noremap = true, silent = true, desc = "git interface lazygit" }
+)
 vim.api.nvim_set_keymap("n", "<leader>gp", ":Flog<CR>", { noremap = true, silent = true, desc = "git plot graph" })
 -- ===============================
 -- rest

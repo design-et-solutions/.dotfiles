@@ -1,6 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   # https://search.nixos.org/options?channel=24.11&query=networking
-  networking= {
+  networking = {
+    enableIPv6 = true;
     networkmanager = {
       enable = true;
     };
@@ -8,10 +10,14 @@
     firewall = {
       enable = true;
       logRefusedConnections = true;
-      allowedTCPPorts = [ 80 443 8080 ];
+      allowedTCPPorts = [
+        80
+        443
+        8080
+      ];
       allowedUDPPorts = [ 53 ];
     };
-  };  
+  };
 
   # Managing network connections on Linux systems.
   systemd.services.NetworkManager.serviceConfig = {
@@ -20,13 +26,13 @@
     ProtectKernelModules = true;
     ProtectKernelLogs = true;
     ProtectControlGroups = true;
-    ProtectClock = true; 
+    ProtectClock = true;
     ProtectHostname = true;
     ProtectProc = "invisible";
     PrivateTmp = true;
     RestrictRealtime = true;
-    RestrictAddressFamilies = [ 
-      "AF_UNIX" 
+    RestrictAddressFamilies = [
+      "AF_UNIX"
       "AF_NETLINK"
       "AF_INET"
       "AF_INET6"
@@ -39,12 +45,12 @@
       "~@mount"
       "~@module"
       "~@swap"
-      "~@obsolete" 
-      "~@cpu-emulation" 
+      "~@obsolete"
+      "~@cpu-emulation"
       "ptrace"
     ];
     SystemCallArchitectures = "native";
-    LockPersonality= true; 
+    LockPersonality = true;
   };
 
   # Runs custom scripts or actions when specific network-related events occur.
@@ -55,14 +61,14 @@
     ProtectKernelModules = true;
     ProtectKernelLogs = true;
     ProtectControlGroups = true;
-    ProtectClock = true; 
+    ProtectClock = true;
     ProtectHostname = true;
     ProtectProc = "invisible";
     PrivateTmp = true;
     PrivateMounts = true;
     RestrictRealtime = true;
-    RestrictAddressFamilies = [ 
-      "AF_UNIX" 
+    RestrictAddressFamilies = [
+      "AF_UNIX"
       "AF_NETLINK"
       "AF_INET"
       "AF_INET6"
@@ -73,14 +79,14 @@
     MemoryDenyWriteExecute = true;
     SystemCallFilter = [
       "~@mount"
-      "~@module" 
+      "~@module"
       "~@swap"
-      "~@obsolete" 
-      "~@cpu-emulation" 
+      "~@obsolete"
+      "~@cpu-emulation"
       "ptrace"
     ];
     SystemCallArchitectures = "native";
-    LockPersonality= true; 
+    LockPersonality = true;
     CapabilityBoundingSet = "CAP_NET_ADMIN CAP_NET_RAW";
   };
 
@@ -92,14 +98,14 @@
     ProtectKernelModules = true;
     ProtectKernelLogs = true;
     ProtectControlGroups = true;
-    ProtectClock = true; 
+    ProtectClock = true;
     ProtectHostname = true;
     ProtectProc = "invisible";
     PrivateTmp = true;
     PrivateMounts = true;
     RestrictRealtime = true;
-    RestrictAddressFamilies = [ 
-      "AF_UNIX" 
+    RestrictAddressFamilies = [
+      "AF_UNIX"
       "AF_NETLINK"
       "AF_INET"
       "AF_INET6"
@@ -116,13 +122,13 @@
       "~@reboot"
       "~@module"
       "~@swap"
-      "~@resources" 
-      "~@obsolete" 
-      "~@cpu-emulation" 
+      "~@resources"
+      "~@obsolete"
+      "~@cpu-emulation"
       "ptrace"
     ];
     SystemCallArchitectures = "native";
-    LockPersonality= true; 
+    LockPersonality = true;
     CapabilityBoundingSet = "CAP_NET_ADMIN CAP_NET_RAW";
   };
 
@@ -134,8 +140,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    networkmanager   
-    protobuf       
+    networkmanager
+    protobuf
     nmap
     wget
     websocat
