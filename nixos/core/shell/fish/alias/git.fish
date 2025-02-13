@@ -1,0 +1,5 @@
+alias gh='lazygit'
+alias gh-reset-last-commit='git commit --amend'
+alias gh-stash='git stash'
+alias gh-stash-back='git stash pop'
+alias gh-tag='git tag'

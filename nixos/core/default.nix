@@ -47,19 +47,6 @@
     };
 
   # tools and libs
-  environment.systemPackages = with pkgs; [
-    nix-index
-
-    libnotify # notification manager
-
-    gcc # collection of compilers
-    glibc
-
-    unzip
-    tree
-    parted
-    busybox
-  ];
 
   system.activationScripts.createMnt = ''
     mkdir -p /mnt
