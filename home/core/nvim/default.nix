@@ -6,7 +6,7 @@
 
   home.file = {
     ".scripts/nvim_reloader.fish" = {
-      source = builtins.toString ../../../scripts/nvim_reloader.fish;
+      source = builtins.toString ../../scripts/nvim_reloader.fish;
       executable = true;
     };
   };
@@ -215,16 +215,14 @@
         })
       ];
   };
+
   home.packages = with pkgs; [
-    luajit
-    imagemagick
-    postgresql
-    stylua
-    nixfmt-rfc-style
-    prettierd
-    isort
-    black
-    nodePackages.prettier
-    ripgrep
+    luajit # Just-In-Time compiler for Lua programming language
+    stylua # Opinionated Lua code formatter
+    nixfmt-rfc-style # Formatter for Nix code following RFC style
+    prettierd # Prettier daemon for faster formatting
+    isort # Python utility to sort imports alphabetically
+    black # The uncompromising Python code formatter
+    nodePackages.prettier # Multi-language code formatter
   ];
 }

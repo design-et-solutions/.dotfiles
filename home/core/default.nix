@@ -6,9 +6,9 @@
     ])
     ++ [
       ./fonts
-      ./pkgs/nvim
-      ./pkgs/git
-      ./pkgs/dev
+      ./nvim
+      ./git
+      ./dev
     ];
 
   nixpkgs = {

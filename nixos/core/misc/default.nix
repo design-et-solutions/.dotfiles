@@ -13,5 +13,6 @@
     bat # A cat(1) clone with syntax highlighting and Git integration.
     starship # Minimal, blazing fast, and extremely customizable prompt for any shell
     nodePackages.mermaid-cli # Create and modify diagrams dynamically
+    imagemagick # Powerful image manipulation tool suite
   ];
 }

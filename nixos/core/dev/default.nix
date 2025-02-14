@@ -3,9 +3,10 @@
   environment.systemPackages = with pkgs; [
     rust-analyzer # Rust language server for IDE support
     rustup # Rust toolchain installer
-    openssl # OpenSSL library for cryptography
     mold # A modern linker
     nodejs # JavaScript runtime built
+    ripgrep # Fast line-oriented search tool, alternative to grep
+    postgresql # Advanced open-source relational database
   ];
 
   environment.variables = {

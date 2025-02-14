@@ -15,8 +15,12 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # vulnix
+    openssl # OpenSSL library for cryptography and SSL/TLS support
+    gnupg # GNU Privacy Guard - a complete OpenPGP implementation
+    pinentry-curses # Curses-based PIN or passphrase entry dialog for GnuPG
+    cryptsetup # Tool to setup encrypted filesystems using dm-crypt
 
+    # vulnix
     # Init
     # echo "pinentry-program $(which pinentry)" >> ~/.gnupg/gpg-agent.conf
     # Use
@@ -26,10 +30,6 @@
     # ❯ gpg --export --armor MNOP3456 > public-key-backup.asc
     # ❯ gpg --import private-key-backup.asc
     # ❯ gpg --import public-key-backup.asc
-    gnupg
-    # Dependency
-    pinentry-curses
-
-    cryptsetup # encrypted filesystems
+    # gnupg
   ];
 }
