@@ -5,8 +5,4 @@
     linker = "clang"
     rustflags = ["-C", "link-arg=-fuse-ld=${pkgs.mold}/bin/mold"]
   '';
-
-  home.packages = with pkgs; [
-    diesel-cli
-  ];
 }

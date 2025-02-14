@@ -1,7 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   environment.systemPackages = with pkgs; [
-    usbutils       # usb cli tools
-    woeusb-ng      # tool to make boot key
-    ntfs3g         # ntfs
+    usbutils # Provides USB command-line tools (e.g., lsusb)
+    woeusb-ng # Tool for creating Windows bootable USB drives from ISO images
+    ntfs3g # NTFS filesystem driver and utilities for read/write support
   ];
 }

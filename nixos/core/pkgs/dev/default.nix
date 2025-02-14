@@ -1,12 +1,11 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    rust-analyzer
-    rustup
-    pkg-config
-    openssl
-    mold
-    clang
+    rust-analyzer # Rust language server for IDE support
+    rustup # Rust toolchain installer
+    openssl # OpenSSL library for cryptography
+    mold # A modern linker
+    nodjs
   ];
 
   environment.variables = {

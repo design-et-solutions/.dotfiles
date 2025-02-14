@@ -1,14 +1,14 @@
-{ lib, mergedSetup, ... }: {
-  imports = 
+{ lib, mergedSetup, ... }:
+{
+  imports =
     (lib.optionals mergedSetup.gui.hyprland [
       ../optional/gui
-    ]) ++
-    [
+    ])
+    ++ [
       ./fonts
       ./pkgs/nvim
-      ./pkgs/rust
       ./pkgs/git
-      ./pkgs/node
+      ./pkgs/dev
     ];
 
   nixpkgs = {
@@ -27,7 +27,7 @@
 
   home.file.".icons".source = ../icons;
 
-  home.activation.createDirectories = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.createDirectories = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p ~/work
     mkdir -p ~/perso
     mkdir -p ~/tmp
