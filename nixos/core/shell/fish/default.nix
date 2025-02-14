@@ -57,6 +57,7 @@
       # Greeting message
       function fish_greeting
         echo "󱐋 This is your way 󱐋"
+        commandline -f repaint
       end
 
       # Load tide configuration
@@ -69,7 +70,7 @@
           --rainbow_prompt_separators=Angled \
           --powerline_prompt_heads=Sharp \
           --powerline_prompt_tails=Flat \
-          # --powerline_prompt_style='Two lines, character' \
+          --powerline_prompt_style='Two lines, character' \
           --powerline_prompt_style='One line' \
           # --prompt_connection=Solid \
           # --powerline_right_prompt_frame=No \
