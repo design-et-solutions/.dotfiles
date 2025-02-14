@@ -5,7 +5,7 @@
     rustup # Rust toolchain installer
     openssl # OpenSSL library for cryptography
     mold # A modern linker
-    nodjs
+    nodejs # JavaScript runtime built
   ];
 
   environment.variables = {
