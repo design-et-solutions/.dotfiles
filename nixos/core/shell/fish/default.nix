@@ -3,8 +3,10 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      ll = "ls -l";
-      la = "ls -a";
+      ll = "exa -l";
+      la = "exa -a";
+      ls = "exa -la";
+      top = "htop";
       gh = "lazygit";
       gh-reset-last-commit = "git commit --amend";
       gh-stash = "git stash";
@@ -54,14 +56,28 @@
 
       # Greeting message
       function fish_greeting
-        echo "Welcome to Fish shell on NixOS!"
+        echo "󱐋 This is your way 󱐋"
       end
 
-      # # Load tide configuration
-      # if type -q tide
-      #   tide configure --auto --style=Rainbow --prompt_colors=Light --show_time=No --rainbow_prompt_separators=Slanted
-      # end
-      starship init fish | source
+      # Load tide configuration
+      if type -q tide
+        tide configure \
+          --auto \
+          --style=Rainbow \
+          --prompt_colors='True color' \
+          --show_time=No \
+          --rainbow_prompt_separators=Angled \
+          --powerline_prompt_heads=Sharp \
+          --powerline_prompt_tails=Flat \
+          # --powerline_prompt_style='Two lines, character' \
+          --powerline_prompt_style='One line' \
+          # --prompt_connection=Solid \
+          # --powerline_right_prompt_frame=No \
+          # --prompt_connection_andor_frame_color=Dark \
+          --prompt_spacing=Compact \
+          --icons='Many icons' \
+          --transient=No
+      end
     '';
   };
 
@@ -83,8 +99,7 @@
     fishPlugins.humantime-fish # Turn milliseconds into a human-readable string in Fish
     fishPlugins.colored-man-pages # Adds color to man pages for improved readability
     fishPlugins.fish-you-should-use # Fish plugin that reminds you to use your aliases
-
-    # fishPlugins.plugin-git # Git plugin for fish (similar to oh-my-zsh git)
+    fishPlugins.plugin-git # Git plugin for fish (similar to oh-my-zsh git)
   ];
 
   environment.shells = with pkgs; [ fish ];
