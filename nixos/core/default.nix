@@ -11,7 +11,6 @@
     ./shell
     ./networking
     ./security
-    ./pkgs
     ./system
     ./users
     ./git
