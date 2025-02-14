@@ -59,6 +59,11 @@
     websocat
     parted
     nodejs_22
+    glib
+    glib.dev
+    pkg-config
+    openssl
+    #gobject-introspection 
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
