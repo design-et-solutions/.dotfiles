@@ -1,7 +1,7 @@
 { lib, mergedSetup, ... }:
 {
   imports =
-    (lib.optionals mergedSetup.gui.hyprland [
+    (lib.optionals mergedSetup.gui.enable [
       ../optional/gui
     ])
     ++ [
