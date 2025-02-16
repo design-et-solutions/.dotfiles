@@ -1,5 +1,5 @@
 { pkgs, ... }:
-{ 
+{
   # https://nixos.wiki/wiki/Bootloader
   # https://mynixos.com/options/boot.loader
   boot.loader = {
@@ -20,7 +20,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    grub2 # grub-mkpasswd-pbkdf2 to generate password
-    efibootmgr
+    grub2 # Boot loader for BIOS and UEFI systems; includes grub-mkpasswd-pbkdf2 for password generation
+    efibootmgr # Tool to manipulate UEFI boot managers
   ];
 }

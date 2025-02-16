@@ -14,7 +14,7 @@
     PrivateTmp = true;
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
-    RestrictAddressFamilies = [ 
+    RestrictAddressFamilies = [
       "AF_UNIX"
       "AF_NETLINK"
     ];
@@ -30,8 +30,11 @@
       "~@cpu-emulation"
     ];
     LockPersonality = true;
-    IPAddressDeny = ["0.0.0.0/0" "::/0"];
+    IPAddressDeny = [
+      "0.0.0.0/0"
+      "::/0"
+    ];
     MemoryDenyWriteExecute = true;
-    UMask = 0077;
+    UMask = 77;
   };
 }

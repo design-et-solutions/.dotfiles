@@ -4,7 +4,7 @@
     NoNewPrivileges = true;
     ProtectSystem = "strict";
     ProtectHome = true;
-    ProtectClock = true; 
+    ProtectClock = true;
     ProtectHostname = true;
     ProtectKernelTunables = true;
     ProtectKernelModules = true;
@@ -16,8 +16,8 @@
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
-    RestrictAddressFamilies = [ 
-      "~AF_INET6"  
+    RestrictAddressFamilies = [
+      "~AF_INET6"
       "~AF_INET"
       "~AF_PACKET"
     ];
@@ -27,8 +27,8 @@
     SystemCallFilter = [
       "~@keyring"
       "~@swap"
-      "~@obsolete" 
-      "~@cpu-emulation" 
+      "~@obsolete"
+      "~@cpu-emulation"
     ];
     SystemCallArchitectures = "native";
   };
@@ -38,7 +38,7 @@
     NoNewPrivileges = true;
     ProtectSystem = "strict";
     ProtectHome = true;
-    ProtectClock = true; 
+    ProtectClock = true;
     ProtectHostname = true;
     ProtectKernelTunables = true;
     ProtectKernelModules = true;
@@ -51,8 +51,8 @@
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
-    RestrictAddressFamilies = [ 
-      "~AF_INET6"  
+    RestrictAddressFamilies = [
+      "~AF_INET6"
       "~AF_INET"
       "~AF_PACKET"
     ];
@@ -62,19 +62,19 @@
     SystemCallFilter = [
       "~@keyring"
       "~@swap"
-      "~@clock"         
+      "~@clock"
       "~@module"
       "~@obsolete"
       "~@cpu-emulation"
     ];
   };
 
-  # Display password prompts on all active virtual terminals (VTs) of a system. 
+  # Display password prompts on all active virtual terminals (VTs) of a system.
   systemd.services.systemd-ask-password-wall.serviceConfig = {
     NoNewPrivileges = true;
     ProtectSystem = "strict";
     ProtectHome = true;
-    ProtectClock = true; 
+    ProtectClock = true;
     ProtectHostname = true;
     ProtectKernelTunables = true;
     ProtectKernelModules = true;
@@ -87,8 +87,8 @@
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
-    RestrictAddressFamilies = [ 
-      "~AF_INET6"  
+    RestrictAddressFamilies = [
+      "~AF_INET6"
       "~AF_INET"
       "~AF_PACKET"
     ];
@@ -98,7 +98,7 @@
     SystemCallFilter = [
       "~@keyring"
       "~@swap"
-      "~@clock"         
+      "~@clock"
       "~@module"
       "~@obsolete"
       "~@cpu-emulation"
@@ -117,7 +117,7 @@
     NoNewPrivileges = true;
     ProtectSystem = "strict";
     ProtectHome = true;
-    ProtectClock = true; 
+    ProtectClock = true;
     ProtectHostname = true;
     ProtectKernelTunables = true;
     ProtectKernelModules = true;
@@ -142,7 +142,7 @@
     ProtectHome = true;
     ProtectKernelLogs = true;
     ProtectControlGroups = true;
-    ProtectClock = true; 
+    ProtectClock = true;
     ProtectHostname = true;
     ProtectProc = "invisible";
     PrivateTmp = true;
@@ -162,7 +162,7 @@
     SystemCallArchitectures = "native";
     LockPersonality = true;
     CapabilityBoundingSet = [
-      "~CAP_SYS_PTRACE" 
+      "~CAP_SYS_PTRACE"
       "~CAP_SYS_PACCT"
     ];
   };
@@ -174,7 +174,7 @@
     ProtectHome = true;
     ProtectKernelLogs = true;
     ProtectControlGroups = true;
-    ProtectClock = true; 
+    ProtectClock = true;
     ProtectProc = "invisible";
     RestrictNamespaces = true;
     CapabilityBoundingSet = "~CAP_SYS_PTRACE ~CAP_SYS_PACCT";

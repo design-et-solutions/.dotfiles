@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./scan
+    ./scan.nix
     ./audit
   ];
 

@@ -140,11 +140,11 @@
   };
 
   environment.systemPackages = with pkgs; [
-    networkmanager
-    protobuf
-    nmap
-    wget
-    websocat
-    curl
+    networkmanager # Network configuration and management tool
+    protobuf # Google's data interchange format
+    nmap # Network exploration and security auditing utility
+    wget # Tool for retrieving files using HTTP, HTTPS, and FTP
+    websocat # Command-line client for WebSockets
+    curl # Command-line tool for transferring data using various protocols
   ];
 }

@@ -7,17 +7,17 @@
 }:
 {
   imports = [
-    ./bootloader
+    ./bootloader.nix
     ./shell
-    ./networking
+    ./networking.nix
     ./security
     ./system
-    ./users
-    ./git
-    ./dev
-    ./misc
-    ./monitoring
-    ./usb
+    ./users.nix
+    ./git.nix
+    ./dev.nix
+    ./misc.nix
+    ./monitoring.nix
+    ./usb.nix
   ];
 
   nixpkgs = {
