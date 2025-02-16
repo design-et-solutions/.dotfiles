@@ -6,8 +6,8 @@
 }:
 {
   imports = [
-    ../pkgs/tool/thunar
-    ../pkgs/web/firefox
+    ./hyprland.nix
+    ./wayland.nix
   ];
 
   services = {
@@ -88,15 +88,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # brightness management
-    brightnessctl
-    # screen recorder
-    kooha
-    # screen print
-    swappy
-    grim
-    slurp
-    # copy paste
-    wl-clipboard
+    brightnessctl # Command-line utility to control device brightness
   ];
 }
