@@ -5,62 +5,61 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
-    gui = {
-      enable = true;
-      full = true;
-      driver = {
-        nvidia = true;
-      };
-      comm = {
-        mail = true;
-        discord = true;
-        slack = true;
-        teams = true;
-        whatsapp = true;
-      };
-      tool = {
-        solaar = true;
-        handbrake = true;
-        vlc = true;
-        gimp = true;
-        vial = true;
-        drawio = true;
-      };
-      misc = {
-        steam-run = true;
-      };
+    gui.enable = true;
+    gpu.enable = true;
+    browser.enable = true;
+    file_explorer.enable = true;
+    mail.enable = true;
+    printer.enable = true;
+    vm.enable = true;
+    game = {
+      steam.enable = true;
+      mgba.enable = true;
+      xbox_controller.enable = true;
     };
-    nogui = {
-      audio = {
-        enable = true;
-        spotify = true;
+    social = {
+      discord.enable = true;
+      slack.enable = true;
+      teams.enable = true;
+      whatsapp.enable = true;
+    };
+    misc = {
+      solaar.enable = true;
+      handbrake.enable = true;
+      gimp.enable = true;
+      vial.enable = true;
+      drawio.enable = true;
+      steam-run.enable = true;
+      stremio.enable = true;
+      unity.enable = true;
+    };
+    video = {
+      vlc.enable = true;
+      mpv.enable = true;
+    };
+    audio = {
+      default.enable = true;
+      spotify.enable = true;
+    };
+    networking = {
+      analyzer.enable = true;
+      vpn = {
+        default.enable = true;
+        client.enable = true;
+        is_external = true;
       };
-      network = {
-        vpn = {
-          client = true;
-          is_external = true;
-        };
-        wifi = {
-          emergency = true;
-        };
-        bluetooth = true;
-        # can = {
-          # enable = true;
-          # peak = true;
-        # };
+      wifi = {
+        emergency.enable = true;
       };
-      tool = {
-        solaar = true;
-        appimage = true;
-      };
-      security = {
-        blocky = true;
-        lynis = true;
-      };
-      driver = {
-        printer = true;
-      };
+      bluetooth.enable = true;
+      # can = {
+      # default.enable = true;
+      # peak.enable = true;
+      # };
+    };
+    security = {
+      blocker.enable = true;
+      analyzer.enable = true;
     };
   };
 }
-

@@ -55,10 +55,6 @@
       path = ../nixos/optional/social/teams.nix;
     };
   };
-  bluetooth = {
-    enable = false;
-    path = ../nixos/optional/bluetooth/default.nix;
-  };
   game = {
     mgba = {
       enable = false;
@@ -98,16 +94,16 @@
       enable = false;
       path = ../nixos/optional/misc/vial.nix;
     };
-  };
-  video = {
     gimp = {
       enable = false;
-      path = ../nixos/optional/video/gimp.nix;
+      path = ../nixos/optional/misc/gimp.nix;
     };
     handbrake = {
       enable = false;
-      path = ../nixos/optional/video/handbrake.nix;
+      path = ../nixos/optional/misc/handbrake.nix;
     };
+  };
+  video = {
     mpv = {
       enable = false;
       path = ../nixos/optional/video/mpv.nix;
@@ -145,6 +141,7 @@
       };
     };
     vpn = {
+      is_external = false;
       default = {
         enable = false;
         path = ../nixos/optional/networking/vpn/default.nix;
@@ -162,6 +159,10 @@
       enable = false;
       path = ../nixos/optional/networking/analyzer.nix;
     };
+    bluetooth = {
+      enable = false;
+      path = ../nixos/optional/networking/bluetooth/default.nix;
+    };
   };
   vm = {
     enable = false;
@@ -171,143 +172,3 @@
     custom = "";
   };
 }
-#     tool = {
-#       unity = false;
-#       vlc = false;
-#       handbrake = false;
-#       gimp = false;
-#       vial = false;
-#       drawio = false;
-#     };
-#     misc = {
-#       steam = false;
-#       steam-run = false;
-#       streamio = false;
-#       mgba = false;
-#     };
-#   };
-#   nogui = {
-#     audio = {
-#       enable = false;
-#       spotify = false;
-#     };
-#     security = {
-#       nikto = false;
-#       blocky = false;
-#       lynis = true;
-#       clamav = true;
-#     };
-#     network = {
-#       suricata = false;
-#       vpn = {
-#         client = false;
-#         server = false;
-#         is_external = false;
-#       };
-#       wireshark = false;
-#       wifi = {
-#         emergency = false;
-#       };
-#       bluetooth = false;
-#       can = {
-#         enable = false;
-#         peak = false;
-#       };
-#     };
-#     tool = {
-#       solaar = false;
-#       docker = false;
-#       appimage = false;
-#     };
-#     driver = {
-#       print = true;
-#     };
-#     misc = {
-#       xbox_controller = false;
-#       elk = false;
-#     };
-#   };
-#   controller = {
-#     rpi5 = false;
-#   };
-# }
-#
-#   # hosts/default-setup.nix
-#   {
-#     gui = {
-#       enable = false;
-#       hyprland = true;
-#       wayfire = false;
-#       extra = {
-#         hyprland = "";
-#       };
-#       driver = {
-#         nvidia = false;
-#       };
-#       comm = {
-#         mail = false;
-#         discord = false;
-#         slack = false;
-#         teams = false;
-#         whatsapp = false;
-#       };
-#       tool = {
-#         unity = false;
-#         vlc = false;
-#         handbrake = false;
-#         gimp = false;
-#         vial = false;
-#         drawio = false;
-#       };
-#       misc = {
-#         steam = false;
-#         steam-run = false;
-#         streamio = false;
-#         mgba = false;
-#       };
-#     };
-#     nogui = {
-#       audio = {
-#         enable = false;
-#         spotify = false;
-#       };
-#       security = {
-#         nikto = false;
-#         blocky = false;
-#         lynis = true;
-#         clamav = true;
-#       };
-#       network = {
-#         suricata = false;
-#         vpn = {
-#           client = false;
-#           server = false;
-#           is_external = false;
-#         };
-#         wireshark = false;
-#         wifi = {
-#           emergency = false;
-#         };
-#         bluetooth = false;
-#         can = {
-#           enable = false;
-#           peak = false;
-#         };
-#       };
-#       tool = {
-#         solaar = false;
-#         docker = false;
-#         appimage = false;
-#       };
-#       driver = {
-#         print = true;
-#       };
-#       misc = {
-#         xbox_controller = false;
-#         elk = false;
-#       };
-#     };
-#     controller = {
-#       rpi5 = false;
-#     };
-#   }

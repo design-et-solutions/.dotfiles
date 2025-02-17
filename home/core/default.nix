@@ -5,10 +5,10 @@
       ../optional/gui
     ])
     ++ [
-      ./fonts
+      ./fonts.nix
       ./nvim
-      ./git
-      ./dev
+      ./git.nix
+      ./dev.nix
     ];
 
   nixpkgs = {

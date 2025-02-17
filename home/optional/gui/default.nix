@@ -30,11 +30,11 @@ let
 in
 {
   imports = [
-    ../pkgs/waybar
-    ../pkgs/mako
-    ../pkgs/kitty
-    ../pkgs/rofi
-    ../pkgs/mpv
+    ./waybar
+    ./mako
+    ./kitty
+    ./rofi
+    ./mpv
   ];
 
   xdg.configFile = {
