@@ -25,7 +25,7 @@ let
     wallpaper_command = wallpaperCommand;
     hyprland_command = hyprlandCommand;
     animations_enable = "true";
-    custom = mergedSetup.gui.extra.hyprland;
+    custom = mergedSetup.hyprland.custom;
   };
 in
 {
@@ -34,7 +34,6 @@ in
     ./mako
     ./kitty
     ./rofi
-    ./mpv
   ];
 
   xdg.configFile = {

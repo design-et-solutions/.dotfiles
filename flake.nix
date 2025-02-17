@@ -83,7 +83,7 @@
             ++ (if mergedSetup.browser.enable then [ mergedSetup.browser.path ] else [ ])
             ++ (if mergedSetup.file_explorer.enable then [ mergedSetup.file_explorer.path ] else [ ])
             ++ (if mergedSetup.mail.enable then [ mergedSetup.mail.path ] else [ ])
-            ++ (if mergedSetup.print.enable then [ mergedSetup.printer.path ] else [ ])
+            ++ (if mergedSetup.print.enable then [ mergedSetup.print.path ] else [ ])
             ++ (if mergedSetup.vm.enable then [ mergedSetup.vm.path ] else [ ])
             ++ (if mergedSetup.game.steam.enable then [ mergedSetup.game.steam.path ] else [ ])
             ++ (if mergedSetup.game.mgba.enable then [ mergedSetup.game.mgba.path ] else [ ])
@@ -128,21 +128,6 @@
             )
             ++ (
               if mergedSetup.networking.can.peak.enable then [ mergedSetup.networking.can.peak.path ] else [ ]
-            )
-            ++ (
-              if mergedSetup.networking.vpn.client.enable then
-                [
-                  (import ./nixos/optional/networking/vpn/client.nix {
-                    inherit pkgs;
-                    is_external = mergedSetup.nogui.network.vpn.is_external;
-                  })
-                ]
-
-              else
-                [ ]
-            )
-            ++ (
-              if mergedSetup.networking.vpn.server.enable then [ mergedSetup.networking.vpn.server.path ] else [ ]
             )
             ++ (
               if mergedSetup.networking.vpn.default.enable then

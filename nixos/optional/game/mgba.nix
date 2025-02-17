@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  environment.systempackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     mgba # Game Boy Advance emulator
   ];
 }

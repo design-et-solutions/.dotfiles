@@ -1,6 +1,7 @@
-{ config, ... }:{
+{ config, ... }:
+{
   imports = [
-    ../tmux 
+    ../../misc/tmux
   ];
 
   home.sessionVariables = {
