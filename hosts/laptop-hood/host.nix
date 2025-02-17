@@ -10,7 +10,7 @@ mkNixosConfiguration {
     browser.enable = true;
     file_explorer.enable = true;
     mail.enable = true;
-    printer.enable = true;
+    print.enable = true;
     vm.enable = true;
     game = {
       steam.enable = true;

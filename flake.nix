@@ -78,83 +78,92 @@
             ]
             ++ extraModules
 
-            # GUI
-            ++ (if mergedSetup.gui.enable then [ ./nixos/optional/gui ] else [ ])
-            ++ (if mergedSetup.gui.hyprland then [ ./nixos/optional/gui/hyprland.nix ] else [ ])
-            ++ (if mergedSetup.gui.wayfire then [ ./nixos/optional/gui/wayfire.nix ] else [ ])
-            #   DRIVER
-            ++ (if mergedSetup.gui.driver.nvidia then [ ./nixos/optional/drivers/gpu/nvidia ] else [ ])
-            #   COMM
-            ++ (if mergedSetup.gui.comm.discord then [ ./nixos/optional/pkgs/comm/discord ] else [ ])
-            ++ (if mergedSetup.gui.comm.slack then [ ./nixos/optional/pkgs/comm/slack ] else [ ])
-            ++ (if mergedSetup.gui.comm.teams then [ ./nixos/optional/pkgs/comm/teams ] else [ ])
-            ++ (if mergedSetup.gui.comm.whatsapp then [ ./nixos/optional/pkgs/comm/whatsapp ] else [ ])
-            ++ (if mergedSetup.gui.comm.mail then [ ./nixos/optional/pkgs/comm/mail ] else [ ])
-            #   TOOL
-            ++ (if mergedSetup.gui.tool.drawio then [ ./nixos/optional/pkgs/tool/drawio ] else [ ])
-            ++ (if mergedSetup.gui.tool.gimp then [ ./nixos/optional/pkgs/tool/gimp ] else [ ])
-            ++ (if mergedSetup.gui.tool.handbrake then [ ./nixos/optional/pkgs/tool/handbrake ] else [ ])
-            ++ (if mergedSetup.gui.misc.steam-run then [ ./nixos/optional/pkgs/tool/steam-run ] else [ ])
-            ++ (if mergedSetup.gui.tool.unity then [ ./nixos/optional/pkgs/tool/unity ] else [ ])
-            ++ (if mergedSetup.gui.tool.vial then [ ./nixos/optional/pkgs/tool/vial ] else [ ])
-            ++ (if mergedSetup.gui.tool.vlc then [ ./nixos/optional/pkgs/tool/vlc ] else [ ])
-            #   MISC
-            ++ (if mergedSetup.gui.misc.steam then [ ./nixos/optional/pkgs/misc/steam ] else [ ])
-            ++ (if mergedSetup.gui.misc.streamio then [ ./nixos/optional/pkgs/misc/stremio ] else [ ])
-            ++ (if mergedSetup.gui.misc.mgba then [ ./nixos/optional/pkgs/misc/mgba ] else [ ])
-
-            # NOGUI
-            #   TOOL
-            ++ (if mergedSetup.nogui.tool.appimage then [ ./nixos/optional/pkgs/tool/appimage ] else [ ])
-            ++ (if mergedSetup.nogui.tool.docker then [ ./nixos/optional/pkgs/tool/docker ] else [ ])
-            ++ (if mergedSetup.nogui.tool.solaar then [ ./nixos/optional/pkgs/tool/solaar ] else [ ])
-            #   AUDIO
-            ++ (if mergedSetup.nogui.audio.spotify then [ ./nixos/optional/pkgs/misc/spotify ] else [ ])
-            ++ (if mergedSetup.nogui.audio.enable then [ ./nixos/optional/drivers/audio ] else [ ])
-            #   NETWORK
+            ++ (if mergedSetup.gui.enable then [ mergedSetup.gui.path ] else [ ])
+            ++ (if mergedSetup.gpu.enable then [ mergedSetup.gpu.path ] else [ ])
+            ++ (if mergedSetup.browser.enable then [ mergedSetup.browser.path ] else [ ])
+            ++ (if mergedSetup.file_explorer.enable then [ mergedSetup.file_explorer.path ] else [ ])
+            ++ (if mergedSetup.mail.enable then [ mergedSetup.mail.path ] else [ ])
+            ++ (if mergedSetup.print.enable then [ mergedSetup.printer.path ] else [ ])
+            ++ (if mergedSetup.vm.enable then [ mergedSetup.vm.path ] else [ ])
+            ++ (if mergedSetup.game.steam.enable then [ mergedSetup.game.steam.path ] else [ ])
+            ++ (if mergedSetup.game.mgba.enable then [ mergedSetup.game.mgba.path ] else [ ])
             ++ (
-              if mergedSetup.nogui.network.vpn.server then [ ./nixos/optional/networking/vpn/server.nix ] else [ ]
+              if mergedSetup.game.xbox_controller.enable then [ mergedSetup.game.xbox_controller.path ] else [ ]
+            )
+            ++ (if mergedSetup.social.discord.enable then [ mergedSetup.social.discord.path ] else [ ])
+            ++ (if mergedSetup.social.teams.enable then [ mergedSetup.social.teams.path ] else [ ])
+            ++ (if mergedSetup.social.whatsapp.enable then [ mergedSetup.social.whatsapp.path ] else [ ])
+            ++ (if mergedSetup.social.slack.enable then [ mergedSetup.social.slack.path ] else [ ])
+            ++ (if mergedSetup.misc.solaar.enable then [ mergedSetup.misc.solaar.path ] else [ ])
+            ++ (if mergedSetup.misc.handbrake.enable then [ mergedSetup.misc.handbrake.path ] else [ ])
+            ++ (if mergedSetup.misc.gimp.enable then [ mergedSetup.misc.gimp.path ] else [ ])
+            ++ (if mergedSetup.misc.vial.enable then [ mergedSetup.misc.vial.path ] else [ ])
+            ++ (if mergedSetup.misc.drawio.enable then [ mergedSetup.misc.drawio.path ] else [ ])
+            ++ (if mergedSetup.misc.steam-run.enable then [ mergedSetup.misc.steam-run.path ] else [ ])
+            ++ (if mergedSetup.misc.streamio.enable then [ mergedSetup.misc.streamio.path ] else [ ])
+            ++ (if mergedSetup.misc.unity.enable then [ mergedSetup.misc.unity.path ] else [ ])
+            ++ (if mergedSetup.video.vlc.enable then [ mergedSetup.video.vlc.path ] else [ ])
+            ++ (if mergedSetup.video.mpv.enable then [ mergedSetup.video.mpv.path ] else [ ])
+            ++ (if mergedSetup.audio.default.enable then [ mergedSetup.audio.default.path ] else [ ])
+            ++ (if mergedSetup.audio.spotify.enable then [ mergedSetup.audio.spotify.path ] else [ ])
+            ++ (if mergedSetup.security.blocker.enable then [ mergedSetup.security.blocker.path ] else [ ])
+            ++ (if mergedSetup.security.analyzer.enable then [ mergedSetup.security.analyzer.path ] else [ ])
+            ++ (
+              if mergedSetup.networking.analyzer.enable then [ mergedSetup.networking.analyzer.path ] else [ ]
             )
             ++ (
-              if mergedSetup.nogui.network.vpn.client then
+              if mergedSetup.networking.bluetooth.enable then [ mergedSetup.networking.bluetooth.path ] else [ ]
+            )
+            ++ (
+              if mergedSetup.networking.wifi.emergency.enable then
+                [ mergedSetup.networking.wifi.emergency.path ]
+              else
+                [ ]
+            )
+            ++ (
+              if mergedSetup.networking.can.default.enable then
+                [ mergedSetup.networking.can.default.path ]
+              else
+                [ ]
+            )
+            ++ (
+              if mergedSetup.networking.can.peak.enable then [ mergedSetup.networking.can.peak.path ] else [ ]
+            )
+            ++ (
+              if mergedSetup.networking.vpn.client.enable then
                 [
                   (import ./nixos/optional/networking/vpn/client.nix {
                     inherit pkgs;
                     is_external = mergedSetup.nogui.network.vpn.is_external;
                   })
                 ]
+
               else
                 [ ]
             )
             ++ (
-              if mergedSetup.nogui.network.wireshark then [ ./nixos/optional/pkgs/network/wireshark ] else [ ]
+              if mergedSetup.networking.vpn.server.enable then [ mergedSetup.networking.vpn.server.path ] else [ ]
             )
-            ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/network/suricata ] else [ ])
             ++ (
-              if mergedSetup.nogui.network.wifi.emergency then
-                [ ./nixos/optional/networking/wifi/emergency.nix ]
+              if mergedSetup.networking.vpn.default.enable then
+                [ mergedSetup.networking.vpn.default.path ]
               else
                 [ ]
             )
-            ++ (if mergedSetup.nogui.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [ ])
-            ++ (if mergedSetup.nogui.network.can.enable then [ ./nixos/optional/network/can ] else [ ])
-            ++ (if mergedSetup.nogui.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else [ ])
-            #   SECURITY
-            ++ (if mergedSetup.nogui.security.nikto then [ ./nixos/optional/pkgs/security/nikto ] else [ ])
-            ++ (if mergedSetup.nogui.security.lynis then [ ./nixos/optional/pkgs/security/lynis ] else [ ])
-            ++ (if mergedSetup.nogui.security.blocky then [ ./nixos/optional/pkgs/security/blocky ] else [ ])
-            ++ (if mergedSetup.nogui.security.clamav then [ ./nixos/optional/pkgs/security/clamav ] else [ ])
-            #   DRIVER
-            ++ (if mergedSetup.nogui.driver.print then [ ./nixos/optional/drivers/print ] else [ ])
-            #   MISC
             ++ (
-              if mergedSetup.nogui.misc.xbox_controller then
-                [ ./nixos/optional/pkgs/misc/xbox_controller ]
+              if mergedSetup.networking.vpn.server.enable then [ mergedSetup.networking.vpn.server.path ] else [ ]
+            )
+            ++ (
+              if mergedSetup.networking.vpn.client.enable then
+                [
+                  (import mergedSetup.networking.vpn.client.path {
+                    inherit pkgs;
+                    is_external = mergedSetup.networking.vpn.is_external;
+                  })
+                ]
               else
                 [ ]
-            )
-            # CONTROLLER
-            ++ (if mergedSetup.controller.rpi5 then [ ./nixos/optional/controller/rpi5 ] else [ ]);
+            );
         };
 
       nixosConfigurations = import ./hosts {
