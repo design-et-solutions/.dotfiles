@@ -1,6 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   environment.etc."scripts/systemd-analyzer-security.fish" = {
-    source = builtins.toString ../../../scripts/systemd-analayser-security.fish;
+    source = builtins.toString ../../scripts/systemd-analayser-security.fish;
     mode = "0755";
   };
 

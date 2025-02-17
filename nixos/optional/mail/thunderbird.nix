@@ -6,7 +6,7 @@
 
   environment.etc = {
     "scripts/mailchecker.fish" = {
-      source = builtins.toString ../../../../scripts/mailchecker.fish;
+      source = builtins.toString ../../scripts/mailchecker.fish;
       mode = "0755";
     };
   };
