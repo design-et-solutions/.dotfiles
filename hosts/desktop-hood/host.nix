@@ -43,10 +43,10 @@ mkNixosConfiguration {
     };
     networking = {
       analyzer.enable = true;
-      vpn = {
-        default.enable = true;
-        client.enable = true;
-      };
+      # vpn = {
+      #   default.enable = true;
+      #   client.enable = true;
+      # };
     };
     security = {
       blocker.enable = true;

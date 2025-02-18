@@ -6,7 +6,6 @@ mkNixosConfiguration {
   users = [ "me" ];
   setup = {
     gui.enable = true;
-    gpu.enable = true;
     browser.enable = true;
     file_explorer.enable = true;
     mail.enable = true;
@@ -14,8 +13,6 @@ mkNixosConfiguration {
     vm.enable = true;
     game = {
       steam.enable = true;
-      mgba.enable = true;
-      xbox_controller.enable = true;
     };
     social = {
       discord.enable = true;
@@ -31,7 +28,6 @@ mkNixosConfiguration {
       drawio.enable = true;
       steam-run.enable = true;
       stremio.enable = true;
-      unity.enable = true;
     };
     video = {
       vlc.enable = true;
@@ -43,18 +39,18 @@ mkNixosConfiguration {
     };
     networking = {
       analyzer.enable = true;
-      vpn = {
-        default.enable = true;
-        client.enable = true;
-        is_external = true;
-      };
+      # vpn = {
+      #   default.enable = true;
+      #   client.enable = true;
+      #   is_external = true;
+      # };
       wifi = {
         emergency.enable = true;
       };
       bluetooth.enable = true;
       # can = {
-      # default.enable = true;
-      # peak.enable = true;
+      #   default.enable = true;
+      #   peak.enable = true;
       # };
     };
     security = {
