@@ -5,47 +5,52 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
-    gui = {
-      enable = true;
-      full = true;
-      driver.nvidia = true;
-      comm = {
-        mail = true;
-        discord = true;
-        slack = true;
-        teams = true;
-        whatsapp = true;
-      };
-      tool = {
-        # unity = true;
-        vial = true;
-        handbrake = true;
-        vlc = true;
-        drawio = true;
-      };
-      misc = {
-        steam = true;
-        steam-run = true;
-        mgba = true;
-        streamio = true;
+    gui.enable = true;
+    gpu.enable = true;
+    browser.enable = true;
+    file_explorer.enable = true;
+    mail.enable = true;
+    print.enable = true;
+    vm.enable = true;
+    game = {
+      steam.enable = true;
+      mgba.enable = true;
+      xbox_controller.enable = true;
+    };
+    social = {
+      discord.enable = true;
+      slack.enable = true;
+      teams.enable = true;
+      whatsapp.enable = true;
+    };
+    misc = {
+      solaar.enable = true;
+      handbrake.enable = true;
+      gimp.enable = true;
+      vial.enable = true;
+      drawio.enable = true;
+      steam-run.enable = true;
+      stremio.enable = true;
+      unity.enable = true;
+    };
+    video = {
+      vlc.enable = true;
+      mpv.enable = true;
+    };
+    audio = {
+      default.enable = true;
+      spotify.enable = true;
+    };
+    networking = {
+      analyzer.enable = true;
+      vpn = {
+        default.enable = true;
+        client.enable = true;
       };
     };
-    nogui = {
-      audio = {
-        enable = true;
-        spotify = true;
-      };
-      tool = {
-        # solaar = true;
-        docker = true;
-        appimage = true;
-      };
-      network = {
-        vpn.client = true;
-        wifi.emergency =  true;
-      };
-      driver.printer = true;
-      misc.xbox_controller = true;
+    security = {
+      blocker.enable = true;
+      analyzer.enable = true;
     };
   };
 }
