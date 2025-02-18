@@ -6,12 +6,21 @@
       ll = "exa -l";
       la = "exa -a";
       ls = "exa -la";
+
       top = "htop";
-      gh = "lazygit";
-      gh-reset-last-commit = "git commit --amend";
-      gh-stash = "git stash";
-      gh-stash-back = "git stash pop";
-      gh-tag = "git tag";
+
+      rm = "trash-put";
+      rm-list = "trash-list";
+      rm-undo = "trash-restore";
+      rm-all-for-real = "trash-empty";
+      rm-for-real = "trash-rm";
+
+      g = "lazygit";
+      g-reset-last-commit = "git commit --amend";
+      g-stash = "git stash";
+      g-stash-back = "git stash pop";
+      g-tag = "git tag";
+
       clippy-full = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all -W clippy::pedantic -W clippy::nursery -W clippy::perf -W clippy::complexity -W clippy::suspicious -W clippy::style -W clippy::correctness";
       clippy-all = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all";
       clippy-cargo = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::cargo";
@@ -23,6 +32,7 @@
       clippy-style = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::style";
       clippy-suspicious = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::suspicious";
       clippy-correctness = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::correctness";
+
       cargo-check-udeps = "rustup run nightly cargo udeps --all-targets  --all-features";
       cargo-tree-search = "cargo tree -i";
     };

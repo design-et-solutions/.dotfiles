@@ -7,6 +7,7 @@
     nodejs # JavaScript runtime built
     ripgrep # Fast line-oriented search tool, alternative to grep
     postgresql # Advanced open-source relational database
+    trash-cli # Command line interface to the freedesktop.org trashcan.
   ];
 
   environment.variables = {
