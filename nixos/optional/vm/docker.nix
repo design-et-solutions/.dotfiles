@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   virtualisation.docker.enable = true;
 
@@ -41,4 +41,8 @@
       "~CAP_SYS_BOOT"
     ];
   };
+
+  environment.systemPackages = with pkgs; [
+    docker-compose # Docker CLI plugin to define and run multi-container applications with Docker.
+  ];
 }
