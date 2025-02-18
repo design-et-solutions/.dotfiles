@@ -15,11 +15,20 @@
       rm-all-for-real = "trash-empty";
       rm-for-real = "trash-rm";
 
-      g = "lazygit";
-      g-reset-last-commit = "git commit --amend";
-      g-stash = "git stash";
-      g-stash-back = "git stash pop";
-      g-tag = "git tag";
+      gg = "lazygit";
+      gg-reset-last-commit = "git commit --amend";
+      gg-stash = "git stash";
+      gg-stash-back = "git stash pop";
+      gg-tag = "git tag";
+
+      tx-new = "tmux new -d -n window -c ~/ -s";
+      tx-kill = "tmux kill-session -t";
+      tx-kill-all = "tmux kill-server";
+      tx-list = "tmux list-sessions";
+      tx-switch = "tmux switch-client -t";
+      tx-split-h = "tmux split-window -h";
+      tx-split-v = "tmux split-window -v";
+      tx-rename = "tmux rename-session";
 
       clippy-full = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all -W clippy::pedantic -W clippy::nursery -W clippy::perf -W clippy::complexity -W clippy::suspicious -W clippy::style -W clippy::correctness";
       clippy-all = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all";
