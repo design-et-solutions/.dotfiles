@@ -54,7 +54,7 @@
               {
                 home-manager = {
                   # verbose = true;
-                  useGlobalPkgs = true;
+                  # useGlobalPkgs = true;
                   useUserPackages = true;
                   backupFileExtension = "backup";
                   extraSpecialArgs = { inherit mergedSetup; };
