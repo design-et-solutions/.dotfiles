@@ -18,13 +18,13 @@ in
     newSession = true;
     mouse = true;
     plugins = with pkgs.tmuxPlugins; [
-      # https://github.com/tmux-plugins/tmux-cpu
-      cpu
+      # # https://github.com/tmux-plugins/tmux-cpu
+      # cpu
       # https://github.com/tmux-plugins/tmux-resurrect
-      # {
-      #   plugin = resurrect;
-      #   # extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-      # }
+      {
+        plugin = resurrect;
+        extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+      }
       # https://github.com/tmux-plugins/tmux-continuum
       {
         plugin = continuum;
@@ -33,14 +33,14 @@ in
           set -g @continuum-save-interval '20'
         '';
       }
-      # https://github.com/laktak/extrakto
-      extrakto
+      # # https://github.com/laktak/extrakto
+      # extrakto
       # https://github.com/tmux-plugins/tmux-fpp
       fpp
       # https://github.com/roosta/tmux-fuzzback
       fuzzback
-      # https://github.com/tmux-plugins/tmux-sidebar
-      sidebar
+      # # https://github.com/tmux-plugins/tmux-sidebar
+      # sidebar
       # https://github.com/alexwforsythe/tmux-which-key
       # tmux-which-key
       # https://github.com/fabioluciano/tmux-tokyo-night
