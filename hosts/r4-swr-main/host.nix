@@ -1,14 +1,25 @@
-# hosts/desktop-hood.nix
-{ mkNixosConfiguration, nixos-hardware, ... }:
+{ mkNixosConfiguration, ... }:
 
 mkNixosConfiguration {
   system = "x86_64-linux";
   host = ./.;
-  users = [ "me" ];
+  users = [
+    "me"
+    "guest"
+  ];
   setup = {
-    gui = {
-      enable = true;
+    gui.enable = true;
+    gpu.enable = true;
+    browser.enable = true;
+    file_explorer.enable = true;
+    vm.enable = true;
+    networking = {
+      analyzer.enable = true;
+      wifi.emergency = true;
     };
-    nogui.network.wifi.emergency =  true;
+    security = {
+      blocker.enable = true;
+      analyzer.enable = true;
+    };
   };
 }

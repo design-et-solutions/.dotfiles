@@ -1,0 +1,132 @@
+/*****----- Configuration -----*****/
+configuration {
+	modi:                       "drun";
+    display-drun:               "->";
+	drun-display-format:        "{name}";
+    show-icons:                 true;
+}
+
+/*****----- Global Properties -----*****/
+* {
+    background:     #1a1b26ff;
+    foreground:     #a9b1d6ff;
+    selected:       #24283bff;
+    active:         #7dcfffff;
+    urgent:         #f7768eff;
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       600px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                transparent;
+    background-color:            transparent;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      2px solid;
+    border-radius:               0px;
+    border-color:                @foreground;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     15px;
+    background-color:            @selected;
+    text-color:                  @foreground;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "::";
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+entry {
+    enabled:                     true;
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search...";
+    placeholder-color:           inherit;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     4;
+    lines:                       3;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     5px;
+    padding:                     10px;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     15px;
+    margin:                      0px;
+    padding:                     10px 10px;
+    border-radius:               4px;
+    border-color:                @selected;
+    background-color:            @background;
+    text-color:                  @foreground;
+    orientation:                 vertical;
+}
+element normal.normal {
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+element selected.normal {
+    background-color:            @selected;
+    text-color:                  @foreground;
+}
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        32px;
+    cursor:                      inherit;
+}
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
