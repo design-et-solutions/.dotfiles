@@ -1,7 +1,8 @@
 { pkgs, lib, ... }:
-let 
+let
   name = "laptop-hood";
-in {
+in
+{
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -9,15 +10,15 @@ in {
 
   time.timeZone = "Europe/Paris";
 
-  networking= {
+  networking = {
     hostName = name;
-    wg-quick = {
-      interfaces = {
-        wg0 = {
-          address = [ "10.100.0.5/32" ];
-        };
-      };
-    };
+    # wg-quick = {
+    #   interfaces = {
+    #     wg0 = {
+    #       address = [ "10.100.0.5/32" ];
+    #     };
+    #   };
+    # };
   };
 
   environment.etc."wireguard/wg0" = {
