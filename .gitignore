@@ -1,0 +1,3 @@
+# for build-vm
+*.qcow2
+result

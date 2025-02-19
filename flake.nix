@@ -1,5 +1,8 @@
 {
   description = "Nix config with Flake";
+  # TO CLEAR CACHE
+  # sudo rm -rf /nix/var/nix/profiles/per-user/root/
+  # sudo nix-collect-garbage -d
 
   inputs = {
     # Nixpkgs
@@ -11,124 +14,131 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    rust-overlay.url = "github:oxalica/rust-overlay";
     nix-rpi5.url = "git+https://gitlab.com/vriska/nix-rpi5.git";
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { 
-    self, 
-    nixpkgs, 
-    home-manager, 
-    nixos-hardware, 
-    sops-nix, 
-    rust-overlay, 
-    nix-rpi5,
-    ... 
-  } @ inputs: 
-    let inherit (self) outputs;
-    defaultSetup = import ./hosts/default-setup.nix;
-    # NixOS configuration entrypoint
-    # Define a function to create a NixOS configuration
-    mkNixosConfiguration = { 
-      system,
-      host,
-      users,
-      setup,
-      extraModules ? []
-    }: 
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nixos-hardware,
+      nix-rpi5,
+      ...
+    }@inputs:
     let
-      mergedSetup = nixpkgs.lib.recursiveUpdate defaultSetup setup;
-    in
-    nixpkgs.lib.nixosSystem {
+      inherit (self) outputs;
+      defaultSetup = import ./hosts/default-setup.nix;
+      # NixOS configuration entrypoint
+      # Define a function to create a NixOS configuration
+      mkNixosConfiguration =
+        {
+          system,
+          host,
+          users,
+          setup,
+          extraModules ? [ ],
+        }:
+        let
+          mergedSetup = nixpkgs.lib.recursiveUpdate defaultSetup setup;
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./nixos/core
-            host
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                # verbose = true;
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "backup";
-                extraSpecialArgs = { inherit mergedSetup; };
-                users = nixpkgs.lib.genAttrs users (user: {
-                  imports = [
-                    ./home/core
-                    ./home/users/${user}.nix
-                  ];
-                });
-              };
-            }
-            {
-              users.groups = nixpkgs.lib.genAttrs users (user: {});
-              users.users = builtins.listToAttrs (map (user: {
-                name = user;
-                value = import (./nixos/users/${user}.nix);
-              }) users);
-            }
-          ] 
-          ++ extraModules
+          modules =
+            [
+              ./nixos/core
+              host
+              home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  # verbose = true;
+                  # useGlobalPkgs = true;
+                  useUserPackages = true;
+                  backupFileExtension = "backup";
+                  extraSpecialArgs = { inherit mergedSetup; };
+                  users = nixpkgs.lib.genAttrs users (user: {
+                    imports = [
+                      ./home/core
+                      ./home/users/${user}.nix
+                    ];
+                  });
+                };
+              }
+              {
+                users.groups = nixpkgs.lib.genAttrs users (user: { });
+                users.users = builtins.listToAttrs (
+                  map (user: {
+                    name = user;
+                    value = import (./nixos/users/${user}.nix);
+                  }) users
+                );
+              }
+            ]
+            ++ extraModules
 
-          # GUI
-          ++ (if mergedSetup.gui.enable then [ ./nixos/optional/gui ] else [])
-          ++ (if mergedSetup.gui.hyprland then [ ./nixos/optional/gui/hyprland.nix ] else [])
-          ++ (if mergedSetup.gui.wayfire then [ ./nixos/optional/gui/wayfire.nix ] else [])
-          #   DRIVER
-          ++ (if mergedSetup.gui.driver.nvidia then [ ./nixos/optional/drivers/gpu/nvidia ] else [])
-          #   COMM
-          ++ (if mergedSetup.gui.comm.discord then [ ./nixos/optional/pkgs/discord ] else [])
-          ++ (if mergedSetup.gui.comm.slack then [ ./nixos/optional/pkgs/slack ] else [])
-          ++ (if mergedSetup.gui.comm.teams then [ ./nixos/optional/pkgs/teams ] else [])
-          ++ (if mergedSetup.gui.comm.whatsapp then [ ./nixos/optional/pkgs/whatsapp ] else [])
-          ++ (if mergedSetup.gui.comm.mail then [ ./nixos/optional/pkgs/mail ] else [])
-          #   TOOL
-          ++ (if mergedSetup.gui.tool.solaar then [ ./nixos/optional/pkgs/solaar ] else [])
-          ++ (if mergedSetup.gui.tool.unity then [ ./nixos/optional/pkgs/unity ] else [])
-          ++ (if mergedSetup.gui.tool.handbrake then [ ./nixos/optional/pkgs/handbrake ] else [])
-          ++ (if mergedSetup.gui.tool.vlc then [ ./nixos/optional/pkgs/vlc ] else [])
-          ++ (if mergedSetup.gui.tool.gimp then [ ./nixos/optional/pkgs/gimp ] else [])
-          ++ (if mergedSetup.gui.tool.vial then [ ./nixos/optional/pkgs/vial ] else [])
-          ++ (if mergedSetup.gui.tool.drawio then [ ./nixos/optional/pkgs/drawio ] else [])
-          #   MISC
-          ++ (if mergedSetup.gui.misc.steam then [ ./nixos/optional/pkgs/steam ] else [])
-          ++ (if mergedSetup.gui.misc.steam-run then [ ./nixos/optional/pkgs/steam ] else [])
-          ++ (if mergedSetup.gui.misc.streamio then [ ./nixos/optional/pkgs/stremio ] else [])
-          ++ (if mergedSetup.gui.misc.mgba then [ ./nixos/optional/pkgs/mgba ] else [])
-
-          # NOGUI
-          #   AUDIO
-          ++ (if mergedSetup.nogui.audio.enable then [ ./nixos/optional/drivers/audio ] else [])
-          ++ (if mergedSetup.nogui.audio.spotify then [ ./nixos/optional/pkgs/spotify ] else [])
-          #   NETWORK
-          ++ (if mergedSetup.nogui.network.suricata then [ ./nixos/optional/pkgs/suricata ] else [])
-          ++ (if mergedSetup.nogui.network.nikto then [ ./nixos/optional/pkgs/nikto ] else [])
-          ++ (if mergedSetup.nogui.network.wireshark then [ ./nixos/optional/pkgs/wireshark ] else [])
-          ++ (if mergedSetup.nogui.network.wifi.emergency then [ ./nixos/optional/network/wifi/emergency.nix ] else [])
-          ++ (if mergedSetup.nogui.network.bluetooth then [ ./nixos/optional/drivers/bluetooth ] else [])
-          ++ (if mergedSetup.nogui.network.can.enable then [ ./nixos/optional/network/can ] else [])
-          ++ (if mergedSetup.nogui.network.can.peak then [ ./nixos/optional/network/can/peak.nix ] else [])
-          #   DRIVER
-          ++ (if mergedSetup.nogui.driver.print then [ ./nixos/optional/drivers/print ] else [])
-          #   MISC
-          ++ (if mergedSetup.nogui.misc.xbox_controller then [ ./nixos/optional/pkgs/xbox_controller ] else [])
-          ++ (if mergedSetup.nogui.misc.elk then [ ./nixos/optional/pkgs/elk ] else [])
-
-          # CONTROLLER
-          ++ (if mergedSetup.controller.rpi5 then [ ./nixos/optional/controller/rpi5 ] else []);
+            ++ (if mergedSetup.gui.enable then [ mergedSetup.gui.path ] else [ ])
+            ++ (if mergedSetup.gpu.enable then [ mergedSetup.gpu.path ] else [ ])
+            ++ (if mergedSetup.browser.enable then [ mergedSetup.browser.path ] else [ ])
+            ++ (if mergedSetup.file_explorer.enable then [ mergedSetup.file_explorer.path ] else [ ])
+            ++ (if mergedSetup.mail.enable then [ mergedSetup.mail.path ] else [ ])
+            ++ (if mergedSetup.print.enable then [ mergedSetup.print.path ] else [ ])
+            ++ (if mergedSetup.vm.enable then [ mergedSetup.vm.path ] else [ ])
+            ++ (if mergedSetup.game.steam.enable then [ mergedSetup.game.steam.path ] else [ ])
+            ++ (if mergedSetup.game.mgba.enable then [ mergedSetup.game.mgba.path ] else [ ])
+            ++ (
+              if mergedSetup.game.xbox_controller.enable then [ mergedSetup.game.xbox_controller.path ] else [ ]
+            )
+            ++ (if mergedSetup.social.discord.enable then [ mergedSetup.social.discord.path ] else [ ])
+            ++ (if mergedSetup.social.teams.enable then [ mergedSetup.social.teams.path ] else [ ])
+            ++ (if mergedSetup.social.whatsapp.enable then [ mergedSetup.social.whatsapp.path ] else [ ])
+            ++ (if mergedSetup.social.slack.enable then [ mergedSetup.social.slack.path ] else [ ])
+            ++ (if mergedSetup.misc.solaar.enable then [ mergedSetup.misc.solaar.path ] else [ ])
+            ++ (if mergedSetup.misc.handbrake.enable then [ mergedSetup.misc.handbrake.path ] else [ ])
+            ++ (if mergedSetup.misc.gimp.enable then [ mergedSetup.misc.gimp.path ] else [ ])
+            ++ (if mergedSetup.misc.vial.enable then [ mergedSetup.misc.vial.path ] else [ ])
+            ++ (if mergedSetup.misc.drawio.enable then [ mergedSetup.misc.drawio.path ] else [ ])
+            ++ (if mergedSetup.misc.steam-run.enable then [ mergedSetup.misc.steam-run.path ] else [ ])
+            ++ (if mergedSetup.misc.streamio.enable then [ mergedSetup.misc.streamio.path ] else [ ])
+            ++ (if mergedSetup.misc.unity.enable then [ mergedSetup.misc.unity.path ] else [ ])
+            ++ (if mergedSetup.video.vlc.enable then [ mergedSetup.video.vlc.path ] else [ ])
+            ++ (if mergedSetup.video.mpv.enable then [ mergedSetup.video.mpv.path ] else [ ])
+            ++ (if mergedSetup.audio.default.enable then [ mergedSetup.audio.default.path ] else [ ])
+            ++ (if mergedSetup.audio.spotify.enable then [ mergedSetup.audio.spotify.path ] else [ ])
+            ++ (if mergedSetup.security.blocker.enable then [ mergedSetup.security.blocker.path ] else [ ])
+            ++ (if mergedSetup.security.analyzer.enable then [ mergedSetup.security.analyzer.path ] else [ ])
+            ++ (
+              if mergedSetup.networking.analyzer.enable then [ mergedSetup.networking.analyzer.path ] else [ ]
+            )
+            ++ (
+              if mergedSetup.networking.bluetooth.enable then [ mergedSetup.networking.bluetooth.path ] else [ ]
+            )
+            ++ (
+              if mergedSetup.networking.wifi.emergency.enable then
+                [ mergedSetup.networking.wifi.emergency.path ]
+              else
+                [ ]
+            )
+            ++ (
+              if mergedSetup.networking.can.default.enable then
+                [ mergedSetup.networking.can.default.path ]
+              else
+                [ ]
+            )
+            ++ (
+              if mergedSetup.networking.can.peak.enable then [ mergedSetup.networking.can.peak.path ] else [ ]
+            );
         };
 
-        nixosConfigurations = import ./hosts {
-          inherit mkNixosConfiguration nixos-hardware;
-          inherit (nixpkgs) lib;
-        };
-  in {
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#machine-name'
-    inherit nixosConfigurations;
-  };
+      nixosConfigurations = import ./hosts {
+        inherit mkNixosConfiguration nixos-hardware;
+        inherit (nixpkgs) lib;
+      };
+    in
+    {
+      # NixOS configuration entrypoint
+      # Available through 'nixos-rebuild --flake .#machine-name'
+      inherit nixosConfigurations;
+    };
 }
-

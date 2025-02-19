@@ -4,17 +4,20 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
-    ./bootloader
-    ./shell/fish
-    ./pkgs/git
-    ./pkgs/monitoring
-    ./pkgs/network
-    ./pkgs/rust
-    ./pkgs/ssh
-    ./pkgs/usb
-    ./pkgs/mermaid
+    ./bootloader.nix
+    ./shell
+    ./networking.nix
+    ./security
+    ./system
+    ./users.nix
+    ./git.nix
+    ./dev.nix
+    ./misc.nix
+    ./monitoring.nix
+    ./usb.nix
   ];
 
   nixpkgs = {
@@ -25,47 +28,38 @@
     };
   };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        # Enable flakes and new 'nix' command
+        experimental-features = "nix-command flakes";
+        # Opinionated: disable global registry
+        flake-registry = "";
+        # Workaround for https://github.com/NixOS/nix/issues/9574
+        nix-path = config.nix.nixPath;
+      };
+      # Opinionated: disable channels
+      channel.enable = true;
+
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
     };
-    # Opinionated: disable channels
-    channel.enable = true;
 
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
-
-  programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS
-
-  services.dbus.enable = true;   # inter-process communication (IPC), allows apps to comm with one another
-
-  # tools and libs
   environment.systemPackages = with pkgs; [
-    nix-prefetch-git
-
-    libnotify   # notification manager
-    gcc         # collection of compilers
-    unzip
-    tree
-    websocat
-    parted
-    nodejs_22
-    feh
+    gcc # GNU Compiler Collection (C and C++ compilers)
+    glibc # GNU C Library, the standard C library
+    nix-index # Indexes the Nix store to allow fast file lookup
+    pkg-config # Helper tool used when compiling applications
+    clang # C language family frontend for LLVM
   ];
 
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.hplip pkgs.gutenprint ];
-  };
+  system.activationScripts.createMnt = ''
+    mkdir -p /mnt
+  '';
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

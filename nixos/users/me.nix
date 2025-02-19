@@ -1,7 +1,20 @@
-{ ... }:{
+{ ... }:
+{
   group = "me";
   isNormalUser = true;
   home = "/home/me";
-  extraGroups = [ "tty" "wheel" "audio" "guest" "pulse" "video" "systemd-journal" "docker" "disk" "dialout" ];
+  extraGroups = [
+    "wheel"
+    "networkmanager"
+    "audio"
+    "guest"
+    "pulse"
+    "video"
+    "systemd-journal"
+    "docker"
+    "disk"
+    "dialout"
+    "docker"
+  ];
   password = "me";
 }

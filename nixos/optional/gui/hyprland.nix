@@ -8,12 +8,11 @@
   programs.hyprlock = {
     enable = true;
   };
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
   services.hypridle.enable = true;
 
   environment.systemPackages = with pkgs; [
-    hyprcursor
-    hyprpaper
-    wlr-randr
+    hyprcursor # Hyprland's cursor theme manager
+    hyprpaper # Wallpaper utility for Hyprland
   ];
 }

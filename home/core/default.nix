@@ -1,12 +1,14 @@
-{ lib, mergedSetup, ... }: {
-  imports = 
-    (lib.optionals mergedSetup.gui.hyprland [
+{ lib, mergedSetup, ... }:
+{
+  imports =
+    (lib.optionals mergedSetup.gui.enable [
       ../optional/gui
-    ]) ++
-    [
-      ./fonts
-      ./pkgs/nvim
-      ./pkgs/git
+    ])
+    ++ [
+      ./fonts.nix
+      ./nvim
+      ./git.nix
+      ./dev.nix
     ];
 
   nixpkgs = {
@@ -23,11 +25,16 @@
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
+  home.file.".icons".source = ../icons;
+
+  home.activation.createDirectories = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p ~/work
+    mkdir -p ~/perso
+    mkdir -p ~/tmp
+    mkdir -p ~/Screenshots
+  '';
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
 
-  home.file.".shell" = {
-    source = ../shell;
-    force = true;
-  };
 }
