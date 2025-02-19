@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 let
-  name = "default";
+  name = "default-pc";
 in
 {
   imports = [
