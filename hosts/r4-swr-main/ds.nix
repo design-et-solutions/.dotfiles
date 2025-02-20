@@ -22,7 +22,7 @@
       Environment = [
         "RUST_LOG=INFO"
       ];
-      ExecStart = "${pkgs.nix-shell}/bin/nix-shell /home/me/Manager/core/gateway/nix/shell.nix --run \"/home/me/Manager/core/gateway/target/release/gateway\"";
+      ExecStart = "${pkgs.nix}/bin/nix-shell /home/me/Manager/core/gateway/nix/shell.nix --run \"/home/me/Manager/core/gateway/target/release/gateway\"";
       Restart = "always";
       RestartSec = "5s";
     };
