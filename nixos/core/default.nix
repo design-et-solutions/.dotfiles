@@ -53,6 +53,7 @@
     gcc # GNU Compiler Collection (C and C++ compilers)
     glibc # GNU C Library, the standard C library
     nix-index # Indexes the Nix store to allow fast file lookup
+    nix-ld # Run unpatched dynamic binaries on NixOS
     pkg-config # Helper tool used when compiling applications
     clang # C language family frontend for LLVM
   ];
