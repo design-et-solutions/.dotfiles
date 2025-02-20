@@ -19,6 +19,9 @@
     description = "Run Server";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
+      EnvironmentFile = [
+        "/home/me/Manager/core/gateway/.env"
+      ];
       Environment = [
         "RUST_LOG=INFO"
       ];
