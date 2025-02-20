@@ -19,10 +19,9 @@
     description = "Run Server";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      EnvironmentFile = [
-        "/home/me/Manager/core/gateway/.env"
-      ];
       Environment = [
+        "APP_HOST=0.0.0.0"
+        "APP_PORT=8080"
         "RUST_LOG=INFO"
         "PRIVATE_KEY=/home/me/Manager/core/gateway/key.pem"
         "CERTIFICATE=/home/me/Manager/core/gateway/cert.pem"
