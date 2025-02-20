@@ -24,6 +24,8 @@
       ];
       Environment = [
         "RUST_LOG=INFO"
+        "PRIVATE_KEY=/home/me/Manager/core/gateway/key.pem"
+        "CERTIFICATE=/home/me/Manager/core/gateway/cert.pem"
       ];
       ExecStart = "${pkgs.nix}/bin/nix-shell /home/me/Manager/core/gateway/nix/shell.nix --run \"/home/me/Manager/core/gateway/target/release/gateway\"";
       Restart = "always";
