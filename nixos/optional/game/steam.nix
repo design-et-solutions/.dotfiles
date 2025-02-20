@@ -5,17 +5,14 @@
   ...
 }:
 {
-  programs.steam = {
-    enable = true;
-  };
+  # programs.steam = {
+  #   enable = true;
+  #   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+  #   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  #   localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  # };
 
-  # environment.systemPackages = with pkgs; [
-  #   flatpak
-  # ];
-  # xdg.portal.enable = true;
-
-  # services.flatpak.enable = true;
-  # environment.sessionVariables.XDG_DATA_DIRS = "${pkgs.flatpak}/share:/var/lib/flatpak/exports/share:/home/me/.local/share/flatpak/exports/share:$XDG_DATA_DIRS";
-  # environment.sessionVariables.XDG_DATA_DIRS = "${pkgs.flatpak}/share:/var/lib/flatpak/exports/share:/home/me/.local/share/flatpak/exports/share:${config.environment.sessionVariables.XDG_DATA_DIRS}";
-
+  environment.systemPackages = with pkgs; [
+    steam
+  ];
 }
