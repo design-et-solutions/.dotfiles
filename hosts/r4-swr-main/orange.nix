@@ -5,11 +5,11 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       EnvironmentFile = [
-        "/home/me/4757-R4-SWR/orange/DOTenv"
-        "/home/me/4757-R4-SWR/orange/credentials"
+        "/home/me/4757-R4-SWR/orange-storage/DOTenv"
+        "/home/me/4757-R4-SWR/orange-storage/credentials"
       ];
       ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/echo $DOCK_PASS | ${pkgs.docker}/bin/docker login -u $DOCK_USER --password-stdin $DOCK_REMOTE'";
-      ExecStart = "${pkgs.docker-compose}/bin/docker-compose --project-name $DOCK_PROJECT -f /home/me/4757-R4-SWR/orange/docker-compose-v2x-edge-node.yml up";
+      ExecStart = "${pkgs.docker-compose}/bin/docker-compose --project-name $DOCK_PROJECT -f /home/me/4757-R4-SWR/orange-storage/docker-compose-v2x-edge-node.yml up";
       ExecStartPost = "${pkgs.docker}/bin/docker logout";
       Restart = "always";
       RestartSec = "5s";
@@ -21,11 +21,11 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       EnvironmentFile = [
-        "/home/me/4757-R4-SWR/orange/DOTenv"
-        "/home/me/4757-R4-SWR/orange/credentials"
+        "/home/me/4757-R4-SWR/orange-storage/DOTenv"
+        "/home/me/4757-R4-SWR/orange-storage/credentials"
       ];
       ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/echo $DOCK_PASS | ${pkgs.docker}/bin/docker login -u $DOCK_USER --password-stdin $DOCK_REMOTE'";
-      ExecStart = "${pkgs.docker-compose}/bin/docker-compose --project-name $DOCK_PROJECT -f /home/me/4757-R4-SWR/orange/docker-compose-allog.yml up";
+      ExecStart = "${pkgs.docker-compose}/bin/docker-compose --project-name $DOCK_PROJECT -f /home/me/4757-R4-SWR/orange-storage/docker-compose-allog.yml up";
       ExecStartPost = "${pkgs.docker}/bin/docker logout";
       Restart = "always";
       RestartSec = "5s";
