@@ -30,7 +30,6 @@
       ${builtins.readFile ./plugins/notify.lua}
       ${builtins.readFile ./plugins/nvim-tree.lua}
       ${builtins.readFile ./plugins/oil.lua}
-      ${builtins.readFile ./plugins/rewind.lua}
       ${builtins.readFile ./plugins/toggleterm.lua}
       ${builtins.readFile ./plugins/tokyonight.lua}
       ${builtins.readFile ./plugins/rest-nvim.lua}
@@ -126,38 +125,6 @@
             rev = "main";
             sha256 = "sha256-E4QVGPbH+24+BzB7p2e+kzJylCcz6PBYCY68/hAOEow=";
           };
-        })
-        # (pkgs.vimUtils.buildVimPlugin {
-        #   # https://github.com/rest-nvim/rest.nvim
-        #   name = "rest.nvim";
-        #   src = pkgs.fetchFromGitHub {
-        #     owner = "rest-nvim";
-        #     repo = "rest.nvim";
-        #     rev = "main";
-        #     # sha256 = "sha256-mhT+puvRbPWZ7TazodqScdPcN8VedVgva8AbSKvXIA0=";
-        #     sha256 = "";
-        #   };
-        #   # buildPhase = "true";
-        # })
-        # .overrideAttrs
-        # (old: {
-        #   buildPhase = "true";
-        #   postInstall = ''
-        #     mkdir -p $out/lua/rest-nvim
-        #     cp -r lua/* $out/lua/rest-nvim/
-        #   '';
-        # })
-        (pkgs.vimUtils.buildVimPlugin {
-          # # https://github.com/YvesCousteau/nvim-whatelse
-          # name = "rewind.nvim";
-          # src = pkgs.fetchFromGitHub {
-          #   owner = "YvesCousteau";
-          #   repo = "rewind.nvim";
-          #   rev = "init";
-          #   sha256 = "sha256-pGkA4TF1VfR5xWLSzJIT+Sd16xVtwRoxIBASzQvWlOk=";
-          # };
-          name = "rewind.nvim";
-          src = /home/me/perso/rewind.nvim;
         })
       ];
   };
