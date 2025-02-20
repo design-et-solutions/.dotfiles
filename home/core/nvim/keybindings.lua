@@ -150,7 +150,7 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>gl",
-	":Lazygit<CR>",
+	":LazyGit<CR>",
 	{ noremap = true, silent = true, desc = "git interface lazygit" }
 )
 vim.api.nvim_set_keymap("n", "<leader>gp", ":Flog<CR>", { noremap = true, silent = true, desc = "git plot graph" })
