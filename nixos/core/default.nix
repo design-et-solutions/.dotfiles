@@ -3,6 +3,7 @@
   lib,
   config,
   pkgs,
+  nix,
   ...
 }:
 {
@@ -47,6 +48,11 @@
       # Opinionated: make flake registry and nix path match flake inputs
       registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
       nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+
+      gc = {
+        automatic = true;
+        options = "--delete-older-than 10d";
+      };
     };
 
   environment.systemPackages = with pkgs; [
@@ -57,6 +63,11 @@
     pkg-config # Helper tool used when compiling applications
     clang # C language family frontend for LLVM
   ];
+
+  # nix.gc = {
+  #   automatic = true;
+  #   options = "--delete-older-than 10d";
+  # };
 
   system.activationScripts.createMnt = ''
     mkdir -p /mnt
