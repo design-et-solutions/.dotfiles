@@ -15,6 +15,10 @@
       rm-all-for-real = "trash-empty";
       rm-for-real = "trash-rm";
 
+      nix-list = "nixos-rebuild list-generations";
+      nix-rebuild = "sudo nixos-rebuild switch --flake ";
+      nix-clean-all = "sudo nix-collect-garbage -d";
+
       gg = "lazygit";
       gg-reset-last-commit = "git commit --amend";
       gg-stash = "git stash";
