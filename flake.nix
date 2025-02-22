@@ -92,7 +92,9 @@
               else
                 [ ]
             )
-            ++ (if mergedSetup.gpu.enable then [ mergedSetup.gpu.path ] else [ ])
+            ++ (
+              if mergedSetup.gpu.enable then [ (mergedSetup.gpu.path + mergedSetup.gpu.model + ".nix") ] else [ ]
+            )
             ++ (if mergedSetup.browser.enable then [ mergedSetup.browser.path ] else [ ])
             ++ (if mergedSetup.file_explorer.enable then [ mergedSetup.file_explorer.path ] else [ ])
             ++ (if mergedSetup.mail.enable then [ mergedSetup.mail.path ] else [ ])

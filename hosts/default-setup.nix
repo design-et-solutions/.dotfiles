@@ -31,7 +31,8 @@
   };
   gpu = {
     enable = false;
-    path = ../nixos/optional/gpu/nvidia.nix;
+    path = ./../nixos/optional/gpu;
+    model = "/nvidia";
   };
   mail = {
     enable = false;
