@@ -2,7 +2,6 @@
 {
   imports = [
     ./scan.nix
-    ./apparmor.nix
     ./audit
   ];
 
