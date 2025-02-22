@@ -1,6 +1,6 @@
 {
   pkgs,
-  mergedSetup,
+  autoLogin,
   lib,
   ...
 }:
@@ -11,6 +11,9 @@
   ];
 
   services = {
+    displayManager = {
+      autoLogin.enable = autoLogin.enbale;
+    };
     xserver = {
       enable = true;
       displayManager = {
@@ -31,26 +34,26 @@
 
   security.apparmor = {
     enable = true;
-    packages = with pkgs; [
-      apparmor-profiles
-    ];
-    enableCache = true;
-    killUnconfinedConfinables = true;
+    #   packages = with pkgs; [
+    #     apparmor-profiles
+    #   ];
+    #   enableCache = true;
+    #   killUnconfinedConfinables = true;
   };
 
-  security.apparmor.policies.display-manager = {
-    profile = ''
-      #include <tunables/global>
-
-      profile display-manager flags=(complain) {
-        #include <abstractions/base>
-
-        file,
-        capability,
-      }
-    '';
-    state = "complain";
-  };
+  # security.apparmor.policies.display-manager = {
+  #   profile = ''
+  #     #include <tunables/global>
+  #
+  #     profile display-manager flags=(complain) {
+  #       #include <abstractions/base>
+  #
+  #       file,
+  #       capability,
+  #     }
+  #   '';
+  #   state = "complain";
+  # };
 
   # Managing the graphical display system on your computer.
   systemd.services.display-manager.serviceConfig = {
@@ -68,7 +71,7 @@
 
     PrivateMounts = true;
     PrivateIPC = true;
-    PrivateDevices = false;
+    PrivateDevices = true;
     PrivateNetwork = false;
     PrivateTmp = false;
     PrivatePIDs = false;
@@ -125,23 +128,27 @@
     AmbientCapabilities = [ ];
 
     DevicePolicy = "closed";
-    DeviceAllow = [
-      "/dev/tty7 rw"
-      "/dev/input/* rw" # Allow Wayland to access keyboards/mice
-      "/dev/dri/* rw" # Allow access to GPU devices
-    ];
+    DeviceAllow = "/dev/* rw";
+    # DeviceAllow = [
+    #   "/dev/tty7 rw"
+    #   "/dev/input/* rw" # Allow Wayland to access keyboards/mice
+    #   "/dev/dri/* rw" # Allow access to GPU devices
+    # ];
 
     LockPersonality = true;
-
-    MemoryDenyWriteExecute = false;
-    ProcSubset = "all";
-    UMask = "0077";
-    LogLevelMax = "debug";
+    UMask = "077";
+    IPAddressDeny = "any";
     KeyringMode = lib.mkForce "private";
-    IPAddressDeny = [
-      "0.0.0.0/0"
-      "::/0"
-    ];
+
+    # ProcSubset = "pid";
+
+    # MemoryDenyWriteExecute = false;
+    # ProcSubset = true;
+    # LogLevelMax = "debug";
+    # IPAddressDeny = [
+    #   "0.0.0.0/0"
+    #   "::/0"
+    # ];
     # AppArmorProfile = "display-manager";
   };
   # IPAddressAllow = [
