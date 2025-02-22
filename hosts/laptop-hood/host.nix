@@ -5,6 +5,11 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
+    hyprland = {
+      custom = ''
+        monitor = eDP-1,2560x1440,auto,1
+      '';
+    };
     gui.enable = true;
     browser.enable = true;
     file_explorer.enable = true;
