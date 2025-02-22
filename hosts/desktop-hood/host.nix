@@ -47,6 +47,9 @@ mkNixosConfiguration {
     };
     networking = {
       analyzer.enable = true;
+      wifi = {
+        emergency.enable = true;
+      };
       # vpn = {
       #   default.enable = true;
       #   client.enable = true;
