@@ -42,7 +42,7 @@ mkNixosConfiguration {
       # vpn = {
       #   default.enable = true;
       #   client.enable = true;
-      #   is_external = true;
+      #   isExternal = true;
       # };
       wifi = {
         emergency.enable = true;
