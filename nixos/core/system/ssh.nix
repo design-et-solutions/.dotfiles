@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   services.openssh = {
     enable = true;
     ports = [ 2222 ];
@@ -25,32 +26,48 @@
 
   systemd.services.sshd.serviceConfig = {
     NoNewPrivileges = true;
-    ProtectSystem = "strict";
-    ProtectHome = "read-only";
-    ProtectClock = true; 
+
+    ProtectSystem = false;
+    ProtectHome = true;
+    ProtectClock = true;
     ProtectHostname = true;
     ProtectKernelTunables = true;
     ProtectKernelModules = true;
     ProtectKernelLogs = true;
-    ProtectControlGroups = true; 
-    ProtectProc = "invisible";
+    ProtectControlGroups = true;
+    ProtectProc = "noaccess";
+
     PrivateTmp = true;
     PrivateMounts = true;
     PrivateDevices = true;
+    PrivateIPC = false;
+    PrivateNetwork = false;
+    PrivatePIDs = true;
+    PrivateUsers = true;
+
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
-    MemoryDenyWriteExecute = true;
-    LockPersonality = true;
-    DevicePolicy = "closed";
+    RestrictAddressFamilies = [
+      "~AF_UNIX"
+      "~AF_NETLINK"
+      "AF_INET"
+      "AF_INET6"
+      "~AF_PACKET"
+    ];
+
     SystemCallFilter = [
       "~@keyring"
       "~@swap"
-      "~@clock"         
+      "~@clock"
       "~@module"
       "~@obsolete"
       "~@cpu-emulation"
     ];
     SystemCallArchitectures = "native";
-  }; 
+
+    MemoryDenyWriteExecute = true;
+    LockPersonality = true;
+    DevicePolicy = "closed";
+  };
 }
