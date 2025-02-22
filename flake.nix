@@ -83,9 +83,9 @@
               if mergedSetup.gui.enable then
                 [
                   (import mergedSetup.gui.path {
+                    inherit lib;
                     inherit pkgs;
                     autoLogin = mergedSetup.autoLogin;
-                    inherit lib;
                   })
 
                 ]

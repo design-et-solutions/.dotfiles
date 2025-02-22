@@ -1,7 +1,7 @@
 {
+  lib,
   pkgs,
   autoLogin,
-  lib,
   ...
 }:
 {
@@ -12,7 +12,8 @@
 
   services = {
     displayManager = {
-      autoLogin.enable = autoLogin.enbale;
+      autoLogin.enable = autoLogin.enable;
+      autoLogin.user = autoLogin.user;
     };
     xserver = {
       enable = true;
@@ -32,14 +33,14 @@
     graphics.enable = true;
   };
 
-  security.apparmor = {
-    enable = true;
-    #   packages = with pkgs; [
-    #     apparmor-profiles
-    #   ];
-    #   enableCache = true;
-    #   killUnconfinedConfinables = true;
-  };
+  # security.apparmor = {
+  #   enable = true;
+  #   packages = with pkgs; [
+  #     apparmor-profiles
+  #   ];
+  #   enableCache = true;
+  #   killUnconfinedConfinables = true;
+  # };
 
   # security.apparmor.policies.display-manager = {
   #   profile = ''
@@ -71,7 +72,7 @@
 
     PrivateMounts = true;
     PrivateIPC = true;
-    PrivateDevices = true;
+    PrivateDevices = false;
     PrivateNetwork = false;
     PrivateTmp = false;
     PrivatePIDs = false;
@@ -128,12 +129,12 @@
     AmbientCapabilities = [ ];
 
     DevicePolicy = "closed";
-    DeviceAllow = "/dev/* rw";
-    # DeviceAllow = [
-    #   "/dev/tty7 rw"
-    #   "/dev/input/* rw" # Allow Wayland to access keyboards/mice
-    #   "/dev/dri/* rw" # Allow access to GPU devices
-    # ];
+    # DeviceAllow = "/dev/* rw";
+    DeviceAllow = [
+      "/dev/tty7 rw"
+      "/dev/input/* rw" # Allow Wayland to access keyboards/mice
+      "/dev/dri/* rw" # Allow access to GPU devices
+    ];
 
     LockPersonality = true;
     UMask = "077";

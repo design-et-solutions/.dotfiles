@@ -171,5 +171,8 @@
   hyprland = {
     custom = "";
   };
-  autoLogin.enbale = false;
+  autoLogin = {
+    enbale = false;
+    user = null;
+  };
 }

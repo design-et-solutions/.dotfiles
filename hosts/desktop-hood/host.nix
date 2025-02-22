@@ -5,6 +5,10 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
+    autoLogin = {
+      enable = true;
+      user = "me";
+    };
     gui.enable = true;
     gpu.enable = true;
     browser.enable = true;
