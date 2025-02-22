@@ -31,43 +31,25 @@
 
   security.apparmor = {
     enable = true;
-    packages = [ pkgs.apparmor-profiles ];
+    packages = with pkgs; [
+      apparmor-profiles
+    ];
     enableCache = true;
     killUnconfinedConfinables = true;
   };
+
   security.apparmor.policies.display-manager = {
     profile = ''
       #include <tunables/global>
 
       profile display-manager flags=(complain) {
         #include <abstractions/base>
-        
-        /** rwmlkix,
+
+        file,
         capability,
       }
     '';
-    # profile = ''
-    #   #include <tunables/global>
-    #
-    #   profile display-manager {
-    #     #include <abstractions/base>
-    #     #include <abstractions/nameservice>
-    #     #include <abstractions/X>
-    #     #include <abstractions/wayland>
-    #
-    #     /dev/** rwmk,
-    #     /sys/** r,
-    #     /proc/** r,
-    #     /run/** rwk,
-    #     /usr/** r,
-    #     /etc/** r,
-    #     /var/** rw,
-    #     /home/** rw,
-    #
-    #     capability,
-    #   }
-    # '';
-    state = "enforce";
+    state = "complain";
   };
 
   # Managing the graphical display system on your computer.
@@ -112,9 +94,7 @@
       "~AF_PACKET"
     ];
 
-    SystemCallArchitectures = [
-      # "native"
-    ];
+    SystemCallArchitectures = [ ];
     SystemCallErrorNumber = "EPERM";
     SystemCallFilter = [
       "~@obsolete"
@@ -162,7 +142,7 @@
       "0.0.0.0/0"
       "::/0"
     ];
-    AppArmorProfile = "display-manager";
+    # AppArmorProfile = "display-manager";
   };
   # IPAddressAllow = [
   #   "127.0.0.1"
