@@ -29,8 +29,9 @@
     dbus.enable = true;
   };
 
-  hardware = {
-    graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
   };
 
   # Managing the graphical display system on your computer.
@@ -66,7 +67,7 @@
       "~AF_PACKET"
     ];
 
-    SystemCallArchitectures = [ "~native" ];
+    SystemCallArchitectures = [ "native" ];
     SystemCallErrorNumber = "EPERM";
     SystemCallFilter = [
       "~@obsolete"
