@@ -42,6 +42,7 @@
         let
           mergedSetup = nixpkgs.lib.recursiveUpdate defaultSetup setup;
           pkgs = nixpkgs.legacyPackages.${system};
+          lib = nixpkgs.lib;
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -78,7 +79,19 @@
             ]
             ++ extraModules
 
-            ++ (if mergedSetup.gui.enable then [ mergedSetup.gui.path ] else [ ])
+            ++ (
+              if mergedSetup.gui.enable then
+                [
+                  (import mergedSetup.gui.path {
+                    inherit pkgs;
+                    autoLogin = mergedSetup.autoLogin;
+                    inherit lib;
+                  })
+
+                ]
+              else
+                [ ]
+            )
             ++ (if mergedSetup.gpu.enable then [ mergedSetup.gpu.path ] else [ ])
             ++ (if mergedSetup.browser.enable then [ mergedSetup.browser.path ] else [ ])
             ++ (if mergedSetup.file_explorer.enable then [ mergedSetup.file_explorer.path ] else [ ])
@@ -143,7 +156,7 @@
                 [
                   (import mergedSetup.networking.vpn.client.path {
                     inherit pkgs;
-                    is_external = mergedSetup.networking.vpn.is_external;
+                    isExternal = mergedSetup.networking.vpn.isExternal;
                   })
                 ]
               else
