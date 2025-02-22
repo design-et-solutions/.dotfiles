@@ -141,7 +141,7 @@
       };
     };
     vpn = {
-      is_external = false;
+      isExternal = false;
       default = {
         enable = false;
         path = ../nixos/optional/networking/vpn/default.nix;
@@ -171,4 +171,5 @@
   hyprland = {
     custom = "";
   };
+  autoLogin.enbale = false;
 }
