@@ -30,7 +30,6 @@
       ${builtins.readFile ./plugins/notify.lua}
       ${builtins.readFile ./plugins/nvim-tree.lua}
       ${builtins.readFile ./plugins/oil.lua}
-      ${builtins.readFile ./plugins/rewind.lua}
       ${builtins.readFile ./plugins/toggleterm.lua}
       ${builtins.readFile ./plugins/tokyonight.lua}
       ${builtins.readFile ./plugins/rest-nvim.lua}
@@ -115,20 +114,6 @@
           );
           type = "lua";
         }
-      ]
-      ++ [
-        (pkgs.vimUtils.buildVimPlugin {
-          # # https://github.com/YvesCousteau/nvim-whatelse
-          # name = "rewind.nvim";
-          # src = pkgs.fetchFromGitHub {
-          #   owner = "YvesCousteau";
-          #   repo = "rewind.nvim";
-          #   rev = "init";
-          #   sha256 = "sha256-pGkA4TF1VfR5xWLSzJIT+Sd16xVtwRoxIBASzQvWlOk=";
-          # };
-          name = "rewind.nvim";
-          src = /home/me/perso/rewind.nvim;
-        })
       ];
   };
 
