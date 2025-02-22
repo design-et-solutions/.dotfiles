@@ -33,29 +33,6 @@
     graphics.enable = true;
   };
 
-  # security.apparmor = {
-  #   enable = true;
-  #   packages = with pkgs; [
-  #     apparmor-profiles
-  #   ];
-  #   enableCache = true;
-  #   killUnconfinedConfinables = true;
-  # };
-
-  # security.apparmor.policies.display-manager = {
-  #   profile = ''
-  #     #include <tunables/global>
-  #
-  #     profile display-manager flags=(complain) {
-  #       #include <abstractions/base>
-  #
-  #       file,
-  #       capability,
-  #     }
-  #   '';
-  #   state = "complain";
-  # };
-
   # Managing the graphical display system on your computer.
   systemd.services.display-manager.serviceConfig = {
     NoNewPrivileges = false;
@@ -64,19 +41,10 @@
     ProtectControlGroups = true;
     ProtectClock = true;
     ProtectKernelModules = true;
-    ProtectKernelLogs = false;
-    ProtectKernelTunables = false;
-    ProtectHostname = false;
     ProtectProc = "default";
-    ProtectHome = false;
 
     PrivateMounts = true;
     PrivateIPC = true;
-    PrivateDevices = false;
-    PrivateNetwork = false;
-    PrivateTmp = false;
-    PrivatePIDs = false;
-    PrivateUsers = false;
 
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
@@ -98,7 +66,7 @@
       "~AF_PACKET"
     ];
 
-    SystemCallArchitectures = [ ];
+    SystemCallArchitectures = [ "~native" ];
     SystemCallErrorNumber = "EPERM";
     SystemCallFilter = [
       "~@obsolete"
@@ -129,7 +97,6 @@
     AmbientCapabilities = [ ];
 
     DevicePolicy = "closed";
-    # DeviceAllow = "/dev/* rw";
     DeviceAllow = [
       "/dev/tty7 rw"
       "/dev/input/* rw" # Allow Wayland to access keyboards/mice
@@ -140,64 +107,9 @@
     UMask = "077";
     IPAddressDeny = "any";
     KeyringMode = lib.mkForce "private";
-
-    # ProcSubset = "pid";
-
-    # MemoryDenyWriteExecute = false;
-    # ProcSubset = true;
-    # LogLevelMax = "debug";
-    # IPAddressDeny = [
-    #   "0.0.0.0/0"
-    #   "::/0"
-    # ];
-    # AppArmorProfile = "display-manager";
+    User = "root";
+    Group = "root";
   };
-  # IPAddressAllow = [
-  #   "127.0.0.1"
-  #   "::1"
-  # ];
-  # IPAddressDeny = "any";
-  # User = "root";
-  # Group = "root";
-  # RemoveIPC = true;
-  # IPAddressAllow = [
-  #   "127.0.0.1"
-  #   "::1"
-  # ];
-  # AuditMode = "all";
-  # "~@io-event"
-  # "~@pkey"
-  # "~@aio"
-  # "~@basic-io"
-  # "~@chown"
-  # "~@file-system"
-  # "~@io-event"
-  # "~@ipc"
-  # "~@keyring"
-  # "~@memlock"
-  # "~@network-io"
-  # "~@process"
-  # "~@sandbox"
-  # "~@setuid"
-  # "~@signal"
-  # "~@sync"
-  # "~@timer"
-  # Personality = [ "x86" ];
-  # DevicePolicy = "strict";
-  # DeviceAllow = [
-  #   "/dev/null rw"
-  #   "/dev/zero rw"
-  #   "/dev/random r"
-  #   "/dev/urandom r"
-  # ];
-  # IPAddressAllow = "localhost";
-  # AuditMode = "all";
-  # IPAccounting = true;
-  # ReadOnlyPaths = "/";
-  # InaccessiblePaths = "/home /root";
-  # LimitNOFILE = 1024;
-  # LimitNPROC = 64;
-  # LimitCORE = 0;
 
   environment.systemPackages = with pkgs; [
     brightnessctl # Command-line utility to control device brightness
