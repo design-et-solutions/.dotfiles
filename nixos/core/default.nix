@@ -19,6 +19,7 @@
     ./misc.nix
     ./monitoring.nix
     ./usb.nix
+    ./generation.nix
   ];
 
   nixpkgs = {
@@ -49,10 +50,6 @@
       registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
       nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
 
-      gc = {
-        automatic = true;
-        options = "--delete-older-than 10d";
-      };
     };
 
   environment.systemPackages = with pkgs; [
