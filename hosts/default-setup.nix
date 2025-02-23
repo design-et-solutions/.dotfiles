@@ -173,7 +173,7 @@
     custom = "";
   };
   autoLogin = {
-    enbale = false;
+    enable = false;
     user = null;
   };
 }
