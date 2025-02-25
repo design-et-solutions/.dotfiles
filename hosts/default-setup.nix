@@ -31,7 +31,8 @@
   };
   gpu = {
     enable = false;
-    path = ../nixos/optional/gpu/nvidia.nix;
+    path = ./../nixos/optional/gpu;
+    model = "/nvidia";
   };
   mail = {
     enable = false;
@@ -124,6 +125,10 @@
     };
   };
   networking = {
+    allowedPorts = {
+      tcp = null;
+      ucp = null;
+    };
     wifi = {
       emergency = {
         enable = false;
@@ -155,5 +160,9 @@
   };
   hyprland = {
     custom = "";
+  };
+  autoLogin = {
+    enable = false;
+    user = null;
   };
 }

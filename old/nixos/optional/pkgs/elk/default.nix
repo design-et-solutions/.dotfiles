@@ -1,4 +1,0 @@
-{ ... }:{
-  services.elasticsearch.enable = true;
-}
-

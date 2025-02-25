@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, allowedPorts, ... }:
 {
   # https://search.nixos.org/options?channel=24.11&query=networking
   networking = {

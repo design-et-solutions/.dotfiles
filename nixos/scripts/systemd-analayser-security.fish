@@ -1,12 +1,12 @@
 #!/usr/bin/env fish
 
 set ok (systemd-analyze security | grep OK | count)
-set sum (math (systemd-analyze security | count)-1) 
+set sum (math (systemd-analyze security | count)-1)
 
 if test "$ok" = "$sum"
-    set urgency "low"
+    set urgency low
 else
-    set urgency "critical"
+    set urgency normal
 end
 
 loginctl list-sessions --no-legend | while read -l session
@@ -16,7 +16,7 @@ loginctl list-sessions --no-legend | while read -l session
     set username (echo "$session" | awk '{print $3}')
     set session_type (loginctl show-session "$session_id" -p Type | cut -d= -f2)
 
-    if test "$session_type" = "wayland" || test "$session_type" = "x11"
+    if test "$session_type" = wayland || test "$session_type" = x11
         echo "GUI session detected: $session_type"
         set -x XDG_RUNTIME_DIR "/run/user/$user_id"
         set -x DBUS_SESSION_BUS_ADDRESS (grep -z DBUS_SESSION_BUS_ADDRESS /proc/(pgrep -u $user_id -n)/environ | tr -d '\0' | sed 's/DBUS_SESSION_BUS_ADDRESS=//')

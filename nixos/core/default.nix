@@ -3,6 +3,7 @@
   lib,
   config,
   pkgs,
+  nix,
   ...
 }:
 {
@@ -18,6 +19,7 @@
     ./misc.nix
     ./monitoring.nix
     ./usb.nix
+    ./generation.nix
   ];
 
   nixpkgs = {
@@ -47,15 +49,22 @@
       # Opinionated: make flake registry and nix path match flake inputs
       registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
       nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+
     };
 
   environment.systemPackages = with pkgs; [
     gcc # GNU Compiler Collection (C and C++ compilers)
     glibc # GNU C Library, the standard C library
     nix-index # Indexes the Nix store to allow fast file lookup
+    nix-ld # Run unpatched dynamic binaries on NixOS
     pkg-config # Helper tool used when compiling applications
     clang # C language family frontend for LLVM
   ];
+
+  # nix.gc = {
+  #   automatic = true;
+  #   options = "--delete-older-than 10d";
+  # };
 
   system.activationScripts.createMnt = ''
     mkdir -p /mnt
