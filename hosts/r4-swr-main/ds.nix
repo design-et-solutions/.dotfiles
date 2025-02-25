@@ -20,15 +20,12 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Environment = [
-        "APP_HOST=0.0.0.0"
-        "APP_PORT=8080"
         "RUST_LOG=INFO"
-        "PRIVATE_KEY=/home/me/Manager/core/gateway/key.pem"
-        "CERTIFICATE=/home/me/Manager/core/gateway/cert.pem"
-        "TRACKER_HOST=0.0.0.0"
-        "TRACKER_PORT=50200"
+        "PRIVATE_KEY=/home/me/gateway/key.pem"
+        "CERTIFICATE=/home/me/gateway/cert.pem"
       ];
-      ExecStart = "${pkgs.nix}/bin/nix-shell /home/me/Manager/core/gateway/nix/shell.nix --run \"/home/me/Manager/core/gateway/target/release/gateway\"";
+      # ExecStart = "${pkgs.nix}/bin/nix-shell /home/me/Manager/core/gateway/nix/shell.nix --run \"/home/me/Manager/core/gateway/target/release/gateway\"";
+      ExecStart = "/home/me/gateway";
       Restart = "always";
       RestartSec = "5s";
     };
