@@ -27,7 +27,6 @@
         "CERTIFICATE=/home/me/gateway/cert.pem"
       ];
       ExecStart = "${pkgs.nix}/bin/nix-shell /home/me/gateway/shell.nix --run \"/home/me/gateway/gateway\"";
-      ExecStart = "/home/me/gateway/gateway\"";
       Restart = "always";
       RestartSec = "5s";
     };
