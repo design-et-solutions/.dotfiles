@@ -5,7 +5,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
-      ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:3000";
+      ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:3001";
       Restart = "always";
       RestartSec = "5s";
       Environment = [
@@ -20,6 +20,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Environment = [
+        "APP_PORT=3000"
         "RUST_LOG=INFO"
         "PRIVATE_KEY=/home/me/gateway/key.pem"
         "CERTIFICATE=/home/me/gateway/cert.pem"
