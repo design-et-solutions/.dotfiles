@@ -1,4 +1,4 @@
-{ pkgs, allowedPorts, ... }:
+{ pkgs, mergedSetup, ... }:
 {
   # https://search.nixos.org/options?channel=24.11&query=networking
   networking = {
@@ -10,15 +10,26 @@
     firewall = {
       enable = true;
       logRefusedConnections = true;
-      allowedTCPPorts = [
-        80
-        443
-        8080
-        3000
-        9999
-        8554
-      ];
-      allowedUDPPorts = [ 53 ];
+      allowedTCPPorts =
+        [
+          80
+          443
+          8080
+        ]
+        ++ (
+          if mergedSetup.networking.allowedPorts.tcp != null then
+            mergedSetup.networking.allowedPorts.tcp
+          else
+            [ ]
+        );
+      allowedUDPPorts =
+        [ 53 ]
+        ++ (
+          if mergedSetup.networking.allowedPorts.ucp != null then
+            mergedSetup.networking.allowedPorts.ucp
+          else
+            [ ]
+        );
     };
   };
 

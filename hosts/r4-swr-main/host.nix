@@ -15,6 +15,12 @@ mkNixosConfiguration {
     networking = {
       analyzer.enable = true;
       wifi.emergency.enable = true;
+      allowedPorts.tcp = [
+        3000
+        3001
+        9999
+        8554
+      ];
     };
     security = {
       blocker.enable = true;
