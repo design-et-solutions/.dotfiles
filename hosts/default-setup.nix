@@ -125,6 +125,10 @@
     };
   };
   networking = {
+    allowedPorts = {
+      tcp = null;
+      ucp = null;
+    };
     wifi = {
       emergency = {
         enable = false;

@@ -49,6 +49,17 @@
           specialArgs = { inherit inputs outputs; };
           modules =
             [
+              (
+                {
+                  config,
+                  pkgs,
+                  lib,
+                  ...
+                }:
+                {
+                  _module.args.mergedSetup = mergedSetup;
+                }
+              )
               ./nixos/core
               host
               home-manager.nixosModules.home-manager
