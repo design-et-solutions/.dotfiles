@@ -14,5 +14,6 @@
     starship # Minimal, blazing fast, and extremely customizable prompt for any shell
     nodePackages.mermaid-cli # Create and modify diagrams dynamically
     imagemagick # Powerful image manipulation tool suite
+    dmidecode # Tool that reads information about your system's hardware from the BIOS according to the SMBIOS/DMI standard.
   ];
 }
