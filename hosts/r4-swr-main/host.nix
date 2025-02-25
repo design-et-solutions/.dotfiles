@@ -26,5 +26,9 @@ mkNixosConfiguration {
       blocker.enable = true;
       analyzer.enable = true;
     };
+    autoLogin = {
+      enable = true;
+      user = "me";
+    };
   };
 }
