@@ -32,7 +32,7 @@
     fsType = "ext4";
   };
 
-  fileSystems."/boot" = {
+  fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/05D8-5C5A";
     fsType = "vfat";
     options = [
