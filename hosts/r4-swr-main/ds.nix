@@ -5,7 +5,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
-      ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:3001";
+      ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:3000";
       Restart = "always";
       RestartSec = "5s";
       Environment = [
@@ -20,13 +20,14 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Environment = [
+        "APP_HOST=0.0.0.0"
         "APP_PORT=3000"
         "RUST_LOG=INFO"
         "PRIVATE_KEY=/home/me/gateway/key.pem"
         "CERTIFICATE=/home/me/gateway/cert.pem"
       ];
-      # ExecStart = "${pkgs.nix}/bin/nix-shell /home/me/Manager/core/gateway/nix/shell.nix --run \"/home/me/Manager/core/gateway/target/release/gateway\"";
-      ExecStart = "/home/me/gateway";
+      ExecStart = "${pkgs.nix}/bin/nix-shell /home/me/gateway/shell.nix --run \"/home/me/gateway/gateway\"";
+      ExecStart = "/home/me/gateway/gateway\"";
       Restart = "always";
       RestartSec = "5s";
     };
