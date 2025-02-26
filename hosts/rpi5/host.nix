@@ -8,6 +8,11 @@ mkNixosConfiguration {
     "guest"
   ];
   setup = {
+    hyprland = {
+      custom = ''
+        monitor = eDP-1,2560x1440,auto,1
+      '';
+    };
     gui.enable = true;
     gpu.enable = true;
     browser.enable = true;
@@ -32,6 +37,9 @@ mkNixosConfiguration {
     };
     networking = {
       analyzer.enable = true;
+      wifi = {
+        emergency.enable = true;
+      };
     };
     security = {
       blocker.enable = true;

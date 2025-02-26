@@ -42,12 +42,24 @@
         let
           mergedSetup = nixpkgs.lib.recursiveUpdate defaultSetup setup;
           pkgs = nixpkgs.legacyPackages.${system};
+          lib = nixpkgs.lib;
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs outputs; };
           modules =
             [
+              (
+                {
+                  config,
+                  pkgs,
+                  lib,
+                  ...
+                }:
+                {
+                  _module.args.mergedSetup = mergedSetup;
+                }
+              )
               ./nixos/core
               host
               home-manager.nixosModules.home-manager
@@ -78,8 +90,22 @@
             ]
             ++ extraModules
 
-            ++ (if mergedSetup.gui.enable then [ mergedSetup.gui.path ] else [ ])
-            ++ (if mergedSetup.gpu.enable then [ mergedSetup.gpu.path ] else [ ])
+            ++ (
+              if mergedSetup.gui.enable then
+                [
+                  (import mergedSetup.gui.path {
+                    inherit lib;
+                    inherit pkgs;
+                    autoLogin = mergedSetup.autoLogin;
+                  })
+
+                ]
+              else
+                [ ]
+            )
+            ++ (
+              if mergedSetup.gpu.enable then [ (mergedSetup.gpu.path + mergedSetup.gpu.model + ".nix") ] else [ ]
+            )
             ++ (if mergedSetup.browser.enable then [ mergedSetup.browser.path ] else [ ])
             ++ (if mergedSetup.file_explorer.enable then [ mergedSetup.file_explorer.path ] else [ ])
             ++ (if mergedSetup.mail.enable then [ mergedSetup.mail.path ] else [ ])

@@ -1,4 +1,4 @@
-{ pkgs, mergedSetup, ... }:
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     wayfire # Wayland compositor

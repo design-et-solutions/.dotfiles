@@ -1,7 +1,7 @@
 {
-  pkgs,
-  mergedSetup,
   lib,
+  pkgs,
+  autoLogin,
   ...
 }:
 {
@@ -11,6 +11,10 @@
   ];
 
   services = {
+    displayManager = {
+      autoLogin.enable = autoLogin.enable;
+      autoLogin.user = autoLogin.user;
+    };
     xserver = {
       enable = true;
       displayManager = {
@@ -25,29 +29,45 @@
     dbus.enable = true;
   };
 
-  hardware = {
-    graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
   };
 
   # Managing the graphical display system on your computer.
   systemd.services.display-manager.serviceConfig = {
+    NoNewPrivileges = false;
+
     ProtectSystem = "full";
     ProtectControlGroups = true;
     ProtectClock = true;
     ProtectKernelModules = true;
+    ProtectProc = "default";
+
     PrivateMounts = true;
     PrivateIPC = true;
+
     RestrictSUIDSGID = true;
     RestrictRealtime = true;
+    RestrictFileSystems = [ ];
     RestrictNamespaces = [
       "~cgroup"
+      "uts"
+      "pid"
+      "net"
+      "user"
+      "mnt"
+      "ipc"
     ];
     RestrictAddressFamilies = [
       "AF_UNIX"
       "AF_NETLINK"
       "AF_INET"
       "AF_INET6"
+      "~AF_PACKET"
     ];
+
+    SystemCallArchitectures = [ "native" ];
     SystemCallErrorNumber = "EPERM";
     SystemCallFilter = [
       "~@obsolete"
@@ -59,12 +79,7 @@
       "~@raw-io"
       "~@debug"
     ];
-    SystemCallArchitectures = "native";
-    LockPersonality = true;
-    IPAddressDeny = [
-      "0.0.0.0/0"
-      "::/0"
-    ];
+
     CapabilityBoundingSet = [
       "CAP_SYS_ADMIN"
       "CAP_SETUID"
@@ -80,11 +95,21 @@
       "CAP_SETFCAP"
       "CAP_CHOWN"
     ];
-    DeviceAllow = "/dev/tty7 rw";
+    AmbientCapabilities = [ ];
+
     DevicePolicy = "closed";
-    UMask = 77;
-    LogLevelMax = "debug";
+    DeviceAllow = [
+      "/dev/tty7 rw"
+      "/dev/input/* rw" # Allow Wayland to access keyboards/mice
+      "/dev/dri/* rw" # Allow access to GPU devices
+    ];
+
+    LockPersonality = true;
+    UMask = "077";
+    IPAddressDeny = "any";
     KeyringMode = lib.mkForce "private";
+    User = "root";
+    Group = "root";
   };
 
   environment.systemPackages = with pkgs; [
