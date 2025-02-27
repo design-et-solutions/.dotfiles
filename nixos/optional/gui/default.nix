@@ -67,7 +67,7 @@
       "~AF_PACKET"
     ];
 
-    SystemCallArchitectures = [ "native" ];
+    # SystemCallArchitectures = [ "native" ];
     SystemCallErrorNumber = "EPERM";
     SystemCallFilter = [
       "~@obsolete"
