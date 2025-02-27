@@ -13,14 +13,15 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
-      Group = "vboxusers";
-      VBOX_USER_HOME = /home/me/.config/VirtualBox;
-      ExecStartPre = [
-        "${pkgs.kmod}/bin/modprobe vboxdrv"
-        "${pkgs.kmod}/bin/modprobe vboxnetflt"
-        "${pkgs.kmod}/bin/modprobe vboxnetadp"
-      ];
-      ExecStart = "${pkgs.virtualbox}/bin/VBoxHeadless --comment 'synergy' -startvm 'synergy' --vrde config";
+      # Group = "vboxusers";
+      # VBOX_USER_HOME = /home/me/.config/VirtualBox;
+      # ExecStartPre = [
+      # "${pkgs.kmod}/bin/modprobe vboxdrv"
+      # "${pkgs.kmod}/bin/modprobe vboxnetflt"
+      # "${pkgs.kmod}/bin/modprobe vboxnetadp"
+      # ];
+      # ExecStart = "${pkgs.virtualbox}/bin/VBoxHeadless --comment 'synergy' -startvm 'synergy' --vrde config";
+      ExecStart = "/bin/bash -l -c '${pkgs.virtualbox}/bin/VBoxHeadless --comment \"synergy\" -startvm \"synergy\" --vrde config'";
       Restart = "always";
       RestartSec = "5s";
       Environment = [
@@ -29,7 +30,7 @@
     };
   };
 
-  services.udev.extraRules = ''
-    KERNEL=="vboxdrv", GROUP="vboxusers", MODE="0660"
-  '';
+  # services.udev.extraRules = ''
+  # KERNEL=="vboxdrv", GROUP="vboxusers", MODE="0660"
+  # '';
 }
