@@ -21,7 +21,7 @@
       # "${pkgs.kmod}/bin/modprobe vboxnetadp"
       # ];
       # ExecStart = "${pkgs.virtualbox}/bin/VBoxHeadless --comment 'synergy' -startvm 'synergy' --vrde config";
-      ExecStart = "/bin/bash -l -c '${pkgs.virtualbox}/bin/VBoxHeadless --comment \"synergy\" -startvm \"synergy\" --vrde config'";
+      ExecStart = "/run/current-system/sw/bin/bash -l -c '${pkgs.virtualbox}/bin/VBoxHeadless --comment \"synergy\" -startvm \"synergy\" --vrde config'";
       Restart = "always";
       RestartSec = "5s";
       Environment = [
