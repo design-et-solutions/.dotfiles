@@ -13,7 +13,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
-      ExecStart = "${pkgs.virtualbox}/bin/VirtualBoxVM /home/me/VirtualBox\ VMs/synergy/synergy.vbox";
+      ExecStart = "/run/wrappers/bin/VirtualBoxVM /home/me/VirtualBox\ VMs/synergy/synergy.vbox";
       # ExecStart = "${pkgs.virtualbox}/bin/VirtualBox /home/me/VirtualBox\ VMs/synergy/synergy.vbox";
       # ExecStart = "${pkgs.virtualbox}/bin/VBoxManage startvm \"synergy\" --type headless && ${pkgs.virtualbox}/bin/VBoxManage controlvm \"synergy\" setcredentials \"synergy\" \"synergy\" \"domain\"";
       Restart = "always";
