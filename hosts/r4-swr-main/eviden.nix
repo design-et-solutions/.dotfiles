@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   virtualisation = {
-    cores = 4;
+    # cores = 4;
     virtualbox.host = {
       enable = true;
       enableExtensionPack = true;
