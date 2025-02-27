@@ -1,16 +1,19 @@
 { pkgs, ... }:
 {
-  virtualisation.virtualbox.host = {
-    enable = true;
-    enableExtensionPack = true;
+  virtualisation = {
+    cores = 4;
+    virtualbox.host = {
+      enable = true;
+      enableExtensionPack = true;
+    };
   };
   # virtualisation.qemu.options = [
   #   "-device virtio-vga"
   # ];
 
   environment.systemPackages = with pkgs; [
-    bash
     # virtualbox
+    bash
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
