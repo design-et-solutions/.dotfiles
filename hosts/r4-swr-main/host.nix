@@ -16,11 +16,10 @@ mkNixosConfiguration {
       analyzer.enable = true;
       wifi.emergency.enable = true;
       allowedPorts.tcp = [
-        3000
-        3001
-        9999
-        8554
-        22
+        3000 # Server
+        3001 # React
+        9999 # WebRTC
+        8554 # RTSP
       ];
     };
     security = {
