@@ -14,6 +14,7 @@
     serviceConfig = {
       User = "me";
       Group = "vboxusers";
+      VBOX_USER_HOME = /home/me/.config/VirtualBox;
       ExecStartPre = [
         "${pkgs.kmod}/bin/modprobe vboxdrv"
         "${pkgs.kmod}/bin/modprobe vboxnetflt"
