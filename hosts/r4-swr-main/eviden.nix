@@ -5,7 +5,7 @@
     virtualbox.host = {
       enable = true;
       enableExtensionPack = true;
-      vtx = true;
+      # vtx = true;
     };
   };
   # virtualisation.qemu.options = [
