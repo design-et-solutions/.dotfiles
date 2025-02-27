@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.qemu.options = [
+    "-device virtio-vga"
+  ];
 
   environment.systemPackages = with pkgs; [
     bash
