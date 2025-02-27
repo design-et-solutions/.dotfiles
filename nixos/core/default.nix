@@ -12,7 +12,7 @@
     ./shell
     ./networking.nix
     ./security
-    # ./system
+    ./system
     ./users.nix
     ./git.nix
     ./dev.nix

@@ -12,6 +12,8 @@
   #   "-device virtio-vga"
   # ];
 
+  boot.blacklistedKernelModules = [ "kvm_intel" ];
+
   environment.systemPackages = with pkgs; [
     # virtualbox
     bash
