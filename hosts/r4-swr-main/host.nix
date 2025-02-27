@@ -27,7 +27,6 @@ mkNixosConfiguration {
       blocker.enable = true;
       analyzer.enable = true;
     };
-    misc.steam-run.enable = true;
     autoLogin = {
       enable = true;
       user = "me";
