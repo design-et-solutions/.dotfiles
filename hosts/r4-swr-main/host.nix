@@ -5,7 +5,6 @@ mkNixosConfiguration {
   host = ./.;
   users = [
     "me"
-    "synergy"
   ];
   setup = {
     gui.enable = true;
