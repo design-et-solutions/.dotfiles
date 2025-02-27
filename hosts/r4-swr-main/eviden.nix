@@ -11,8 +11,7 @@
     gst_all_1.gst-plugins-bad
     gst_all_1.gst-libav
     rpm
-    rpm2cpio
-    cpio
+    rpmextract
   ];
 
   users.extraGroups.vboxusers.members = [ "me" ];
