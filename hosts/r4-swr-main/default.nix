@@ -15,4 +15,6 @@
   networking = {
     hostName = "r4-swr-main";
   };
+
+  virtualisation.virtualbox.host.enable = true;
 }
