@@ -1,9 +1,12 @@
 { pkgs, ... }:
 {
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation = {
+    virtualbox.host = {
+      enable = true;
+      enableExtensionPack = true;
+    };
+  };
 
-  environment.systemPackages = with pkgs; [
-    bash
-    virtualbox
-  ];
+  boot.blacklistedKernelModules = [ "kvm_intel" ];
+  users.extraGroups.vboxusers.members = [ "me" ];
 }

@@ -20,6 +20,7 @@ mkNixosConfiguration {
         3001
         9999
         8554
+        22
       ];
     };
     security = {
