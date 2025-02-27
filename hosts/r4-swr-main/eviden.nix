@@ -6,4 +6,6 @@
     bash
     virtualbox
   ];
+
+  users.extraGroups.vboxusers.members = [ "me" ];
 }
