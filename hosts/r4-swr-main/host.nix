@@ -5,7 +5,6 @@ mkNixosConfiguration {
   host = ./.;
   users = [
     "me"
-    "synergy"
   ];
   setup = {
     gui.enable = true;
@@ -21,13 +20,13 @@ mkNixosConfiguration {
         3001
         9999
         8554
+        22
       ];
     };
     security = {
       blocker.enable = true;
       analyzer.enable = true;
     };
-    steam-run.enable = true;
     autoLogin = {
       enable = true;
       user = "me";
