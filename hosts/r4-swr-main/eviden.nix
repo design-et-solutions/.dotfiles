@@ -13,10 +13,9 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "rooot";
-      ExecStart = "${pkgs.virtualbox}/bin/VBoxHeadlesss --comment 'synergy' -startvm 'synergy' --vrde config";
+      ExecStart = "/run/wrappers/bin/VirtualBoxVM --comment 'synergy' -startvm 'synergy' --vrde config";
       Restart = "always";
       RestartSec = "5s";
-      # Environment = "PATH=/run/current-system/sw/bin:/bin";
     };
   };
 }
