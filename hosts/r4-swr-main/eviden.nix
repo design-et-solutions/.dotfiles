@@ -12,6 +12,7 @@
     description = "Run Synergy VirtualBox";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
+      User = "me";
       ExecStart = "/run/wrappers/bin/VBoxHeadless --comment 'synergy' -startvm 'synergy' --vrde config";
       Restart = "always";
       RestartSec = "5s";
