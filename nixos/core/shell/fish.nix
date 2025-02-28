@@ -34,6 +34,9 @@
       tx-split-v = "tmux split-window -v";
       tx-rename = "tmux rename-session";
 
+      tar-out = "tar -xvzf";
+      tar-in = "tar -czvf";
+
       clippy-full = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all -W clippy::pedantic -W clippy::nursery -W clippy::perf -W clippy::complexity -W clippy::suspicious -W clippy::style -W clippy::correctness";
       clippy-all = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::all";
       clippy-cargo = "cargo clippy --all-targets --all-features -- -D warnings -W clippy::cargo";
