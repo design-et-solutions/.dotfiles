@@ -14,6 +14,7 @@
     serviceConfig = {
       User = "me";
       ExecStart = "/run/wrappers/bin/VBoxHeadless --comment 'synergy' -startvm 'synergy' --vrde config";
+      ExecStop = "/run/current-system/sw/bin/VBoxManage controlvm 'synergy' acpipowerbutton";
       Restart = "always";
       RestartSec = "5s";
     };
