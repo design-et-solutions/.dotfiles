@@ -13,7 +13,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "rooot";
-      ExecStart = "/run/wrappers/bin/VBoxHeadlesss --comment 'synergy' -startvm 'synergy' --vrde config";
+      ExecStart = "/run/wrappers/bin/VBoxHeadless --comment 'synergy' -startvm 'synergy' --vrde config";
       Restart = "always";
       RestartSec = "5s";
     };
