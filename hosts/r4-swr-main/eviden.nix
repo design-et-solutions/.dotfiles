@@ -16,6 +16,7 @@
       ExecStart = "${pkgs.virtualbox}/bin/VBoxHeadless --comment 'synergy' -startvm 'synergy' --vrde config";
       Restart = "always";
       RestartSec = "5s";
+      Environment = "PATH=/run/current-system/sw/bin:/bin";
     };
   };
 }
