@@ -81,7 +81,7 @@
         Environment = [
           "RUST_LOG='DEBUG'"
           "APP_HOST='0.0.0.0'"
-          "APP_PORT=8080"
+          "APP_PORT=3002"
           "PRIVATE_KEY=/home/me/Manager/core/gateway/key.pem"
           "CERTIFICATE=/home/me/Manager/core/gateway/cert.pem"
           "TRACKER_HOST='0.0.0.0'"
