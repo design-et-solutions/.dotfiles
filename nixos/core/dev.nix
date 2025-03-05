@@ -8,6 +8,7 @@
     ripgrep # Fast line-oriented search tool, alternative to grep
     postgresql # Advanced open-source relational database
     trash-cli # Command line interface to the freedesktop.org trashcan.
+    mkcert # Simple tool for making locally-trusted development certificates.
   ];
 
   environment.variables = {
