@@ -13,7 +13,7 @@
     description = "Run Docker golem-swr";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.docker}/bin/docker run -d platform-mce.orange-labs.fr:2424/orange/golem_swr:latest";
+      ExecStart = "${pkgs.docker}/bin/docker run platform-mce.orange-labs.fr:2424/orange/golem_swr:latest";
       Restart = "always";
       RestartSec = "5s";
     };
@@ -22,7 +22,7 @@
     description = "Run Docker allog-swr";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.docker}/bin/docker run -d platform-mce.orange-labs.fr:2424/orange/orange_allog_swr:latest";
+      ExecStart = "${pkgs.docker}/bin/docker run platform-mce.orange-labs.fr:2424/orange/orange_allog_swr:latest";
       Restart = "always";
       RestartSec = "5s";
     };
@@ -31,7 +31,7 @@
     description = "Run Docker mosquitto-swr";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.docker}/bin/docker run -d platform-mce.orange-labs.fr:2424/orange/orange_mosquitto_swr:latest";
+      ExecStart = "${pkgs.docker}/bin/docker run platform-mce.orange-labs.fr:2424/orange/orange_mosquitto_swr:latest";
       Restart = "always";
       RestartSec = "5s";
     };
