@@ -23,8 +23,6 @@
         "APP_HOST=0.0.0.0"
         "APP_PORT=3000"
         "RUST_LOG=INFO"
-        "PRIVATE_KEY=/home/me/gateway/key.pem"
-        "CERTIFICATE=/home/me/gateway/cert.pem"
         "SSL_CRT_FILE=/home/me/gateway/fullchain.crt"
         "SSL_KEY_FILE=/home/me/gateway/gateway.key"
       ];
