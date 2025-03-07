@@ -25,56 +25,71 @@ let
     wallpaper_command = wallpaperCommand;
     hyprland_command = hyprlandCommand;
     animations_enable = "true";
-    custom = mergedSetup.hyprland.custom;
+    custom = mergedSetup.gui.params.hyprland.custom;
   };
+  isWayland = mergedSetup.gui.params.displayServer == "wayland";
 in
 {
-  imports = [
-    ./waybar
-    ./mako
-    ./kitty
-    ./rofi
-  ];
+  imports =
+    [
+      ./mako
+      ./kitty
+      ./rofi
+    ]
+    ++ lib.optionals (isWayland) [
+      ./waybar
+    ];
 
-  xdg.configFile = {
-    "hypr/hyprland.conf".source = hyprlandConf;
-    "hypr/windowrule.conf".source = ./windowrule.conf;
-    "hypr/keybindings.conf".source = ./keybindings.conf;
-    "hypr/hyprpaper.conf".source = ./hyprpaper.conf;
-    "hypr/hyprlock.conf".source = ./hyprlock.conf;
-    "swappy/config".text = ''
-      [Default]
-      save_dir=~/Screenshots
-      save_filename_format=screenshot-%Y%m%d-%H%M%S.png
-      show_panel=false
-      line_size=5
-      text_size=20
-      text_font=sans-serif
-    '';
-  };
+  xdg.configFile =
+    {
+      "swappy/config".text = ''
+        [Default]
+        save_dir=~/Screenshots
+        save_filename_format=screenshot-%Y%m%d-%H%M%S.png
+        show_panel=false
+        line_size=5
+        text_size=20
+        text_font=sans-serif
+      '';
+    }
+    // (
+      if isWayland then
+        {
+          "hypr/hyprland.conf".source = hyprlandConf;
+          "hypr/windowrule.conf".source = ./windowrule.conf;
+          "hypr/keybindings.conf".source = ./keybindings.conf;
+          "hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+          "hypr/hyprlock.conf".source = ./hyprlock.conf;
+        }
+      else
+        { }
+    );
 
-  home.file = {
-    ".scripts/hypr_reloader.fish" = {
-      source = builtins.toString ../../scripts/hypr_reloader.fish;
-      executable = true;
+  home.file =
+    {
+      ".scripts/misc/loading_notif.fish" = {
+        source = builtins.toString ../../scripts/misc/loading_notif.fish;
+        executable = true;
+      };
+      ".scripts/misc/theme_reloader.fish" = {
+        source = builtins.toString ../../scripts/misc/theme_reloader.fish;
+        executable = true;
+      };
+      ".scripts/misc/wallpapers_rand.fish" = {
+        source = builtins.toString ../../scripts/misc/wallpapers_rand.fish;
+        executable = true;
+      };
+      ".wallpapers" = {
+        source = ../../wallpapers;
+      };
+      ".local/share/icons" = {
+        source = ../../cursors;
+      };
+    }
+    // lib.optionalAttrs isWayland {
+      ".scripts/hypr_reloader.fish" = {
+        source = builtins.toString ../../scripts/hypr_reloader.fish;
+        executable = true;
+      };
     };
-    ".scripts/misc/loading_notif.fish" = {
-      source = builtins.toString ../../scripts/misc/loading_notif.fish;
-      executable = true;
-    };
-    ".scripts/misc/theme_reloader.fish" = {
-      source = builtins.toString ../../scripts/misc/theme_reloader.fish;
-      executable = true;
-    };
-    ".scripts/misc/wallpapers_rand.fish" = {
-      source = builtins.toString ../../scripts/misc/wallpapers_rand.fish;
-      executable = true;
-    };
-    ".wallpapers" = {
-      source = ../../wallpapers;
-    };
-    ".local/share/icons" = {
-      source = ../../cursors;
-    };
-  };
 }

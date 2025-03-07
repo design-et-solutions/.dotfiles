@@ -1,25 +1,33 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.networking.can;
-in {
+in
+{
   options.networking.can = {
     interfaces = mkOption {
-      type = types.attrsOf (types.submodule {
-        options = {
-          bitrate = mkOption {
-            type = types.int;
-            default = 500000;
-            description = "The bitrate for the CAN interface.";
+      type = types.attrsOf (
+        types.submodule {
+          options = {
+            bitrate = mkOption {
+              type = types.int;
+              default = 500000;
+              description = "The bitrate for the CAN interface.";
+            };
           };
-        };
-      });
-      default = {};
+        }
+      );
+      default = { };
       description = "CAN interfaces to configure.";
     };
   };
 
-  config = mkIf (cfg.interfaces != {}) {
+  config = mkIf (cfg.interfaces != { }) {
     environment.systemPackages = with pkgs; [
       can-utils
     ];
