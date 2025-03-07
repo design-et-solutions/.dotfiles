@@ -11,7 +11,7 @@ in
   environment.systemPackages = lib.mkIf (!isWayland) (
     with pkgs;
     [
-      gnome.gnome-tweaks
+      gnome-tweaks
     ]
   );
 }
