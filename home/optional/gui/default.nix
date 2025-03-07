@@ -67,18 +67,6 @@ in
 
   home.file =
     {
-      ".scripts/misc/loading_notif.fish" = {
-        source = builtins.toString ../../scripts/misc/loading_notif.fish;
-        executable = true;
-      };
-      ".scripts/misc/theme_reloader.fish" = {
-        source = builtins.toString ../../scripts/misc/theme_reloader.fish;
-        executable = true;
-      };
-      ".scripts/misc/wallpapers_rand.fish" = {
-        source = builtins.toString ../../scripts/misc/wallpapers_rand.fish;
-        executable = true;
-      };
       ".wallpapers" = {
         source = ../../wallpapers;
       };
@@ -89,6 +77,18 @@ in
     // lib.optionalAttrs isWayland {
       ".scripts/hypr_reloader.fish" = {
         source = builtins.toString ../../scripts/hypr_reloader.fish;
+        executable = true;
+      };
+      ".scripts/misc/loading_notif.fish" = {
+        source = builtins.toString ../../scripts/misc/loading_notif.fish;
+        executable = true;
+      };
+      ".scripts/misc/theme_reloader.fish" = {
+        source = builtins.toString ../../scripts/misc/theme_reloader.fish;
+        executable = true;
+      };
+      ".scripts/misc/wallpapers_rand.fish" = {
+        source = builtins.toString ../../scripts/misc/wallpapers_rand.fish;
         executable = true;
       };
     };
