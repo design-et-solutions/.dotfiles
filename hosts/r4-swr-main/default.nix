@@ -6,7 +6,7 @@
     ./ds.nix
     ./eviden.nix
     ./orange.nix
-    ./thales.nix
+    # ./thales.nix
     ./test.nix
   ];
 
