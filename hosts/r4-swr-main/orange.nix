@@ -1,5 +1,16 @@
 { pkgs, ... }:
 {
+  # Login
+  # docker login platform-mce.orange-labs.fr:2424
+  # softwrep/worldWild
+
+  # docker image ls
+  # docker rmi $(docker images -a -q)
+  # docker rm if not able to rmi
+
+  # docker-compose --project-name swr -f /home/me/4757-R4-SWR/orange-storage/docker-compose-allog.yml pull
+  # docker-compose --project-name swr -f /home/me/4757-R4-SWR/orange-storage/docker-compose-v2x-edge-node pull
+
   systemd.services."docker-compose-v2x-edge-node" = {
     description = "Run Docker for v2x edge node";
     wantedBy = [ "multi-user.target" ];
