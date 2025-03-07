@@ -14,23 +14,16 @@ mkNixosConfiguration {
           enable = true;
           user = "me";
         };
+        displayServer = "x11";
       };
     };
     gpu.nvidia.enable = true;
     browser.firefox.enable = true;
     fileExplorer.enable = true;
     vm.docker.enable = true;
-    networking = {
-      internet = {
-        analyzer.enable = true;
-        wifi.emergency.enable = true;
-      };
-      params.allowedPorts.tcp = [
-        3000 # Server
-        3001 # React
-        9999 # WebRTC
-        8554 # RTSP
-      ];
+    networking.internet = {
+      analyzer.enable = true;
+      wifi.emergency.enable = true;
     };
     security = {
       blocker.enable = true;
