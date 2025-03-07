@@ -4,6 +4,9 @@
   mergedSetup,
   ...
 }:
+let
+  isWayland = mergedSetup.gui.params.displayServer == "wayland";
+in
 {
   imports = [
     ./hyprland.nix
@@ -20,10 +23,12 @@
       displayManager = {
         gdm = {
           enable = true;
-          wayland = true;
+          wayland = if mergedSetup.gui.params.displayServer == "wayland" then true else false;
           banner = "go fuck your self";
         };
       };
+      desktopManager.gnome.enable =
+        if mergedSetup.gui.params.displayServer == "wayland" then false else true;
     };
     ratbagd.enable = true; # DBus daemon to configure input devices
     dbus.enable = true;
