@@ -48,6 +48,9 @@
 
       cargo-check-udeps = "rustup run nightly cargo udeps --all-targets  --all-features";
       cargo-tree-search = "cargo tree -i";
+
+      cargo-run-nix = "nix-shell --run \"cargo run\"";
+      cargo-build-nix = "nix-shell --run \"cargo build --release\"";
     };
     interactiveShellInit = ''
       # Set vi mode
