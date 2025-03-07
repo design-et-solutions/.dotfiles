@@ -17,16 +17,16 @@
           8080
         ]
         ++ (
-          if mergedSetup.networking.allowedPorts.tcp != null then
-            mergedSetup.networking.allowedPorts.tcp
+          if mergedSetup.networking.params.allowedPorts.tcp != null then
+            mergedSetup.networking.params.allowedPorts.tcp
           else
             [ ]
         );
       allowedUDPPorts =
         [ 53 ]
         ++ (
-          if mergedSetup.networking.allowedPorts.ucp != null then
-            mergedSetup.networking.allowedPorts.ucp
+          if mergedSetup.networking.params.allowedPorts.ucp != null then
+            mergedSetup.networking.params.allowedPorts.ucp
           else
             [ ]
         );
