@@ -32,11 +32,11 @@ in
 {
   imports =
     [
+    ]
+    ++ lib.optionals (isWayland) [
       ./mako
       ./kitty
       ./rofi
-    ]
-    ++ lib.optionals (isWayland) [
       ./waybar
     ];
 
