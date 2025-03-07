@@ -5,17 +5,19 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
-    hyprland = {
-      custom = ''
-        monitor = eDP-1,2560x1440,auto,1
-      '';
+    gui = {
+      enable = true;
+      params.hyprland = {
+        custom = ''
+          monitor = eDP-1,2560x1440,auto,1
+        '';
+      };
     };
-    gui.enable = true;
-    browser.enable = true;
-    file_explorer.enable = true;
+    browser.firefox.enable = true;
+    fileExplorer.enable = true;
     mail.enable = true;
     print.enable = true;
-    vm.enable = true;
+    vm.docker.enable = true;
     game = {
       steam.enable = true;
     };
@@ -43,14 +45,16 @@ mkNixosConfiguration {
       spotify.enable = true;
     };
     networking = {
-      analyzer.enable = true;
-      # vpn = {
-      #   default.enable = true;
-      #   client.enable = true;
-      #   isExternal = true;
-      # };
-      wifi = {
-        emergency.enable = true;
+      internet = {
+        analyzer.enable = true;
+        # vpn = {
+        #   default.enable = true;
+        #   client.enable = true;
+        #   isExternal = true;
+        # };
+        wifi = {
+          emergency.enable = true;
+        };
       };
       bluetooth.enable = true;
       # can = {

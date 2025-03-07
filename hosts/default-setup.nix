@@ -2,10 +2,22 @@
   gui = {
     enable = false;
     path = ../nixos/optional/gui;
+    params = {
+      displayServer = "wayland";
+      hyprland = {
+        custom = "";
+      };
+      autoLogin = {
+        enable = false;
+        user = null;
+      };
+    };
   };
-  rpi5 = {
-    enable = false;
-    path = ../nixos/optional/controller/rpi5.nix;
+  device = {
+    rpi5 = {
+      enable = false;
+      path = ../nixos/optional/controller/rpi5.nix;
+    };
   };
   print = {
     enable = false;
@@ -22,17 +34,24 @@
     };
   };
   browser = {
-    enable = false;
-    path = ../nixos/optional/browser/firefox.nix;
+    firefox = {
+      enable = false;
+      path = ../nixos/optional/browser/firefox.nix;
+    };
   };
-  file_explorer = {
+  fileExplorer = {
     enable = false;
     path = ../nixos/optional/file_explorer/thunar.nix;
   };
   gpu = {
-    enable = false;
-    path = ./../nixos/optional/gpu;
-    model = "/nvidia";
+    nvidia = {
+      enable = false;
+      path = ./../nixos/optional/gpu/nvidia.nix;
+    };
+    amd = {
+      enable = false;
+      path = ./../nixos/optional/gpu/amd.nix;
+    };
   };
   mail = {
     enable = false;
@@ -125,14 +144,33 @@
     };
   };
   networking = {
-    allowedPorts = {
-      tcp = null;
-      ucp = null;
-    };
-    wifi = {
-      emergency = {
+    internet = {
+      wifi = {
+        emergency = {
+          enable = false;
+          path = ../nixos/optional/networking/wifi/emergency.nix;
+        };
+      };
+      vpn = {
+        default = {
+          enable = false;
+          path = ../nixos/optional/networking/vpn/default.nix;
+        };
+        client = {
+          enable = false;
+          path = ../nixos/optional/networking/vpn/client.nix;
+          params = {
+            isExternal = false;
+          };
+        };
+        server = {
+          enable = false;
+          path = ../nixos/optional/networking/vpn/server.nix;
+        };
+      };
+      analyzer = {
         enable = false;
-        path = ../nixos/optional/networking/wifi/emergency.nix;
+        path = ../nixos/optional/networking/analyzer.nix;
       };
     };
     can = {
@@ -145,39 +183,21 @@
         path = ../nixos/optional/networking/can/peak.nix;
       };
     };
-    vpn = {
-      isExternal = false;
-      default = {
-        enable = false;
-        path = ../nixos/optional/networking/vpn/default.nix;
-      };
-      client = {
-        enable = false;
-        path = ../nixos/optional/networking/vpn/client.nix;
-      };
-      server = {
-        enable = false;
-        path = ../nixos/optional/networking/vpn/server.nix;
-      };
-    };
-    analyzer = {
-      enable = false;
-      path = ../nixos/optional/networking/analyzer.nix;
-    };
     bluetooth = {
       enable = false;
       path = ../nixos/optional/networking/bluetooth/default.nix;
     };
+    params = {
+      allowedPorts = {
+        tcp = null;
+        ucp = null;
+      };
+    };
   };
   vm = {
-    enable = false;
-    path = ../nixos/optional/vm/docker.nix;
-  };
-  hyprland = {
-    custom = "";
-  };
-  autoLogin = {
-    enable = false;
-    user = null;
+    docker = {
+      enable = false;
+      path = ../nixos/optional/vm/docker.nix;
+    };
   };
 }

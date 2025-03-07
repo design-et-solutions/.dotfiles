@@ -1,7 +1,7 @@
 {
   lib,
   pkgs,
-  autoLogin,
+  mergedSetup,
   ...
 }:
 {
@@ -12,8 +12,8 @@
 
   services = {
     displayManager = {
-      autoLogin.enable = autoLogin.enable;
-      autoLogin.user = autoLogin.user;
+      autoLogin.enable = mergedSetup.gui.params.autoLogin.enable;
+      autoLogin.user = mergedSetup.gui.params.autoLogin.user;
     };
     xserver = {
       enable = true;

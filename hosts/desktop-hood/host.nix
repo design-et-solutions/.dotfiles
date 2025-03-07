@@ -5,17 +5,20 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
-    autoLogin = {
-      enable = true;
-      user = "me";
-    };
     gui.enable = true;
-    gpu.enable = true;
-    browser.enable = true;
-    file_explorer.enable = true;
+    gui = {
+      enable = true;
+      params.autoLogin = {
+        enable = true;
+        user = "me";
+      };
+    };
+    gpu.nvidia.enable = true;
+    browser.firefox.enable = true;
+    fileExplorer.enable = true;
     mail.enable = true;
     print.enable = true;
-    vm.enable = true;
+    vm.docker.enable = true;
     game = {
       steam.enable = true;
       mgba.enable = true;
@@ -45,7 +48,7 @@ mkNixosConfiguration {
       default.enable = true;
       spotify.enable = true;
     };
-    networking = {
+    networking.internet = {
       analyzer.enable = true;
       wifi = {
         emergency.enable = true;

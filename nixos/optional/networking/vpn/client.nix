@@ -1,4 +1,4 @@
-{ pkgs, isExternal, ... }:
+{ pkgs, mergedSetup, ... }:
 {
   imports = [
     ./default.nix
@@ -26,7 +26,11 @@
                   "0.0.0.0/0"
                   "::/0"
                 ];
-                endpoint = if isExternal then "128.78.107.5:51820" else "192.168.10.213:51820";
+                endpoint =
+                  if mergedSetup.networking.vpn.client.params.isExternal then
+                    "128.78.107.5:51820"
+                  else
+                    "192.168.10.213:51820";
               }
             ];
           };

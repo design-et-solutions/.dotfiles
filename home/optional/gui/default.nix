@@ -25,7 +25,7 @@ let
     wallpaper_command = wallpaperCommand;
     hyprland_command = hyprlandCommand;
     animations_enable = "true";
-    custom = mergedSetup.hyprland.custom;
+    custom = mergedSetup.gui.params.hyprland.custom;
   };
 in
 {
