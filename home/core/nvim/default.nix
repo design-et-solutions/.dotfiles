@@ -27,7 +27,7 @@
       ${builtins.readFile ./plugins/colorizer.lua}
       ${builtins.readFile ./plugins/conform.lua}
       ${builtins.readFile ./plugins/gruvbox.lua}
-      ${builtins.readFile ./inc-rename.lua}
+      ${builtins.readFile ./plugins/inc-rename.lua}
       ${builtins.readFile ./plugins/neogit.lua}
       ${builtins.readFile ./plugins/notify.lua}
       ${builtins.readFile ./plugins/nvim-tree.lua}
