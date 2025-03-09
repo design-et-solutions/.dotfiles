@@ -50,6 +50,7 @@
         vim-dadbod-ui # navigation database gui
         oil-nvim # file explorer that lets you edit your filesystem like a normal Neovim buffer.
         plenary-nvim # All the lua functions I don't want to write twice.
+        openscad-nvim
         # ========================
         # code
         # ========================
