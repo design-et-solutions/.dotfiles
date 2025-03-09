@@ -122,6 +122,10 @@
       enable = false;
       path = ../nixos/optional/misc/handbrake.nix;
     };
+    openscad = {
+      enable = false;
+      path = ../nixos/optional/misc/openscad.nix;
+    };
   };
   video = {
     mpv = {

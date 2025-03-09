@@ -34,6 +34,7 @@ mkNixosConfiguration {
       drawio.enable = true;
       steam-run.enable = true;
       stremio.enable = true;
+      openscad.enable = true;
     };
     video = {
       vlc.enable = true;

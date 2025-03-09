@@ -5,7 +5,6 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
-    gui.enable = true;
     gui = {
       enable = true;
       params.autoLogin = {
@@ -39,6 +38,7 @@ mkNixosConfiguration {
       steam-run.enable = true;
       stremio.enable = true;
       unity.enable = true;
+      openscad.enable = true;
     };
     video = {
       vlc.enable = true;
