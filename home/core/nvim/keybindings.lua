@@ -54,8 +54,13 @@ vim.api.nvim_set_keymap(
 
 vim.keymap.set("n", "<leader>rn", function()
 	return ":IncRename " .. vim.fn.expand("<cword>")
-end, { expr = true })
-vim.keymap.set({ "v", "n" }, "<leader>ra", require("actions-preview").code_actions)
+end, { expr = true, noremap = true, silent = true, desc = "LSP renaming" })
+vim.keymap.set(
+	{ "v", "n" },
+	"<leader>ra",
+	require("actions-preview").code_actions,
+	{ expr = true, noremap = true, silent = true, desc = "code actions" }
+)
 
 -- ===============================
 -- focus
