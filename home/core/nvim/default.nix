@@ -27,16 +27,14 @@
       ${builtins.readFile ./plugins/colorizer.lua}
       ${builtins.readFile ./plugins/conform.lua}
       ${builtins.readFile ./plugins/gruvbox.lua}
-      ${builtins.readFile ./plugins/inc-rename.lua}
       ${builtins.readFile ./plugins/neogit.lua}
       ${builtins.readFile ./plugins/notify.lua}
-      ${builtins.readFile ./plugins/nvim-tree.lua}
       ${builtins.readFile ./plugins/oil.lua}
+      ${builtins.readFile ./plugins/nvim-tree.lua}
+      ${builtins.readFile ./plugins/rest.lua}
       ${builtins.readFile ./plugins/rewind.lua}
       ${builtins.readFile ./plugins/toggleterm.lua}
       ${builtins.readFile ./plugins/tokyonight.lua}
-      ${builtins.readFile ./plugins/rest-nvim.lua}
-      ${builtins.readFile ./plugins/which-key.lua}
       ${builtins.readFile ./keybindings.lua}
       ${builtins.readFile ./config.lua}
     '';
@@ -68,8 +66,11 @@
         markdown-preview-nvim # preview markdown file
         nvim-lspconfig # Language Server Protocol
         rest-nvim # asynchronous Neovim HTTP client
+        rustaceanvim # Supercharge your Rust experience
+
         inc-rename-nvim # LSP renaming with immediate visual feedback
-        # rust-vim # beautify code
+        actions-preview-nvim
+
         # ========================
         # git
         # ========================

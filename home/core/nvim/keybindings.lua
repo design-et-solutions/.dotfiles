@@ -51,7 +51,11 @@ vim.api.nvim_set_keymap(
 	":RewindToggle<CR>",
 	{ noremap = true, silent = true, desc = "rewind toggle" }
 )
-vim.api.nvim_set_keymap("n", "<leader>rn", ":IncRename ", { noremap = true, silent = true, desc = "LSP renaming" })
+
+vim.keymap.set("n", "<leader>rn", function()
+	return ":IncRename " .. vim.fn.expand("<cword>")
+end, { expr = true })
+vim.keymap.set({ "v", "n" }, "<leader>ra", require("actions-preview").code_actions)
 
 -- ===============================
 -- focus
