@@ -51,6 +51,8 @@ vim.api.nvim_set_keymap(
 	":RewindToggle<CR>",
 	{ noremap = true, silent = true, desc = "rewind toggle" }
 )
+vim.api.nvim_set_keymap("n", "<leader>rn", ":IncRename ", { noremap = true, silent = true, desc = "LSP renaming" })
+
 -- ===============================
 -- focus
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true, desc = "Switch window left" })
@@ -103,13 +105,13 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap(
 	"n",
-	"<leader>rd",
+	"<leader>rc",
 	"<Plug>(coc-definition)",
 	{ noremap = true, silent = true, desc = "goto definition" }
 )
 vim.api.nvim_set_keymap(
 	"n",
-	"<leader>rT",
+	"<leader>rd",
 	"<Plug>(coc-type-definition)",
 	{ noremap = true, silent = true, desc = "goto type definition" }
 )
@@ -125,15 +127,10 @@ vim.api.nvim_set_keymap(
 	"<Plug>(coc-references)",
 	{ noremap = true, silent = true, desc = "goto references" }
 )
-vim.api.nvim_set_keymap("n", "<leader>rR", "<Cmd>CocRestart<CR>", { noremap = true, silent = true, desc = "restart" })
+vim.api.nvim_set_keymap("n", "<leader>rl", "<Cmd>CocRestart<CR>", { noremap = true, silent = true, desc = "restart" })
 
 -- ===============================
 -- git
--- vim.api.nvim_set_keymap('n', '<leader>gc', ':Git comment<CR>', { noremap = true, silent = true, desc = "git comment" })
--- vim.api.nvim_set_keymap('n', '<leader>gP', ':Git push<CR>', { noremap = true, silent = true, desc = "git push" })
--- vim.api.nvim_set_keymap('n', '<leader>gp', ':Git pull<CR>', { noremap = true, silent = true, desc = "git pull" })
--- vim.api.nvim_set_keymap('n', '<leader>gm', ':Git merge<CR>', { noremap = true, silent = true, desc = "git merge" })
--- vim.api.nvim_set_keymap('n', '<leader>ga', ':Git add<CR>', { noremap = true, silent = true, desc = "git add" })
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>gg",

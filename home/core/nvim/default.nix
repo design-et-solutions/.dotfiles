@@ -27,6 +27,7 @@
       ${builtins.readFile ./plugins/colorizer.lua}
       ${builtins.readFile ./plugins/conform.lua}
       ${builtins.readFile ./plugins/gruvbox.lua}
+      ${builtins.readFile ./plugins/inc-rename.lua}
       ${builtins.readFile ./plugins/neogit.lua}
       ${builtins.readFile ./plugins/notify.lua}
       ${builtins.readFile ./plugins/nvim-tree.lua}
@@ -67,6 +68,7 @@
         markdown-preview-nvim # preview markdown file
         nvim-lspconfig # Language Server Protocol
         rest-nvim # asynchronous Neovim HTTP client
+        inc-rename-nvim # LSP renaming with immediate visual feedback
         # rust-vim # beautify code
         # ========================
         # git
