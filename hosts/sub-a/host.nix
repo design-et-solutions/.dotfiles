@@ -9,6 +9,10 @@ mkNixosConfiguration {
     gui = {
       enable = true;
     };
+    can = {
+      enable = true;
+      peak = true;
+    };
     nogui.network.wifi.emergency =  true;
   };
 }

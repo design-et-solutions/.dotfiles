@@ -63,10 +63,23 @@
     glib.dev
     pkg-config
     openssl
+    python3
   ];
   
   
   systemd.services = {
+    can = {
+      description = "Configure can0 interface";
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        Restart = "on-failure";
+        ExecStart = "/run/current-system/sw/bin/ip link set can0 up type can bitrate 500000";
+        ExecStop = "/run/current-system/sw/bin/ip link set can0 down";
+        RemainAfterExit = "yes";
+      };
+    };
     gateway = {
       description = "Service gateway";
       enable = true;
