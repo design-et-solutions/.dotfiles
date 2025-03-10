@@ -8,15 +8,31 @@ mkNixosConfiguration {
     "guest"
   ];
   setup = {
-    autoLogin = {
-      enable = true;
-      user = "me";
-    };
     gui.enable = true;
-    gpu.enable = true;
-    browser.enable = true;
-    file_explorer.enable = true;
-    vm.enable = true;
+    gui = {
+      enable = true;
+      params.autoLogin = {
+        enable = true;
+        user = "me";
+      };
+    };
+    gpu.nvidia.enable = true;
+    browser.firefox.enable = true;
+    fileExplorer.enable = true;
+    mail.enable = true;
+    print.enable = true;
+    vm.docker.enable = true;
+    game = {
+      steam.enable = true;
+      mgba.enable = true;
+      xbox_controller.enable = true;
+    };
+    social = {
+      discord.enable = true;
+      slack.enable = true;
+      teams.enable = true;
+      whatsapp.enable = true;
+    };
     misc = {
       solaar.enable = true;
       handbrake.enable = true;
@@ -34,7 +50,7 @@ mkNixosConfiguration {
     audio = {
       default.enable = true;
     };
-    networking = {
+    networking.internet = {
       analyzer.enable = true;
       wifi = {
         emergency.enable = true;
