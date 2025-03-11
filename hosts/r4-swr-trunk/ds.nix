@@ -24,7 +24,7 @@
       Restart = "always";
       RestartSec = "5s";
       Environment = [
-        "WAYLAND_DISPLAY=wayland-2"
+        "WAYLAND_DISPLAY=wayland-0"
         "XDG_RUNTIME_DIR=/run/user/1000"
       ];
     };

@@ -5,7 +5,6 @@ mkNixosConfiguration {
   host = ./.;
   users = [
     "me"
-    "guest"
   ];
   setup = {
     gui = {
