@@ -8,7 +8,6 @@ mkNixosConfiguration {
     "guest"
   ];
   setup = {
-    gui.enable = true;
     gui = {
       enable = true;
       params.autoLogin = {

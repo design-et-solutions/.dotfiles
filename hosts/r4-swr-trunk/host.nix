@@ -24,6 +24,9 @@ mkNixosConfiguration {
     networking.internet = {
       analyzer.enable = true;
       wifi.emergency.enable = true;
+      params.allowedPorts.tcp = [
+        3000 # React
+      ];
     };
     security = {
       blocker.enable = true;
