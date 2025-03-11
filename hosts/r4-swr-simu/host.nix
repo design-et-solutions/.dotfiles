@@ -14,7 +14,7 @@ mkNixosConfiguration {
         user = "me";
       };
     };
-    gpu.nvidia.enable = true;
+    # gpu.nvidia.enable = true;
     browser.firefox.enable = true;
     networking.internet = {
       analyzer.enable = true;
