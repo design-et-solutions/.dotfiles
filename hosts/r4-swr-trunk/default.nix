@@ -3,6 +3,7 @@
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ./ds
   ];
 
   time.timeZone = "Europe/Paris";

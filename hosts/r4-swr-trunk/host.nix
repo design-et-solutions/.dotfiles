@@ -14,7 +14,7 @@ mkNixosConfiguration {
           enable = true;
           user = "me";
         };
-        displayServer = "x11";
+        displayServer = "wayland";
       };
     };
     gpu.nvidia.enable = true;
