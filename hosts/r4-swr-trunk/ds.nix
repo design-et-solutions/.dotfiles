@@ -9,9 +9,10 @@
       Restart = "always";
       RestartSec = "5s";
       Environment = [
-        # "WAYLAND_DISPLAY=wayland-1"
-        "DISPLAY=:0"
+        "WAYLAND_DISPLAY=wayland-1"
         "XDG_RUNTIME_DIR=/run/user/1000"
+        "MOZ_ENABLE_WAYLAND=1"
+        "GDK_BACKEND=wayland"
       ];
     };
   };
@@ -25,9 +26,10 @@
       Restart = "always";
       RestartSec = "5s";
       Environment = [
-        # "WAYLAND_DISPLAY=wayland-0"
-        "DISPLAY=:1"
+        "WAYLAND_DISPLAY=wayland-1"
         "XDG_RUNTIME_DIR=/run/user/1000"
+        "MOZ_ENABLE_WAYLAND=1"
+        "GDK_BACKEND=wayland"
       ];
     };
   };
