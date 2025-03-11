@@ -16,6 +16,7 @@
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
+    "thunderbolt"
     "ahci"
     "nvme"
     "usbhid"
@@ -27,12 +28,12 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/c2eb0881-6470-4bdc-80e7-9ee4cc2415fc";
+    device = "/dev/disk/by-uuid/47253b1c-2ce3-4701-acce-336ca36bdf43";
     fsType = "ext4";
   };
 
   fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/46B6-E1C4";
+    device = "/dev/disk/by-uuid/4D6C-8590";
     fsType = "vfat";
     options = [
       "fmask=0022"
@@ -47,7 +48,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp86s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
