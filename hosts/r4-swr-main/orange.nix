@@ -11,7 +11,7 @@
   # docker-compose --project-name swr -f /home/me/4757-R4-SWR/orange-storage/docker-compose-allog.yml pull
   # docker-compose --project-name swr -f /home/me/4757-R4-SWR/orange-storage/docker-compose-v2x-edge-node pull
 
-  #   Pour la mise à jour il faut donc arrêter les containers, puis supprimer les volumes:
+  # Pour la mise à jour il faut donc arrêter les containers, puis supprimer les volumes:
   # docker volume rm swr_mqttlog swr_orange-golem-conf-swr swr_orange-golem-log-swr swr_orange-mosquitto-conf swr_orange-mosquitto-log swr_orange-replay-conf-swr
   # et ensuite le up -d...
 
