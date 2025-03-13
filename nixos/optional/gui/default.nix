@@ -113,8 +113,6 @@ in
     UMask = "077";
     IPAddressDeny = "any";
     KeyringMode = lib.mkForce "private";
-    User = "root";
-    Group = "root";
   };
 
   environment.systemPackages = with pkgs; [
