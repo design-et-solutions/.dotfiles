@@ -5,8 +5,8 @@
   extraGroups = [
     "wheel"
   ];
-  password = "root";
-  # hashedPassword = "$6$9kBLqUdAM7HL/woP$7M.oa2WdVlOP6PyMNpKHX2Mn5fBe49Z6y/uVi2B9x/G2hjg5uYHhGb354KA97Uz/9pOVTNcrZ4tqatWITR82o1";
+  # password = "root";
+  hashedPassword = "$6$T73W/kgEMgyjT/iQ$NUYVlgjwZSxqrCoJ.aQt0B6Hu/e62Oi4/s2oR0ZGDUvtSBe0Isa49DexpBumM0NekLDvfF64KJDmJMnzXrVRK1";
 
   # security.sudo.wheelNeedsPassword = false;
 
