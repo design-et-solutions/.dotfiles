@@ -44,7 +44,7 @@
             content = {
               type = "filesystem";
               format = "ext4";
-              mountpoint = "/boot";
+              mountpoint = "/boot/efi";
             };
           };
 
