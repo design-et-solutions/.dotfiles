@@ -1,4 +1,4 @@
-{ mergedSetup, ... }:
+{ mergedSetup, lib, ... }:
 {
   disko.devices = lib.mkIf mergedSetup.disk.default {
     disk.disk1 = {
