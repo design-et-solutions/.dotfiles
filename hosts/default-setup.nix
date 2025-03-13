@@ -1,4 +1,5 @@
 {
+  disk.default = true;
   gui = {
     enable = false;
     path = ../nixos/optional/gui;

@@ -37,6 +37,7 @@
           host,
           users,
           setup,
+          name,
           extraModules ? [ ],
         }:
         let
@@ -98,6 +99,7 @@
                 }:
                 {
                   _module.args.mergedSetup = mergedSetup;
+                  _module.args.hostname = name;
                 }
               )
               ./nixos/core

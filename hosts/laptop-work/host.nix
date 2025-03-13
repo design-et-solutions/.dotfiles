@@ -1,6 +1,7 @@
 { mkNixosConfiguration, ... }:
 
 mkNixosConfiguration {
+  name = "laptop-work";
   system = "x86_64-linux";
   host = ./.;
   users = [ "me" ];

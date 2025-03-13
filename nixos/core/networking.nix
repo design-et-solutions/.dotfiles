@@ -1,7 +1,13 @@
-{ pkgs, mergedSetup, ... }:
+{
+  pkgs,
+  mergedSetup,
+  hostname,
+  ...
+}:
 {
   # https://search.nixos.org/options?channel=24.11&query=networking
   networking = {
+    hostname = hostname;
     enableIPv6 = true;
     networkmanager = {
       enable = true;
