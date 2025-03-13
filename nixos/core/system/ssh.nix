@@ -40,10 +40,10 @@
     PrivateTmp = true;
     PrivateMounts = true;
     PrivateDevices = true;
-    PrivateIPC = false;
+    PrivateIPC = true;
     PrivateNetwork = false;
     PrivatePIDs = true;
-    # PrivateUsers = true;
+    PrivateUsers = false;
 
     RestrictNamespaces = true;
     RestrictRealtime = true;
