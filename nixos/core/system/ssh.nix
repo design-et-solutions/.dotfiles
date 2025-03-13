@@ -91,7 +91,7 @@
     # UMask = "077";
     # IPAddressDeny = "any";
     DevicePolicy = "closed";
-    # KeyringMode = "private";
+    KeyringMode = "private";
   };
 
   # NoNewPrivileges = false;
