@@ -27,23 +27,23 @@
   systemd.services.sshd.serviceConfig = {
     NoNewPrivileges = true;
 
-    # ProtectSystem = false;
-    # ProtectHome = true;
-    # ProtectClock = true;
-    # ProtectHostname = true;
-    # ProtectKernelTunables = true;
-    # ProtectKernelModules = true;
-    # ProtectKernelLogs = true;
-    # ProtectControlGroups = true;
-    # ProtectProc = "noaccess";
+    ProtectSystem = false;
+    ProtectHome = true;
+    ProtectClock = true;
+    ProtectHostname = true;
+    ProtectKernelTunables = true;
+    ProtectKernelModules = true;
+    ProtectKernelLogs = true;
+    ProtectControlGroups = true;
+    ProtectProc = "noaccess";
 
-    # PrivateTmp = true;
-    # PrivateMounts = true;
-    # PrivateDevices = true;
-    # PrivateIPC = false;
-    # PrivateNetwork = false;
-    # PrivatePIDs = true;
-    # PrivateUsers = true;
+    PrivateTmp = true;
+    PrivateMounts = true;
+    PrivateDevices = true;
+    PrivateIPC = false;
+    PrivateNetwork = false;
+    PrivatePIDs = true;
+    PrivateUsers = true;
 
     # RestrictNamespaces = true;
     # RestrictRealtime = true;
