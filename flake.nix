@@ -15,6 +15,9 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-rpi5.url = "git+https://gitlab.com/vriska/nix-rpi5.git";
+
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
