@@ -48,7 +48,7 @@
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
-    RestrictAddressFamilies = false;
+    # RestrictAddressFamilies = false;
     # RestrictAddressFamilies = [
     #   "~AF_UNIX"
     #   "~AF_NETLINK"
