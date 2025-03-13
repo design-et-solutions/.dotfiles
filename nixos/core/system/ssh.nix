@@ -37,12 +37,12 @@
     ProtectControlGroups = true;
     ProtectProc = "noaccess";
 
-    # PrivateTmp = true;
-    # PrivateMounts = true;
+    PrivateTmp = true;
+    PrivateMounts = true;
     # PrivateDevices = true;
-    # PrivateIPC = false;
-    # PrivateNetwork = false;
-    # PrivatePIDs = true;
+    PrivateIPC = false;
+    PrivateNetwork = false;
+    PrivatePIDs = true;
     # PrivateUsers = true;
 
     RestrictNamespaces = true;
