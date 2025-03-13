@@ -7,13 +7,14 @@
       content = {
         type = "gpt"; # Specifies that the partition table type is GPT (GUID Partition Table).
         partitions = {
-          boot = {
-            name = "boot";
-            size = "1M";
-            type = "EF02"; # The partition type, which is typically used for BIOS boot partitions.
-          };
-          esp = {
-            name = "ESP"; # The name of the partition, which stands for EFI System Partition.
+          # boot = {
+          #   name = "boot";
+          #   size = "1M";
+          #   type = "EF02"; # The partition type, which is typically used for BIOS boot partitions.
+          # };
+
+          # The partition, which stands for EFI System Partition.
+          ESP = {
             size = "500M";
             type = "EF00"; # The partition type for EFI System Partitions.
             content = {
@@ -23,7 +24,6 @@
             };
           };
           root = {
-            name = "root";
             size = "100%";
             content = {
               type = "lvm_pv"; # Specifies that this partition is a physical volume for LVM (Logical Volume Manager).
