@@ -39,7 +39,7 @@
 
     PrivateTmp = true;
     PrivateMounts = true;
-    # PrivateDevices = true;
+    PrivateDevices = true;
     PrivateIPC = false;
     PrivateNetwork = false;
     PrivatePIDs = true;
