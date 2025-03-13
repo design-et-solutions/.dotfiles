@@ -48,13 +48,14 @@
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
-    RestrictAddressFamilies = [
-      "~AF_UNIX"
-      "~AF_NETLINK"
-      "AF_INET"
-      "AF_INET6"
-      "~AF_PACKET"
-    ];
+    RestrictAddressFamilies = false;
+    # RestrictAddressFamilies = [
+    #   "~AF_UNIX"
+    #   "~AF_NETLINK"
+    #   "AF_INET"
+    #   "AF_INET6"
+    #   "~AF_PACKET"
+    # ];
 
     SystemCallFilter = [
       "~@keyring"
