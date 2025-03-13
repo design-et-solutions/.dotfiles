@@ -27,13 +27,13 @@
   systemd.services.sshd.serviceConfig = {
     NoNewPrivileges = false;
 
-    ProtectSystem = "full";
+    # ProtectSystem = "full";
     ProtectHome = false;
     ProtectClock = true;
     ProtectHostname = true;
-    ProtectKernelTunables = true;
-    ProtectKernelModules = true;
-    ProtectKernelLogs = true;
+    # ProtectKernelTunables = true;
+    # ProtectKernelModules = true;
+    # ProtectKernelLogs = true;
     ProtectControlGroups = true;
     ProtectProc = "noaccess";
 
@@ -57,7 +57,7 @@
       "~@module"
       "~@obsolete"
       "~@cpu-emulation"
-      # "~@debug"
+      "~@debug"
     ];
     SystemCallArchitectures = "native";
 
