@@ -14,7 +14,7 @@
             type = "EF02"; # The partition type, which is typically used for BIOS boot partitions.
           };
 
-          # The partition, which stands for EFI System Partition.
+          # The partition, which stands for EFI System Partition (ESP).
           esp = {
             name = "ESP";
             size = "500M";
@@ -49,6 +49,12 @@
               mountOptions = [
                 "defaults"
               ];
+            };
+          };
+          swap = {
+            size = "4G"; # Size of the swap logical volume
+            content = {
+              type = "swap";
             };
           };
         };

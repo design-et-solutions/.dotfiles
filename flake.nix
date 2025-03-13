@@ -5,31 +5,17 @@
   # sudo nix-collect-garbage -d
 
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-    # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
     nix-rpi5.url = "git+https://gitlab.com/vriska/nix-rpi5.git";
-
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      nixos-hardware,
-      nix-rpi5,
-      disko,
-      ...
-    }@inputs:
+    inputs@{ nixpkgs, ... }:
     let
       inherit (self) outputs;
       defaultSetup = import ./hosts/default-setup.nix;
@@ -108,6 +94,7 @@
               )
               ./nixos/core
               host
+              inputs.nixos-facter-modules.nixosModules.facter
               disko.nixosModules.disko
               home-manager.nixosModules.home-manager
               {
