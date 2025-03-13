@@ -73,19 +73,18 @@
         "url": "https://gitlab.com/vriska/nix-rpi5.git"
       }
     },
-    "nixos-hardware": {
+    "nixos-facter-modules": {
       "locked": {
-        "lastModified": 1739798439,
-        "narHash": "sha256-GyipmjbbQEaosel/+wq1xihCKbv0/e1LU00x/8b/fP4=",
-        "owner": "NixOS",
-        "repo": "nixos-hardware",
-        "rev": "3e2ea8a49d4d76276b0f4e2041df8ca5c0771371",
+        "lastModified": 1738752252,
+        "narHash": "sha256-/nA3tDdp/2g0FBy8966ppC2WDoyXtUWaHkZWL+N3ZKc=",
+        "owner": "numtide",
+        "repo": "nixos-facter-modules",
+        "rev": "60f8b8f3f99667de6a493a44375e5506bf0c48b1",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "master",
-        "repo": "nixos-hardware",
+        "owner": "numtide",
+        "repo": "nixos-facter-modules",
         "type": "github"
       }
     },
@@ -125,7 +124,7 @@
         "disko": "disko",
         "home-manager": "home-manager",
         "nix-rpi5": "nix-rpi5",
-        "nixos-hardware": "nixos-hardware",
+        "nixos-facter-modules": "nixos-facter-modules",
         "nixpkgs": "nixpkgs_2"
       }
     }
