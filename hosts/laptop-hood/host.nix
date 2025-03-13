@@ -7,6 +7,7 @@ mkNixosConfiguration {
   users = [ "me" ];
   setup = {
     disk = {
+      enable = false;
       params = {
         diskPath = "/dev/nvme0n1";
       };
