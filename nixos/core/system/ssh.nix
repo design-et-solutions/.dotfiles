@@ -64,7 +64,10 @@
       "~@module"
       "~@obsolete"
       "~@cpu-emulation"
+      "~@raw-io"
+      "~@debug"
     ];
+
     SystemCallArchitectures = "native";
 
     # CapabilityBoundingSet = [
