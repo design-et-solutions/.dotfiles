@@ -10,7 +10,7 @@
   boot.loader = {
     systemd-boot.enable = false;
     efi = {
-      efiSysMountPoint = "/boot/EFI";
+      efiSysMountPoint = "/boot/efi";
       canTouchEfiVariables = true;
     };
     timeout = 10;

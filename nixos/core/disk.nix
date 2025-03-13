@@ -19,7 +19,7 @@
             content = {
               type = "filesystem";
               format = "vfat"; # The filesystem format, which is VFAT (Virtual File Allocation Table).
-              mountpoint = "/boot/EFI";
+              mountpoint = "/boot/efi";
             };
           };
           root = {
