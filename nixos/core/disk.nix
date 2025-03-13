@@ -5,7 +5,8 @@
       device = lib.mkDefault "/dev/sda";
       type = "disk";
       content = {
-        type = "gpt"; # Specifies that the partition table type is GPT (GUID Partition Table).
+        # type = "gpt"; # Specifies that the partition table type is GPT (GUID Partition Table).
+        type = "msdos";
         partitions = {
           boot = {
             name = "boot";
