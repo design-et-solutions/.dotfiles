@@ -50,14 +50,14 @@
     RestrictSUIDSGID = true;
 
     SystemCallFilter = [
-      "~@reboot"
+      # "~@reboot"
       "~@keyring"
       "~@swap"
       "~@clock"
       "~@module"
       "~@obsolete"
       "~@cpu-emulation"
-      "~@debug"
+      # "~@debug"
     ];
     SystemCallArchitectures = "native";
 
