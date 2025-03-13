@@ -41,7 +41,7 @@
         type = "lvm_vg"; # Specifies that this is a volume group for LVM.
         lvs = {
           root = {
-            size = "100%FREE"; # The size of the logical volume, which takes up all the free space in the volume group.
+            size = "100%FREE - 4G"; # The size of the logical volume, which takes up all the free space in the volume group.
             content = {
               type = "filesystem";
               format = "ext4"; # The filesystem format, which is ext4, a commonly used filesystem for Linux.
