@@ -36,6 +36,9 @@ mkNixosConfiguration {
     };
     networking = {
       internet = {
+        ssh.root.authorizedKeys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMc6jbhoDuKt0YOIF9prT4reT9WG6sP2sEFVj59loQwq me@desktop-hood"
+        ];
         analyzer.enable = true;
       };
       bluetooth.enable = true;

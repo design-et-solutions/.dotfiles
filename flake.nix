@@ -31,6 +31,7 @@
           extraModules ? [ ],
         }:
         let
+          allUsers = users ++ [ "root" ];
           mergedSetup = nixpkgs.lib.recursiveUpdate defaultSetup setup;
           pkgs = nixpkgs.legacyPackages.${system};
           lib = nixpkgs.lib;
@@ -101,7 +102,7 @@
                   useUserPackages = true;
                   backupFileExtension = "backup";
                   extraSpecialArgs = { inherit mergedSetup; };
-                  users = nixpkgs.lib.genAttrs users (user: {
+                  users = nixpkgs.lib.genAttrs allUsers (user: {
                     imports = [
                       ./home/core
                       ./home/users/${user}.nix
@@ -110,12 +111,12 @@
                 };
               }
               {
-                users.groups = nixpkgs.lib.genAttrs users (user: { });
+                users.groups = nixpkgs.lib.genAttrs allUsers (user: { });
                 users.users = builtins.listToAttrs (
                   map (user: {
                     name = user;
                     value = import (./nixos/users/${user}.nix);
-                  }) users
+                  }) allUsers
                 );
               }
 
