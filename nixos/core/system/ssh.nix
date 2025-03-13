@@ -30,7 +30,7 @@
     # ProtectSystem = "full";
     ProtectHome = false;
     ProtectClock = true;
-    ProtectHostname = true;
+    # ProtectHostname = true;
     # ProtectKernelTunables = true;
     # ProtectKernelModules = true;
     # ProtectKernelLogs = true;
@@ -45,7 +45,7 @@
     PrivatePIDs = true;
     PrivateUsers = false;
 
-    RestrictNamespaces = true;
+    # RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
 
