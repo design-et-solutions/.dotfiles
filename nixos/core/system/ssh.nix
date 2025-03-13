@@ -64,7 +64,6 @@
       "~@module"
       "~@obsolete"
       "~@cpu-emulation"
-      "~@raw-io"
       "~@debug"
     ];
 
