@@ -66,21 +66,21 @@
     ];
     SystemCallArchitectures = "native";
 
-    CapabilityBoundingSet = [
-      "CAP_SYS_ADMIN"
-      "CAP_SETUID"
-      "CAP_SETGID"
-      "CAP_SETPCAP"
-      "CAP_KILL"
-      "CAP_SYS_TTY_CONFIG"
-      "CAP_DAC_OVERRIDE"
-      "CAP_DAC_READ_SEARCH"
-      "CAP_FOWNER"
-      "CAP_IPC_OWNER"
-      "CAP_FSETID"
-      "CAP_SETFCAP"
-      "CAP_CHOWN"
-    ];
+    # CapabilityBoundingSet = [
+    #   "CAP_SYS_ADMIN"
+    #   "CAP_SETUID"
+    #   "CAP_SETGID"
+    #   "CAP_SETPCAP"
+    #   "CAP_KILL"
+    #   "CAP_SYS_TTY_CONFIG"
+    #   "CAP_DAC_OVERRIDE"
+    #   "CAP_DAC_READ_SEARCH"
+    #   "CAP_FOWNER"
+    #   "CAP_IPC_OWNER"
+    #   "CAP_FSETID"
+    #   "CAP_SETFCAP"
+    #   "CAP_CHOWN"
+    # ];
     AmbientCapabilities = [ ];
 
     MemoryDenyWriteExecute = true;
