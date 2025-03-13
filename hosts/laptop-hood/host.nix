@@ -8,10 +8,16 @@ mkNixosConfiguration {
   setup = {
     gui = {
       enable = true;
-      params.hyprland = {
-        custom = ''
-          monitor = eDP-1,2560x1440,auto,1
-        '';
+      params = {
+        autoLogin = {
+          enable = true;
+          user = "me";
+        };
+        hyprland = {
+          custom = ''
+            monitor = eDP-1,2560x1440,auto,1
+          '';
+        };
       };
     };
     browser.firefox.enable = true;
