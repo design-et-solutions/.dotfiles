@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  mergedSetup,
+  ...
+}:
 {
   # https://nixos.wiki/wiki/Bootloader
   # https://mynixos.com/options/boot.loader
@@ -11,7 +16,7 @@
     timeout = 10;
     grub = {
       enable = true;
-      device = "nodev";
+      device = if mergedSetup.disk.enable then mergedSetup.disk.params.diskPath else "nodev";
       efiSupport = true;
       efiInstallAsRemovable = false;
       useOSProber = true;
