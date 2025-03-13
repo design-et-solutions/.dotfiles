@@ -50,7 +50,7 @@
     RestrictSUIDSGID = true;
     RestrictAddressFamilies = [
       "AF_UNIX"
-      "~AF_NETLINK"
+      "AF_NETLINK"
       "AF_INET"
       "AF_INET6"
       "~AF_PACKET"
