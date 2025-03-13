@@ -48,13 +48,13 @@
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
-    RestrictAddressFamilies = [
-      "~AF_UNIX"
-      "~AF_NETLINK"
-      "AF_INET"
-      "AF_INET6"
-      "~AF_PACKET"
-    ];
+    # RestrictAddressFamilies = [
+    #   "~AF_UNIX"
+    #   "~AF_NETLINK"
+    #   "AF_INET"
+    #   "AF_INET6"
+    #   "~AF_PACKET"
+    # ];
 
     SystemCallFilter = [
       "~@keyring"
@@ -85,7 +85,7 @@
 
     MemoryDenyWriteExecute = true;
     LockPersonality = true;
-    UMask = "077";
+    # UMask = "077";
     IPAddressDeny = "any";
     DevicePolicy = "closed";
     KeyringMode = "private";
