@@ -6,7 +6,7 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
-    # disk.default = false;
+    disk.default = false;
     gui = {
       enable = true;
       params = {
