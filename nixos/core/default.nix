@@ -9,17 +9,18 @@
 {
   imports = [
     ./bootloader.nix
-    ./shell
-    ./networking.nix
-    ./security
-    ./system
-    ./users.nix
-    ./git.nix
+    ./config.nix
     ./dev.nix
+    ./generation.nix
+    ./git.nix
+    ./networking.nix
     ./misc.nix
     ./monitoring.nix
+    ./security
+    ./shell
+    ./system
     ./usb.nix
-    ./generation.nix
+    ./users.nix
   ];
 
   nixpkgs = {
@@ -60,11 +61,6 @@
     pkg-config # Helper tool used when compiling applications
     clang # C language family frontend for LLVM
   ];
-
-  # nix.gc = {
-  #   automatic = true;
-  #   options = "--delete-older-than 10d";
-  # };
 
   system.activationScripts.createMnt = ''
     mkdir -p /mnt
