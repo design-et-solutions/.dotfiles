@@ -11,6 +11,7 @@
           type = "gpt";
           partitions = {
             boot = {
+              name = "nvme0n1p1";
               size = "512M";
               type = "EF00";
               content = {
@@ -20,6 +21,7 @@
               };
             };
             root = {
+              name = "nvme0n1p2";
               size = "100%";
               content = {
                 type = "filesystem";
