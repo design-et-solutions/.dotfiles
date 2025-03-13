@@ -80,6 +80,17 @@
         RemainAfterExit = "yes";
       };
     };
+    
+    can_server = {
+      description = "CAN server";
+      wantedBy = ["multi-user.target"];
+      after = ["network.target" "can.service"];
+      serviceConfig = {
+        Restart = "on-failure";
+        ExecStart = "/run/current-system/sw/bin/node /home/me/4731-Sub-A/soft-high-level/server.js";
+      };
+    };
+
     gateway = {
       description = "Service gateway";
       enable = true;
