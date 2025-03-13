@@ -7,11 +7,12 @@
       content = {
         type = "gpt"; # Specifies that the partition table type is GPT (GUID Partition Table).
         partitions = {
-          # boot = {
-          #   name = "boot";
-          #   size = "1M";
-          #   type = "EF02"; # The partition type, which is typically used for BIOS boot partitions.
-          # };
+
+          boot = {
+            name = "boot";
+            size = "1M";
+            type = "EF02"; # The partition type, which is typically used for BIOS boot partitions.
+          };
 
           # The partition, which stands for EFI System Partition.
           esp = {

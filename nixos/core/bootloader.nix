@@ -16,7 +16,6 @@
     timeout = 10;
     grub = {
       enable = true;
-      # device = if mergedSetup.disk.enable then mergedSetup.disk.params.diskPath else "nodev";
       device = "nodev";
       efiSupport = true;
       efiInstallAsRemovable = false;
