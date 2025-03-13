@@ -96,7 +96,7 @@
               host
               inputs.nixos-facter-modules.nixosModules.facter
               inputs.disko.nixosModules.disko
-              home-manager.nixosModules.home-manager
+              inputs.home-manager.nixosModules.home-manager
               {
                 home-manager = {
                   useUserPackages = true;
