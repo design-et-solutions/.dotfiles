@@ -11,7 +11,7 @@
     timeout = 10;
     grub = {
       enable = true;
-      device = "nodev";
+      device = "/dev/sda";
       efiSupport = true;
       efiInstallAsRemovable = false;
       useOSProber = true;
