@@ -4,7 +4,7 @@
     enable = true;
     ports = [ 2222 ];
     settings = {
-      permitRootLogin = "prohibit-password"; # Allow root login only with SSH keys
+      PermitRootLogin = "prohibit-password"; # Allow root login only with SSH keys
       PasswordAuthentication = true;
       LogLevel = "VERBOSE";
     };

@@ -2,7 +2,6 @@
 {
   group = "root";
   isNormalUser = false;
-  home = "/home/root";
   extraGroups = [
     "wheel"
   ];
