@@ -83,7 +83,7 @@
     #   "CAP_SETFCAP"
     #   "CAP_CHOWN"
     # ];
-    AmbientCapabilities = [ ];
+    # AmbientCapabilities = [ ];
 
     MemoryDenyWriteExecute = true;
     LockPersonality = true;
