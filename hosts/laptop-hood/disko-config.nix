@@ -8,7 +8,7 @@
   disko.devices = {
     disk = {
       main = {
-        device = "/dev/nvme0n1"; # Adjust this to match your actual device
+        device = "/dev/nvme0"; # Adjust this to match your actual device
         type = "disk";
         content = {
           type = "gpt";
