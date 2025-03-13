@@ -7,7 +7,7 @@
 {
   # https://search.nixos.org/options?channel=24.11&query=networking
   networking = {
-    hostname = hostname;
+    hostName = hostname;
     enableIPv6 = true;
     networkmanager = {
       enable = true;

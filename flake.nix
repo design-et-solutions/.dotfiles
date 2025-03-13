@@ -108,6 +108,7 @@
               )
               ./nixos/core
               host
+              disko.nixosModules.disko
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
