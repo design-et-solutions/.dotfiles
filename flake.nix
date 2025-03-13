@@ -95,7 +95,7 @@
               ./nixos/core
               host
               inputs.nixos-facter-modules.nixosModules.facter
-              disko.nixosModules.disko
+              inputs.disko.nixosModules.disko
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
