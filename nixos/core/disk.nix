@@ -1,9 +1,8 @@
 { mergedSetup, lib, ... }:
 {
-  disko.devices = lib.mkIf mergedSetup.disk.default {
+  disko.devices = lib.mkIf mergedSetup.disk.enable {
     disk.disk1 = {
-      # device = lib.mkDefault "/dev/sda";
-      device = lib.mkDefault "/dev/nvme0n1";
+      device = lib.mkDefault disk.params.diskPath;
       type = "disk";
       content = {
         type = "gpt"; # Specifies that the partition table type is GPT (GUID Partition Table).

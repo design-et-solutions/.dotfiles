@@ -6,7 +6,11 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
-    # disk.default = false;
+    disk = {
+      params = {
+        diskPath = "/dev/nvme0n1";
+      };
+    };
     gui = {
       enable = true;
       params = {

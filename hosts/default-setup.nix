@@ -1,5 +1,10 @@
 {
-  disk.default = true;
+  disk = {
+    enable = true;
+    params = {
+      diskPath = "/dev/sda";
+    };
+  };
   gui = {
     enable = false;
     path = ../nixos/optional/gui;
