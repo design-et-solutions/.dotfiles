@@ -27,6 +27,7 @@
       home-manager,
       nixos-hardware,
       nix-rpi5,
+      disko,
       ...
     }@inputs:
     let
