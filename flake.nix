@@ -15,7 +15,7 @@
   };
 
   outputs =
-    inputs@{ nixpkgs, ... }:
+    inputs@{ self, nixpkgs, ... }:
     let
       inherit (self) outputs;
       defaultSetup = import ./hosts/default-setup.nix;
