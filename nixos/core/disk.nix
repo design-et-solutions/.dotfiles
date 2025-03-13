@@ -2,11 +2,11 @@
 {
   disko.devices = lib.mkIf mergedSetup.disk.default {
     disk.disk1 = {
-      device = lib.mkDefault "/dev/sda";
+      # device = lib.mkDefault "/dev/sda";
+      device = lib.mkDefault "/dev/nvme0n1";
       type = "disk";
       content = {
-        # type = "gpt"; # Specifies that the partition table type is GPT (GUID Partition Table).
-        type = "msdos";
+        type = "gpt"; # Specifies that the partition table type is GPT (GUID Partition Table).
         partitions = {
           boot = {
             name = "boot";
