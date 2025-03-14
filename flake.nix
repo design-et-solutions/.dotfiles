@@ -115,9 +115,7 @@
                 users.users = builtins.listToAttrs (
                   map (user: {
                     name = user;
-                    value = import (./nixos/users/${user}.nix) {
-                      inherit mergedSetup;
-                    };
+                    value = import (./nixos/users/${user}.nix);
                   }) allUsers
                 );
               }
