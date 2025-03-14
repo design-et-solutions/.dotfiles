@@ -75,6 +75,7 @@
       serviceConfig = {
         Type = "oneshot";
         Restart = "on-failure";
+        ExecStartPre = "/run/current-system/sw/bin/sleep 2";
         ExecStart = "/run/current-system/sw/bin/ip link set can0 up type can bitrate 500000";
         ExecStop = "/run/current-system/sw/bin/ip link set can0 down";
         RemainAfterExit = "yes";
