@@ -15,8 +15,8 @@ in
 
   services = {
     displayManager = {
-      autoLogin.enable = mergedSetup.gui.params.autoLogin.enable;
-      autoLogin.user = mergedSetup.gui.params.autoLogin.user;
+      autoLogin.enable = lib.mkDefault true;
+      autoLogin.user = lib.mkDefault null;
     };
     xserver = {
       enable = true;

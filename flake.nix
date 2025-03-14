@@ -18,7 +18,7 @@
     inputs@{ self, nixpkgs, ... }:
     let
       inherit (self) outputs;
-      defaultSetup = import ./hosts/default-setup.nix;
+      config = import ./hosts/config.nix;
       # NixOS configuration entrypoint
       # Define a function to create a NixOS configuration
       mkNixosConfiguration =
@@ -26,13 +26,13 @@
           system,
           host,
           users,
-          setup,
+          hostConfig,
           name,
           extraModules ? [ ],
         }:
         let
           allUsers = users ++ [ "root" ];
-          mergedSetup = nixpkgs.lib.recursiveUpdate defaultSetup setup;
+          mergedSetup = nixpkgs.lib.recursiveUpdate config hostConfig;
           pkgs = nixpkgs.legacyPackages.${system};
           lib = nixpkgs.lib;
 
