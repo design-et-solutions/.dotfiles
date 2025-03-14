@@ -4,7 +4,7 @@
     enable = true;
     ports = [ 2222 ];
     settings = {
-      PermitRootLogin = "no";
+      PermitRootLogin = "prohibit-password"; # Allow root login only with SSH keys
       PasswordAuthentication = true;
       LogLevel = "VERBOSE";
     };
@@ -25,44 +25,39 @@
   };
 
   systemd.services.sshd.serviceConfig = {
-    NoNewPrivileges = true;
+    NoNewPrivileges = false;
 
-    ProtectSystem = false;
-    ProtectHome = true;
+    # ProtectSystem = "full";
+    ProtectHome = false;
     ProtectClock = true;
-    ProtectHostname = true;
-    ProtectKernelTunables = true;
-    ProtectKernelModules = true;
-    ProtectKernelLogs = true;
+    # ProtectHostname = true;
+    # ProtectKernelTunables = true;
+    # ProtectKernelModules = true;
+    # ProtectKernelLogs = true;
     ProtectControlGroups = true;
     ProtectProc = "noaccess";
 
     PrivateTmp = true;
     PrivateMounts = true;
     PrivateDevices = true;
-    PrivateIPC = false;
+    PrivateIPC = true;
     PrivateNetwork = false;
     PrivatePIDs = true;
-    PrivateUsers = true;
+    PrivateUsers = false;
 
-    RestrictNamespaces = true;
+    # RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
-    RestrictAddressFamilies = [
-      "~AF_UNIX"
-      "~AF_NETLINK"
-      "AF_INET"
-      "AF_INET6"
-      "~AF_PACKET"
-    ];
 
     SystemCallFilter = [
+      # "~@reboot"
       "~@keyring"
       "~@swap"
       "~@clock"
       "~@module"
       "~@obsolete"
       "~@cpu-emulation"
+      "~@debug"
     ];
     SystemCallArchitectures = "native";
 

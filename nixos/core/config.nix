@@ -6,5 +6,6 @@
     grub2 # Boot loader for BIOS and UEFI systems; includes grub-mkpasswd-pbkdf2 for password generation
     efibootmgr # Tool to manipulate UEFI boot managers
     disko # Declarative disk partitioning and formatting using nix.
+    nixos-facter # Declarative hardware configuration for NixOS.
   ];
 }

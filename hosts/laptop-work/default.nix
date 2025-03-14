@@ -1,17 +1,13 @@
 { pkgs, lib, ... }:
-let
-  name = "laptop-work";
-in
 {
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
+    ./disko-config.nix
   ];
 
   time.timeZone = "Europe/Paris";
 
   networking = {
-    hostName = name;
     # wg-quick = {
     #   interfaces = {
     #     wg0 = {

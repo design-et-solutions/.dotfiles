@@ -1,4 +1,10 @@
 {
+  disk = {
+    enable = true;
+    params = {
+      diskPath = "/dev/sda";
+    };
+  };
   gui = {
     enable = false;
     path = ../nixos/optional/gui;
@@ -172,6 +178,7 @@
           path = ../nixos/optional/networking/vpn/server.nix;
         };
       };
+      ssh.root.authorizedKeys = [ ];
       analyzer = {
         enable = false;
         path = ../nixos/optional/networking/analyzer.nix;

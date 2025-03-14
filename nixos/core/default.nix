@@ -11,6 +11,7 @@
     ./bootloader.nix
     ./config.nix
     ./dev.nix
+    ./disk.nix
     ./generation.nix
     ./git.nix
     ./networking.nix

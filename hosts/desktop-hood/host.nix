@@ -1,10 +1,12 @@
 { mkNixosConfiguration, ... }:
 
 mkNixosConfiguration {
+  name = "desktop-hood";
   system = "x86_64-linux";
   host = ./.;
   users = [ "me" ];
   setup = {
+    disk.default = false;
     gui = {
       enable = true;
       params.autoLogin = {

@@ -5,27 +5,17 @@
   # sudo nix-collect-garbage -d
 
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-    # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
     nix-rpi5.url = "git+https://gitlab.com/vriska/nix-rpi5.git";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      nixos-hardware,
-      nix-rpi5,
-      ...
-    }@inputs:
+    inputs@{ self, nixpkgs, ... }:
     let
       inherit (self) outputs;
       defaultSetup = import ./hosts/default-setup.nix;
@@ -37,9 +27,11 @@
           host,
           users,
           setup,
+          name,
           extraModules ? [ ],
         }:
         let
+          allUsers = users ++ [ "root" ];
           mergedSetup = nixpkgs.lib.recursiveUpdate defaultSetup setup;
           pkgs = nixpkgs.legacyPackages.${system};
           lib = nixpkgs.lib;
@@ -98,17 +90,19 @@
                 }:
                 {
                   _module.args.mergedSetup = mergedSetup;
+                  _module.args.hostname = name;
                 }
               )
               ./nixos/core
               host
-              home-manager.nixosModules.home-manager
+              inputs.disko.nixosModules.disko
+              inputs.home-manager.nixosModules.home-manager
               {
                 home-manager = {
                   useUserPackages = true;
                   backupFileExtension = "backup";
                   extraSpecialArgs = { inherit mergedSetup; };
-                  users = nixpkgs.lib.genAttrs users (user: {
+                  users = nixpkgs.lib.genAttrs allUsers (user: {
                     imports = [
                       ./home/core
                       ./home/users/${user}.nix
@@ -117,13 +111,28 @@
                 };
               }
               {
-                users.groups = nixpkgs.lib.genAttrs users (user: { });
+                users.groups = nixpkgs.lib.genAttrs allUsers (user: { });
                 users.users = builtins.listToAttrs (
                   map (user: {
                     name = user;
-                    value = import (./nixos/users/${user}.nix);
-                  }) users
+                    value = import (./nixos/users/${user}.nix) {
+                      inherit mergedSetup;
+                    };
+                  }) allUsers
                 );
+              }
+
+              inputs.nixos-facter-modules.nixosModules.facter
+              {
+                config.facter.reportPath =
+                  if builtins.pathExists ./hosts/${name}/facter.json then
+                    ./hosts/${name}/facter.json
+                  else
+                    throw ''
+                      To FIX:
+                        * Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter hosts/${name}/facter.json` ?
+                        * Have you forgotten to generate `./facter.json` by `sudo nixos-facter > hosts/${name}/facter.json` ?
+                    '';
               }
             ]
             ++ extraModules
@@ -132,7 +141,7 @@
         };
 
       nixosConfigurations = import ./hosts {
-        inherit mkNixosConfiguration nixos-hardware;
+        inherit mkNixosConfiguration;
         inherit (nixpkgs) lib;
       };
     in
