@@ -14,7 +14,7 @@
           };
           esp = {
             name = "ESP";
-            size = "500M";
+            size = "512M";
             type = "EF00";
             content = {
               type = "filesystem";
@@ -38,15 +38,27 @@
         type = "lvm_vg";
         lvs = {
           root = {
-            size = "100%FREE";
+            size = "50%FREE";
             content = {
               type = "filesystem";
               format = "ext4";
               mountpoint = "/";
-              mountOptions = [
-                "defaults"
-              ];
+              mountOptions = [ "defaults" ];
             };
+          };
+          home = {
+            size = "50%FREE - 4G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/home";
+              mountOptions = [ "defaults" ];
+            };
+          };
+          swap = {
+            size = "4G";
+            content.type = "swap";
+            randomEncryption = true;
           };
         };
       };
