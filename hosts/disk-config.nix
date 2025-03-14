@@ -20,6 +20,7 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
+              mountOptions = [ "umask=0077" ];
             };
           };
           root = {
@@ -38,26 +39,13 @@
         type = "lvm_vg";
         lvs = {
           root = {
-            size = "50%FREE";
+            size = "100%FREE";
             content = {
               type = "filesystem";
               format = "ext4";
               mountpoint = "/";
               mountOptions = [ "defaults" ];
             };
-          };
-          home = {
-            size = "50%FREE - 4G";
-            content = {
-              type = "filesystem";
-              format = "ext4";
-              mountpoint = "/home";
-              mountOptions = [ "defaults" ];
-            };
-          };
-          swap = {
-            size = "4G";
-            content.type = "swap";
           };
         };
       };
