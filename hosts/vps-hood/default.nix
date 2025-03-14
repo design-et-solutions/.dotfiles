@@ -16,6 +16,7 @@
   ];
 
   boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.efi.canTouchEfiVariables = false;
   # boot.loader.grub.efiSupport = false;
   # boot.loader.grub.device = "dev/sda";
 }

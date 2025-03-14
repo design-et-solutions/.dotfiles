@@ -11,14 +11,14 @@
     systemd-boot.enable = false;
     efi = {
       efiSysMountPoint = "/boot";
-      canTouchEfiVariables = true;
+      canTouchEfiVariables = lib.mkDefault true;
     };
     timeout = 10;
     grub = {
       enable = true;
       device = "nodev";
       efiSupport = true;
-      efiInstallAsRemovable = false;
+      efiInstallAsRemovable = lib.mkDefault false;
       useOSProber = true;
       # extraConfig = ''
       #   set superusers="root"
