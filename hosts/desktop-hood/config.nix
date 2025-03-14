@@ -3,9 +3,8 @@
 mkNixosConfiguration {
   name = "desktop-hood";
   system = "x86_64-linux";
-  host = ./.;
   users = [ "me" ];
-  setup = {
+  hostConfig = {
     gui.enable = true;
     gpu.nvidia.enable = true;
     browser.firefox.enable = true;

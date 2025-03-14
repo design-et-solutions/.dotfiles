@@ -1,14 +1,13 @@
 { mkNixosConfiguration, ... }:
 mkNixosConfiguration {
   system = "aarch64-linux";
-  host = ./.;
   users = [ "bodyguard" ];
-  setup = {
+  hostConfig = {
     nogui = {
       network = {
         wireshark = true;
         vpn.server = true;
-        wifi.emergency =  true;
+        wifi.emergency = true;
         suricata = true;
       };
       security = {

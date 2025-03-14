@@ -1,17 +1,15 @@
-{ pkgs, lib, ... }:
-let 
-  name = "bodyguard";
-in {
+{
+  modulesPath,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [
-    # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
+    (modulesPath + "/profiles/qemu-guest.nix")
+    ../disk-config.nix
   ];
-  
-  time.timeZone = "Europe/Paris";
-
-  networking= {
-    hostName = name;
-  };
 
   services = {
     # ntp.enable = true;
@@ -21,7 +19,7 @@ in {
     # };
     # suricata = {
     #   enable = true;
-    #   interface = "eth0"; 
+    #   interface = "eth0";
     # };
   };
 
@@ -43,7 +41,7 @@ in {
   systemd.services.close-luks-usb = {
     description = "Unmount and close LUKS-encrypted USB key";
     wantedBy = [ "shutdown.target" ]; # Ensure it runs on shutdown
-    before = [ "shutdown.target" ];  # Runs before shutdown completes
+    before = [ "shutdown.target" ]; # Runs before shutdown completes
 
     serviceConfig = {
       Type = "oneshot";
@@ -55,4 +53,3 @@ in {
     };
   };
 }
-

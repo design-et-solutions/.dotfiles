@@ -24,7 +24,6 @@
       mkNixosConfiguration =
         {
           system,
-          host,
           users,
           hostConfig,
           name,
@@ -94,7 +93,7 @@
                 }
               )
               ./nixos/core
-              host
+              ./hosts/${name}
               inputs.disko.nixosModules.disko
               inputs.home-manager.nixosModules.home-manager
               {

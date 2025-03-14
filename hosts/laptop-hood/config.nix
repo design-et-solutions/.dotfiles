@@ -3,9 +3,8 @@
 mkNixosConfiguration {
   name = "laptop-hood";
   system = "x86_64-linux";
-  host = ./.;
   users = [ "me" ];
-  setup = {
+  hostConfig = {
     gui = {
       enable = true;
       params = {
