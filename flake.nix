@@ -131,7 +131,7 @@
                     throw ''
                       To FIX:
                         * Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter ./facter.json` ?
-                        * Have you forgotten to generate `./facter.json` by `` ?
+                        * Have you forgotten to generate `./facter.json` by `sudo nixos-facter > hosts/${name}/facter.json` ?
                     '';
               }
             ]
