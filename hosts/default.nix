@@ -7,7 +7,7 @@ let
 
   # Import each host.nix file and create the configuration
   hostConfigurations = lib.mapAttrs (
-    name: _: import (./. + "/${name}/host.nix") { inherit mkNixosConfiguration; }
+    name: _: import (./. + "/${name}/config.nix") { inherit mkNixosConfiguration; }
   ) hostDirs;
 in
 hostConfigurations

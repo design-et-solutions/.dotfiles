@@ -6,14 +6,7 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
-    disk.default = false;
-    gui = {
-      enable = true;
-      params.autoLogin = {
-        enable = true;
-        user = "me";
-      };
-    };
+    gui.enable = true;
     gpu.nvidia.enable = true;
     browser.firefox.enable = true;
     fileExplorer.enable = true;

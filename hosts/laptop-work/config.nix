@@ -6,13 +6,7 @@ mkNixosConfiguration {
   host = ./.;
   users = [ "me" ];
   setup = {
-    gui = {
-      enable = true;
-      params.autoLogin = {
-        enable = true;
-        user = "me";
-      };
-    };
+    gui.enable = true;
     browser.firefox.enable = true;
     fileExplorer.enable = true;
     mail.enable = true;

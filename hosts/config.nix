@@ -1,10 +1,4 @@
 {
-  disk = {
-    enable = true;
-    params = {
-      diskPath = "/dev/sda";
-    };
-  };
   gui = {
     enable = false;
     path = ../nixos/optional/gui;
@@ -12,10 +6,6 @@
       displayServer = "wayland";
       hyprland = {
         custom = "";
-      };
-      autoLogin = {
-        enable = false;
-        user = null;
       };
     };
   };
