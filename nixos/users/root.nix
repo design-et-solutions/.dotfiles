@@ -5,10 +5,6 @@
   extraGroups = [
     "wheel"
   ];
-  # password = "root";
-  hashedPassword = "$6$T73W/kgEMgyjT/iQ$NUYVlgjwZSxqrCoJ.aQt0B6Hu/e62Oi4/s2oR0ZGDUvtSBe0Isa49DexpBumM0NekLDvfF64KJDmJMnzXrVRK1";
-
-  # security.sudo.wheelNeedsPassword = false;
-
+  hashedPassword = "$6$ZNZFnpB1Wy800/Nz$7EMJ6qSnbSfSsAetfK7IIxoH1wpZP85Oq5sMz5tl8jFI4dLG9EPE8NwaPiM1FxV91/38PSLZNoLaTBvz71/LX1";
   openssh.authorizedKeys.keys = mergedSetup.networking.internet.ssh.root.authorizedKeys;
 }

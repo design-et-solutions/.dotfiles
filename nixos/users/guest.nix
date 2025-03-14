@@ -1,8 +1,13 @@
-{ ... }:{
+{ ... }:
+{
   group = "guest";
   isNormalUser = true;
   home = "/home/guest";
-  extraGroups = [ "audio" "video" "systemd-journal" "pulse" ];
-  # password = "guest";
-  hashedPassword = "$6$OKgDFi5FepLAah1f$i4KftCYXTnUx2oSQ2NCTCcfsHeyyVL8A5NU/g.UexKgHMVaWskvX6W1yckbuL9GalSUiT2Bxz66k0u4HlEbiC.";
+  extraGroups = [
+    "audio"
+    "video"
+    "systemd-journal"
+    "pulse"
+  ];
+  hashedPassword = "$6$y2j3S1Viel/.P/j4$2OJ.Aoq/JDidLKsxtNJ4Z5XDlwT626d5iUljOTtq3m8HVYHeBhxQje/zN0XBOjonKsJHU.LSx0MCXPM2fAdnq.";
 }

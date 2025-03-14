@@ -1,8 +1,20 @@
-{ ... }:{
+{ ... }:
+{
   group = "me";
   isNormalUser = true;
   home = "/home/me";
-  extraGroups = [ "wheel" "networkmanager" "audio" "guest" "pulse" "video" "systemd-journal" "docker" "disk" "dialout" "docker" ];
-  # password = "me";
-  hashedPassword = "$6$9kBLqUdAM7HL/woP$7M.oa2WdVlOP6PyMNpKHX2Mn5fBe49Z6y/uVi2B9x/G2hjg5uYHhGb354KA97Uz/9pOVTNcrZ4tqatWITR82o1";
+  extraGroups = [
+    "wheel"
+    "networkmanager"
+    "audio"
+    "guest"
+    "pulse"
+    "video"
+    "systemd-journal"
+    "docker"
+    "disk"
+    "dialout"
+    "docker"
+  ];
+  hashedPassword = "$6$E280K2LZktjmDkQV$5eSLAIx3fWw807sc9Du8TLS2CUjSj6HdqhPff1NobZnK8D53PoScBtu3XxQuVIJ79mHMQeHiPAtfOYhspux2J1";
 }
