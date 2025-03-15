@@ -5,8 +5,8 @@
   };
 
   home.file = {
-    ".scripts/nvim_reloader.fish" = {
-      source = builtins.toString ../../scripts/nvim_reloader.fish;
+    ".scripts/shell/nvim/reloader.fish" = {
+      source = builtins.toString ../../../scripts/shell/nvim/reloader.fish;
       executable = true;
     };
   };

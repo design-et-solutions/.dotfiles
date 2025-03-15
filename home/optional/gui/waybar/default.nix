@@ -260,7 +260,7 @@
           tooltip = false;
           interval = 1;
           exec = "${pkgs.writeShellScript "unread-mail" ''
-            UNREAD_MAIL=$(/etc/scripts/mailchecker.fish | tail -n 1)
+            UNREAD_MAIL=$(/etc/scripts/misc/mailchecker.fish | tail -n 1)
             if [[ $UNREAD_MAIL  -gt 0 ]]; then
               ALT="no-empty"
             else
@@ -270,7 +270,7 @@
 
           ''}";
           exec-if = "${pkgs.writeShellScript "check-interface" ''
-            MAIL_ACCOUNT_COUNT=$(/etc/scripts/mailchecker.fish | wc -l)
+            MAIL_ACCOUNT_COUNT=$(/etc/scripts/misc/mailchecker.fish | wc -l)
             if [[ $MAIL_ACCOUNT_COUNT  -gt 1 ]]; then
               exit 0
             else
@@ -284,8 +284,8 @@
 
   xdg.configFile."waybar/theme".source = ./theme;
 
-  home.file.".scripts/waybar.fish" = {
-    source = builtins.toString ../../../scripts/waybar.fish;
+  home.file.".scripts/gui/waybar/self.fish" = {
+    source = builtins.toString ../../../../scripts/gui/waybar/self.fish;
     executable = true;
   };
 }

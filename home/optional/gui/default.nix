@@ -6,17 +6,17 @@
 }:
 let
   notifyCommand = ''
-    exec = $HOME/.scripts/mako_reloader.fish
+    exec = $HOME/.scripts/gui/mako/reloader.fish
   '';
   barCommand = ''
-    exec = $HOME/.scripts/waybar.fish
+    exec = $HOME/.scripts/gui/waybar/self.fish
   '';
   wallpaperCommand = ''
     exec = hyprpaper
-    exec = $HOME/.scripts/misc/wallpapers_rand.fish
+    exec = $HOME/.scripts/gui/misc/wallpapers_rand.fish
   '';
   hyprlandCommand = ''
-    exec = $HOME/.scripts/hypr_reloader.fish
+    exec = $HOME/.scripts/gui/hyprland/reloader.fish
   '';
   hyprlandConf = pkgs.substituteAll {
     src = ./hyprland.conf;
@@ -68,15 +68,15 @@ in
   home.file =
     {
       ".scripts/misc/loading_notif.fish" = {
-        source = builtins.toString ../../scripts/misc/loading_notif.fish;
+        source = builtins.toString ../../../scripts/misc/loading_notif.fish;
         executable = true;
       };
-      ".scripts/misc/theme_reloader.fish" = {
-        source = builtins.toString ../../scripts/misc/theme_reloader.fish;
+      ".scripts/gui/misc/theme_reloader.fish" = {
+        source = builtins.toString ../../../scripts/gui/misc/theme_reloader.fish;
         executable = true;
       };
-      ".scripts/misc/wallpapers_rand.fish" = {
-        source = builtins.toString ../../scripts/misc/wallpapers_rand.fish;
+      ".scripts/gui/misc/wallpapers_rand.fish" = {
+        source = builtins.toString ../../../scripts/gui/misc/wallpapers_rand.fish;
         executable = true;
       };
       ".wallpapers" = {
@@ -87,8 +87,8 @@ in
       };
     }
     // lib.optionalAttrs isWayland {
-      ".scripts/hypr_reloader.fish" = {
-        source = builtins.toString ../../scripts/hypr_reloader.fish;
+      ".scripts/gui/hyprland/reloader.fish" = {
+        source = builtins.toString ../../../scripts/hyprland/reloader.fish;
         executable = true;
       };
     };

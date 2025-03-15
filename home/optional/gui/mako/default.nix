@@ -11,8 +11,8 @@ in
   xdg.configFile."mako/theme".source = ./theme;
 
   home.file = {
-    ".scripts/mako_reloader.fish" = {
-      source = builtins.toString ../../../scripts/mako_reloader.fish;
+    ".scripts/gui/mako/reloader.fish" = {
+      source = builtins.toString ../../../scripts/gui/mako/reloader.fish;
       executable = true;
     };
   };

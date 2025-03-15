@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
-  environment.etc."scripts/systemd-analyzer-security.fish" = {
-    source = builtins.toString ../../scripts/systemd-analayser-security.fish;
+  environment.etc."scripts/security/systemd-analyzer-security.fish" = {
+    source = builtins.toString ../../../scripts/security/systemd-analayser-security.fish;
     mode = "0755";
   };
 
@@ -9,7 +9,7 @@
     description = "Run systemd security check";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.fish}/bin/fish -c '/etc/scripts/systemd-analyzer-security.fish'";
+      ExecStart = "${pkgs.fish}/bin/fish -c '/etc/scripts/security/systemd-analyzer-security.fish'";
       Environment = [
         "PATH=${pkgs.fish}/bin:${pkgs.gnugrep}/bin:${pkgs.gnused}/bin:${pkgs.coreutils}/bin:${pkgs.gawk}/bin:${pkgs.systemd}/bin:${pkgs.libnotify}/bin:${pkgs.procps}/bin:${pkgs.util-linux}/bin:$PATH"
       ];

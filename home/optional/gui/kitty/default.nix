@@ -15,7 +15,7 @@
       size = 12.0;
     };
     settings = {
-      shell = "${toString ./../../../scripts/tmux.fish}";
+      shell = "${toString ./../../../../scripts/shell/tmux/self.fish}";
       window_padding_width = 4;
     };
     keybindings = {
@@ -34,12 +34,12 @@
   xdg.configFile."kitty/theme".source = ./theme;
 
   home.file = {
-    ".scripts/tmux.fish" = {
-      source = builtins.toString ../../../scripts/tmux.fish;
+    ".scripts/shell/tmux/self.fish" = {
+      source = builtins.toString ../../../../scripts/shell/tmux/self.fish;
       executable = true;
     };
-    ".scripts/kitty.fish" = {
-      source = builtins.toString ../../../scripts/kitty.fish;
+    ".scripts/shell/kitty/self.fish" = {
+      source = builtins.toString ../../../scripts/shell/kitty/self.fish;
       executable = true;
     };
   };
