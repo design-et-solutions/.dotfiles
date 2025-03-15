@@ -4,6 +4,7 @@
 nix-shell -p git
 git clone https://github.com/YvesCousteau/.dotfiles.git /mnt/etc/nixos
 cd /mnt/etc/nixos
+nix run nixpkgs#nixos-facter -- --output ./hosts/${host}/facter.json
 ```
 
 ```sh
