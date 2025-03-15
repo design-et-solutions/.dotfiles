@@ -6,7 +6,7 @@ function kitty_reload
 end
 
 function mako_reload
-    $HOME/.scripts/mako_reloader.fish
+    $HOME/.scripts/gui/mako/reloader.fish
 end
 
 function hyprland_reload
@@ -14,11 +14,11 @@ function hyprland_reload
 end
 
 function nvim_reload
-    $HOME/.scripts/nvim_reloader.fish
+    $HOME/.scripts/shell/nvim/reloader.fish
 end
 
 function tmux_reload
-    $HOME/.scripts/tmux_reloader.fish
+    $HOME/.scripts/shell/tmux/reloader.fish
 end
 
 echo $argv[1]

@@ -1,4 +1,4 @@
 #!/usr/bin/env fish
 
-$HOME/.scripts/tmux_reloader.fish
+$HOME/.scripts/shell/tmux/reloader.fish
 tmux attach-session
