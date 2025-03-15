@@ -1,14 +1,13 @@
 # Live CD
 
 ```sh
-git clone https://github.com/your-username/your-nixos-config.git
-cd your-nixos-config
-
+nix-shell -p git
+git clone https://github.com/YvesCousteau/.dotfiles.git /mnt/etc/nixos
+cd /mnt/etc/nixos
 ```
 
 ```sh
-nix run github:nix-community/disko -- --mode disko /mnt/config/path/to/disko-config.nix
-
+# nix run github:nix-community/disko -- --mode disko /mnt/config/path/to/disko-config.nix
 ```
 
 ```sh
