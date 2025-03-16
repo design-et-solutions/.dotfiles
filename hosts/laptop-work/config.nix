@@ -46,9 +46,9 @@ mkNixosConfiguration {
         #   client.enable = true;
         #   isExternal = true;
         # };
-        wifi = {
-          emergency.enable = true;
-        };
+        # wifi = {
+        #   emergency.enable = true;
+        # };
       };
       bluetooth.enable = true;
       # can = {
