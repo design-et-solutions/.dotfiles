@@ -12,6 +12,7 @@ services.openssh = {
   enable = true;                        # Enable the SSH service
   settings = {
     PasswordAuthentication = true;     # Allow password-based login (optional, for security consider disabling this later)
+    PermitRootLogin = true;
   };
 };
 ```
