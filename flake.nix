@@ -6,12 +6,15 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-rpi5.url = "git+https://gitlab.com/vriska/nix-rpi5.git";
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+    disko = {
+      url = "github:nix-community/disko/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -118,19 +121,26 @@
                   }) allUsers
                 );
               }
-
-              inputs.nixos-facter-modules.nixosModules.facter
-              {
-                config.facter.reportPath =
-                  if builtins.pathExists ./hosts/facter.json then
-                    ./hosts/facter.json
-                  else
-                    throw ''
-                      To FIX:
-                        * Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter facter.json` ?
-                        * Have you forgotten to generate `./facter.json` by `sudo nixos-facter > /facter.json` ?
-                    '';
-              }
+              (
+                { config, pkgs, ... }:
+                {
+                  imports = [
+                    (
+                      if builtins.pathExists ./hardware-configuration.nix then
+                        (pkgs.writeText "hardware-configuration.nix" ''
+                          ${builtins.readFile ./hardware-configuration.nix}
+                        '')
+                      else
+                        throw ''
+                          To FIX:
+                            * Have you forgotten to generate hardware-configuration.nix?
+                            * Run 'sudo nixos-generate-config --no-filesystem' to create hardware-configuration.nix
+                            * Or use nixos-anywhere with '--generate-hardware-config' option
+                        ''
+                    )
+                  ];
+                }
+              )
             ]
             ++ extraModules
             ++ debugModules

@@ -3,3 +3,4 @@
 result
 
 **/facter.json
+**/hardware-configuration.nix
