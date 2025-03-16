@@ -14,9 +14,9 @@ in
   ];
 
   services = {
-    displayManager = {
-      autoLogin.enable = lib.mkDefault true;
-      autoLogin.user = lib.mkDefault null;
+    displayManager.autoLogin = {
+      enable = lib.mkDefault false;
+      user = lib.mkDefault null;
     };
     xserver = {
       enable = true;

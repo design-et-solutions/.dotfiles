@@ -39,7 +39,7 @@
       executable = true;
     };
     ".scripts/shell/kitty/self.fish" = {
-      source = builtins.toString ../../../scripts/shell/kitty/self.fish;
+      source = builtins.toString ../../../../scripts/shell/kitty/self.fish;
       executable = true;
     };
   };

@@ -10,11 +10,9 @@
     ../disk-config.nix
   ];
 
-  services = {
-    displayManager = {
-      autoLogin.enable = lib.mkDefault true;
-      autoLogin.user = lib.mkDefault null;
-    };
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "me";
   };
 
   disko.devices.disk.disk1.device = "/dev/nvme0n1";

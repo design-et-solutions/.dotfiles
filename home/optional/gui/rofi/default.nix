@@ -20,15 +20,15 @@
 
   home.file = {
     ".scripts/gui/rofi/menu_themes.fish" = {
-      source = builtins.toString ../../../../scripts/rofi/menu_themes.fish;
+      source = builtins.toString ../../../../scripts/gui/rofi/menu_themes.fish;
       executable = true;
     };
     ".scripts/gui/rofi/menu_power.fish" = {
-      source = builtins.toString ../../../../scripts/rofi/menu_power.fish;
+      source = builtins.toString ../../../../scripts/gui/rofi/menu_power.fish;
       executable = true;
     };
     ".scripts/gui/rofi/menu_launcher.fish" = {
-      source = builtins.toString ../../../../scripts/rofi/menu_launcher.fish;
+      source = builtins.toString ../../../../scripts/gui/rofi/menu_launcher.fish;
       executable = true;
     };
     ".scripts/gui/rofi/menu_shortcuts.fish" = {

@@ -88,7 +88,7 @@ in
     }
     // lib.optionalAttrs isWayland {
       ".scripts/gui/hyprland/reloader.fish" = {
-        source = builtins.toString ../../../scripts/hyprland/reloader.fish;
+        source = builtins.toString ../../../scripts/gui/hyprland/reloader.fish;
         executable = true;
       };
     };

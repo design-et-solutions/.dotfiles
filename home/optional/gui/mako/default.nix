@@ -12,7 +12,7 @@ in
 
   home.file = {
     ".scripts/gui/mako/reloader.fish" = {
-      source = builtins.toString ../../../scripts/gui/mako/reloader.fish;
+      source = builtins.toString ../../../../scripts/gui/mako/reloader.fish;
       executable = true;
     };
   };
