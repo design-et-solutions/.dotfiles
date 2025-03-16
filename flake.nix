@@ -130,8 +130,9 @@
                       throw ''
                         To FIX:
                           * Have you forgotten to generate hardware-configuration.nix?
-                          * Run 'sudo nixos-generate-config --no-filesystem --dir  ./hosts/${name}/hardware-configuration.nix' to create hardware-configuration.nix
-                          * Or use nixos-anywhere with '--generate-hardware-config ./hosts/${name}/hardware-configuration.nix' option
+                          * Run 'sudo nixos-generate-config --no-filesystem --dir  ./hosts/${name}'
+                          * Or 
+                          * Run 'sudo nixos-anywhere --flake .#${name} --generate-hardware-config nixos-generate-config ./hosts/${name}'
                       ''
                   )
                 ];
