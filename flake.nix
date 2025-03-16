@@ -122,13 +122,13 @@
               inputs.nixos-facter-modules.nixosModules.facter
               {
                 config.facter.reportPath =
-                  if builtins.pathExists ./hosts/${name}/facter.json then
-                    ./hosts/${name}/facter.json
+                  if builtins.pathExists ./hosts/facter.json then
+                    ./hosts/facter.json
                   else
                     throw ''
                       To FIX:
-                        * Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter hosts/${name}/facter.json` ?
-                        * Have you forgotten to generate `./facter.json` by `sudo nixos-facter > hosts/${name}/facter.json` ?
+                        * Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter facter.json` ?
+                        * Have you forgotten to generate `./facter.json` by `sudo nixos-facter > /facter.json` ?
                     '';
               }
             ]
