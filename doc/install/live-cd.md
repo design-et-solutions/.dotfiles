@@ -8,7 +8,12 @@ nix run nixpkgs#nixos-facter -- --output ./hosts/${host}/facter.json
 ```
 
 ```sh
-# nix run github:nix-community/disko -- --mode disko /mnt/config/path/to/disko-config.nix
+services.openssh = {
+  enable = true;                        # Enable the SSH service
+  settings = {
+    PasswordAuthentication = true;     # Allow password-based login (optional, for security consider disabling this later)
+  };
+};
 ```
 
 ```sh
