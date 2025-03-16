@@ -121,26 +121,21 @@
                   }) allUsers
                 );
               }
-              (
-                { config, pkgs, ... }:
-                {
-                  imports = [
-                    (
-                      if builtins.pathExists ./hardware-configuration.nix then
-                        (pkgs.writeText "hardware-configuration.nix" ''
-                          ${builtins.readFile ./hardware-configuration.nix}
-                        '')
-                      else
-                        throw ''
-                          To FIX:
-                            * Have you forgotten to generate hardware-configuration.nix?
-                            * Run 'sudo nixos-generate-config --no-filesystem' to create hardware-configuration.nix
-                            * Or use nixos-anywhere with '--generate-hardware-config' option
-                        ''
-                    )
-                  ];
-                }
-              )
+              {
+                imports = [
+                  (
+                    if builtins.pathExists ./hosts/{name}/hardware-configuration.nix then
+                      ./hosts/{name}/hardware-configuration.nix
+                    else
+                      throw ''
+                        To FIX:
+                          * Have you forgotten to generate hardware-configuration.nix?
+                          * Run 'sudo nixos-generate-config --no-filesystem' to create hardware-configuration.nix
+                          * Or use nixos-anywhere with '--generate-hardware-config' option
+                      ''
+                  )
+                ];
+              }
             ]
             ++ extraModules
             ++ debugModules
