@@ -1,4 +1,5 @@
 {
+  disk.encryption = false;
   gui = {
     enable = false;
     path = ../nixos/optional/gui;
