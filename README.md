@@ -44,6 +44,5 @@ sudo nixos-rebuild switch \
 ```sh
 NIX_SSHOPTS="-p ${SSH_PORT}" nixos-rebuild switch \
     --flake .#${name} \
-    --target-host ${hostname}@${IP} \
-    --build-host localhost
+    --target-host ${hostname}@${IP}
 ```
