@@ -27,22 +27,16 @@ let
     animations_enable = "true";
     custom = mergedSetup.gui.params.hyprland.custom;
   };
-  isWayland = mergedSetup.gui.params.displayServer == "wayland";
 in
 {
   imports =
     [
       ./mako
-      # ./kitty
-      # ./rofi
-    ]
-    ++ lib.optionals (isWayland) [
       ./kitty
       ./rofi
-      ./waybar
     ]
-    ++ lib.optionals (!isWayland) [
-      ./gnome.nix
+    ++ lib.optionals (mergedSetup.gui.params.displayServer.wayland) [
+      ./waybar
     ];
 
   xdg.configFile =
@@ -58,7 +52,7 @@ in
       '';
     }
     // (
-      if isWayland then
+      if mergedSetup.gui.params.windowManager.hyprland then
         {
           "hypr/hyprland.conf".source = hyprlandConf;
           "hypr/windowrule.conf".source = ./windowrule.conf;
@@ -91,7 +85,7 @@ in
         source = ../../cursors;
       };
     }
-    // lib.optionalAttrs isWayland {
+    // lib.optionalAttrs mergedSetup.gui.params.windowManager.hyprland {
       ".scripts/gui/hyprland/reloader.fish" = {
         source = builtins.toString ../../../scripts/gui/hyprland/reloader.fish;
         executable = true;

@@ -4,28 +4,25 @@
   lib,
   ...
 }:
-let
-  isWayland = mergedSetup.gui.params.displayServer == "wayland";
-in
 {
-  programs.hyprland = lib.mkIf isWayland {
+  programs.hyprland = lib.mkIf mergedSetup.gui.params.windowManager.hyprland {
     enable = true;
     xwayland.enable = true;
   };
 
-  programs.hyprlock = lib.mkIf isWayland {
+  programs.hyprlock = lib.mkIf mergedSetup.gui.params.windowManager.hyprland {
     enable = true;
   };
 
-  security.pam.services = lib.mkIf isWayland {
+  security.pam.services = lib.mkIf mergedSetup.gui.params.windowManager.hyprland {
     hyprlock = { };
   };
 
-  services.hypridle = lib.mkIf isWayland {
+  services.hypridle = lib.mkIf mergedSetup.gui.params.windowManager.hyprland {
     enable = true;
   };
 
-  environment.systemPackages = lib.mkIf isWayland (
+  environment.systemPackages = lib.mkIf mergedSetup.gui.params.windowManager.hyprland (
     with pkgs;
     [
       hyprcursor # Hyprland's cursor theme manager

@@ -4,7 +4,14 @@
     enable = false;
     path = ../nixos/optional/gui;
     params = {
-      displayServer = "wayland";
+      displayServer = {
+        wayland = true;
+        x11 = false;
+      };
+      windowManager = {
+        hyprland = true;
+        i3 = false;
+      };
       hyprland = {
         custom = "";
       };
