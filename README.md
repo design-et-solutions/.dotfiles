@@ -17,25 +17,22 @@
 
 ## Setup
 
-## Table of Contents
+### From scratch
 
-- [Themes](docs/themes/README.md)
-- [Shortcuts Guide](docs/shortcuts/README.md)
-- [Usage Guide](docs/usage/README.md)
+To install nixos on an none setup host or on a live CD plugged host with SSH setuped by running from a nixos host:
 
-## Security
+```sh
+nixos-anywhere \
+    --flake .#${name} \
+     --generate-hardware-config nixos-generate-config ./hosts/${name}/hardware-configuration.nix \
+    ${hostname}@${IP} -p ${SSH_PORT}
+```
 
-### Systemd
+### From already installed
 
-- **CMD** => `systemd-analyze security`
-- **CMD** => `systemd-analyze security <service_name>`
-- **CMD** => `journactl -n 100 -fu <service_name>`
-- **LINK** => `https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html`
+To install nixos on an already setuped host by running from a nixos host:
 
-## Print
-
-- **CMD** => `sudo lpadmin -p name_&&_description -E -v ipp://192.168.1.XXX/ipp/print -m everywhere`
-
-## Nix
-
-- **LINK** => `https://nixos.org/manual/nixos/stable/`
+```sh
+sudo nixos-rebuild \
+    --flake .#${name}
+```
