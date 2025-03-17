@@ -17,7 +17,7 @@
 
 ## Setup
 
-### From scratch
+### From none setuped host
 
 To install nixos on an none setup host or on a live CD plugged host with SSH setuped by running from a nixos host:
 
@@ -28,7 +28,7 @@ nixos-anywhere \
     ${hostname}@${IP} -p ${SSH_PORT}
 ```
 
-### From already installed
+### From setuped host
 
 To install nixos on an already setuped host by running from a nixos host:
 
