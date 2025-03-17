@@ -40,7 +40,6 @@
     lvm_vg = {
       pool = {
         type = "lvm_vg";
-        extent_size = "4M";
         lvs = {
           root = {
             size = "100%FREE";
