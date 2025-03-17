@@ -33,11 +33,16 @@ in
   imports =
     [
       ./mako
-      ./kitty
-      ./rofi
+      # ./kitty
+      # ./rofi
     ]
     ++ lib.optionals (isWayland) [
+      ./kitty
+      ./rofi
       ./waybar
+    ]
+    ++ lib.optionals (!isWayland) [
+      ./gnome.nix
     ];
 
   xdg.configFile =
