@@ -73,34 +73,34 @@
               mountOptions = [ "defaults" ];
             };
           };
-        };
-        # User home directory
-        home = {
-          size = "200G";
-          content = {
-            type = "filesystem";
-            format = "ext4";
-            mountpoint = "/home";
-            mountOptions = [ "defaults" ];
+          # User home directory
+          home = {
+            size = "200G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/home";
+              mountOptions = [ "defaults" ];
+            };
           };
-        };
-        # Logs, databases, etc.
-        var = {
-          size = "100G";
-          content = {
-            type = "filesystem";
-            format = "ext4";
-            mountpoint = "/var";
-            mountOptions = [ "defaults" ];
+          # Logs, databases, etc.
+          var = {
+            size = "100G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/var";
+              mountOptions = [ "defaults" ];
+            };
           };
-        };
-        # Dedicated swap partition
-        swap = {
-          size = "16G";
-          content = {
-            type = "swap";
+          # Dedicated swap partition
+          swap = {
+            size = "16G";
+            content = {
+              type = "swap";
+            };
           };
-        };
+      };
       };
     };
   };
