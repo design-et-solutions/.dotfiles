@@ -12,8 +12,8 @@
 
   services = {
     displayManager = {
-      autoLogin.enable = lib.mkDefault true;
-      autoLogin.user = lib.mkDefault null;
+      autoLogin.enable = true;
+      autoLogin.user = "me";
     };
   };
 
