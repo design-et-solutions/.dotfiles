@@ -1,4 +1,4 @@
-{ lib, mergedSetup,... }:
+{ lib, mergedSetup, ... }:
 {
   disko.devices = {
     disk.disk1 = {
@@ -7,16 +7,16 @@
       content = {
         type = "gpt";
         partitions = {
-          # (Optional) BIOS Boot Partition (for legacy GRUB)
+          # BIOS Boot Partition for legacy GRUB (optional)
           boot = {
             name = "boot";
             size = "2M";
             type = "EF02";
           };
-          # EFI System Partition (ESP)
+          # EFI System Partition (ESP) for UEFI systems
           esp = {
             name = "ESP";
-            size = "512M";
+            size = "1G";
             type = "EF00";
             content = {
               type = "filesystem";
@@ -28,68 +28,88 @@
               ];
             };
           };
-          # Root Partition (LVM Physical Volume)
-          root = if !mergedSetup.disk.encryption then {
-            name = "root";
-            size = "100%";
-            content = {
-              type = "lvm_pv";
-              vg = "pool";
-            };
-          } else {
-            name = "cryptroot";
-            size = "100%";
-            content = {
-              type = "luks";
-              name = "crypted";  # This is the unlocked LUKS device
-              settings.allowDiscards = true;  # Enable TRIM for SSDs
-              settings.tpm2 = false;  # Set to true if using a TPM
-              content = {
-                type = "lvm_pv";
-                vg = "pool";
+          # Root Partition setup, using LVM or LUKS based on encryption
+          root =
+            if !mergedSetup.disk.encryption then
+              {
+                name = "root";
+                size = "100%"; # Use remaining space
+                content = {
+                  type = "lvm_pv"; # LVM Physical Volume
+                  vg = "pool"; # Volume Group
+                  extraArgs = [
+                    "--align=2048" # SSD optimization, 2048-byte alignment
+                  ];
+                };
+              }
+            else
+              {
+                name = "cryptroot"; # Name for encrypted root partition
+                size = "100%"; # Use remaining space
+                content = {
+                  type = "luks"; # LUKS encryption setup
+                  name = "crypted"; # Name for unlocked LUKS device
+                  settings.allowDiscards = true; # Enable TRIM for SSDs
+                  settings.tpm2 = false; # TPM usage setting, adjust if needed
+                  content = {
+                    type = "lvm_pv"; # LVM Physical Volume inside LUKS
+                    vg = "pool"; # Volume Group
+                    extraArgs = [
+                      "--align=2048" # SSD optimization, 2048-byte alignment
+                    ];
+                  };
+                };
               };
-            };
-          };
         };
       };
     };
-    # LVM Volume Group with multiple logical volumes
+    # LVM Volume Group configuration with multiple logical volumes
     lvm_vg = {
       pool = {
-        type = "lvm_vg";
+        type = "lvm_vg"; # Define volume group 'pool'
         lvs = {
-          # Root partition (system files)
+          # Logical Volume for the root filesystem
           root = {
-            size = "100G";
-            # size = "100%FREE";
+            size = "50%FREE";
             content = {
               type = "filesystem";
               format = "ext4";
               mountpoint = "/";
-              mountOptions = [ "defaults" ];
+              mountOptions = [
+                "defaults"
+                "noatime" # File system does not update the access time for files and directories
+              ];
             };
           };
-          # User home directory
+          # Logical Volume for user home directories
           home = {
-            size = "200G";
+            size = "30%FREE";
             content = {
               type = "filesystem";
               format = "ext4";
               mountpoint = "/home";
-              mountOptions = [ "defaults" ];
+              mountOptions = [
+                "defaults"
+                "noatime" # File system does not update the access time for files and directories
+              ];
             };
           };
-          # Logs, databases, etc.
+          # Logical Volume for system logs, databases, etc.
           var = {
-            size = "100G";
+            size = "20%FREE";
             content = {
               type = "filesystem";
               format = "ext4";
               mountpoint = "/var";
-              mountOptions = [ "defaults" ];
+              mountOptions = [
+                "defaults"
+                "noatime" # File system does not update the access time for files and directories
+                "nodev" # Restrict device files for security
+                "nosuid" # Prevent execution of setuid binaries
+              ];
             };
           };
-          # Dedicated swap partition
+          # Logical Volume for swap partition
           swap = {
             size = "16G";
             content = {
