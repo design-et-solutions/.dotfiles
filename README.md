@@ -30,9 +30,20 @@ nixos-anywhere \
 
 ### From setuped host
 
+## Self
+
 To install nixos on an already setuped host by running from a nixos host:
 
 ```sh
-sudo nixos-rebuild \
+sudo nixos-rebuild switch \
     --flake .#${name}
+```
+
+## On other
+
+```sh
+NIX_SSHOPTS="-p ${SSH_PORT}" nixos-rebuild switch \
+    --flake .#${name} \
+    --target-host ${hostname}@${IP} \
+    --build-host localhost
 ```

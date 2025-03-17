@@ -15,4 +15,11 @@
   ];
 
   disko.devices.disk.disk1.device = "/dev/nvme0n1";
+
+  services = {
+    displayManager = {
+      autoLogin.enable = true;
+      autoLogin.user = "me";
+    };
+  };
 }
