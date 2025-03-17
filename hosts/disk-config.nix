@@ -37,9 +37,6 @@
                 content = {
                   type = "lvm_pv"; # LVM Physical Volume
                   vg = "pool"; # Volume Group
-                  extraArgs = [
-                    "--align=2048" # SSD optimization, 2048-byte alignment
-                  ];
                 };
               }
             else
@@ -54,9 +51,6 @@
                   content = {
                     type = "lvm_pv"; # LVM Physical Volume inside LUKS
                     vg = "pool"; # Volume Group
-                    extraArgs = [
-                      "--align=2048" # SSD optimization, 2048-byte alignment
-                    ];
                   };
                 };
               };
