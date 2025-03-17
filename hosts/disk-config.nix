@@ -37,6 +37,23 @@
               vg = "pool";
             };
           };
+          # Encrypted LUKS Partition for LVM
+          # cryptroot = {
+          #   name = "cryptroot";
+          #   size = "100%";
+          #   content = {
+          #     type = "luks";
+          #     name = "crypted"; # This is the unlocked LUKS device
+          #     settings.allowDiscards = true; # Enable TRIM for SSDs
+          #     settings.tpm2 = false; # Set to true if using a TPM
+          #
+          #     # Inside LUKS, we create an LVM group
+          #     content = {
+          #       type = "lvm_pv";
+          #       vg = "pool";
+          #     };
+          #   };
+          # };
         };
       };
     };
