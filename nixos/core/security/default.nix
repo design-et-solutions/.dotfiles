@@ -3,6 +3,7 @@
   imports = [
     ./scan.nix
     ./audit
+    ./login.nix
   ];
 
   security = {

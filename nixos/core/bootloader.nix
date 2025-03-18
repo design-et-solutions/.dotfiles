@@ -24,5 +24,19 @@
       };
     };
     kernelPackages = pkgs.linuxPackages_latest;
+    supportedFilesystems = {
+      ext4 = true;
+      vfat = true;
+      lvm = true;
+    };
+    # 0	EMERG	System is unusable
+    # 1	ALERT	Immediate action required
+    # 2	CRIT	Critical conditions
+    # 3	ERR	    Error conditions
+    # 4	WARN	Warning conditions
+    # 5	NOTICE	Normal but significant
+    # 6	INFO	Informational messages
+    # 7	DEBUG	Debug-level messages
+    consoleLogLevel = lib.mkDefault 4;
   };
 }

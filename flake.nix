@@ -107,8 +107,14 @@
                   users = nixpkgs.lib.genAttrs allUsers (user: {
                     imports = [
                       ./home/core
-                      ./home/users/${user}.nix
-                    ];
+                    ] ++ (if lib.pathExists ./home/users/${user}.nix then [ ./home/users/${user}.nix ] else [ ]);
+
+                    home = {
+                      username = "${user}";
+                    };
+
+                    programs.home-manager.enable = true;
+
                   });
                 };
               }
@@ -117,7 +123,10 @@
                 users.users = builtins.listToAttrs (
                   map (user: {
                     name = user;
-                    value = import (./nixos/users/${user}.nix);
+                    value = (import (./nixos/users/${user}.nix) { inherit pkgs lib; }) // {
+                      group = "${user}";
+                      shell = pkgs.fish;
+                    };
                   }) allUsers
                 );
               }

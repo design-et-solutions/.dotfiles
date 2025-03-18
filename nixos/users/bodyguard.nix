@@ -1,6 +1,5 @@
 { ... }:
 {
-  group = "bodyguard";
   isNormalUser = true;
   home = "/home/bodyguard";
   extraGroups = [
