@@ -5,8 +5,6 @@
   ...
 }:
 {
-  # https://nixos.wiki/wiki/Bootloader
-  # https://mynixos.com/options/boot.loader
   boot = {
     loader = {
       systemd-boot.enable = false;
@@ -27,8 +25,10 @@
     supportedFilesystems = {
       ext4 = true;
       vfat = true;
-      lvm = true;
+      lvm2 = true;
     };
+    initrd.availableKernelModules = [ "dm-mod" ];
+
     # 0	EMERG	System is unusable
     # 1	ALERT	Immediate action required
     # 2	CRIT	Critical conditions
@@ -39,4 +39,6 @@
     # 7	DEBUG	Debug-level messages
     consoleLogLevel = lib.mkDefault 4;
   };
+
+  environment.systemPackages = [ pkgs.lvm2 ];
 }
