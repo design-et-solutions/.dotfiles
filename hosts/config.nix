@@ -17,6 +17,10 @@
       };
     };
   };
+  nogui = {
+    enable = true;
+    path = ../nixos/optional/nogui.nix;
+  };
   dev = {
     enable = false;
     path = ../nixos/optional/dev.nix;

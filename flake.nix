@@ -125,7 +125,8 @@
                     name = user;
                     value = (import (./nixos/users/${user}.nix) { inherit pkgs lib; }) // {
                       group = "${user}";
-                      shell = pkgs.fish;
+                      shell = pkgs.bash;
+                      createHome = true;
                     };
                   }) allUsers
                 );

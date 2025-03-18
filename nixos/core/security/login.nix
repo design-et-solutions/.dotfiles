@@ -1,8 +1,8 @@
-{ ... }:
+{ lib, ... }:
 {
   security.pam.services.login = {
     startSession = true;
-    allowNullPassword = false;
+    allowNullPassword = lib.mkForce false;
     forwardXAuth = false;
   };
 }
