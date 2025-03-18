@@ -8,4 +8,7 @@
     disko # Declarative disk partitioning and formatting using nix.
     nixos-facter # Declarative hardware configuration for NixOS.
   ];
+
+  # Ensure your system clock stays accurate
+  services.timesyncd.enable = true;
 }

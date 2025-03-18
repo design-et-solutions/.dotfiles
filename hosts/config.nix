@@ -17,6 +17,10 @@
       };
     };
   };
+  dev = {
+    enable = false;
+    path = ../nixos/optional/dev.nix;
+  };
   device = {
     rpi5 = {
       enable = false;
@@ -25,7 +29,7 @@
   };
   print = {
     enable = false;
-    path = ../nixos/optional/print/default.nix;
+    path = ../nixos/optional/print.nix;
   };
   audio = {
     default = {
