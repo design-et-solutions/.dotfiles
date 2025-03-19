@@ -1,5 +1,6 @@
 {
   modulesPath,
+  pkgs,
   ...
 }:
 {
@@ -18,6 +19,27 @@
     displayManager = {
       autoLogin.enable = true;
       autoLogin.user = "me";
+    };
+  };
+
+  networking = {
+    hosts = {
+      "192.100.1.1" = [ "cdp.thales" ];
+    };
+  };
+
+  systemd.services."auto-web" = {
+    description = "Run Firefox with a specific URL";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      User = "me";
+      ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:3000";
+      Restart = "always";
+      RestartSec = "5s";
+      Environment = [
+        "DISPLAY=:0"
+        "XDG_RUNTIME_DIR=/run/user/1000"
+      ];
     };
   };
 }
