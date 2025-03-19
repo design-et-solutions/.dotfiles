@@ -27,6 +27,7 @@ mkNixosConfiguration {
       };
       params.allowedPorts.tcp = [
         3000 # Server
+        3001 # React
         9999 # WebRTC
         8554 # RTSP
       ];
