@@ -25,8 +25,6 @@
           banner = "go fuck your self";
         };
       };
-      # desktopManager.xterm.enable = false;
-      # desktopManager.gnome.enable = true;
     };
     ratbagd.enable = true; # DBus daemon to configure input devices
     dbus.enable = true;
