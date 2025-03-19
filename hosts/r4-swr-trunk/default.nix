@@ -28,12 +28,12 @@
     };
   };
 
-  systemd.services."auto-web" = {
+  systemd.services."auto-web-1" = {
     description = "Run Firefox with a specific URL";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
-      ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:3000";
+      ExecStart = "${pkgs.firefox}/bin/firefox --new-instance -P p1 --class firefox-1 http://localhost:3000/left";
       Restart = "always";
       RestartSec = "5s";
       Environment = [
@@ -42,4 +42,37 @@
       ];
     };
   };
+
+  systemd.services."auto-web-2" = {
+    description = "Run Firefox with a specific URL";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      User = "me";
+      ExecStart = "${pkgs.firefox}/bin/firefox --new-instance -P p2 --class firefox-2 http://cdp.thales/mobile-app";
+      Restart = "always";
+      RestartSec = "5s";
+      Environment = [
+        "DISPLAY=:0"
+        "XDG_RUNTIME_DIR=/run/user/1000"
+      ];
+    };
+  };
+
+  home-manager.users.me =
+    { pkgs, ... }:
+    {
+      xsession.windowManager.i3.extraConfig = ''
+          # Assign Firefox windows to specific workspaces
+        assign [class="Firefox"] $ws1
+        assign [class="Firefox" instance="firefox-2"] $ws2
+
+        # Start Firefox on both screens
+        exec --no-startup-id i3-msg 'workspace 1; exec firefox'
+        exec --no-startup-id i3-msg 'workspace 2; exec firefox -P second-profile --class="firefox-2"'
+
+        # Move workspaces to specific outputs
+        workspace 1 output HDMI-1
+        workspace 2 output HDMI-2
+      '';
+    };
 }
