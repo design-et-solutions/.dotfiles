@@ -5,42 +5,36 @@
   # sudo nix-collect-garbage -d
 
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-    # Home manager
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-rpi5.url = "git+https://gitlab.com/vriska/nix-rpi5.git";
+    disko = {
+      url = "github:nix-community/disko/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      nixos-hardware,
-      nix-rpi5,
-      ...
-    }@inputs:
+    inputs@{ self, nixpkgs, ... }:
     let
       inherit (self) outputs;
-      defaultSetup = import ./hosts/default-setup.nix;
+      config = import ./hosts/config.nix;
       # NixOS configuration entrypoint
       # Define a function to create a NixOS configuration
       mkNixosConfiguration =
         {
           system,
-          host,
           users,
-          setup,
+          hostConfig,
+          name,
           extraModules ? [ ],
         }:
         let
-          mergedSetup = nixpkgs.lib.recursiveUpdate defaultSetup setup;
+          allUsers = users ++ [ "root" ];
+          mergedSetup = nixpkgs.lib.recursiveUpdate config hostConfig;
           pkgs = nixpkgs.legacyPackages.${system};
           lib = nixpkgs.lib;
 
@@ -98,32 +92,60 @@
                 }:
                 {
                   _module.args.mergedSetup = mergedSetup;
+                  _module.args.hostname = name;
                 }
               )
               ./nixos/core
-              host
-              home-manager.nixosModules.home-manager
+              ./hosts/${name}
+              inputs.disko.nixosModules.disko
+              inputs.home-manager.nixosModules.home-manager
               {
                 home-manager = {
                   useUserPackages = true;
                   backupFileExtension = "backup";
                   extraSpecialArgs = { inherit mergedSetup; };
-                  users = nixpkgs.lib.genAttrs users (user: {
+                  users = nixpkgs.lib.genAttrs allUsers (user: {
                     imports = [
                       ./home/core
-                      ./home/users/${user}.nix
-                    ];
+                    ] ++ (if lib.pathExists ./home/users/${user}.nix then [ ./home/users/${user}.nix ] else [ ]);
+
+                    home = {
+                      username = "${user}";
+                    };
+
+                    programs.home-manager.enable = true;
+
                   });
                 };
               }
               {
-                users.groups = nixpkgs.lib.genAttrs users (user: { });
+                users.groups = nixpkgs.lib.genAttrs allUsers (user: { });
                 users.users = builtins.listToAttrs (
                   map (user: {
                     name = user;
-                    value = import (./nixos/users/${user}.nix);
-                  }) users
+                    value = (import (./nixos/users/${user}.nix) { inherit pkgs lib; }) // {
+                      group = "${user}";
+                      shell = pkgs.bash;
+                      createHome = true;
+                    };
+                  }) allUsers
                 );
+              }
+              {
+                imports = [
+                  (
+                    if builtins.pathExists ./hosts/${name}/hardware-configuration.nix then
+                      ./hosts/${name}/hardware-configuration.nix
+                    else
+                      throw ''
+                        To FIX:
+                          * Have you forgotten to generate hardware-configuration.nix?
+                          * Run 'sudo nixos-generate-config --no-filesystems --dir  ./hosts/${name}'
+                          * Or 
+                          * Run 'sudo nixos-anywhere --flake .#${name} --generate-hardware-config nixos-generate-config ./hosts/${name}/hardware-configuration.nix'
+                      ''
+                  )
+                ];
               }
             ]
             ++ extraModules
@@ -132,7 +154,7 @@
         };
 
       nixosConfigurations = import ./hosts {
-        inherit mkNixosConfiguration nixos-hardware;
+        inherit mkNixosConfiguration;
         inherit (nixpkgs) lib;
       };
     in

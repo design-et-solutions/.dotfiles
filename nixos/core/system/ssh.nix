@@ -4,7 +4,7 @@
     enable = true;
     ports = [ 2222 ];
     settings = {
-      PermitRootLogin = "no";
+      PermitRootLogin = "prohibit-password"; # Allow root login only with SSH keys
       PasswordAuthentication = true;
       LogLevel = "VERBOSE";
     };
@@ -24,50 +24,45 @@
     '';
   };
 
-  # systemd.services.sshd.serviceConfig = {
-  #   NoNewPrivileges = true;
-  #
-  #   ProtectSystem = false;
-  #   ProtectHome = true;
-  #   ProtectClock = true;
-  #   ProtectHostname = true;
-  #   ProtectKernelTunables = true;
-  #   ProtectKernelModules = true;
-  #   ProtectKernelLogs = true;
-  #   ProtectControlGroups = true;
-  #   ProtectProc = "noaccess";
-  #
-  #   PrivateTmp = true;
-  #   PrivateMounts = true;
-  #   PrivateDevices = true;
-  #   PrivateIPC = false;
-  #   PrivateNetwork = false;
-  #   PrivatePIDs = true;
-  #   PrivateUsers = true;
-  #
-  #   RestrictNamespaces = true;
-  #   RestrictRealtime = true;
-  #   RestrictSUIDSGID = true;
-  #   RestrictAddressFamilies = [
-  #     "~AF_UNIX"
-  #     "~AF_NETLINK"
-  #     "AF_INET"
-  #     "AF_INET6"
-  #     "~AF_PACKET"
-  #   ];
-  #
-  #   SystemCallFilter = [
-  #     "~@keyring"
-  #     "~@swap"
-  #     "~@clock"
-  #     "~@module"
-  #     "~@obsolete"
-  #     "~@cpu-emulation"
-  #   ];
-  #   SystemCallArchitectures = "native";
-  #
-  #   MemoryDenyWriteExecute = true;
-  #   LockPersonality = true;
-  #   DevicePolicy = "closed";
-  # };
+  systemd.services.sshd.serviceConfig = {
+    NoNewPrivileges = false;
+
+    # ProtectSystem = "full";
+    ProtectHome = false;
+    ProtectClock = true;
+    # ProtectHostname = true;
+    # ProtectKernelTunables = true;
+    # ProtectKernelModules = true;
+    # ProtectKernelLogs = true;
+    ProtectControlGroups = true;
+    ProtectProc = "noaccess";
+
+    PrivateTmp = true;
+    PrivateMounts = true;
+    PrivateDevices = true;
+    PrivateIPC = true;
+    PrivateNetwork = false;
+    PrivatePIDs = true;
+    PrivateUsers = false;
+
+    # RestrictNamespaces = true;
+    RestrictRealtime = true;
+    RestrictSUIDSGID = true;
+
+    SystemCallFilter = [
+      # "~@reboot"
+      "~@keyring"
+      "~@swap"
+      "~@clock"
+      "~@module"
+      "~@obsolete"
+      "~@cpu-emulation"
+      "~@debug"
+    ];
+    SystemCallArchitectures = "native";
+
+    MemoryDenyWriteExecute = true;
+    LockPersonality = true;
+    DevicePolicy = "closed";
+  };
 }

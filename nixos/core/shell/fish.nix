@@ -54,6 +54,8 @@
 
       cargo-run-nix = "nix-shell --run \"cargo run\"";
       cargo-build-nix = "nix-shell --run \"cargo build --release\"";
+
+      gbk = "/etc/misc/generate_boot_key.fish";
     };
     interactiveShellInit = ''
       # Set vi mode

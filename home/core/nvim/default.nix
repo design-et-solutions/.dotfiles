@@ -5,8 +5,8 @@
   };
 
   home.file = {
-    ".scripts/nvim_reloader.fish" = {
-      source = builtins.toString ../../scripts/nvim_reloader.fish;
+    ".scripts/shell/nvim/reloader.fish" = {
+      source = builtins.toString ../../../scripts/shell/nvim/reloader.fish;
       executable = true;
     };
   };
@@ -27,13 +27,13 @@
       ${builtins.readFile ./plugins/colorizer.lua}
       ${builtins.readFile ./plugins/conform.lua}
       ${builtins.readFile ./plugins/gruvbox.lua}
+      ${builtins.readFile ./plugins/inc-rename.lua}
+      ${builtins.readFile ./plugins/neogit.lua}
       ${builtins.readFile ./plugins/notify.lua}
       ${builtins.readFile ./plugins/nvim-tree.lua}
-      ${builtins.readFile ./plugins/oil.lua}
+      ${builtins.readFile ./plugins/rest.lua}
       ${builtins.readFile ./plugins/toggleterm.lua}
       ${builtins.readFile ./plugins/tokyonight.lua}
-      ${builtins.readFile ./plugins/rest-nvim.lua}
-      ${builtins.readFile ./plugins/which-key.lua}
       ${builtins.readFile ./keybindings.lua}
       ${builtins.readFile ./config.lua}
     '';
@@ -47,6 +47,7 @@
       vim-dadbod-ui # navigation database gui
       oil-nvim # file explorer that lets you edit your filesystem like a normal Neovim buffer.
       plenary-nvim # All the lua functions I don't want to write twice.
+      openscad-nvim
       # ========================
       # code
       # ========================
@@ -62,7 +63,11 @@
       markdown-preview-nvim # preview markdown file
       nvim-lspconfig # Language Server Protocol
       rest-nvim # asynchronous Neovim HTTP client
-      # rust-vim # beautify code
+      rustaceanvim # Supercharge your Rust experience
+      actions-preview-nvim # Better actions preview
+
+      inc-rename-nvim # LSP renaming with immediate visual feedback
+
       # ========================
       # git
       # ========================

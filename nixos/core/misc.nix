@@ -16,4 +16,11 @@
     imagemagick # Powerful image manipulation tool suite
     dmidecode # Tool that reads information about your system's hardware from the BIOS according to the SMBIOS/DMI standard.
   ];
+
+  environment.etc = {
+    "scripts/misc/generate_boot_key.fish" = {
+      source = builtins.toString ../../scripts/misc/generate_boot_key.fish;
+      mode = "0755";
+    };
+  };
 }

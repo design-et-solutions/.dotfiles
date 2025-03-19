@@ -1,32 +1,17 @@
 { mkNixosConfiguration, ... }:
 
 mkNixosConfiguration {
+  name = "laptop-work";
   system = "x86_64-linux";
-  host = ./.;
-  users = [
-    "me"
-    "guest"
-  ];
-  setup = {
+  users = [ "me" ];
+  hostConfig = {
     gui.enable = true;
-    gui = {
-      enable = true;
-      params.autoLogin = {
-        enable = true;
-        user = "me";
-      };
-    };
-    gpu.nvidia.enable = true;
     browser.firefox.enable = true;
     fileExplorer.enable = true;
     mail.enable = true;
     print.enable = true;
     vm.docker.enable = true;
-    game = {
-      steam.enable = true;
-      mgba.enable = true;
-      xbox_controller.enable = true;
-    };
+    game.steam.enable = true;
     social = {
       discord.enable = true;
       slack.enable = true;
@@ -41,7 +26,7 @@ mkNixosConfiguration {
       drawio.enable = true;
       steam-run.enable = true;
       stremio.enable = true;
-      unity.enable = true;
+      openscad.enable = true;
     };
     video = {
       vlc.enable = true;
@@ -50,11 +35,9 @@ mkNixosConfiguration {
     audio = {
       default.enable = true;
     };
-    networking.internet = {
-      analyzer.enable = true;
-      wifi = {
-        emergency.enable = true;
-      };
+    networking = {
+      internet.analyzer.enable = true;
+      bluetooth.enable = true;
     };
     security = {
       blocker.enable = true;

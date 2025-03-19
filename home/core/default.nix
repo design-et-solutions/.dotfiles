@@ -4,11 +4,13 @@
     (lib.optionals mergedSetup.gui.enable [
       ../optional/gui
     ])
+    ++ (lib.optionals mergedSetup.dev.enable [
+      ../optional/dev.nix
+    ])
     ++ [
       ./fonts.nix
       ./nvim
       ./git.nix
-      ./dev.nix
     ];
 
   nixpkgs = {

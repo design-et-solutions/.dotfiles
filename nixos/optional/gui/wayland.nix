@@ -4,11 +4,8 @@
   lib,
   ...
 }:
-let
-  isWayland = mergedSetup.gui.params.displayServer == "wayland";
-in
 {
-  environment.systemPackages = lib.mkIf isWayland (
+  environment.systemPackages = lib.mkIf mergedSetup.gui.params.displayServer.wayland (
     with pkgs;
     [
       wayfire # Wayland compositor
@@ -26,11 +23,11 @@ in
     ]
   );
 
-  programs.wayfire = lib.mkIf isWayland {
+  programs.wayfire = lib.mkIf mergedSetup.gui.params.displayServer.wayland {
     enable = true;
   };
 
-  environment.etc = lib.mkIf isWayland {
+  environment.etc = lib.mkIf mergedSetup.gui.params.displayServer.wayland {
     "wayfire.ini".text = ''
       [core]
       plugins = alpha animate autostart command cube decoration expo fast-switcher fisheye grid idle invert move oswitch place resize switcher vswitch window-rules wobbly zoom

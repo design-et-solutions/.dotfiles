@@ -9,17 +9,17 @@
 {
   imports = [
     ./bootloader.nix
-    ./shell
-    ./networking.nix
-    ./security
-    ./system
-    ./users.nix
+    ./config.nix
+    ./generation.nix
     ./git.nix
-    ./dev.nix
+    ./networking.nix
     ./misc.nix
     ./monitoring.nix
+    ./security
+    ./shell
+    ./system
     ./usb.nix
-    ./generation.nix
+    ./users.nix
   ];
 
   nixpkgs = {
@@ -61,14 +61,11 @@
     clang # C language family frontend for LLVM
   ];
 
-  # nix.gc = {
-  #   automatic = true;
-  #   options = "--delete-older-than 10d";
-  # };
-
   system.activationScripts.createMnt = ''
     mkdir -p /mnt
   '';
+
+  time.timeZone = "Europe/Paris";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

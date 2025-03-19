@@ -6,17 +6,17 @@
 }:
 let
   notifyCommand = ''
-    exec = $HOME/.scripts/mako_reloader.fish
+    exec = $HOME/.scripts/gui/mako/reloader.fish
   '';
   barCommand = ''
-    exec = $HOME/.scripts/waybar.fish
+    exec = $HOME/.scripts/gui/waybar/self.fish
   '';
   wallpaperCommand = ''
     exec = hyprpaper
-    exec = $HOME/.scripts/misc/wallpapers_rand.fish
+    exec = $HOME/.scripts/gui/misc/wallpapers_rand.fish
   '';
   hyprlandCommand = ''
-    exec = $HOME/.scripts/hypr_reloader.fish
+    exec = $HOME/.scripts/gui/hyprland/reloader.fish
   '';
   hyprlandConf = pkgs.substituteAll {
     src = ./hyprland.conf;
@@ -27,7 +27,6 @@ let
     animations_enable = "true";
     custom = mergedSetup.gui.params.hyprland.custom;
   };
-  isWayland = mergedSetup.gui.params.displayServer == "wayland";
 in
 {
   imports =
@@ -36,7 +35,7 @@ in
       ./kitty
       ./rofi
     ]
-    ++ lib.optionals (isWayland) [
+    ++ lib.optionals (mergedSetup.gui.params.displayServer.wayland) [
       ./waybar
     ];
 
@@ -53,7 +52,7 @@ in
       '';
     }
     // (
-      if isWayland then
+      if mergedSetup.gui.params.windowManager.hyprland then
         {
           "hypr/hyprland.conf".source = hyprlandConf;
           "hypr/windowrule.conf".source = ./windowrule.conf;
@@ -68,15 +67,15 @@ in
   home.file =
     {
       ".scripts/misc/loading_notif.fish" = {
-        source = builtins.toString ../../scripts/misc/loading_notif.fish;
+        source = builtins.toString ../../../scripts/misc/loading_notif.fish;
         executable = true;
       };
-      ".scripts/misc/theme_reloader.fish" = {
-        source = builtins.toString ../../scripts/misc/theme_reloader.fish;
+      ".scripts/gui/misc/theme_reloader.fish" = {
+        source = builtins.toString ../../../scripts/gui/misc/theme_reloader.fish;
         executable = true;
       };
-      ".scripts/misc/wallpapers_rand.fish" = {
-        source = builtins.toString ../../scripts/misc/wallpapers_rand.fish;
+      ".scripts/gui/misc/wallpapers_rand.fish" = {
+        source = builtins.toString ../../../scripts/gui/misc/wallpapers_rand.fish;
         executable = true;
       };
       ".wallpapers" = {
@@ -86,9 +85,9 @@ in
         source = ../../cursors;
       };
     }
-    // lib.optionalAttrs isWayland {
-      ".scripts/hypr_reloader.fish" = {
-        source = builtins.toString ../../scripts/hypr_reloader.fish;
+    // lib.optionalAttrs mergedSetup.gui.params.windowManager.hyprland {
+      ".scripts/gui/hyprland/reloader.fish" = {
+        source = builtins.toString ../../../scripts/gui/hyprland/reloader.fish;
         executable = true;
       };
     };

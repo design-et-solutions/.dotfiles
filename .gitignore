@@ -1,3 +1,6 @@
 # for build-vm
 *.qcow2
 result
+
+**/facter.json
+**/configuration.nix

@@ -57,8 +57,8 @@ in
     '';
   };
 
-  home.file.".scripts/tmux_reloader.fish" = {
-    source = builtins.toString ../../../scripts/tmux_reloader.fish;
+  home.file.".scripts/shell/tmux/reloader.fish" = {
+    source = builtins.toString ../../../../scripts/shell/tmux/reloader.fish;
     executable = true;
   };
 }
