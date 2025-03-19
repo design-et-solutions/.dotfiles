@@ -62,17 +62,17 @@
     { pkgs, ... }:
     {
       xsession.windowManager.i3.extraConfig = ''
-          # Assign Firefox windows to specific workspaces
-        assign [class="Firefox"] $ws1
-        assign [class="Firefox" instance="firefox-2"] $ws2
-
-        # Start Firefox on both screens
-        exec --no-startup-id i3-msg 'workspace 1; exec firefox'
-        exec --no-startup-id i3-msg 'workspace 2; exec firefox -P second-profile --class="firefox-2"'
-
-        # Move workspaces to specific outputs
+        # Define workspaces
         workspace 1 output HDMI-1
         workspace 2 output HDMI-2
+
+        # Assign Firefox instances to specific workspaces
+        assign [class="firefox-1"] 1
+        assign [class="firefox-2"] 2
+
+        # Set Firefox instances to fullscreen on startup
+        for_window [class="firefox-1"] fullscreen enable
+        for_window [class="firefox-2"] fullscreen enable
       '';
     };
 }
