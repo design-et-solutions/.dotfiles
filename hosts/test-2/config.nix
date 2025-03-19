@@ -18,6 +18,8 @@ mkNixosConfiguration {
         };
       };
     };
+    nogui = false;
+    vm.docker.enable = true;
     # gpu.nvidia.enable = true;
     # browser.firefox.enable = true;
     # networking.internet = {

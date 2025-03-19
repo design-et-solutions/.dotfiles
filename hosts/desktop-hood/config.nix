@@ -5,12 +5,12 @@ mkNixosConfiguration {
   system = "x86_64-linux";
   users = [ "me" ];
   hostConfig = {
-    gui.enable = true;
+    # gui.enable = true;
     gpu.nvidia.enable = true;
-    browser.firefox.enable = true;
-    fileExplorer.enable = true;
-    mail.enable = true;
-    print.enable = true;
+    # browser.firefox.enable = true;
+    # fileExplorer.enable = true;
+    # mail.enable = true;
+    # print.enable = true;
     # vm.docker.enable = true;
     # game = {
     #   steam.enable = true;
@@ -54,7 +54,7 @@ mkNixosConfiguration {
     };
     security = {
       blocker.enable = true;
-      analyzer.enable = true;
+      # analyzer.enable = true;
     };
   };
 }

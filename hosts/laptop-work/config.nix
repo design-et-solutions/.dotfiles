@@ -11,9 +11,7 @@ mkNixosConfiguration {
     mail.enable = true;
     print.enable = true;
     vm.docker.enable = true;
-    game = {
-      steam.enable = true;
-    };
+    game.steam.enable = true;
     social = {
       discord.enable = true;
       slack.enable = true;
@@ -39,22 +37,8 @@ mkNixosConfiguration {
       spotify.enable = true;
     };
     networking = {
-      internet = {
-        analyzer.enable = true;
-        # vpn = {
-        #   default.enable = true;
-        #   client.enable = true;
-        #   isExternal = true;
-        # };
-        # wifi = {
-        #   emergency.enable = true;
-        # };
-      };
+      internet.analyzer.enable = true;
       bluetooth.enable = true;
-      # can = {
-      #   default.enable = true;
-      #   peak.enable = true;
-      # };
     };
     security = {
       blocker.enable = true;

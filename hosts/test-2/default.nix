@@ -6,7 +6,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    ../disk-config.nix
+    ../../nixos/disk-config.nix
   ];
 
   users.users.root.openssh.authorizedKeys.keys = [
@@ -14,10 +14,10 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAq7LsVEV+jw4yPpLyDc4XIS2yVmSJt0J24pS4BQYtGD me@laptop-work"
   ];
 
-  # services = {
-  #   displayManager = {
-  #     autoLogin.enable = true;
-  #     autoLogin.user = "me";
-  #   };
-  # };
+  services = {
+    displayManager = {
+      autoLogin.enable = true;
+      autoLogin.user = "me";
+    };
+  };
 }

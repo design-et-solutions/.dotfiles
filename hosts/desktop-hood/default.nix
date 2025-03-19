@@ -7,17 +7,15 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    ../disk-config.nix
+    ../../nixos/disk-config.nix
   ];
 
-  services = {
-    displayManager = {
-      autoLogin.enable = true;
-      autoLogin.user = "me";
-    };
-  };
-
-  disko.devices.disk.disk1.device = "/dev/nvme0n1";
+  # services = {
+  #   displayManager = {
+  #     autoLogin.enable = true;
+  #     autoLogin.user = "me";
+  #   };
+  # };
 
   # networking = {
   # wg-quick = {
