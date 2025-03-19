@@ -1,17 +1,15 @@
 { pkgs, ... }:
 {
-  systemd.services."auto-web" = {
-    description = "Run Firefox with a specific URL";
+  systemd.services."ds-client" = {
+    description = "Run React Client";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
-      ExecStart = "${pkgs.firefox}/bin/firefox http://localhost:3001";
+      WorkingDirectory = "/home/me/4757-R4-SWR/trunk-client";
+      ExecStart = "${pkgs.nodejs}/bin/npm start -- -p 3001";
       Restart = "always";
       RestartSec = "5s";
-      Environment = [
-        "WAYLAND_DISPLAY=wayland-1"
-        "XDG_RUNTIME_DIR=/run/user/1000"
-      ];
+      Environment = "PATH=/run/current-system/sw/bin:/bin:/usr/bin";
     };
   };
 
