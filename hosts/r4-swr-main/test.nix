@@ -22,17 +22,4 @@
       RestartSec = "5s";
     };
   };
-
-  systemd.services."test-client" = {
-    description = "Run React Client";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      User = "me";
-      WorkingDirectory = "/home/me/poc/rtsp-client";
-      ExecStart = "${pkgs.nodejs}/bin/npm start -- -p 3001";
-      Restart = "always";
-      RestartSec = "5s";
-      Environment = "PATH=/run/current-system/sw/bin:/bin:/usr/bin";
-    };
-  };
 }
