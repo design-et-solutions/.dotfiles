@@ -20,7 +20,7 @@
       enable = true;
       displayManager = {
         gdm = {
-          enable = true;
+          enable = lib.mkDefault true;
           wayland = mergedSetup.gui.params.displayServer.wayland;
           banner = "go fuck your self";
         };
