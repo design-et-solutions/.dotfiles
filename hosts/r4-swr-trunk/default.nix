@@ -58,6 +58,14 @@
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    qt5.full
+    xorg.libX11
+    xorg.libxcb
+    xorg.libXi
+    xorg.libXcomposite
+  ];
+
   home-manager.users.me =
     { pkgs, ... }:
     {
