@@ -23,6 +23,23 @@ sudo systemctl gdm3
 Fix color.
 
 ```sh
-$ shpinx
-[...]
+sudo apt update
+apt-cache search parrot-ue4
+sudo apt install parrot-ue4-forest
+```
+
+```sh
+sudo ubuntu-drivers autoinstall
+```
+
+```sh
+sudo systemctl start firmwared.service
+```
+
+```sh
+sphinx "/opt/parrot-sphinx/usr/share/sphinx/drones/anafi_ai.drone"::firmware="https://firmware.parrot.com/Versions/anafi2/pc/%23latest/images/anafi2-pc.ext2.zip"
+```
+
+```sh
+parrot-ue4-forest
 ```
