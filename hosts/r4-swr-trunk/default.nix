@@ -48,7 +48,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
-      ExecStart = "${pkgs.firefox}/bin/firefox --new-instance -P p2 --class firefox-2 http://cdp.thales/mobile-app";
+      ExecStart = "${pkgs.firefox}/bin/firefox --new-instance -P p2 --class firefox-2 http://192.168.100.125:3001/right";
       Restart = "always";
       RestartSec = "5s";
       Environment = [
