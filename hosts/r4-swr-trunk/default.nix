@@ -64,6 +64,11 @@
     xorg.libxcb
     xorg.libXi
     xorg.libXcomposite
+    xorg.xrandr
+    xorg.xinput
+    xorg.xmodmap
+    xorg.xwininfo
+    natscli
   ];
 
   home-manager.users.me =
