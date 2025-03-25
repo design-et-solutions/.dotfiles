@@ -59,6 +59,13 @@
   };
 
   environment.systemPackages = with pkgs; [
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
+
     qt5.full
     xorg.libX11
     xorg.libxcb
@@ -68,6 +75,32 @@
     xorg.xinput
     xorg.xmodmap
     xorg.xwininfo
+    xorg.xhost
+
+    fontconfig.dev
+    freetype.dev
+    xorg.libX11.dev
+    xorg.libxcb.dev
+    xorg.libXext.dev
+    xorg.libXfixes.dev
+    xorg.libXi.dev
+    xorg.libXrender.dev
+    xorg.libxcb.dev
+
+    # xorg.libxcb-glx.dev
+    # xorg.libxcb-keysyms.dev
+    # xorg.libxcb-image.dev
+    # xorg.libxcb-shm.dev
+    # xorg.libxcb-icccm.dev
+    # xorg.libxcb-sync.dev
+    # xorg.libxcb-xfixes.dev
+    # xorg.libxcb-shape.dev
+    # xorg.libxcb-randr.dev
+    # xorg.libxcb-render-util.dev
+    # xorg.libxcb-xinerama.dev
+    # libxkbcommon.dev
+    # libxkbcommon-x11.dev
+
     natscli
   ];
 
