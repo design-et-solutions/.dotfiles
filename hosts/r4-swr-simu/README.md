@@ -1,24 +1,47 @@
 # Setup
 
-## Dependencies
+## Pre Setup
+
+### SSH
 
 ```sh
-sudo apt install curl gstreamer1.0-plugins-hard
+sudo apt install openssh-server
 ```
 
-## Pre Setup
+### GPU \*NEW
+
+```sh
+sudo apt install nvidia-kernel-open-570
+sudo apt install nvidia-driver-570-open
+sudo apt install libssl3 libnvidia-extra-570
+# sudo apt --fix-broken install
+sudo dpkg-reconfigure nvidia-dkms-570
+sudo update-initramfs -u -k all
+```
 
 ### GPU
 
 ```sh
 sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt update
-nvidia-detector
 sudo apt search nvidia
 ```
 
 ```sh
-sudo apt install nvida-XXX
+nvidia-detector
+```
+
+Got driver XXX.
+
+```sh
+sudo apt install nvida-utils-XXX nvida-driver-XXX
+```
+
+Reboot.\
+To check if it working:
+
+```sh
+nvidia-smi
 ```
 
 ### X11
@@ -35,6 +58,12 @@ WaylandEnable=false
 
 Reboot.\
 Then, fix color.
+
+## Dependencies
+
+```sh
+sudo apt install curl gstreamer1.0-plugins-bad
+```
 
 ## Install
 
