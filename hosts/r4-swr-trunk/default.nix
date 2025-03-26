@@ -58,6 +58,22 @@
     };
   };
 
+  systemd.services."thales-sight" = {
+    description = "Run Thales App Sight";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      User = "me";
+      ExecStart = "${pkgs.bash}/bin/bash /home/me/thales_sight_docker_vivatech/launch_sight_docker.sh";
+      Restart = "on-failure";
+      RestartSec = "5s";
+      Environment = [
+        "DISPLAY=:0"
+        "XDG_RUNTIME_DIR=/run/user/1000"
+        "PATH=${pkgs.docker}/bin:${pkgs.xorg.xhost}/bin:$PATH"
+      ];
+    };
+  };
+
   environment.variables = {
     # GST_PLUGIN_SYSTEM_PATH_1_0 = "${pkgs.gst_all_1.gstreamer.out}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0";
   };
@@ -109,6 +125,14 @@
 
     natscli
   ];
+
+  services.xserver.windowManager.i3.extraSessionCommands = ''
+    # Disable screensaver
+    xset s off
+    # Disable screen blanking
+    xset -dpms
+    xset s noblank
+  '';
 
   home-manager.users.me =
     { pkgs, ... }:
