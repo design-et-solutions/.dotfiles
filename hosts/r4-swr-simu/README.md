@@ -91,8 +91,25 @@ gst-launch-1.0 rtspsrc location=rtsp://10.202.0.1/live ! rtph264depay ! h264pars
 ---
 
 ```sh
+sudo apt install docker
+cd /home/me
+unzip vivatech-thales.zip
+```
+
+---
+
+```sh
 cd /home/me
 wget https://github.com/bluenviron/mediamtx/releases/download/v1.11.3/mediamtx_v1.11.3_linux_amd64.tar.gz
 tar -xvzf mediamtx_v1.11.3_linux_amd64.tar.gz
 /home/me/mediamtx /home/me/vivatech-thales/mediamtx.yml
+```
+
+---
+
+```sh
+cd /home/me/vivatech-thales/
+unzip anafi-bridge-docker.zip
+cd anafi-bridge-docker
+./start_anafi_bridge_stream_simu.sh
 ```
