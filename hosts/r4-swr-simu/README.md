@@ -8,17 +8,6 @@
 sudo apt install openssh-server
 ```
 
-### GPU \*NEW
-
-```sh
-sudo apt install nvidia-kernel-open-570
-sudo apt install nvidia-driver-570-open
-sudo apt install libssl3 libnvidia-extra-570
-# sudo apt --fix-broken install
-sudo dpkg-reconfigure nvidia-dkms-570
-sudo update-initramfs -u -k all
-```
-
 ### GPU
 
 ```sh
@@ -34,7 +23,7 @@ nvidia-detector
 Got driver XXX.
 
 ```sh
-sudo apt install nvida-utils-XXX nvida-driver-XXX
+sudo apt install nvidia-utils-XXX nvidia-driver-XXX
 ```
 
 Reboot.\
