@@ -109,6 +109,8 @@
 
     xorg.libXtst
 
+    tcpdump
+
     # xorg.libxcb-glx.dev
     # xorg.libxcb-keysyms.dev
     # xorg.libxcb-image.dev
