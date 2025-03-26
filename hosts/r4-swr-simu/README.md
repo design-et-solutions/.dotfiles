@@ -138,3 +138,9 @@ cd anafi-bridge-docker
 docker load -i anafi-bridge-51-simu-default-image.tar.gz
 ./start_anafi_bridge_stream_simu.sh
 ```
+
+---
+
+```sh
+gst-launch-1.0 -v udpsrc multicast-group=239.100.51.20 auto-multicast=true port=51200 caps="application/x-rtp, encoding-name=H264" ! rtpjitterbuffer ! rtph264depay ! avdec_h264 ! autovideosink sync=false
+```
