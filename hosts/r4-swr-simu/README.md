@@ -48,6 +48,31 @@ WaylandEnable=false
 Reboot.\
 Then, fix color.
 
+### Docker
+
+```sh
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo docker run hello-world
+
+sudo usermod -aG docker $USER
+```
+
+Reboot.
+
 ## Dependencies
 
 ```sh
@@ -91,7 +116,6 @@ gst-launch-1.0 rtspsrc location=rtsp://10.202.0.1/live ! rtph264depay ! h264pars
 ---
 
 ```sh
-sudo apt install docker
 cd /home/me
 unzip vivatech-thales.zip
 ```
@@ -111,5 +135,6 @@ tar -xvzf mediamtx_v1.11.3_linux_amd64.tar.gz
 cd /home/me/vivatech-thales/
 unzip anafi-bridge-docker.zip
 cd anafi-bridge-docker
+docker load -i anafi-bridge-51-simu-default-image.tar.gz
 ./start_anafi_bridge_stream_simu.sh
 ```
