@@ -1,0 +1,13 @@
+[Unit]
+Description=Run Parrot Sphinx
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+ExecStart=sphinx "/opt/parrot-sphinx/usr/share/sphinx/drones/anafi_ai.drone"::firmware="/home/me/anafi2-pc.ext2"
+Restart=always
+RestartSec=5s
+User=me
+
+[Install]
+WantedBy=multi-user.target

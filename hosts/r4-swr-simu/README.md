@@ -63,6 +63,9 @@ sudo apt update
 sudo apt install parrot-sphinx
 sudo apt update
 sudo apt install parrot-ue4-forest
+cd /home/me/
+wget https://firmware.parrot.com/Versions/anafi2/pc/%23latest/images/anafi2-pc.ext2.zip
+unzip anafi2-pc.ext2.zip
 ```
 
 ## Test
@@ -70,7 +73,7 @@ sudo apt install parrot-ue4-forest
 ### Shell 1
 
 ```sh
-sphinx "/opt/parrot-sphinx/usr/share/sphinx/drones/anafi_ai.drone"::firmware="https://firmware.parrot.com/Versions/anafi2/pc/%23latest/images/anafi2-pc.ext2.zip"
+sphinx "/opt/parrot-sphinx/usr/share/sphinx/drones/anafi_ai.drone"::firmware="/home/me/anafi2-pc.ext2"
 ```
 
 ### Shell 2

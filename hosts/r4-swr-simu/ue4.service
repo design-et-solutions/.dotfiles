@@ -1,0 +1,13 @@
+[Unit]
+Description=Run Parrot Sphinx
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+ExecStart=parrot-ue4-forest
+Restart=always
+RestartSec=5s
+User=me
+
+[Install]
+WantedBy=multi-user.target
