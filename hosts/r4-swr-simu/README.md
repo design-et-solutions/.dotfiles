@@ -136,6 +136,12 @@ cd /home/me/vivatech-thales/
 unzip anafi-bridge-docker.zip
 cd anafi-bridge-docker
 docker load -i anafi-bridge-51-simu-default-image.tar.gz
+nano ./nano subscripts/configure_multicast.sh
+```
+
+Change network interface.
+
+```sh
 ./start_anafi_bridge_stream_simu.sh
 ```
 
