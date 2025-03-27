@@ -74,9 +74,22 @@
     };
   };
 
-  environment.variables = {
-    # GST_PLUGIN_SYSTEM_PATH_1_0 = "${pkgs.gst_all_1.gstreamer.out}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0:${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0";
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.force_igmp_version" = 2;
   };
+
+  environment.variables = {
+    # PKG_CONFIG_PATH = "${pkgs.gst_all_1.gstreamer.dev}/lib/pkgconfig:${pkgs.gst_all_1.gst-plugins-base.dev}/lib/pkgconfig";
+  };
+
+  # networking.routes = [
+  #   {
+  #     address = "224.0.0.0";
+  #     prefixLength = 3;
+  #     via = null;
+  #     interface = "enp86s0";
+  #   }
+  # ];
 
   environment.systemPackages = with pkgs; [
     gst_all_1.gstreamer
@@ -85,6 +98,7 @@
     gst_all_1.gst-plugins-bad
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-libav
+    gst_all_1.gst-vaapi
 
     qt5.full
     xorg.libX11
@@ -96,7 +110,6 @@
     xorg.xmodmap
     xorg.xwininfo
     xorg.xhost
-
     fontconfig.dev
     freetype.dev
     xorg.libX11.dev
@@ -106,7 +119,6 @@
     xorg.libXi.dev
     xorg.libXrender.dev
     xorg.libxcb.dev
-
     xorg.libXtst
 
     tcpdump

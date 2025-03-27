@@ -29,7 +29,10 @@
             [ ]
         );
       allowedUDPPorts =
-        [ 53 ]
+        [
+          53
+          51200
+        ]
         ++ (
           if mergedSetup.networking.params.allowedPorts.ucp != null then
             mergedSetup.networking.params.allowedPorts.ucp
