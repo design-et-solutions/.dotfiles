@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Anafi Stream Simu
+After=sphinx.service
+
+[Service]
+ExecStart=bash /home/me/vivatech-thales/anafi-bridge-docker/subscripts/configure_multicast.sh && bash /home/me/vivatech-thales/anafi-bridge-docker/subscripts/launch_anafi_rtsp_stream_simu.sh
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
