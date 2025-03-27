@@ -148,5 +148,5 @@ Change network interface.
 ---
 
 ```sh
-gst-launch-1.0 -v udpsrc multicast-group=239.100.51.20 auto-multicast=true port=51200 caps="application/x-rtp, encoding-name=H264" ! rtpjitterbuffer ! rtph264depay ! avdec_h264 ! autovideosink sync=false
+ffplay rtsp://192.168.100.134:8554/vivatech-simu
 ```
