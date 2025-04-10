@@ -92,18 +92,4 @@ in
       };
     };
 
-  xsession.windowManager.i3.extraConfig = ''
-    # Define workspaces
-    workspace 1 output HDMI-1
-    workspace 2 output HDMI-2
-
-    # Assign Firefox instances to specific workspaces
-    assign [class="firefox-1"] 1
-    assign [class="firefox-2"] 2
-
-    # Set Firefox instances to fullscreen on startup
-    for_window [class="firefox-1"] fullscreen enable
-    for_window [class="firefox-2"] fullscreen enable
-  '';
-
 }
