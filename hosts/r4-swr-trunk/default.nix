@@ -76,6 +76,11 @@
       xsession.windowManager.i3 = {
         enable = true;
         extraConfig = ''
+          # Disable the i3 bar
+          bar {
+            mode invisible
+          }
+
           # Define workspaces
           workspace 1 output HDMI-1
           workspace 2 output HDMI-2
@@ -89,12 +94,11 @@
           for_window [class="firefox-2"] fullscreen enable
 
           # Hide cursor after 1 second of inactivity
-          exec --no-startup-id xsetroot -cursor_name left_ptr  # Reset cursor first
-          exec --no-startup-id unclutter -idle 1 -root
+          # exec --no-startup-id xsetroot -cursor_name left_ptr  # Reset cursor first
+          # exec --no-startup-id unclutter -idle 1 -root
         '';
       };
 
-      services.unclutter.enable = true;
     };
 
   services.touchegg.enable = true;
@@ -151,6 +155,7 @@
   environment.systemPackages = with pkgs; [
     xdotool
     # libinput-gestures
+    # unclutter
     tcpdump
     natscli
 
