@@ -28,12 +28,27 @@
     };
   };
 
-  systemd.services."auto-web-1" = {
+  systemd.services."auto-web-1-1" = {
     description = "Run Firefox with a specific URL";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
       ExecStart = "${pkgs.firefox}/bin/firefox --new-instance -P p1 --class firefox-1 http://192.168.100.125:3001/left";
+      Restart = "always";
+      RestartSec = "5s";
+      Environment = [
+        "DISPLAY=:0"
+        "XDG_RUNTIME_DIR=/run/user/1000"
+      ];
+    };
+  };
+
+  systemd.services."auto-web-1-2" = {
+    description = "Run Firefox with a specific URL";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      User = "me";
+      ExecStart = "${pkgs.firefox}/bin/firefox --new-instance -P p1 --class firefox-1 https://demo.astrautm.com";
       Restart = "always";
       RestartSec = "5s";
       Environment = [
@@ -58,21 +73,21 @@
     };
   };
 
-  systemd.services."thales-sight" = {
-    description = "Run Thales App Sight";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      User = "me";
-      ExecStart = "${pkgs.bash}/bin/bash /home/me/thales_sight_docker_vivatech/launch_sight_docker.sh";
-      Restart = "on-failure";
-      RestartSec = "5s";
-      Environment = [
-        "DISPLAY=:0"
-        "XDG_RUNTIME_DIR=/run/user/1000"
-        "PATH=${pkgs.docker}/bin:${pkgs.xorg.xhost}/bin:$PATH"
-      ];
-    };
-  };
+  # systemd.services."thales-sight" = {
+  #   description = "Run Thales App Sight";
+  #   wantedBy = [ "multi-user.target" ];
+  #   serviceConfig = {
+  #     User = "me";
+  #     ExecStart = "${pkgs.bash}/bin/bash /home/me/thales_sight_docker_vivatech/launch_sight_docker.sh";
+  #     Restart = "on-failure";
+  #     RestartSec = "5s";
+  #     Environment = [
+  #       "DISPLAY=:0"
+  #       "XDG_RUNTIME_DIR=/run/user/1000"
+  #       "PATH=${pkgs.docker}/bin:${pkgs.xorg.xhost}/bin:$PATH"
+  #     ];
+  #   };
+  # };
 
   boot.kernel.sysctl = {
     "net.ipv4.conf.all.force_igmp_version" = 2;
