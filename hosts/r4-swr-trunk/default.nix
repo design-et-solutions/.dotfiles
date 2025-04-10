@@ -87,15 +87,17 @@
           # Set Firefox instances to fullscreen on startup
           for_window [class="firefox-1"] fullscreen enable
           for_window [class="firefox-2"] fullscreen enable
+
+          # Hide cursor after 1 second of inactivity
+          exec --no-startup-id xsetroot -cursor_name left_ptr  # Reset cursor first
+          exec --no-startup-id unclutter -idle 1 -root
         '';
       };
 
-      services.unclutter = {
-        enable = true;
-        timeout = 0;
-        extraOptions = [ "-root" ];
-      };
+      services.unclutter.enable = true;
     };
+
+  services.touchegg.enable = true;
 
   #
   # systemd.services."touch" = {
@@ -147,6 +149,11 @@
   # ];
 
   environment.systemPackages = with pkgs; [
+    xdotool
+    # libinput-gestures
+    tcpdump
+    natscli
+
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
@@ -154,7 +161,6 @@
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-libav
     gst_all_1.gst-vaapi
-
     qt5.full
     xorg.libX11
     xorg.libxcb
@@ -175,24 +181,5 @@
     xorg.libXrender.dev
     xorg.libxcb.dev
     xorg.libXtst
-
-    tcpdump
-
-    # xorg.libxcb-glx.dev
-    # xorg.libxcb-keysyms.dev
-    # xorg.libxcb-image.dev
-    # xorg.libxcb-shm.dev
-    # xorg.libxcb-icccm.dev
-    # xorg.libxcb-sync.dev
-    # xorg.libxcb-xfixes.dev
-    # xorg.libxcb-shape.dev
-    # xorg.libxcb-randr.dev
-    # xorg.libxcb-render-util.dev
-    # xorg.libxcb-xinerama.dev
-    # libxkbcommon.dev
-    # libxkbcommon-x11.dev
-
-    natscli
   ];
-
 }
