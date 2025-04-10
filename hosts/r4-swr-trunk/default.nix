@@ -28,27 +28,12 @@
     };
   };
 
-  systemd.services."auto-web-1-1" = {
+  systemd.services."auto-web-1" = {
     description = "Run Firefox with a specific URL";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
-      ExecStart = "${pkgs.firefox}/bin/firefox --new-instance -P p1 --class firefox-1 http://192.168.100.125:3001/left";
-      Restart = "always";
-      RestartSec = "5s";
-      Environment = [
-        "DISPLAY=:0"
-        "XDG_RUNTIME_DIR=/run/user/1000"
-      ];
-    };
-  };
-
-  systemd.services."auto-web-1-2" = {
-    description = "Run Firefox with a specific URL";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      User = "me";
-      ExecStart = "${pkgs.firefox}/bin/firefox --new-instance -P p1 --class firefox-1 https://demo.astrautm.com";
+      ExecStart = "${pkgs.firefox}/bin/firefox --new-instance -P p1 --class firefox-1 http://192.168.100.125:3001/left https://demo.astrautm.com";
       Restart = "always";
       RestartSec = "5s";
       Environment = [
@@ -64,6 +49,21 @@
     serviceConfig = {
       User = "me";
       ExecStart = "${pkgs.firefox}/bin/firefox --new-instance -P p2 --class firefox-2 http://192.168.100.125:3001/right";
+      Restart = "always";
+      RestartSec = "5s";
+      Environment = [
+        "DISPLAY=:0"
+        "XDG_RUNTIME_DIR=/run/user/1000"
+      ];
+    };
+  };
+
+  systemd.services."touch" = {
+    description = "Setup touch screens";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      User = "me";
+      ExecStart = "/run/current-system/sw/bin/xinput map-to-output 10 HDMI-1 && /run/current-system/sw/bin/xinput map-to-output 11 HDMI-2";
       Restart = "always";
       RestartSec = "5s";
       Environment = [
@@ -163,21 +163,4 @@
     xset s noblank
   '';
 
-  home-manager.users.me =
-    { pkgs, ... }:
-    {
-      xsession.windowManager.i3.extraConfig = ''
-        # Define workspaces
-        workspace 1 output HDMI-1
-        workspace 2 output HDMI-2
-
-        # Assign Firefox instances to specific workspaces
-        assign [class="firefox-1"] 1
-        assign [class="firefox-2"] 2
-
-        # Set Firefox instances to fullscreen on startup
-        for_window [class="firefox-1"] fullscreen enable
-        for_window [class="firefox-2"] fullscreen enable
-      '';
-    };
 }
