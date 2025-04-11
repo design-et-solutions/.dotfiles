@@ -135,13 +135,13 @@
           export DISPLAY=:0
           #!/bin/sh
 
-          # Check if a tab number argument is provided
+          # Check if an argument is provided
           if [ -z "$1" ]; then
-            echo "Usage: $0 <tab_number>"
+            echo "Usage: $0 <next|previous|number>"
             exit 1
           fi
 
-          TAB_NUMBER=$1
+          ACTION=$1
 
           # Get the window ID of the Firefox instance
           WINDOW_ID=$(wmctrl -lx | grep 'firefox-1' | awk '{print $1}')
@@ -149,8 +149,21 @@
           # Activate the window
           wmctrl -ia $WINDOW_ID
 
-          # Send the key press to change tabs (Ctrl+$TAB_NUMBER)
-          xdotool key --window $WINDOW_ID ctrl+1
+          # Perform the action based on the argument
+          case $ACTION in
+            next)
+              # Switch to the next tab (Ctrl+Tab)
+              xdotool key --window $WINDOW_ID Control+Tab
+              ;;
+            previous)
+              # Switch to the previous tab (Ctrl+Shift+Tab)
+              xdotool key --window $WINDOW_ID Control+Shift+Tab
+              ;;
+            *)
+              # Switch to the next tab (Ctrl+number)
+              xdotool key --window $WINDOW_ID Control+$ACTION
+              ;;
+          esac
         '';
         executable = true;
       };
