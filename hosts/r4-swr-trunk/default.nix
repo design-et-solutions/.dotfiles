@@ -97,10 +97,6 @@
           # Set Firefox instances to fullscreen on startup
           for_window [class="firefox-1"] fullscreen enable
           for_window [class="firefox-2"] fullscreen enable
-
-          # Hide cursor after 1 second of inactivity
-          # exec --no-startup-id xsetroot -cursor_name left_ptr  # Reset cursor first
-          # exec --no-startup-id unclutter -idle 1 -root
         '';
       };
 
