@@ -58,14 +58,16 @@
     };
   };
 
-  services.unclutter-xfixes = {
-    enable = true;
-    timeout = 0; # hide immediately
-    extraOptions = [
-      "--jitter"
-      "0"
-    ];
-  };
+  # services.unclutter-xfixes = {
+  #   enable = true;
+  #   timeout = 0; # hide immediately
+  #   extraOptions = [
+  #     "--jitter"
+  #     "0"
+  #   ];
+  # };
+
+  services.touchegg.enable = true;
 
   services.xserver.windowManager.i3.extraSessionCommands = ''
     # Disable screensaver
@@ -260,6 +262,10 @@
 
       xsession.windowManager.i3.config.startup = [
         {
+          command = "unclutter --timeout 0 --jitter 0 --hide-on-touch";
+          always = true;
+        }
+        {
           command = "touchegg";
           always = true;
         }
@@ -286,14 +292,13 @@
     "net.ipv4.conf.all.force_igmp_version" = 2;
   };
 
-  services.touchegg.enable = true;
-
   environment.systemPackages = with pkgs; [
     xdotool
     libinput-gestures
     libinput
     touchegg
     wmctrl
+    unclutter-xfixes
 
     tcpdump
     natscli
