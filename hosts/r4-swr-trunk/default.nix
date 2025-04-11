@@ -150,7 +150,7 @@
           wmctrl -ia $WINDOW_ID
 
           # Send the key press to change tabs (Ctrl+$TAB_NUMBER)
-          xdotool key --window $WINDOW_ID ctrl+$TAB_NUMBER
+          xdotool key --window $WINDOW_ID ctrl+1
         '';
         executable = true;
       };
