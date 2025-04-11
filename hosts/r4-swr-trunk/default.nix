@@ -58,8 +58,13 @@
     };
   };
 
-  environment.variables = {
-    MOZ_USE_XINPUT2 = "1";
+  services.unclutter-xfixes = {
+    enable = true;
+    timeout = 0; # hide immediately
+    extraOptions = [
+      "--jitter"
+      "0"
+    ];
   };
 
   services.xserver.windowManager.i3.extraSessionCommands = ''
