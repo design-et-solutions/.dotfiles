@@ -29,14 +29,13 @@
   };
 
   systemd.services."rtsp-to-hls" = {
-    # enable = false;
     description = "Middleware RTSP to HLS";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/www/html/hls";
       # ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -fflags nobuffer -flags low_delay -strict experimental -i rtsp://192.168.100.134:8554/vivatech-simu -c:v libx264 -preset ultrafast -tune zerolatency -x264-params keyint=20:min-keyint=20:scenecut=0 -g 20 -sc_threshold 0 -start_number 0 -an -f hls -hls_time 2 -hls_list_size 10 -hls_flags delete_segments+append_list+omit_endlist -hls_delete_threshold 2 /var/www/html/hls/stream.m3u8";
-      ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -fflags nobuffer -flags low_delay -strict experimental -i rtsp://192.168.100.134:8554/vivatech-simu -c:v libx264 -preset ultrafast -tune zerolatency -g 30 -sc_threshold 0 -start_number 0 -f hls -hls_time 2 -hls_list_size 10 -hls_flags delete_segments+append_list+omit_endlist /var/www/html/hls/stream.m3u8";
-      # ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -i rtsp://192.168.100.134:8554/vivatech-simu -c:v on -preset -g 30 -sc_threshold 0 -start_number 0 -f hls -hls_time 2 -hls_list_size 7 -hls_flags delete_segments+append_list+omit_endlist /var/www/html/hls/stream.m3u8";
+      # ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -fflags nobuffer -flags low_delay -strict experimental -i rtsp://192.168.100.134:8554/vivatech-simu -c:v libx264 -preset ultrafast -tune zerolatency -g 30 -sc_threshold 0 -start_number 0 -f hls -hls_time 2 -hls_list_size 10 -hls_flags delete_segments+append_list+omit_endlist /var/www/html/hls/stream.m3u8";
+      ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -rtsp_transport tcp -fflags nobuffer -flags low_delay -strict experimental -i rtsp://192.168.100.134:8554/vivatech-simu -c:v libx264 -preset ultrafast -tune zerolatency -g 30 -sc_threshold 0 -start_number 0 -f hls -hls_time 1 -hls_list_size 6 -hls_flags delete_segments+append_list+omit_endlist /var/www/html/hls/stream.m3u8";
       Restart = "always";
       RestartSec = "5s";
     };
@@ -115,40 +114,38 @@
         extraConfig = ''
           # Disable the i3 bar
           bar {
-            mode hide
+            mode invisible
           }
 
           # Define workspaces
           workspace 1 output HDMI-1
           workspace 2 output HDMI-2
+          workspace 3 output HDMI-1
 
           # Assign Firefox instances to specific workspaces
           assign [class="firefox-1"] 1
           assign [class="firefox-2"] 2
-          assign [class="SightCohoma"] 1
+          assign [class="SightCohoma"] 3
 
           # Set Firefox instances to fullscreen on startup
           for_window [class="firefox-1"] fullscreen enable
-          for_window [class="SightCohoma"] fullscreen enable
           for_window [class="firefox-2"] fullscreen enable
-
-          bindsym Tab fullscreen toggle; focus left; fullscreen toggle
-          bindsym Shift+Tab fullscreen toggle; focus right; fullscreen toggle
+          for_window [class="SightCohoma"] fullscreen enable
         '';
       };
 
       home.file."start_sight_app.sh" = {
         text = ''
-          if ! docker ps -q --filter "name=^sight-container$" | grep -q .; then
-            export DISPLAY=:0
-            xhost +local:docker
-            docker run -d -it \
-              --network host \
-              -e DISPLAY=$DISPLAY \
-              -v /tmp/.X11-unix:/tmp/.X11-unix \
-              --device /dev/dri:/dev/dri \
-              --name sight-container sight-image
-          fi
+          export DISPLAY=:0
+          xhost +local:docker
+          docker stop sight-container
+          docker container rm sight-container
+          docker run -d -it \
+                  --network host \
+                  -e DISPLAY=$DISPLAY \
+                  -v /tmp/.X11-unix:/tmp/.X11-unix \
+                  --device /dev/dri:/dev/dri \
+                  --name sight-container sight-image
         '';
         executable = true;
       };
@@ -228,16 +225,16 @@
           </application>
 
           <gesture type="SWIPE" fingers="3" direction="RIGHT">
-              <action type="RUN_COMMAND">
-                <repeat>true</repeat>
-                <command>xdotool key Tab</command>
-              </action>
+            <action type="SEND_KEYS">
+              <modifiers>Alt_L</modifiers>
+              <keys>3</keys>
+            </action>
           </gesture>
 
           <gesture type="SWIPE" fingers="3" direction="LEFT">
             <action type="SEND_KEYS">
               <repeat>true</repeat>
-              <modifiers>xdotool key Tab</modifiers>
+              <modifiers>Alt_L</modifiers>
               <keys>1</keys>
             </action>
           </gesture>
@@ -259,12 +256,11 @@
   systemd.services."thales-sight" = {
     description = "Run Thales App Sight";
     wantedBy = [ "multi-user.target" ];
-    after = [ "auto-web-2.service" ];
     serviceConfig = {
       User = "me";
       ExecStart = "${pkgs.bash}/bin/bash /home/me/start_sight_app.sh";
       ExecStop = "${pkgs.bash}/bin/bash /home/me/stop_sight_app.sh";
-      Restart = "always";
+      Restart = "on-failure";
       RestartSec = "5s";
       Environment = [
         "DISPLAY=:0"
