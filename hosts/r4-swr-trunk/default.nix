@@ -28,15 +28,14 @@
     };
   };
 
-  systemd.services."rtsp-to-hsl" = {
+  systemd.services."rtsp-to-hls" = {
     description = "Middleware RTSP to HLS";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/www/html/hls";
-      ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -i rtsp://192.168.100.134:8554/vivatech-simu   -c:v libx264 -preset veryfast -f hls   -hls_time 2 -hls_list_size 3 -hls_flags delete_segments   /var/www/html/hls/stream.m3u8";
+      ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -fflags nobuffer -flags low_delay -strict experimental -i rtsp://192.168.100.134:8554/vivatech-simu -c:v libx264 -preset ultrafast -tune zerolatency -x264-params keyint=20:min-keyint=20:scenecut=0 -g 20 -sc_threshold 0 -start_number 0 -an -f hls -hls_time 2 -hls_list_size 10 -hls_flags delete_segments+append_list+omit_endlist -hls_delete_threshold 2 /var/www/html/hls/stream.m3u8";
       Restart = "always";
       RestartSec = "5s";
-      PermissionsStartOnly = true;
     };
   };
 
@@ -91,15 +90,6 @@
     };
   };
 
-  # services.unclutter-xfixes = {
-  #   enable = true;
-  #   timeout = 0; # hide immediately
-  #   extraOptions = [
-  #     "--jitter"
-  #     "0"
-  #   ];
-  # };
-
   services.touchegg.enable = true;
 
   services.xserver.windowManager.i3.extraSessionCommands = ''
@@ -128,15 +118,17 @@
           # Define workspaces
           workspace 1 output HDMI-1
           workspace 2 output HDMI-2
+          workspace 3 output HDMI-1
 
           # Assign Firefox instances to specific workspaces
           assign [class="firefox-1"] 1
           assign [class="firefox-2"] 2
-          assign [class="SightCohoma"] 1
+          assign [class="SightCohoma"] 3
 
           # Set Firefox instances to fullscreen on startup
           for_window [class="firefox-1"] fullscreen enable
           for_window [class="firefox-2"] fullscreen enable
+          for_window [class="SightCohoma"] fullscreen enable
         '';
       };
 
@@ -208,89 +200,42 @@
       home.file.".config/touchegg/touchegg.conf".text = ''
         <touchégg>
           <settings>
-            <property name="composed_gestures_time">111</property>
+            <property name="composed_gestures_time">100</property>
           </settings>
           <application name="All">
-            <gesture type="DRAG" fingers="1" direction="ALL">
-              <action type="DRAG_AND_DROP">BUTTON=1</action>
-            </gesture>
-            <gesture type="DRAG" fingers="4" direction="DOWN">
-              <action type="SEND_KEYS">Super+a</action>
-            </gesture>
-            <gesture type="DRAG" fingers="4" direction="UP">
-              <action type="SEND_KEYS">Super+s</action>
-            </gesture>
-            <gesture type="DRAG" fingers="4" direction="RIGHT">
-              <action type="SEND_KEYS">Super+Left</action>
-            </gesture>
-            <gesture type="DRAG" fingers="4" direction="LEFT">
-              <action type="SEND_KEYS">Super+Right</action>
-            </gesture>
-            <gesture type="DRAG" fingers="3" direction="UP">
-              <action type="MAXIMIZE_RESTORE_WINDOW"></action>
-            </gesture>
-            <gesture type="DRAG" fingers="3" direction="DOWN">
-              <action type="MINIMIZE_WINDOW"></action>
-            </gesture>
-            <gesture type="DRAG" fingers="3" direction="RIGHT">
-              <action type="SEND_KEYS">Control+Super+Right</action>
-            </gesture>
-            <gesture type="DRAG" fingers="3" direction="LEFT">
-              <action type="SEND_KEYS">Control+Super+Left</action>
-            </gesture>
-            <gesture type="DRAG" fingers="2" direction="ALL">
-              <action type="SCROLL">SPEED=7:INVERTED=true</action>
-            </gesture>
-
             <gesture type="PINCH" fingers="2" direction="IN">
-              <action type="SEND_KEYS">
-                <modifiers>Control_L</modifiers>
-                <keys>minus</keys>
-                <on>begin</on>
+              <action type="RUN_COMMAND">
+                <repeat>true</repeat>
+                <command>xdotool click 5</command>
               </action>
             </gesture>
-
+             
             <gesture type="PINCH" fingers="2" direction="OUT">
-              <action type="SEND_KEYS">
-                <modifiers>Control_L</modifiers>
-                <keys>equal</keys>
-                <on>begin</on>
+              <action type="RUN_COMMAND">
+                <repeat>true</repeat>
+                <command>xdotool click 4</command>
               </action>
             </gesture>
 
-            <gesture type="TAP" fingers="3" direction="">
-              <action type="MOUSE_CLICK">BUTTON=2</action>
-            </gesture>
-            <gesture type="TAP" fingers="2" direction="">
-              <action type="MOUSE_CLICK">BUTTON=3</action>
-            </gesture>
             <gesture type="TAP" fingers="1" direction="">
               <action type="MOUSE_CLICK">BUTTON=1</action>
             </gesture>
           </application>
 
-          <application name="Gwenview, Shotwell, Evince">
-            <gesture type="ROTATE" fingers="2" direction="LEFT">
-              <action type="SEND_KEYS">Control+L</action>
-            </gesture>
-            <gesture type="PINCH" fingers="2" direction="IN">
-              <action type="SEND_KEYS">Control+KP_Add</action>
-            </gesture>
-            <gesture type="PINCH" fingers="2" direction="OUT">
-              <action type="SEND_KEYS">Control+KP_Subtract</action>
-            </gesture>
-            <gesture type="ROTATE" fingers="2" direction="RIGHT">
-              <action type="SEND_KEYS">Control+R</action>
-            </gesture>
-          </application>
-          <application name="Dolphin, Midori, Chromium-browser, Chrome, Firefox">
-            <gesture type="DRAG" fingers="5" direction="RIGHT">
-              <action type="SEND_KEYS">Alt+Home</action>
-            </gesture>
-            <gesture type="DRAG" fingers="5" direction="ALL">
-              <action type="SEND_KEYS">Control+Next</action>
-            </gesture>
-          </application>
+          <gesture type="SWIPE" fingers="3" direction="RIGHT">
+            <action type="SEND_KEYS">
+              <modifiers>Alt_L</modifiers>
+              <keys>3</keys>
+            </action>
+          </gesture>
+
+          <gesture type="SWIPE" fingers="3" direction="LEFT">
+            <action type="SEND_KEYS">
+              <repeat>true</repeat>
+              <modifiers>Alt_L</modifiers>
+              <keys>1</keys>
+            </action>
+          </gesture>
         </touchégg>
       '';
 
@@ -306,21 +251,22 @@
       ];
     };
 
-  # systemd.services."thales-sight" = {
-  #   description = "Run Thales App Sight";
-  #   wantedBy = [ "multi-user.target" ];
-  #   serviceConfig = {
-  #     User = "me";
-  #     ExecStart = "${pkgs.bash}/bin/bash /home/me/thales_sight_docker_vivatech/launch_sight_docker.sh";
-  #     Restart = "on-failure";
-  #     RestartSec = "5s";
-  #     Environment = [
-  #       "DISPLAY=:0"
-  #       "XDG_RUNTIME_DIR=/run/user/1000"
-  #       "PATH=${pkgs.docker}/bin:${pkgs.xorg.xhost}/bin:$PATH"
-  #     ];
-  #   };
-  # };
+  systemd.services."thales-sight" = {
+    description = "Run Thales App Sight";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      User = "me";
+      ExecStart = "${pkgs.bash}/bin/bash /home/me/start_sight_app.sh";
+      ExecStop = "${pkgs.bash}/bin/bash /home/me/stop_sight_app.sh";
+      Restart = "on-failure";
+      RestartSec = "5s";
+      Environment = [
+        "DISPLAY=:0"
+        "XDG_RUNTIME_DIR=/run/user/1000"
+        "PATH=${pkgs.docker}/bin:${pkgs.xorg.xhost}/bin:$PATH"
+      ];
+    };
+  };
 
   boot.kernel.sysctl = {
     "net.ipv4.conf.all.force_igmp_version" = 2;
