@@ -14,10 +14,6 @@
   #   ];
   # };
 
-  security.pam.services = lib.mkIf mergedSetup.gui.params.windowManager.i3 {
-    i3lock = { };
-  };
-
   services = {
     displayManager = lib.mkIf mergedSetup.gui.params.windowManager.i3 {
       defaultSession = "none+i3";

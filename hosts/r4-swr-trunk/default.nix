@@ -132,23 +132,28 @@
           for_window [class="SightCohoma"] fullscreen enable
           for_window [class="firefox-2"] fullscreen enable
 
-          bindsym Tab fullscreen toggle; focus left; fullscreen toggle
-          bindsym Shift+Tab fullscreen toggle; focus right; fullscreen toggle
+          bindsym $mod+q exec --no-startup-id i3-msg '[title="^SightCohoma"] focus; fullscreen enable'
+          bindsym $mod+w exec --no-startup-id i3-msg '[instance="firefox-1"] focus; fullscreen enable'
+          bindsym $mod+e exec --no-startup-id i3-msg '[instance="firefox-2"] focus; fullscreen enable'
         '';
       };
 
       home.file."start_sight_app.sh" = {
         text = ''
-          if ! docker ps -q --filter "name=^sight-container$" | grep -q .; then
-            export DISPLAY=:0
-            xhost +local:docker
-            docker run -d -it \
-              --network host \
-              -e DISPLAY=$DISPLAY \
-              -v /tmp/.X11-unix:/tmp/.X11-unix \
-              --device /dev/dri:/dev/dri \
-              --name sight-container sight-image
-          fi
+          export DISPLAY=:0
+          xhost +local:docker
+
+          # Stop and remove the container only if it exists
+          docker stop sight-container
+          docker container rm sight-container
+
+          # Don't use `-it` for systemd services (no TTY)
+          docker run \
+            --network host \
+            -e DISPLAY=$DISPLAY \
+            -v /tmp/.X11-unix:/tmp/.X11-unix \
+            --device /dev/dri:/dev/dri \
+            --name sight-container sight-image
         '';
         executable = true;
       };
@@ -244,8 +249,6 @@
         </touchégg>
       '';
 
-      services.dbus.enable = true;
-
       xsession.windowManager.i3.config.startup = [
         {
           command = "unclutter --timeout 0 --jitter 0 --hide-on-touch";
@@ -321,4 +324,14 @@
     xorg.libxcb.dev
     xorg.libXtst
   ];
+
+  # Ensures dbus and polkit are working for user/system-level services
+  services.dbus.enable = true;
+  security.polkit.enable = true;
+
+  # This ensures X11 sessions start correctly for polkit (esp. with i3)
+  services.xserver.enable = true;
+
+  # Required for polkit to identify users in graphical sessions
+  services.xserver.displayManager.startx.enable = true;
 }
