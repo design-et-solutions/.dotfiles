@@ -244,6 +244,8 @@
         </touchégg>
       '';
 
+      services.dbus.enable = true;
+
       xsession.windowManager.i3.config.startup = [
         {
           command = "unclutter --timeout 0 --jitter 0 --hide-on-touch";
