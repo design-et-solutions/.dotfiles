@@ -132,9 +132,9 @@
           for_window [class="SightCohoma"] fullscreen enable
           for_window [class="firefox-2"] fullscreen enable
 
-          bindsym $mod+q exec --no-startup-id i3-msg '[title="^SightCohoma"] focus; fullscreen enable'
-          bindsym $mod+w exec --no-startup-id i3-msg '[instance="firefox-1"] focus; fullscreen enable'
-          bindsym $mod+e exec --no-startup-id i3-msg '[instance="firefox-2"] focus; fullscreen enable'
+          bindsym q exec --no-startup-id i3-msg '[title="SightCohoma"] focus; fullscreen enable'
+          bindsym w exec --no-startup-id i3-msg '[instance="firefox-1"] focus; fullscreen enable'
+          bindsym e exec --no-startup-id i3-msg '[instance="firefox-2"] focus; fullscreen enable'
         '';
       };
 
