@@ -28,6 +28,39 @@
     };
   };
 
+  systemd.services."rtsp-to-hsl" = {
+    description = "Middleware RTSP to HLS";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/www/html/hls";
+      ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -i rtsp://192.168.100.134:8554/vivatech-simu   -c:v libx264 -preset veryfast -f hls   -hls_time 2 -hls_list_size 3 -hls_flags delete_segments   /var/www/html/hls/stream.m3u8";
+      Restart = "always";
+      RestartSec = "5s";
+      PermissionsStartOnly = true;
+    };
+  };
+
+  services.nginx = {
+    enable = true;
+    virtualHosts."localhost" = {
+      locations."/" = {
+        root = "/var/www/html";
+        index = "index.html";
+      };
+      locations."/hls/" = {
+        root = "/var/www/html";
+        extraConfig = ''
+          add_header Cache-Control no-cache;
+          add_header Access-Control-Allow-Origin *;
+          types {
+            application/vnd.apple.mpegurl m3u8;
+            video/mp2t ts;
+          }
+        '';
+      };
+    };
+  };
+
   systemd.services."auto-web-1" = {
     description = "Run Firefox with a specific URL";
     wantedBy = [ "multi-user.target" ];
@@ -299,6 +332,8 @@
     touchegg
     wmctrl
     unclutter-xfixes
+    nginx
+    ffmpeg
 
     tcpdump
     natscli
