@@ -268,6 +268,7 @@
               <action type="MOUSE_CLICK">BUTTON=1</action>
             </gesture>
           </application>
+
           <application name="Gwenview, Shotwell, Evince">
             <gesture type="ROTATE" fingers="2" direction="LEFT">
               <action type="SEND_KEYS">Control+L</action>
