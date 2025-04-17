@@ -1,0 +1,12 @@
+[Unit]
+Description=Drone Telemetry WebSocket Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 metadata.py
+WorkingDirectory=/home/me
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
