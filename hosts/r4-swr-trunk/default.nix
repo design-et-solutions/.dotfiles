@@ -101,6 +101,9 @@
       ExecStart = "${pkgs.bash}/bin/bash /home/me/start_precision_landing.sh";
       Restart = "always";
       RestartSec = "5s";
+      Environment = [
+        "PATH=${pkgs.docker}/bin:${pkgs.xorg.xhost}/bin:$PATH"
+      ];
     };
   };
 
