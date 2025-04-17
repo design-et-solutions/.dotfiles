@@ -161,7 +161,7 @@
 
           docker stop parrot-anafi-olympe
           docker container rm parrot-anafi-olympe
-          docker run -it --rm -p 8000:8000 --net=host parrot-anafi-olympe
+          docker run --rm -p 8000:8000 --net=host parrot-anafi-olympe
         '';
         executable = true;
       };
