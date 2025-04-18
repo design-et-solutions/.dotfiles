@@ -93,6 +93,20 @@
     };
   };
 
+  systemd.services."precision-landing" = {
+    description = "Run precision landing";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      User = "me";
+      ExecStart = "${pkgs.bash}/bin/bash /home/me/start_precision_landing.sh";
+      Restart = "always";
+      RestartSec = "5s";
+      Environment = [
+        "PATH=${pkgs.docker}/bin:${pkgs.xorg.xhost}/bin:$PATH"
+      ];
+    };
+  };
+
   services.touchegg.enable = true;
 
   services.xserver.windowManager.i3.extraSessionCommands = ''
@@ -137,32 +151,30 @@
         '';
       };
 
+      home.file."start_precision_landing.sh" = {
+        text = ''
+          xhost +local:docker
+
+          docker stop parrot-anafi-olympe
+          docker container rm parrot-anafi-olympe
+          docker run --rm -p 8000:8000 --net=host parrot-anafi-olympe
+        '';
+        executable = true;
+      };
+
       home.file."start_sight_app.sh" = {
         text = ''
           export DISPLAY=:0
           xhost +local:docker
 
-          # Stop and remove the container only if it exists
           docker stop sight-container
           docker container rm sight-container
-
-          # Don't use `-it` for systemd services (no TTY)
           docker run \
             --network host \
             -e DISPLAY=$DISPLAY \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
             --device /dev/dri:/dev/dri \
             --name sight-container sight-image
-        '';
-        executable = true;
-      };
-
-      home.file."stop_sight_app.sh" = {
-        text = ''
-          export DISPLAY=:0
-          xhost +local:docker
-          docker stop sight-container
-          docker container rm sight-container
         '';
         executable = true;
       };
@@ -267,7 +279,6 @@
     serviceConfig = {
       User = "me";
       ExecStart = "${pkgs.bash}/bin/bash /home/me/start_sight_app.sh";
-      ExecStop = "${pkgs.bash}/bin/bash /home/me/stop_sight_app.sh";
       Restart = "always";
       RestartSec = "5s";
       Environment = [
