@@ -132,12 +132,8 @@
           for_window [class="SightCohoma"] fullscreen enable
           for_window [class="firefox-2"] fullscreen enable
 
-          bindsym $mod+s [class="SightCohoma"] focus
-          bindsym $mod+1 [title="Create Next App — Mozilla Firefox" instance="firefox-1"] focus
-          bindsym $mod+2 [title="Create Next App — Mozilla Firefox" instance="firefox-2"] focus
-          # bindsym q [title="SightCohoma"] focus; fullscreen enable
-          # bindsym w [instance="firefox-1"] focus; fullscreen enable
-          # bindsym e [instance="firefox-2"] focus; fullscreen enable
+          bindsym Tab fullscreen disabe; focus left; fullscreen enable 
+          # bindsym Shift+Tab
         '';
       };
 
