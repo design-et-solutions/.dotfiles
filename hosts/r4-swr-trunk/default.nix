@@ -15,13 +15,6 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAq7LsVEV+jw4yPpLyDc4XIS2yVmSJt0J24pS4BQYtGD me@laptop-work"
   ];
 
-  services = {
-    displayManager = {
-      autoLogin.enable = true;
-      autoLogin.user = "me";
-    };
-  };
-
   networking = {
     hosts = {
       "192.100.1.1" = [ "cdp.thales" ];
@@ -352,6 +345,8 @@
     xorg.libXrender.dev
     xorg.libxcb.dev
     xorg.libXtst
+    xorg.xinit
+    xorg.xrandr
   ];
 
   services.picom = {
@@ -365,14 +360,4 @@
       blur-kern = "7x7box";
     };
   };
-
-  # Ensures dbus and polkit are working for user/system-level services
-  services.dbus.enable = true;
-  security.polkit.enable = true;
-
-  # This ensures X11 sessions start correctly for polkit (esp. with i3)
-  services.xserver.enable = true;
-
-  # Required for polkit to identify users in graphical sessions
-  services.xserver.displayManager.startx.enable = true;
 }

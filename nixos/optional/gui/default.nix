@@ -8,22 +8,28 @@
   imports = [
     ./hyprland.nix
     ./wayland.nix
-    ./i3.nix
   ];
 
   services = {
-    displayManager.autoLogin = {
-      enable = lib.mkDefault false;
-      user = lib.mkDefault null;
+    displayManager = {
+      autoLogin.enable = true;
+      autoLogin.user = "me";
+      defaultSession = "none+i3";
     };
     xserver = {
       enable = true;
       displayManager = {
-        gdm = {
-          enable = lib.mkDefault true;
-          wayland = mergedSetup.gui.params.displayServer.wayland;
-          banner = "go fuck your self";
-        };
+        lightdm.enable = true;
+      };
+      windowManager.i3 = {
+        enable = true;
+        extraPackages = with pkgs; [
+          i3status
+          i3lock
+          dmenu
+          xterm
+          feh
+        ];
       };
     };
     ratbagd.enable = true; # DBus daemon to configure input devices
@@ -37,5 +43,26 @@
 
   environment.systemPackages = with pkgs; [
     brightnessctl # Command-line utility to control device brightness
+    xorg.libX11
+    xorg.libxcb
+    xorg.libXi
+    xorg.libXcomposite
+    xorg.xrandr
+    xorg.xinput
+    xorg.xmodmap
+    xorg.xwininfo
+    xorg.xhost
+    fontconfig.dev
+    freetype.dev
+    xorg.libX11.dev
+    xorg.libxcb.dev
+    xorg.libXext.dev
+    xorg.libXfixes.dev
+    xorg.libXi.dev
+    xorg.libXrender.dev
+    xorg.libxcb.dev
+    xorg.libXtst
+    xorg.xinit
+    xorg.xrandr
   ];
 }
