@@ -94,6 +94,7 @@
   };
 
   systemd.services."precision-landing" = {
+    enable = false;
     description = "Run precision landing";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
@@ -146,8 +147,8 @@
           for_window [class="SightCohoma"] fullscreen enable
           for_window [class="firefox-2"] fullscreen enable
 
-          bindsym Tab fullscreen disabe; focus left; fullscreen enable 
-          # bindsym Shift+Tab
+          bindsym Tab focus left; fullscreen disable; focus left; fullscreen enable 
+          bindsym Shift+Tab focus right; fullscreen disable; focus right; fullscreen enable
         '';
       };
 
@@ -213,6 +214,16 @@
               xdotool key --window $WINDOW_ID Control+$ACTION
               ;;
           esac
+        '';
+        executable = true;
+      };
+
+      home.file."toggle_sight.sh" = {
+        text = ''
+          export DISPLAY=:0
+          #!/bin/sh
+
+          xdotool key Tab
         '';
         executable = true;
       };
