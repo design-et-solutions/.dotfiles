@@ -280,6 +280,10 @@
           command = "touchegg";
           always = true;
         }
+        {
+          command = "picom --backend xrender";
+          always = true;
+        }
       ];
     };
 
@@ -324,7 +328,11 @@
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-libav
     gst_all_1.gst-vaapi
-    qt5.full
+
+    qt5.qtbase
+    qt5.qttools
+    libsForQt5.qt5ct
+
     xorg.libX11
     xorg.libxcb
     xorg.libXi
@@ -345,6 +353,18 @@
     xorg.libxcb.dev
     xorg.libXtst
   ];
+
+  services.picom = {
+    enable = true;
+    backend = "xrender";
+    fade = true;
+    shadow = true;
+    settings = {
+      corner-radius = 5;
+      blur-background = true;
+      blur-kern = "7x7box";
+    };
+  };
 
   # Ensures dbus and polkit are working for user/system-level services
   services.dbus.enable = true;
