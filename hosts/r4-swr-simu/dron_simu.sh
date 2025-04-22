@@ -5,5 +5,5 @@ while true; do
         echo "Simulation not responding, restarting..."
         sphinx-cli action -m world fwman world_reset_all
     fi
-    sleep 5
+    sleep 20
 done
