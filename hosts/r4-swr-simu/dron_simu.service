@@ -1,0 +1,13 @@
+[Unit]
+Description=Parrot Sphinx Watchdog
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/me/drone_simu.sh
+Restart=always
+RestartSec=10
+User=me
+
+[Install]
+WantedBy=default.target
