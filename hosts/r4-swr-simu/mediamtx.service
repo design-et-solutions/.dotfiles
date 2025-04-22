@@ -2,7 +2,7 @@
 Description=Run Media MTX
 
 [Service]
-ExecStart=/home/me/mediamtx /home/me/vivatech-thales/mediamtx.yml
+ExecStart=/home/me/mediamtx_v1.12.0/mediamtx /home/me/vivatech-thales/mediamtx.yml
 Restart=always
 RestartSec=5s
 User=me

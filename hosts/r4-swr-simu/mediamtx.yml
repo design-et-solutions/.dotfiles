@@ -1,0 +1,8 @@
+paths:
+  vivatech-simu:
+    source: rtsp://10.202.0.1:554/live
+    runOnInit: ffmpeg -fflags nobuffer -flags low_delay -strict experimental -i rtsp://localhost:8554/vivatech-simu -c:v libx264 -preset ultrafast -tune zerolatency -g 30 -sc_threshold 0 -start_number 0 -f hls -hls_time 2 -hls_list_size 10 -hls_flags delete_segments+append_list+omit_endlist /var/www/html/hls/stream.m3u8
+    runOnInitRestart: yes
+
+  vivatech-real:
+    source: rtsp://192.168.42.1/live
