@@ -15,6 +15,7 @@ declare -A metrics=(
   ["actuator_anafi_ai.rr_motorSpeed"]="motor"
   ["actuator_anafi_ai.fl_worldPosition.z"]="altitude"
   ["smart_battery_anafi_ai.battery_capacity"]="battery"
+  ["actuator_anafi_ai.fl_worldAttitude.x"]="attitude_x"
 )
 
 restart_drone() {
@@ -51,6 +52,14 @@ process_metric() {
     awk -v val="$value" 'BEGIN { exit (val<15)?0:1 }'
     if [[ $? -eq 0 ]]; then
       echo "Battery low: $value% < 15%"
+      return 2
+    fi
+  fi
+
+  if [[ "$label" == "attitude_x" ]]; then
+    awk -v val="$value" 'BEGIN { exit (val > 2.5 || val < -2.5)?0:1 }'
+    if [[ $? -eq 0 ]]; then
+      echo "Attitude anomaly on X axis: $value rad"
       return 2
     fi
   fi
