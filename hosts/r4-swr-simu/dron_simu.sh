@@ -15,13 +15,14 @@ declare -A metrics=(
   ["actuator_anafi_ai.rr_motorSpeed"]="motor"
   ["actuator_anafi_ai.fl_worldPosition.z"]="altitude"
   ["smart_battery_anafi_ai.battery_capacity"]="battery"
-  ["actuator_anafi_ai.fl_worldAttitude.x"]="attitude_x"
+  ["actuator_anafi_ai.fr_worldAttitude.x"]="attitude_x"
+  ["actuator_anafi_ai.fr_worldAttitude.y"]="attitude_y"
 )
 
 restart_drone() {
   echo "Drone is stuck. Restarting Sphinx..."
   sphinx-cli action -m world fwman world_reset_all
-  sleep 40
+  sleep 20
 }
 
 reset_state() {
@@ -35,7 +36,7 @@ process_metric() {
   local value="$3"
 
   # Validate numeric value
-  if ! [[ "$value" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
+  if ! [[ "$value" =~ ^-?[0-9]+([.][0-9]+)?$ ]]; then
     echo "Invalid numeric value ($label): $value"
     return
   fi
@@ -56,10 +57,10 @@ process_metric() {
     fi
   fi
 
-  if [[ "$label" == "attitude_x" ]]; then
-    awk -v val="$value" 'BEGIN { exit (val > 2.5 || val < -2.5)?0:1 }'
+  if [[ "$label" == "attitude_x" || "$label" == "attitude_y" ]]; then
+    awk -v val="$value" 'BEGIN { exit (val > 1.0 || val < -1.0)?0:1 }'
     if [[ $? -eq 0 ]]; then
-      echo "Attitude anomaly on X axis: $value rad"
+      echo "Attitude anomaly on $label axis: $value rad"
       return 2
     fi
   fi
@@ -83,7 +84,7 @@ process_metric() {
 }
 
 main_loop() {
-  tlm-data-logger "$TLM_PORT" | while read -r line; do
+  while read -r line; do
     for pattern in "${!metrics[@]}"; do
       if [[ "$line" =~ $pattern ]]; then
         value=$(echo "$line" | awk '{print $2}')
@@ -98,7 +99,7 @@ main_loop() {
     if [[ "${idle_counter[collision]:-0}" -ge "$MAX_IDLE" && "${idle_counter[motor]:-0}" -ge "$MAX_IDLE" ]]; then
       return 1
     fi
-  done
+  done < <(tlm-data-logger "$TLM_PORT")
 }
 
 while true; do
