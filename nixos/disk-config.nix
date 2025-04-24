@@ -1,12 +1,7 @@
-{
-  lib,
-  mergedSetup,
-  ...
-}:
-{
+{ ... }: {
   disko.devices = {
     disk.disk1 = {
-      device = lib.mkDefault "/dev/nvme0n1";
+      device = "/dev/nvme0n1";
       type = "disk";
       content = {
         type = "gpt";
@@ -26,38 +21,16 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = [
-                "fmask=0077"
-                "dmask=0077"
-              ];
+              mountOptions = [ "umask=0077" ];
             };
           };
-          # Root Partition setup, using LVM or LUKS based on encryption
-          root =
-            if !mergedSetup.disk.encryption then
-              {
-                name = "root";
-                size = "100%"; # Use remaining space
-                content = {
-                  type = "lvm_pv"; # LVM Physical Volume
-                  vg = "pool"; # Volume Group
-                };
-              }
-            else
-              {
-                name = "cryptroot"; # Name for encrypted root partition
-                size = "100%"; # Use remaining space
-                content = {
-                  type = "luks"; # LUKS encryption setup
-                  name = "crypted"; # Name for unlocked LUKS device
-                  settings.allowDiscards = true; # Enable TRIM for SSDs
-                  settings.tpm2 = false; # TPM usage setting, adjust if needed
-                  content = {
-                    type = "lvm_pv"; # LVM Physical Volume inside LUKS
-                    vg = "pool"; # Volume Group
-                  };
-                };
-              };
+          root = {
+            size = "100%";
+            content = {
+              type = "lvm_pv";
+              vg = "pool";
+            };
+          };
         };
       };
     };
@@ -66,19 +39,6 @@
       pool = {
         type = "lvm_vg"; # Define volume group 'pool'
         lvs = {
-          # Logical Volume for the root filesystem
-          root = {
-            size = "50%FREE";
-            content = {
-              type = "filesystem";
-              format = "ext4";
-              mountpoint = "/";
-              mountOptions = [
-                "defaults"
-                "noatime" # File system does not update the access time for files and directories
-              ];
-            };
-          };
           # Logical Volume for user home directories
           home = {
             size = "30%FREE";
@@ -86,10 +46,16 @@
               type = "filesystem";
               format = "ext4";
               mountpoint = "/home";
-              mountOptions = [
-                "defaults"
-                "noatime" # File system does not update the access time for files and directories
-              ];
+            };
+          };
+          # Logical Volume for the root filesystem
+          root = {
+            size = "50%FREE";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
+              mountOptions = [ "defaults" ];
             };
           };
           # Logical Volume for system logs, databases, etc.
@@ -99,20 +65,12 @@
               type = "filesystem";
               format = "ext4";
               mountpoint = "/var";
-              mountOptions = [
-                "defaults"
-                "noatime" # File system does not update the access time for files and directories
-                "nodev" # Restrict device files for security
-                "nosuid" # Prevent execution of setuid binaries
-              ];
             };
           };
           # Logical Volume for swap partition
           swap = {
             size = "16G";
-            content = {
-              type = "swap";
-            };
+            content = { type = "swap"; };
           };
         };
       };

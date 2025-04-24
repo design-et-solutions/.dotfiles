@@ -1,25 +1,34 @@
-{
-  modulesPath,
-  pkgs,
-  ...
-}:
-{
+{ modulesPath, pkgs, ... }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ../../nixos/disk-config.nix
   ];
 
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "thunderbolt"
+    "ahci"
+    "nvme"
+    "usb_storage"
+    "usbhid"
+    "sd_mod"
+    "hid_generic"
+    "hid_apple" # Add input/HID modules
+  ];
+
+  boot.kernelModules = [ "kvm-intel" "usbhid" "hid-generic" ];
+
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="input", RUN+="${pkgs.coreutils}/bin/logger 'Input device detected: $env{DEVNAME}'"
+  '';
+
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMc6jbhoDuKt0YOIF9prT4reT9WG6sP2sEFVj59loQwq me@desktop-hood"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAq7LsVEV+jw4yPpLyDc4XIS2yVmSJt0J24pS4BQYtGD me@laptop-work"
   ];
 
-  networking = {
-    hosts = {
-      "192.100.1.1" = [ "cdp.thales" ];
-    };
-  };
+  networking = { hosts = { "192.100.1.1" = [ "cdp.thales" ]; }; };
 
   systemd.services."rtsp-to-hls" = {
     # enable = false;
@@ -28,7 +37,8 @@
     serviceConfig = {
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/www/html/hls";
       # ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -fflags nobuffer -flags low_delay -strict experimental -i rtsp://192.168.100.134:8554/vivatech-simu -c:v libx264 -preset ultrafast -tune zerolatency -x264-params keyint=20:min-keyint=20:scenecut=0 -g 20 -sc_threshold 0 -start_number 0 -an -f hls -hls_time 2 -hls_list_size 10 -hls_flags delete_segments+append_list+omit_endlist -hls_delete_threshold 2 /var/www/html/hls/stream.m3u8";
-      ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -fflags nobuffer -flags low_delay -strict experimental -i rtsp://192.168.100.134:8554/vivatech-simu -c:v libx264 -preset ultrafast -tune zerolatency -g 30 -sc_threshold 0 -start_number 0 -f hls -hls_time 2 -hls_list_size 10 -hls_flags delete_segments+append_list+omit_endlist /var/www/html/hls/stream.m3u8";
+      ExecStart =
+        "${pkgs.ffmpeg}/bin/ffmpeg -fflags nobuffer -flags low_delay -strict experimental -i rtsp://192.168.100.134:8554/vivatech-simu -c:v libx264 -preset ultrafast -tune zerolatency -g 30 -sc_threshold 0 -start_number 0 -f hls -hls_time 2 -hls_list_size 10 -hls_flags delete_segments+append_list+omit_endlist /var/www/html/hls/stream.m3u8";
       # ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -i rtsp://192.168.100.134:8554/vivatech-simu -c:v on -preset -g 30 -sc_threshold 0 -start_number 0 -f hls -hls_time 2 -hls_list_size 7 -hls_flags delete_segments+append_list+omit_endlist /var/www/html/hls/stream.m3u8";
       Restart = "always";
       RestartSec = "5s";
@@ -61,13 +71,11 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
-      ExecStart = "${pkgs.firefox}/bin/firefox --kiosk --new-instance -P p1 --class firefox-1 http://192.168.100.125:3001/left https://demo.astrautm.com";
+      ExecStart =
+        "${pkgs.firefox}/bin/firefox --kiosk --new-instance -P p1 --class firefox-1 http://192.168.100.125:3001/left https://demo.astrautm.com";
       Restart = "always";
       RestartSec = "5s";
-      Environment = [
-        "DISPLAY=:0"
-        "XDG_RUNTIME_DIR=/run/user/1000"
-      ];
+      Environment = [ "DISPLAY=:0" "XDG_RUNTIME_DIR=/run/user/1000" ];
     };
   };
 
@@ -76,13 +84,11 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "me";
-      ExecStart = "${pkgs.firefox}/bin/firefox --kiosk --new-instance -P p2 --class firefox-2 http://192.168.100.125:3001/right";
+      ExecStart =
+        "${pkgs.firefox}/bin/firefox --kiosk --new-instance -P p2 --class firefox-2 http://192.168.100.125:3001/right";
       Restart = "always";
       RestartSec = "5s";
-      Environment = [
-        "DISPLAY=:0"
-        "XDG_RUNTIME_DIR=/run/user/1000"
-      ];
+      Environment = [ "DISPLAY=:0" "XDG_RUNTIME_DIR=/run/user/1000" ];
     };
   };
 
@@ -95,9 +101,7 @@
       ExecStart = "${pkgs.bash}/bin/bash /home/me/start_precision_landing.sh";
       Restart = "always";
       RestartSec = "5s";
-      Environment = [
-        "PATH=${pkgs.docker}/bin:${pkgs.xorg.xhost}/bin:$PATH"
-      ];
+      Environment = [ "PATH=${pkgs.docker}/bin:${pkgs.xorg.xhost}/bin:$PATH" ];
     };
   };
 
@@ -115,170 +119,168 @@
     xinput map-to-output 11 HDMI-2
   '';
 
-  home-manager.users.me =
-    { pkgs, ... }:
-    {
-      xsession.windowManager.i3 = {
-        enable = true;
-        extraConfig = ''
-          # Disable the i3 bar
-          bar {
-            mode hide
-          }
+  home-manager.users.me = { pkgs, ... }: {
+    xsession.windowManager.i3 = {
+      enable = true;
+      extraConfig = ''
+        # Disable the i3 bar
+        bar {
+          mode hide
+        }
 
-          # Define workspaces
-          workspace 1 output HDMI-1
-          workspace 2 output HDMI-2
+        # Define workspaces
+        workspace 1 output HDMI-1
+        workspace 2 output HDMI-2
 
-          # Assign Firefox instances to specific workspaces
-          assign [class="firefox-1"] 1
-          assign [class="firefox-2"] 2
-          assign [class="SightCohoma"] 1
+        # Assign Firefox instances to specific workspaces
+        assign [class="firefox-1"] 1
+        assign [class="firefox-2"] 2
+        assign [class="SightCohoma"] 1
 
-          # Set Firefox instances to fullscreen on startup
-          for_window [class="firefox-1"] fullscreen enable
-          for_window [class="SightCohoma"] fullscreen enable
-          for_window [class="firefox-2"] fullscreen enable
+        # Set Firefox instances to fullscreen on startup
+        for_window [class="firefox-1"] fullscreen enable
+        for_window [class="SightCohoma"] fullscreen enable
+        for_window [class="firefox-2"] fullscreen enable
 
-          bindsym Tab focus left; fullscreen disable; focus left; fullscreen enable 
-          bindsym Shift+Tab focus right; fullscreen disable; focus right; fullscreen enable
-        '';
-      };
+        bindsym Tab focus left; fullscreen disable; focus left; fullscreen enable 
+        bindsym Shift+Tab focus right; fullscreen disable; focus right; fullscreen enable
+      '';
+    };
 
-      home.file."start_precision_landing.sh" = {
-        text = ''
-          xhost +local:docker
+    home.file."start_precision_landing.sh" = {
+      text = ''
+        xhost +local:docker
 
-          docker stop parrot-anafi-olympe
-          docker container rm parrot-anafi-olympe
-          docker run --rm -p 8000:8000 --net=host parrot-anafi-olympe
-        '';
-        executable = true;
-      };
+        docker stop parrot-anafi-olympe
+        docker container rm parrot-anafi-olympe
+        docker run --rm -p 8000:8000 --net=host parrot-anafi-olympe
+      '';
+      executable = true;
+    };
 
-      home.file."start_sight_app.sh" = {
-        text = ''
-          export DISPLAY=:0
-          xhost +local:docker
+    home.file."start_sight_app.sh" = {
+      text = ''
+        export DISPLAY=:0
+        xhost +local:docker
 
-          docker stop sight-container
-          docker container rm sight-container
-          docker run \
-            --network host \
-            -e DISPLAY=$DISPLAY \
-            -v /tmp/.X11-unix:/tmp/.X11-unix \
-            --device /dev/dri:/dev/dri \
-            --name sight-container sight-image
-        '';
-        executable = true;
-      };
+        docker stop sight-container
+        docker container rm sight-container
+        docker run \
+          --network host \
+          -e DISPLAY=$DISPLAY \
+          -v /tmp/.X11-unix:/tmp/.X11-unix \
+          --device /dev/dri:/dev/dri \
+          --name sight-container sight-image
+      '';
+      executable = true;
+    };
 
-      home.file."change_tabs.sh" = {
-        text = ''
-          export DISPLAY=:0
-          #!/bin/sh
+    home.file."change_tabs.sh" = {
+      text = ''
+        export DISPLAY=:0
+        #!/bin/sh
 
-          # Check if an argument is provided
-          if [ -z "$1" ]; then
-            echo "Usage: $0 <next|previous|number>"
-            exit 1
-          fi
+        # Check if an argument is provided
+        if [ -z "$1" ]; then
+          echo "Usage: $0 <next|previous|number>"
+          exit 1
+        fi
 
-          ACTION=$1
+        ACTION=$1
 
-          # Get the window ID of the Firefox instance
-          WINDOW_ID=$(wmctrl -lx | grep 'firefox-1' | awk '{print $1}')
+        # Get the window ID of the Firefox instance
+        WINDOW_ID=$(wmctrl -lx | grep 'firefox-1' | awk '{print $1}')
 
-          # Activate the window
-          wmctrl -ia $WINDOW_ID
+        # Activate the window
+        wmctrl -ia $WINDOW_ID
 
-          # Perform the action based on the argument
-          case $ACTION in
-            next)
-              # Switch to the next tab (Ctrl+Tab)
-              xdotool key --window $WINDOW_ID Control+Tab
-              ;;
-            previous)
-              # Switch to the previous tab (Ctrl+Shift+Tab)
-              xdotool key --window $WINDOW_ID Control+Shift+Tab
-              ;;
-            *)
-              # Switch to the next tab (Ctrl+number)
-              xdotool key --window $WINDOW_ID Control+$ACTION
-              ;;
-          esac
-        '';
-        executable = true;
-      };
+        # Perform the action based on the argument
+        case $ACTION in
+          next)
+            # Switch to the next tab (Ctrl+Tab)
+            xdotool key --window $WINDOW_ID Control+Tab
+            ;;
+          previous)
+            # Switch to the previous tab (Ctrl+Shift+Tab)
+            xdotool key --window $WINDOW_ID Control+Shift+Tab
+            ;;
+          *)
+            # Switch to the next tab (Ctrl+number)
+            xdotool key --window $WINDOW_ID Control+$ACTION
+            ;;
+        esac
+      '';
+      executable = true;
+    };
 
-      home.file."toggle_sight.sh" = {
-        text = ''
-          export DISPLAY=:0
-          #!/bin/sh
+    home.file."toggle_sight.sh" = {
+      text = ''
+        export DISPLAY=:0
+        #!/bin/sh
 
-          xdotool key Tab
-        '';
-        executable = true;
-      };
+        xdotool key Tab
+      '';
+      executable = true;
+    };
 
-      # Write touchegg.conf to the right place
-      home.file.".config/touchegg/touchegg.conf".text = ''
-        <touchégg>
-          <settings>
-            <property name="composed_gestures_time">100</property>
-          </settings>
-          <application name="All">
-            <gesture type="PINCH" fingers="2" direction="IN">
-              <action type="RUN_COMMAND">
-                <repeat>true</repeat>
-                <command>xdotool click 5</command>
-              </action>
-            </gesture>
-             
-            <gesture type="PINCH" fingers="2" direction="OUT">
-              <action type="RUN_COMMAND">
-                <repeat>true</repeat>
-                <command>xdotool click 4</command>
-              </action>
-            </gesture>
-
-            <gesture type="TAP" fingers="1" direction="">
-              <action type="MOUSE_CLICK">BUTTON=1</action>
-            </gesture>
-          </application>
-
-          <gesture type="SWIPE" fingers="3" direction="RIGHT">
-              <action type="RUN_COMMAND">
-                <repeat>true</repeat>
-                <command>xdotool key Tab</command>
-              </action>
-          </gesture>
-
-          <gesture type="SWIPE" fingers="3" direction="LEFT">
-            <action type="SEND_KEYS">
+    # Write touchegg.conf to the right place
+    home.file.".config/touchegg/touchegg.conf".text = ''
+      <touchégg>
+        <settings>
+          <property name="composed_gestures_time">100</property>
+        </settings>
+        <application name="All">
+          <gesture type="PINCH" fingers="2" direction="IN">
+            <action type="RUN_COMMAND">
               <repeat>true</repeat>
-              <modifiers>xdotool key Tab</modifiers>
-              <keys>1</keys>
+              <command>xdotool click 5</command>
             </action>
           </gesture>
-        </touchégg>
-      '';
+           
+          <gesture type="PINCH" fingers="2" direction="OUT">
+            <action type="RUN_COMMAND">
+              <repeat>true</repeat>
+              <command>xdotool click 4</command>
+            </action>
+          </gesture>
 
-      xsession.windowManager.i3.config.startup = [
-        {
-          command = "unclutter --timeout 0 --jitter 0 --hide-on-touch";
-          always = true;
-        }
-        {
-          command = "touchegg";
-          always = true;
-        }
-        {
-          command = "picom --backend xrender";
-          always = true;
-        }
-      ];
-    };
+          <gesture type="TAP" fingers="1" direction="">
+            <action type="MOUSE_CLICK">BUTTON=1</action>
+          </gesture>
+        </application>
+
+        <gesture type="SWIPE" fingers="3" direction="RIGHT">
+            <action type="RUN_COMMAND">
+              <repeat>true</repeat>
+              <command>xdotool key Tab</command>
+            </action>
+        </gesture>
+
+        <gesture type="SWIPE" fingers="3" direction="LEFT">
+          <action type="SEND_KEYS">
+            <repeat>true</repeat>
+            <modifiers>xdotool key Tab</modifiers>
+            <keys>1</keys>
+          </action>
+        </gesture>
+      </touchégg>
+    '';
+
+    xsession.windowManager.i3.config.startup = [
+      {
+        command = "unclutter --timeout 0 --jitter 0 --hide-on-touch";
+        always = true;
+      }
+      {
+        command = "touchegg";
+        always = true;
+      }
+      {
+        command = "picom --backend xrender";
+        always = true;
+      }
+    ];
+  };
 
   systemd.services."thales-sight" = {
     description = "Run Thales App Sight";
@@ -297,9 +299,7 @@
     };
   };
 
-  boot.kernel.sysctl = {
-    "net.ipv4.conf.all.force_igmp_version" = 2;
-  };
+  boot.kernel.sysctl = { "net.ipv4.conf.all.force_igmp_version" = 2; };
 
   environment.systemPackages = with pkgs; [
     xdotool
@@ -347,6 +347,8 @@
     xorg.libXtst
     xorg.xinit
     xorg.xrandr
+
+    coreutils
   ];
 
   services.picom = {
@@ -360,4 +362,6 @@
       blur-kern = "7x7box";
     };
   };
+
+  services.libinput = { enable = true; };
 }
