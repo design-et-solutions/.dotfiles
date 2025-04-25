@@ -44,6 +44,13 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
+  services = {
+    displayManager = {
+      autoLogin.enable = true;
+      autoLogin.user = "me";
+    };
+  };
+
   programs.nix-ld.enable = true; # run unpatched dynamic binaries on NixOS
 
   services.dbus.enable = true;   # inter-process communication (IPC), allows apps to comm with one another
@@ -68,6 +75,44 @@
   
   
   systemd.services = {
+
+    npm-app = {
+      description = "Serveur React";
+      wantedBy = ["multi-user.target"];
+      after = ["network.target" "can.service"];
+      serviceConfig = {
+        User = "me";
+        WorkingDirectory = "/home/me/4731-Sub-A/soft-high-level/bin/react_sub-a";
+        ExecStartPre = "/run/current-system/sw/bin/sleep 15";
+        ExecStart = "/run/current-system/sw/bin/npm start";
+        Restart = "always";
+        RestartSec = "5s";
+        Environment = [
+          "DISPLAY=:0"
+          "PATH=/run/current-system/sw/bin:/usr/bin:/bin"
+          "XDG_RUNTIME_DIR=/run/user/1000"
+        ];
+      };
+    };
+
+    react-app = {
+      description = "React Web App Launcher";
+      wantedBy = ["multi-user.target"];
+      after = ["network.target" "npm-app.service"];
+      serviceConfig = {
+        User = "me";
+        ExecStart = "${pkgs.firefox}/bin/firefox --new-window --class firefox-1 --kiosk https://sub-a:3000"; 
+        Environment = [
+          "DISPLAY=:0"
+          "XDG_RUNTIME_DIR=/run/user/1000"
+        ]; 
+        Restart = "always";
+        RestartSec = "5s";  
+      };
+    };
+
+
+
     can = {
       description = "Configure can0 interface";
       wantedBy = ["multi-user.target"];
@@ -85,9 +130,11 @@
     can_server = {
       description = "CAN server";
       wantedBy = ["multi-user.target"];
-      after = ["network.target" "can.service"];
-      serviceConfig = {
-        Restart = "on-failure";
+      after = ["network.target" "npm-app.service"];
+      serviceConfig = { 
+        ExecStartPre = "/run/current-system/sw/bin/sleep 5";
+        Restart = "always";
+        RestartSec = "5s";
         ExecStart = "/run/current-system/sw/bin/node /home/me/4731-Sub-A/soft-high-level/server.js";
       };
     };
