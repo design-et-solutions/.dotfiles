@@ -1,0 +1,11 @@
+[Unit]
+Description=Unclutter Mouse Cursor Hider
+
+[Service]
+ExecStart=unclutter --timeout 0 --jitter 0 --hide-on-touch
+User=me
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+
+[Install]
+WantedBy=multi-user.target

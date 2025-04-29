@@ -1,0 +1,14 @@
+[Unit]
+Description=Run Thales App Sight
+After=sphinx.service
+
+[Service]
+ExecStart=bash /home/me/start_sight_app.sh
+Restart=always
+RestartSec=5s
+User=me
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+
+[Install]
+WantedBy=multi-user.target

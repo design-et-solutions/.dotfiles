@@ -1,0 +1,14 @@
+[Unit]
+Description=Run Firefox with a specific URL
+After=sphinx.service
+
+[Service]
+ExecStart=firefox --kiosk --new-instance -P p2 --class firefox-2 https://demo.astrautm.com
+Restart=always
+RestartSec=5s
+User=me
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+
+[Install]
+WantedBy=multi-user.target
