@@ -1,0 +1,15 @@
+[Unit]
+Description=Devilspie2 window matcher
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=devilspie2
+Restart=always
+RestartSec=5s
+User=me
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+
+[Install]
+WantedBy=multi-user.target

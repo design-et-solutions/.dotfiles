@@ -1,0 +1,13 @@
+[Unit]
+Description=Run Parrot Sphinx
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+ExecStart=parrot-ue4-forest -gps-json='{"lat_deg": 44.57642441620385, "lng_deg": -1.1548001335664253, "elevation": 2.0}' -quality=high
+Restart=always
+RestartSec=5s
+User=me
+
+[Install]
+WantedBy=multi-user.target
