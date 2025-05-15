@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /home/me/test_gst.py
+ExecStart=/usr/bin/python3 /home/me/gst_reencoder_real.py
 Restart=always
 RestartSec=10
 User=me

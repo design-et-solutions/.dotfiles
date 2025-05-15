@@ -1,0 +1,13 @@
+[Unit]
+Description=GST re-encorder
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/me/gst_reencoder_simu.py
+Restart=always
+RestartSec=10
+User=me
+
+[Install]
+WantedBy=default.target
