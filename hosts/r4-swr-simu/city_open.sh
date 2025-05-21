@@ -1,6 +1,8 @@
 #!/bin/bash
+export DISPLAY=:0
 systemctl stop ue4_forest.service
 systemctl restart ue4_city.service
+wmctrl -r "Parrot-Sphinx-App (64-bit Development SF_VULKAN_SM5)" -b add,belo
 systemctl restart anafi_bridge_real.service
 systemctl restart anafi_bridge_simu.service
 systemctl restart anafi_stream_real.service
