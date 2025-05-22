@@ -3,6 +3,7 @@ Description=Run Thales App Sight
 After=sphinx.service
 
 [Service]
+ExecStartPre=/home/me/nats_alive.sh
 ExecStart=bash /home/me/start_sight_app.sh
 Restart=always
 RestartSec=5s

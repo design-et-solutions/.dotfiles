@@ -3,6 +3,7 @@ Description=Run Anafi Stream Simu
 After=sphinx.service
 
 [Service]
+ExecStartPre=/home/me/nats_alive.sh
 ExecStart=bash /home/me/vivatech-thales/anafi-bridge-docker/subscripts/launch_anafi_rtsp_stream_simu.sh
 Restart=on-failure
 RestartSec=5s

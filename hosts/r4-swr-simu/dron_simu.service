@@ -1,6 +1,8 @@
 [Unit]
 Description=Parrot Sphinx Watchdog
 After=network.target
+After=mediamtx.service
+Requires=mediamtx.service
 
 [Service]
 Type=simple

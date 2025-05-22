@@ -1,5 +1,7 @@
 [Unit]
 Description=Run Media MTX
+After=sight.service
+Requires=sight.service
 
 [Service]
 ExecStart=/home/me/mediamtx_v1.12.0/mediamtx /home/me/vivatech-thales/mediamtx.yml

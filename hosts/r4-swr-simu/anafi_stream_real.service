@@ -2,6 +2,7 @@
 Description=Run Anafi Stream Real
 
 [Service]
+ExecStartPre=/home/me/nats_alive.sh
 ExecStart=bash /home/me/vivatech-thales/anafi-bridge-docker/subscripts/launch_anafi_rtsp_stream_real.sh
 Restart=on-failure
 RestartSec=5s

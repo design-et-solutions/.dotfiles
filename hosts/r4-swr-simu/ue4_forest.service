@@ -4,7 +4,7 @@ Description=Run Parrot Sphinx
 [Service]
 Environment=DISPLAY=:0
 Environment=XDG_RUNTIME_DIR=/run/user/1000
-ExecStart=parrot-ue4-landscape-ecosystem -gps-json='{"lat_deg": 44.5974827486116, "lng_deg": -1.17023530065868, "elevation": 2.0}' -config-file=/home/me/sphinx_paths/human_path.yaml l -ams-path=HumanNearDrone,Jasper -light-intensity=2000 -quality=high
+ExecStart=parrot-ue4-landscape-ecosystem -gps-json='{"lat_deg": 44.5974827486116, "lng_deg": -1.17023530065868, "elevation": 2.0}' -config-file=/home/me/sphinx_paths/human_path.yaml -ams-path=HumanNearDrone,Jasper -ams-path="DefaultPath,Pickup:*" -light-intensity=1000 -quality=high
 Restart=always
 RestartSec=5s
 User=me

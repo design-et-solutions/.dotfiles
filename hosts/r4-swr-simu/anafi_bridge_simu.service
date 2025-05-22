@@ -3,6 +3,7 @@ Description=Run Anafi Bridge
 After=sphinx.service
 
 [Service]
+ExecStartPre=/home/me/nats_alive.sh
 ExecStart=bash /home/me/vivatech-thales/anafi-bridge-docker/subscripts/run_anafi_bridge_simu.sh
 Restart=on-failure
 RestartSec=5s
