@@ -70,7 +70,9 @@
     glib.dev
     pkg-config
     openssl
-    python3
+    (python3.withPackages (ps: with ps; [
+      requests
+    ]))
   ];
   
   
