@@ -1,0 +1,12 @@
+[Unit]
+Description=Run Anafi Bridge 52
+
+[Service]
+ExecStartPre=/home/me/nats_alive.sh
+ExecStart=bash /home/me/vivatech-thales/anafi-bridge-docker/subscripts/run_anafi_bridge_52.sh
+Restart=on-failure
+RestartSec=5s
+User=me
+
+[Install]
+WantedBy=multi-user.target

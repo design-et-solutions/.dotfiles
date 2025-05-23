@@ -1,0 +1,12 @@
+[Unit]
+Description=Run Anafi Stream 57
+
+[Service]
+ExecStartPre=/home/me/nats_alive.sh
+ExecStart=bash /home/me/vivatech-thales/anafi-bridge-docker/subscripts/launch_anafi57_rtp_stream.sh
+Restart=on-failure
+RestartSec=5s
+User=me
+
+[Install]
+WantedBy=multi-user.target
