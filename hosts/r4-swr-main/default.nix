@@ -1,5 +1,4 @@
-{ pkgs, lib, ... }:
-{
+{ pkgs, lib, ... }: {
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -12,10 +11,12 @@
 
   time.timeZone = "Europe/Paris";
 
+  services.tailscale.enable = true;
+
+  environment.systemPackages = [ pkgs.tailscale ];
+
   networking = {
     hostName = "r4-swr-main";
-    hosts = {
-      "192.100.1.1" = [ "cdp.thales" ];
-    };
+    hosts = { "192.100.1.1" = [ "cdp.thales" ]; };
   };
 }
