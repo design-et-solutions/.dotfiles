@@ -4,6 +4,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -16,11 +17,11 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    gateway.url = "git+ssh://git@github.com/tools-hood/gateway?dir=nix";
-    tracker.url = "git+ssh://git@github.com/tools-hood/tracker?dir=nix";
-    sonify.url = "git+ssh://git@github.com/tools-hood/sonify?dir=nix";
-    react.url =
-      "git+ssh://git@github.com/design-et-solutions/4731-Sub-A?dir=soft-high-level/bin/react_sub-a/nix";
+    # gateway.url = "git+ssh://git@github.com/tools-hood/gateway?dir=nix";
+    # tracker.url = "git+ssh://git@github.com/tools-hood/tracker?dir=nix";
+    # sonify.url = "git+ssh://git@github.com/tools-hood/sonify?dir=nix";
+    # react.url =
+    #   "git+ssh://git@github.com/design-et-solutions/4731-Sub-A?dir=soft-high-level/bin/react_sub-a/nix";
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix

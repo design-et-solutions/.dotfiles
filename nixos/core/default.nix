@@ -68,21 +68,21 @@
   ];
 
   systemd.services = let
-    gateway = "${inputs.gateway.packages.${pkgs.system}.default}/bin/gateway";
-    tracker = "${inputs.tracker.packages.${pkgs.system}.default}/bin/tracker";
-    sonify = "${inputs.sonify.packages.${pkgs.system}.default}/bin/sonify";
-    react = "${inputs.react.packages.${pkgs.system}.default}/bin/suba-app";
+    # gateway = "${inputs.gateway.packages.${pkgs.system}.default}/bin/gateway";
+    # tracker = "${inputs.tracker.packages.${pkgs.system}.default}/bin/tracker";
+    # sonify = "${inputs.sonify.packages.${pkgs.system}.default}/bin/sonify";
+    # react = "${inputs.react.packages.${pkgs.system}.default}/bin/suba-app";
   in {
 
-    test-app = {
-      description = "Serveur React Test";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" "can.service" ];
-      serviceConfig = {
-        ExecStart = "${react}";
-        Restart = "on-failure";
-      };
-    };
+    # test-app = {
+    #   description = "Serveur React Test";
+    #   wantedBy = [ "multi-user.target" ];
+    #   after = [ "network.target" "can.service" ];
+    #   serviceConfig = {
+    #     ExecStart = "${react}";
+    #     Restart = "on-failure";
+    #   };
+    # };
 
     npm-app = {
       description = "Serveur React";
@@ -146,95 +146,96 @@
       };
     };
 
-    gateway = {
-      description = "Run gateway";
-      after = [ "network.target" "tracker.service" "sonify.service" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        ExecStart = "${gateway}";
-        Environment = [
-          "RUST_LOG=info"
-          ''APP_HOST="0.0.0.0"''
-          "APP_PORT=8080"
-          "TRACKER_ENABLE=true"
-          ''TRACKER_HOST="0.0.0.0"''
-          "TRACKER_PORT=50200"
-          "SONIFY_ENABLE=true"
-          "SSL_CRT_FILE=./fullchain.crt"
-          "SSL_KEY_FILE=./gateway.key"
-        ];
-        Restart = "on-failure";
-      };
-    };
-
-    tracker = {
-      description = "Run tracker";
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        ExecStart = "${tracker}";
-        Environment =
-          [ "RUST_LOG=info" ''APP_HOST="0.0.0.0"'' "APP_PORT=50200" ];
-        Restart = "on-failure";
-      };
-    };
-
-    sonify = {
-      description = "Run sonify";
-      after = [ "network.target" "tracker.service" "pulseaudio.service" ];
-      wantedBy = [ "default.target" ];
-      serviceConfig = {
-        User = "me";
-        ExecStart = "${sonify}";
-        Environment = [
-          "RUST_LOG=info"
-          ''APP_HOST="0.0.0.0"''
-          ''TRACKER_HOST="0.0.0.0"''
-          "TRACKER_PORT=50200"
-          "XDG_RUNTIME_DIR=/run/user/1000"
-        ];
-        Restart = "on-failure";
-      };
-    };
     # gateway = {
-    #   description = "Service gateway";
-    #   enable = true;
+    #   description = "Run gateway";
+    #   after = [ "network.target" "tracker.service" "sonify.service" ];
     #   wantedBy = [ "multi-user.target" ];
-    #   after = [ "network.target" "tracker.service" ];
-    #   requires = [ "tracker.service" ];
     #   serviceConfig = {
-    #     # ExecStart = "/home/me/Manager/core/gateway";
-    #     ExecStart = ''
-    #       ${pkgs.nix}/bin/nix-shell /home/me/Manager/core/gateway/nix/shell.nix --run "/home/me/Manager/core/gateway/target/debug/gateway"'';
-    #     Restart = "always";
-    #     RestartSec = "30s";
+    #     ExecStart = "${gateway}";
     #     Environment = [
-    #       "RUST_LOG='DEBUG'"
-    #       "APP_HOST='0.0.0.0'"
+    #       "RUST_LOG=info"
+    #       ''APP_HOST="0.0.0.0"''
     #       "APP_PORT=8080"
-    #       "PRIVATE_KEY=/home/me/Manager/core/gateway/key.pem"
-    #       "CERTIFICATE=/home/me/Manager/core/gateway/cert.pem"
-    #       "TRACKER_HOST='0.0.0.0'"
+    #       "TRACKER_ENABLE=true"
+    #       ''TRACKER_HOST="0.0.0.0"''
     #       "TRACKER_PORT=50200"
+    #       "SONIFY_ENABLE=true"
+    #       "SSL_CRT_FILE=./fullchain.crt"
+    #       "SSL_KEY_FILE=./gateway.key"
     #     ];
+    #     Restart = "on-failure";
     #   };
     # };
 
     # tracker = {
-    #   description = "Service Tracker";
-    #   wantedBy = [ "multi-user.target" ];
+    #   description = "Run tracker";
     #   after = [ "network.target" ];
+    #   wantedBy = [ "multi-user.target" ];
     #   serviceConfig = {
-    #     ExecStart = "/home/me/Manager/core/tracker/target/release/registry";
-    #     Restart = "always";
-    #     RestartSec = "30s";
+    #     ExecStart = "${tracker}";
     #     Environment =
-    #       [ "RUST_LOG='DEBUG'" "APP_HOST='0.0.0.0'" "APP_PORT=50200" ];
+    #       [ "RUST_LOG=info" ''APP_HOST="0.0.0.0"'' "APP_PORT=50200" ];
+    #     Restart = "on-failure";
     #   };
     # };
+
+    # sonify = {
+    #   description = "Run sonify";
+    #   after = [ "network.target" "tracker.service" "pulseaudio.service" ];
+    #   wantedBy = [ "default.target" ];
+    #   serviceConfig = {
+    #     User = "me";
+    #     ExecStart = "${sonify}";
+    #     Environment = [
+    #       "RUST_LOG=info"
+    #       ''APP_HOST="0.0.0.0"''
+    #       ''TRACKER_HOST="0.0.0.0"''
+    #       "TRACKER_PORT=50200"
+    #       "XDG_RUNTIME_DIR=/run/user/1000"
+    #     ];
+    #     Restart = "on-failure";
+    #   };
+    # };
+
+    gateway = {
+      description = "Service gateway";
+      enable = true;
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" "tracker.service" ];
+      requires = [ "tracker.service" ];
+      serviceConfig = {
+        # ExecStart = "/home/me/Manager/core/gateway";
+        ExecStart = ''
+          ${pkgs.nix}/bin/nix-shell /home/me/Manager/core/gateway/nix/shell.nix --run "/home/me/Manager/core/gateway/target/debug/gateway"'';
+        Restart = "always";
+        RestartSec = "30s";
+        Environment = [
+          "RUST_LOG='DEBUG'"
+          "APP_HOST='0.0.0.0'"
+          "APP_PORT=8080"
+          "PRIVATE_KEY=/home/me/Manager/core/gateway/key.pem"
+          "CERTIFICATE=/home/me/Manager/core/gateway/cert.pem"
+          "TRACKER_HOST='0.0.0.0'"
+          "TRACKER_PORT=50200"
+        ];
+      };
+    };
+
+    tracker = {
+      description = "Service Tracker";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
+      serviceConfig = {
+        ExecStart = "/home/me/Manager/core/tracker/target/release/registry";
+        Restart = "always";
+        RestartSec = "30s";
+        Environment =
+          [ "RUST_LOG='DEBUG'" "APP_HOST='0.0.0.0'" "APP_PORT=50200" ];
+      };
+    };
 
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.05";
+  system.stateVersion = "25.11";
 }
