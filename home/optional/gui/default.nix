@@ -2,7 +2,8 @@
 let
   waybarCommand = if mergedSetup.gui.full or false then ''
     exec-once = waybar
-  '' else "";
+  '' else
+    "";
   hyprpaperCommand = if mergedSetup.gui.full or false then ''
     exec-once = hyprpaper
     exec-once = while true; do $HOME/.scripts/wallpapers-randomizer.sh; sleep 900; done
@@ -10,31 +11,24 @@ let
     exec-once = hyprpaper
     exec-once = $HOME/.scripts/wallpapers-black.sh
   '';
-  hyprlandConf = pkgs.substituteAll {
-    src = ./hyprland.conf;
-    waybar_command = waybarCommand;
-    hyprpaper_command = hyprpaperCommand;
-    animations_enable = if mergedSetup.gui.full or false then "true" else "false";
-    custom = mergedSetup.gui.extra.hyprland;
-  };
-in
-{
-  imports = 
-    (lib.optionals mergedSetup.gui.full [
-      ../pkgs/waybar 
-    ]) ++
-    [
-      ../pkgs/kitty 
-      ../pkgs/rofi 
-      ../pkgs/mpv 
-    ];
+  # hyprlandConf = pkgs.replaceVars {
+  #   src = ./hyprland.conf;
+  #   waybar_command = waybarCommand;
+  #   hyprpaper_command = hyprpaperCommand;
+  #   animations_enable =
+  #     if mergedSetup.gui.full or false then "true" else "false";
+  #   custom = mergedSetup.gui.extra.hyprland;
+  # };
+in {
+  imports = (lib.optionals mergedSetup.gui.full [ ../pkgs/waybar ])
+    ++ [ ../pkgs/kitty ../pkgs/rofi ../pkgs/mpv ];
 
-  xdg.configFile = {
-    "hypr/hyprland.conf".source = hyprlandConf;
-    "hypr/windowrule.conf".source = ./windowrule.conf;
-    "hypr/keybindings.conf".source = ./keybindings.conf;
-    "hypr/hyprpaper.conf".source = ./hyprpaper.conf;
-    "hypr/hyprlock.conf".source = ./hyprlock.conf;
+  home.file = {
+    ".config/hypr/hyprland.conf".source = ./hyprland.conf;
+    ".config/hypr/windowrule.conf".source = ./windowrule.conf;
+    ".config/hypr/keybindings.conf".source = ./keybindings.conf;
+    ".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+    ".config/hypr/hyprlock.conf".source = ./hyprlock.conf;
     "swappy/config".text = ''
       [Default]
       save_dir=~/Screenshots
@@ -44,9 +38,6 @@ in
       text_size=20
       text_font=sans-serif
     '';
-  };
-
-  home.file = {
     ".scripts/wallpapers-randomizer.sh" = {
       source = builtins.toString ../../scripts/wallpapers-randomizer.sh;
       executable = true;
@@ -69,7 +60,7 @@ in
 
   # screenshot
   home.activation = {
-    createDirectories = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    createDirectories = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p ~/Screenshots
     '';
   };
