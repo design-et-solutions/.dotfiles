@@ -151,7 +151,7 @@
       after = [ "network.target" "tracker.service" "sonify.service" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "/home/me/result-1/bin/gateway";
+        ExecStart = "/home/me/gateway/result/bin/gateway";
         Environment = [
           "RUST_LOG=info"
           ''APP_HOST="0.0.0.0"''
@@ -160,8 +160,10 @@
           ''TRACKER_HOST="0.0.0.0"''
           "TRACKER_PORT=50200"
           "SONIFY_ENABLE=true"
-          "SSL_CRT_FILE=./fullchain.crt"
-          "SSL_KEY_FILE=./gateway.key"
+          # "SSL_CRT_FILE=./fullchain.crt"
+          # "SSL_KEY_FILE=./gateway.key"
+          "SSL_KEY_FILE=/home/me/Manager/core/gateway/key.pem"
+          "SSL_CRT_FILE=/home/me/Manager/core/gateway/cert.pem"
         ];
         Restart = "on-failure";
       };
@@ -172,7 +174,7 @@
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "/home/me/result-2/bin/tracker";
+        ExecStart = "/home/me/tracker/result/bin/tracker";
         Environment =
           [ "RUST_LOG=info" ''APP_HOST="0.0.0.0"'' "APP_PORT=50200" ];
         Restart = "on-failure";
@@ -185,7 +187,7 @@
       wantedBy = [ "default.target" ];
       serviceConfig = {
         User = "me";
-        ExecStart = "/home/me/result/bin/sonify";
+        ExecStart = "/home/me/sonify/result/bin/sonify";
         Environment = [
           "RUST_LOG=info"
           ''APP_HOST="0.0.0.0"''
