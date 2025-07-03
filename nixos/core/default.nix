@@ -151,7 +151,7 @@
       after = [ "network.target" "tracker.service" "sonify.service" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "/home/me/result/bin/gateway";
+        ExecStart = "/home/me/result-1/bin/gateway";
         Environment = [
           "RUST_LOG=info"
           ''APP_HOST="0.0.0.0"''
@@ -172,7 +172,7 @@
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "/home/me/result/bin/tracker";
+        ExecStart = "/home/me/result-2/bin/tracker";
         Environment =
           [ "RUST_LOG=info" ''APP_HOST="0.0.0.0"'' "APP_PORT=50200" ];
         Restart = "on-failure";
