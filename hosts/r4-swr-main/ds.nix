@@ -2,6 +2,8 @@
   systemd.services."ds-client" = {
     description = "Run React Client";
     wantedBy = [ "multi-user.target" ];
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
     serviceConfig = {
       User = "me";
       WorkingDirectory = "/home/me/4757-R4-SWR/trunk-client";
